@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 14:10:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 17:46:15 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/08 17:39:27 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/08 17:49:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef ERROR_H
+# define ERROR_H
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "libft.h"
-# include "mlx.h"
-
-# define SAVE_FLAG "--save"
-
-# include "error.h"
-# include "constants.h"
-# include "vector.h"
-# include "buffer.h"
-# include "matrix.h"
-# include "ray.h"
-# include "shapes.h"
-# include "entities.h"
-# include "engine.h"
+# define ERR_SCENE_MEM "Failed to allocate scene"
+# define ERR_SCENE_INIT "Failed to initialize scene"
+# define ERR_MLX_INIT "Failed to initialize MLX"
+# define ERR_SCENE_RENDER "Failed to render scene"
 
 #endif

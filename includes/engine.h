@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:39:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 16:03:23 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/08 17:47:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 typedef enum e_mode
 {
-	MODE_UNLIT,
-	MODE_FLAT,
-	MODE_SHADED,
-	MODE_AABB,
-	MODE_NONE
+	UNLIT,
+	FLAT,
+	SHADED,
+	AABB,
+	NONE
 }	t_mode;
 
 typedef struct s_hitrecord

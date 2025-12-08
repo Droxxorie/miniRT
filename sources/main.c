@@ -6,16 +6,31 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/07 14:20:51 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/08 18:04:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	
+	t_scene	*scene;
+
 	if (argc < 2 || argc > 5)
-		print_usgage(); //TODO
-	
+		print_usgage();       // TODO
+	scene = allocate_scene(); // TODO
+	if (scene == NULL)
+		print_error_exit(ERR_SCENE_MEM);              // TODO
+	if (init_scene(scene, argv[1]) == FALSE)          // TODO
+		print_error_free_exit(scene, ERR_SCENE_INIT); // TODO
+	if (init_buffer(scene) == FALSE)                  // TODO
+		print_error_free_exit(scene, ERR_MLX_INIT);   // TODO
+	if (ft_match(argv[2], SAVE_FLAG))                 // TODO
+		scene->render_mode == SHADED;
+	if (update(scene) == FALSE) // TODO
+		print_error_free_exit(scene, ERR_SCENE_RENDER); // TODO
+	if (scene->render_mode == SHADED)
+		save_bmp(&scene->frame_buffer, "save.bmp"); // TODO
+	hook_init(scene);                     // TODO
+	return (0); //? ou return (1) jsp
 }
