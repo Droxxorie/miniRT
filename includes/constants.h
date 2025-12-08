@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 14:10:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 16:17:14 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/08 16:12:36 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/08 16:15:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "libft.h"
-# include "mlx.h"
-
-# include "constants.h"
-# include "vector.h"
-# include "buffer.h"
-# include "matrix.h"
-# include "ray.h"
-# include "shapes.h"
-# include "entities.h"
-# include "engine.h"
+# define M_EPSILON 1e-8
+# define M_INFINITY 1.0e30f
+# define COLOR_SIZE 8
+# define PI 3.14159265359
+# define TWO_PI 6.28318530718
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:35:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/07 16:36:46 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/08 14:10:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <vector.h>
 
-typedef t_vec3 t_rgb;
+typedef t_vec3 t_color;
 
 typedef struct s_material
 {
-	t_rgb	diffuse;
+	t_color	diffuse;
 }	t_material;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:37:26 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/07 16:38:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/08 15:15:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 
 # include <vector.h>
 
+/*
+* origin: Ray origin point
+* direction: Normalized direction vector
+* min: Minimum t value (start of ray segment)
+* max: Maximum t value (end of ray segment)
+*/
 typedef struct s_ray
 {
-	t_vec3	origin;
-	t_vec3	direction;
-	t_vec3	min;
-	t_vec3	max;
+	t_point3	origin;
+	t_vec3		direction;
+	t_real		min;
+	t_real		max;
 }	t_ray;
 
 #endif
