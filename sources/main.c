@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 18:04:16 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/09 15:36:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	main(int argc, char **argv)
 	t_scene	*scene;
 
 	if (argc < 2 || argc > 5)
-		print_usgage();       // TODO
-	scene = allocate_scene(); // TODO
+		print_usage();
+	scene = (t_scene *)ft_calloc(1, sizeof(t_scene));
 	if (scene == NULL)
-		print_error_exit(ERR_SCENE_MEM);              // TODO
+		sys_print_error_exit(ERR_SCENE_MEM);
 	if (init_scene(scene, argv[1]) == FALSE)          // TODO
 		print_error_free_exit(scene, ERR_SCENE_INIT); // TODO
 	if (init_buffer(scene) == FALSE)                  // TODO

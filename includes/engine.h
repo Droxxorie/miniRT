@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:39:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 17:47:51 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/09 20:24:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ typedef enum e_mode
 	NONE
 }	t_mode;
 
-typedef struct s_hitrecord
+typedef struct s_hit_record
 {
-	t_ray		ray;
-	t_shapes	*object;
+	t_ray		ray; //? redondant, on verra
+	t_shapes	*object; //? Un seul objet intersecté donc peut etre pas une liste
 	t_point3	point;
 	t_vec3		normal;
 	t_real		t;
 	t_bool		frontface;
 	t_color		color;
-}	t_hitrecord;
+}	t_hit_record;
 
 typedef struct s_scene
 {
@@ -54,8 +54,8 @@ typedef struct s_scene
 	t_real			completion; //?
 	t_real			prog_add; //?
 	t_vec2			screen; //? kesako exacetement
-	t_real			ambience; //?
-	t_color 		ambience_color; //?
+	t_real			ambient; //?
+	t_color 		ambient_color; //?
 	t_shapes		*shapes;
 	t_lights		*lights;
 	t_camera_list	*cameras;
