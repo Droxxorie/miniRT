@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:36:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 16:47:21 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 22:30:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ t_status	parse_color(char **line, t_color *color)
 		|| !is_valid_color_value(green)
 		|| !is_valid_color_value(blue))
 		return (print_error(ERR_COLOR_RANGE), EXIT_FAILURE);
-	color->r = (t_real)red / 255.0;
-	color->g = (t_real)green / 255.0;
-	color->b = (t_real)blue / 255.0;
+	// color->r = (t_real)red / 255.0;
+	// color->g = (t_real)green / 255.0;
+	// color->b = (t_real)blue / 255.0;
+	color->r = (t_real)red * INV_255;
+	color->g = (t_real)green * INV_255;
+	color->b = (t_real)blue * INV_255;
 	return (EXIT_SUCCESS);
 }

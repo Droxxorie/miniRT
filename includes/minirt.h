@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:10:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 11:36:51 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 20:32:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "buffer.h"
 # include "matrix.h"
 # include "ray.h"
-# include "shapes.h"
+# include "objects.h"
 # include "entities.h"
 # include "engine.h"
 # include "parsing.h"

@@ -6,14 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:39:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 18:30:01 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 20:35:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-# include <shapes.h>
+# include <objects.h>
 # include <entities.h>
 # include <buffer.h>
 # include <ray.h>
@@ -38,7 +38,7 @@ typedef enum e_mode
 typedef struct s_hit_record
 {
 	t_ray		ray; //? redondant, on verra
-	t_shapes	*object; //? Un seul objet intersecté donc peut etre pas une liste
+	t_objects	*object; //? Un seul objet intersecté donc peut etre pas une liste
 	t_point3	point;
 	t_vec3		normal;
 	t_real		t;
@@ -60,7 +60,7 @@ typedef struct s_scene
 	t_vec2			screen; //? kesako exacetement
 	t_real			ambient;
 	t_color 		ambient_color;
-	t_shapes		*shapes;
+	t_objects		*objects;
 	t_lights		*lights;
 	// t_camera_list	*cameras;
 	t_cameras		*cameras;

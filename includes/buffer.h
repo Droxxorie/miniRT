@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:13:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 18:29:06 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 22:28:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_buffer
 typedef struct s_window
 {
 	void	*ptr;
-	void	*win;
+	void	*win; //?
 	int		width;
 	int		height;
 	t_real	aspect_ratio;

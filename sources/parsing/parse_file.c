@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 18:23:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 22:32:18 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static int	match_identifier(const char *line, const char *identifier)
+static t_status	match_identifier(const char *line, const char *identifier)
 {
 	size_t	len;
 
@@ -44,18 +44,17 @@ static int	match_identifier(const char *line, const char *identifier)
 // 	return (identifier);
 // }
 
-static int	dispatch_parse(t_scene *scene, char *line, int line_index)
+static t_status	dispatch_parse(t_scene *scene, char *line, int line_index)
 {
 	int					i;
 	static t_parse_map	parse_map[] = {{"A", parse_ambient}, {"C",
 			parse_camera}, {"L", parse_light}, {"sp",
-			parse_sphere}, {"pl", parse_plane}, {"cy", parse_cylinder}, {"sq",
-			parse_square}, {"tr", parse_triangle}, {NULL, NULL}};
+			parse_sphere}, {"pl", parse_plane}, {"cy", parse_cylinder}, {NULL, NULL}};
 
 	// while (*line && ft_isspace(*line))
 	// 	line++;
 	skip_whitespace(&line);
-	if (*line == '\0' || *line == '#') // skip empty lines and comments
+	if (*line == '\0' || *line == '#') //* skip empty lines and comments
 		return (EXIT_SUCCESS);
 	i = 0;
 	while (parse_map[i].id)
@@ -89,14 +88,14 @@ static int	dispatch_parse(t_scene *scene, char *line, int line_index)
 // 		{NULL, NULL}};
 
 // 	i = 0;
-// 	identifier = extract_identifier(line); // TODO
+// 	identifier = extract_identifier(line);
 // 	if (!identifier)
 // 		return (TRUE);
 // 	while (parse_map[i].id && ft_strcmp(identifier, parse_map[i].id) != 0)
 // 		i++;
 // 	free(identifier);
 // 	if (!parse_map[i].id)
-// 		return (error_msg(ERR_PAR_NOID)); // TODO
+// 		return (error_msg(ERR_PAR_NOID));
 // 	return (parse_map[i].func(scene, line));
 // }
 
@@ -114,7 +113,7 @@ static t_bool	has_extension(const char *file, const char *extension)
 	return (ft_strncmp(file + file_len - ext_len, extension, ext_len) == 0);
 }
 
-int	parse_scene_file(t_scene *scene, const char *file_path)
+t_status	parse_scene_file(t_scene *scene, const char *file_path)
 {
 	int		fd;
 	char	*line;

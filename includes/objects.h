@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shapes.h                                           :+:      :+:    :+:   */
+/*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 16:40:15 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 15:44:00 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/10 20:32:38 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/10 21:38:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHAPES_H
-# define SHAPES_H
+#ifndef OBJECTS_H
+# define OBJECTS_H
 
-# include <vector.h>
 # include <color.h>
+# include <vector.h>
 
-typedef enum e_shape_type
+typedef enum e_object_type
 {
-	SHAPE_SPHERE,
-	SHAPE_PLANE,
-	SHAPE_CYLINDER,
-	SHAPE_SQUARE,
-	SHAPE_TRIANGLE,
-	SHAPE_NONE
-}	t_shape_type;
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	SQUARE,
+	TRIANGLE,
+	NONE
+}	t_object_type;
 
 typedef struct s_aabb
 {
@@ -34,16 +34,23 @@ typedef struct s_aabb
 	t_bool		used;
 }	t_aabb;
 
-typedef struct s_shapes
+typedef struct s_objects
 {
-	void			*shape;
-	t_shape_type	type;
-	t_material		material;
-	t_aabb			volume;
-	t_bool			construct;
-	void			*next;
-}	t_shapes;
-
+	t_object_type	type;
+	t_color			color;
+	// t_material		material;
+	// t_aabb			volume;
+	// t_bool			construct;
+	union
+	{
+		t_sphere		sphere;
+		t_plane			plane;
+		t_cylinder		cylinder;
+		// t_square			square;
+		// t_triangle		triangle;
+	}	data;
+	struct s_objects	*next;
+}	t_objects;
 
 //* -------------------- SPHERE -------------------- *//
 /*
@@ -86,9 +93,9 @@ Method: Simple substitution of the ray equation into the plane equation.
 */
 typedef struct s_plane_vars
 {
-	t_real		denom;
-	t_vec3		vec_diff;
-	t_real		dist;
+	t_real	denom;
+	t_vec3	vec_diff;
+	t_real	dist;
 }	t_plane_vars;
 
 typedef struct s_plane
@@ -97,39 +104,39 @@ typedef struct s_plane
 	t_vec3		normal;
 }	t_plane;
 
-//* -------------------- SQUARE -------------------- *//
-/*
-Equation: Plane Intersection + Boundary Check
-1. Solve Plane Intersection
-2. Project intersection point P onto local axes (U, V)
-| (P - C) . U | <= size/2  AND  | (P - C) . V | <= size/2
-* denom: RayDir . Normal
-* vec_diff: Vector RayOrigin -> SquareCenter
-* dist: Distance t
-* impact_point: Point P in world space
-* vec_center_hit: Vector SquareCenter -> P
-* proj_u: Distance along local X axis (U)
-* proj_v: Distance along local Y axis (V)
-*/
-typedef struct s_square_vars
-{
-	t_real		denom;
-	t_vec3		vec_diff;
-	t_real		dist;
-	t_point3	impact_point;
-	t_vec3		vec_center_hit;
-	t_real		proj_u;
-	t_real		proj_v;
-}	t_square_vars;
+// //* -------------------- SQUARE -------------------- *//
+// /*
+// Equation: Plane Intersection + Boundary Check
+// 1. Solve Plane Intersection
+// 2. Project intersection point P onto local axes (U, V)
+// | (P - C) . U | <= size/2  AND  | (P - C) . V | <= size/2
+// * denom: RayDir . Normal
+// * vec_diff: Vector RayOrigin -> SquareCenter
+// * dist: Distance t
+// * impact_point: Point P in world space
+// * vec_center_hit: Vector SquareCenter -> P
+// * proj_u: Distance along local X axis (U)
+// * proj_v: Distance along local Y axis (V)
+// */
+// typedef struct s_square_vars
+// {
+// 	t_real		denom;
+// 	t_vec3		vec_diff;
+// 	t_real		dist;
+// 	t_point3	impact_point;
+// 	t_vec3		vec_center_hit;
+// 	t_real		proj_u;
+// 	t_real		proj_v;
+// }	t_square_vars;
 
-typedef struct s_square
-{
-	t_point3	center;
-	t_vec3		normal;
-	t_vec3		u_axis;
-	t_vec3		v_axis;
-	t_real		side_size;
-}	t_square;
+// typedef struct s_square
+// {
+// 	t_point3	center;
+// 	t_vec3		normal;
+// 	t_vec3		u_axis;
+// 	t_vec3		v_axis;
+// 	t_real		side_size;
+// }	t_square;
 
 //* -------------------- CYLINDER -------------------- *//
 /*
@@ -175,51 +182,51 @@ typedef struct s_cylinder
 	t_vec3		half_height_vec;
 }	t_cylinder;
 
-//* -------------------- TRIANGLE -------------------- *//
-/*
-Equation: Möller-Trumbore Algorithm
-O + tD = (1 - u - v)V0 + uV1 + vV2
-Method:
-Uses Cramer's rule to solve the linear system directly for t, u, and v
-without computing the plane equation first.
-* h: Vector H = Cross(RayDir, Edge2)
-* s: Vector S = RayOrigin - V0
-* q: Vector Q = Cross(S, Edge1)
-* det: Determinant = Dot(Edge1, H)
-* inv_det: Inverse of the determinant
-* u: 1st Barycentric coordinate
-* v: 2nd Barycentric coordinate
-* t: Intersection distance
+// //* -------------------- TRIANGLE -------------------- *//
+// /*
+// Equation: Möller-Trumbore Algorithm
+// O + tD = (1 - u - v)V0 + uV1 + vV2
+// Method:
+// Uses Cramer's rule to solve the linear system directly for t, u, and v
+// without computing the plane equation first.
+// * h: Vector H = Cross(RayDir, Edge2)
+// * s: Vector S = RayOrigin - V0
+// * q: Vector Q = Cross(S, Edge1)
+// * det: Determinant = Dot(Edge1, H)
+// * inv_det: Inverse of the determinant
+// * u: 1st Barycentric coordinate
+// * v: 2nd Barycentric coordinate
+// * t: Intersection distance
 
-*/
-typedef struct s_triangle_vars
+// */
+// typedef struct s_triangle_vars
+// // {
+// // 	t_real pl;
+// // 	t_real d;
+// // 	t_real t;
+// // 	t_real p;
+// // 	t_vec3 test[3];
+// // }	t_triangle_vars;
 // {
-// 	t_real pl;
-// 	t_real d;
-// 	t_real t;
-// 	t_real p;
-// 	t_vec3 test[3];
+// 	t_vec3	h;
+// 	t_vec3	s;
+// 	t_vec3	q;
+// 	t_real	det;
+// 	t_real	inv_det;
+// 	t_real	u;
+// 	t_real	v;
+// 	t_real	t;
 // }	t_triangle_vars;
-{
-	t_vec3	h;
-	t_vec3	s;
-	t_vec3	q;
-	t_real	det;
-	t_real	inv_det;
-	t_real	u;
-	t_real	v;
-	t_real	t;
-}	t_triangle_vars;
 
-typedef struct s_triangle
-{
-	t_point3	v0;
-	t_point3	v1;
-	t_point3	v2;
-	t_vec3		edge1;
-	t_vec3		edge2;
-	t_vec3		normal;
-	// t_real traverse;
-}	t_triangle;
+// typedef struct s_triangle
+// {
+// 	t_point3	v0;
+// 	t_point3	v1;
+// 	t_point3	v2;
+// 	t_vec3		edge1;
+// 	t_vec3		edge2;
+// 	t_vec3		normal;
+// 	// t_real traverse;
+// }	t_triangle;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:13:24 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 18:00:57 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 22:29:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define COLOR_SIZE 8
 # define PI 3.14159265359
 # define TWO_PI 6.28318530718
+# define INV_255 0.00392156862
 
 //* Vector operations */
 t_vec3	vec3_add(const t_vec3 u, const t_vec3 v);
