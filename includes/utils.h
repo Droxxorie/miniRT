@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:17:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/09 20:49:34 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 11:37:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 # define B_WHITE "\033[1;37m"
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
+# define SAVE_FLAG "--save"
+
+typedef int	t_status; // EXIT_SUCCESS or EXIT_FAILURE
 
 void	print_usage(void);
 void	log_info(const char *message);

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   len.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 16:35:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 16:39:59 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/10 17:57:21 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/10 17:58:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include <minirt.h>
 
-# include <vector.h>
-
-typedef struct s_color
+t_real	vec3_len_squared(const t_vec3 v)
 {
-	t_real	r;
-	t_real	g;
-	t_real	b;
-}			t_color;
+	return ((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+}
 
-typedef struct s_material
+t_real	vec3_len(const t_vec3 v)
 {
-	t_color	diffuse;
-}			t_material;
-
-#endif
+	return (sqrt(vec3_len_squared(v)));
+}

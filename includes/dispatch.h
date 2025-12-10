@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:58:43 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/09 20:59:31 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 17:28:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_parse_map
 {
 	char	*id;
-	t_bool	(*func)(t_scene *scene, char **line_tokens);
+	t_status	(*func)(t_scene *scene, char **line_tokens);
 }	t_parse_map;
 
 typedef struct s_key_map

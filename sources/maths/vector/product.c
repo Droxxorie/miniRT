@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   product.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 16:35:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 16:39:59 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/10 11:20:56 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/10 17:23:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include <minirt.h>
 
-# include <vector.h>
-
-typedef struct s_color
+t_vec3	vec3_scale(const t_vec3 v, const t_real k)
 {
-	t_real	r;
-	t_real	g;
-	t_real	b;
-}			t_color;
+	return ((t_vec3){v.x * k, v.y * k, v.z * k});
+}
 
-typedef struct s_material
+t_vec3	vec3_prod(const t_vec3 u, const t_vec3 v)
 {
-	t_color	diffuse;
-}			t_material;
+	return ((t_vec3){u.x * v.x, u.y * v.y, u.z * v.z});
+}
 
-#endif
+

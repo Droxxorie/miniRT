@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:10:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/09 20:19:19 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 11:36:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define SAVE_FLAG "--save"
 
 # include "utils.h"
 # include "error.h"
-# include "constants.h"
 # include "dispatch.h"
 # include "vector.h"
+# include "maths.h"
 # include "buffer.h"
 # include "matrix.h"
 # include "ray.h"
 # include "shapes.h"
 # include "entities.h"
 # include "engine.h"
+# include "parsing.h"
 
 #endif

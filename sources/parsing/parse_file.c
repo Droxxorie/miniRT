@@ -6,20 +6,22 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/09 21:08:42 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 18:23:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static t_bool	match_identifier(const char *line, const char *identifier)
+static int	match_identifier(const char *line, const char *identifier)
 {
-	size_t	id_len;
+	size_t	len;
 
-	id_len = ft_strlen(identifier);
-	if (ft_strncmp(line, identifier, id_len) == 0)
-		return (TRUE);
-	return (FALSE);
+	len = ft_strlen(identifier);
+	if (ft_strncmp(line, identifier, len) != 0)
+		return (EXIT_FAILURE);
+	if (line[len] != '\0' && !ft_isspace(line[len]))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 // static char	*extract_identifier(char **line)
@@ -42,29 +44,32 @@ static t_bool	match_identifier(const char *line, const char *identifier)
 // 	return (identifier);
 // }
 
-static t_bool	dispatch_parse(t_scene *scene, char **line)
+static int	dispatch_parse(t_scene *scene, char *line, int line_index)
 {
 	int					i;
 	static t_parse_map	parse_map[] = {{"A", parse_ambient}, {"C",
-		parse_camera}, {"L", parse_light}, {"R", parse_resolution}, {"sp",
-		parse_sphere}, {"pl", parse_plane}, {"cy", parse_cylinder}, {"sq",
-		parse_square}, {"tr", parse_triangle}, {NULL, NULL}};
+			parse_camera}, {"L", parse_light}, {"sp",
+			parse_sphere}, {"pl", parse_plane}, {"cy", parse_cylinder}, {"sq",
+			parse_square}, {"tr", parse_triangle}, {NULL, NULL}};
 
-	while (*line && ft_isspace(**line))
-		(*line)++;
-	if (**line == '\0')
-		return (TRUE);
+	// while (*line && ft_isspace(*line))
+	// 	line++;
+	skip_whitespace(&line);
+	if (*line == '\0' || *line == '#') // skip empty lines and comments
+		return (EXIT_SUCCESS);
 	i = 0;
 	while (parse_map[i].id)
 	{
-		if (match_identifier(*line, parse_map[i].id))
+		if (match_identifier(*line, parse_map[i].id) == EXIT_SUCCESS)
 		{
-			*line += ft_strlen(parse_map[i].id);
-			return (parse_map[i].func(scene, line));
+			line += ft_strlen(parse_map[i].id);
+			return (parse_map[i].func(scene, &line));
 		}
 		i++;
 	}
-	return (error_msg(ERR_FILE_FORMAT)); // TODO
+	print_error(ERR_PARSE_UID);
+	ft_printf_fd(STDERR_FILENO, "Line %d: %s\n", line_index, line);
+	return (EXIT_FAILURE);
 }
 
 // static t_bool	dispatch_parse(t_scene *scene, char **line)
@@ -109,26 +114,31 @@ static t_bool	has_extension(const char *file, const char *extension)
 	return (ft_strncmp(file + file_len - ext_len, extension, ext_len) == 0);
 }
 
-t_bool	parse_scene_file(t_scene *scene, const char *file_path)
+int	parse_scene_file(t_scene *scene, const char *file_path)
 {
 	int		fd;
 	char	*line;
-	int		ret;
+	int		line_index;
 
-	ret = TRUE;
 	fd = open(file_path, O_RDONLY);
-	if (fd < 3)
-		return (sys_print_error(ERR_FILE_OPEN), FALSE);
+	if (fd < 0) //? ou < 3 pour tt couvrir ?
+		return (sys_print_error(ERR_FILE_OPEN), EXIT_FAILURE);
 	if (has_extension(file_path, ".rt") == FALSE)
-		return (print_error(ERR_FILE_FORMAT), FALSE);
+		return (close(fd),print_error(ERR_FILE_FORMAT), EXIT_FAILURE);
 	line = get_next_line(fd);
+	line_index = 1;
 	while (line)
 	{
-		if (!dispatch_parse(scene, line)) // TODO
-			ret = error_line(line);       // TODO
+		if (dispatch_parse(scene, line, line_index) == EXIT_FAILURE)
+		{
+			free(line);
+			close(fd);
+			return (EXIT_FAILURE);
+		}
 		free(line);
 		line = get_next_line(fd);
+		line_index++;
 	}
 	close(fd);
-	return (ret);
+	return (EXIT_SUCCESS);
 }

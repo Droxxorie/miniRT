@@ -126,6 +126,7 @@ int		ft_printstr_fd(char *s, int fd);
 int		ft_printf(const char *format, ...);
 int		ft_printaddr_fd(void *adress, int fd);
 int		ft_printunbr_fd(unsigned int n, int fd);
+int		ft_printf_fd(int fd, const char *format, ...);
 int		ft_printdbl_fd(double number, int fd, int precision);
 int		ft_printhex_fd(unsigned int n, int fd, int uppercase);
 

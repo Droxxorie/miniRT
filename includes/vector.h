@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:07:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 17:45:40 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/10 09:41:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,5 @@ typedef struct s_vec3
 	t_real	y;
 	t_real	z;
 }	t_vec3;
-
-typedef enum e_bool
-{
-	FALSE = 0,
-	TRUE = 1
-}	t_bool;
 
 #endif
