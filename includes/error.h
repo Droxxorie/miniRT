@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:39:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 12:17:43 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 17:40:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@
 
 # define ERR_INIT_NO_CAM "No camera defined in the scene (missing 'C')"
 # define ERR_INIT_NO_AMB "No ambient light defined in the scene (missing 'A')"
+# define ERR_INIT_MLX "Failed to initialize MLX"
 # define ERR_INIT_RES "Invalid resolution settings"
+# define ERR_INIT_WIN "Failed to create window"
+# define ERR_INIT_FB "Failed to initialize frame buffer"
+# define ERR_INIT_GRAPHICS "Failed to initialize graphics"
 
 # define ERR_SCENE_INIT "Failed to initialize scene"
 # define ERR_SCENE_RENDER "Failed to render scene"
 
-# define ERR_MLX_INIT "Failed to initialize MLX"
 
 # define ERR_FILE_OPEN "Failed to open scene file" //? ou wrong fd ?
 # define ERR_FILE_FORMAT "File format does not conform to .rt specifications"

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:38:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 11:49:38 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 17:16:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void init_default_values(t_scene *scene)
 	scene->mlx_window.height = WINDOW_HEIGHT;
 	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH / (t_real)WINDOW_HEIGHT;
 	scene->render_mode = FLAT;
-	scene->ambient = -1.0;
+	scene->ambient.r = -1;
 	scene->camera_count = 0;
 	scene->objects = NULL;
 	scene->lights = NULL;
@@ -32,7 +32,7 @@ static t_status	validate_scene(t_scene *scene)
 		print_error(ERR_INIT_NO_CAM);
 		return (EXIT_FAILURE);
 	}
-	if (scene->ambient < 0.0)
+	if (scene->ambient.r < 0)
 	{
 		print_error(ERR_INIT_NO_AMB);
 		return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:32:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 14:27:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 22:23:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,30 @@ typedef struct s_object
 
 //* -------------------- SPHERE -------------------- *//
 /*
-Equation: Geometric Intersection
-||P - C||^2 = r^2
-Method: We project the sphere's center onto the ray to form a right triangle.
-Then we use Pythagoras to find the intersection distance.
-* t_proj: Projected length of Vector(RayOrigin -> Center) onto RayDir
-* p_proj: The point on the ray closest to the sphere center
-* d_ortho: Orthogonal distance (height) from Ray to Center
-* d_chord: Half-length of the chord (segment inside the sphere)
-* t0: First intersection distance (Entry)
-* t1: Second intersection distance (Exit)
+Equation: Quadratic Equation
+at^2 + bt + c = 0
+where:
+a = D . D
+b = 2(OC . D)
+c = OC . OC - r^2
+Method: Substitute the ray equation into the sphere equation and solve
+for t using the quadratic formula.
+* oc: Vector from RayOrigin to SphereCenter
+* a, half_b, c: Quadratic coefficients
+* delta: Discriminant (b^2 - 4ac)
+* sqrt_delta: Square root of discriminant
+* root: Potential intersection distance
 */
-typedef struct s_sphere_vars
+typedef struct s_poly
 {
-	t_real		t_proj;
-	t_point3	p_proj;
-	t_real		d_ortho;
-	t_real		d_chord;
-	t_real		t0;
-	t_real		t1;
-}	t_sphere_vars;
+	t_real	a;
+	t_real	half_b;
+	t_real	c;
+	t_real	min;
+	t_real	max;
+	t_real	root1;
+	t_real	root2;
+} t_poly;
 
 typedef struct s_sphere
 {

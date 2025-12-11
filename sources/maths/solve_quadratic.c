@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve_quadratic.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/11 22:29:52 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/11 22:42:35 by eraad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minirt.h>
+
+t_bool	solve_quadratic(t_poly *vars)
+{
+	t_real	delta;
+	t_real	sqrt_delta;
+	t_real	inv_a;
+
+	delta = (vars->half_b * vars->half_b) - (vars->a * vars->c);
+	if (delta < 0)
+		return (FALSE);
+	sqrt_delta = sqrt(delta);
+	if (vars->a != 0)
+		inv_a = 1 / vars->a; //? opti ?
+	vars->root1 = (-vars->half_b - sqrt_delta) * inv_a;
+	vars->root2 = (-vars->half_b + sqrt_delta) * inv_a;
+	return (TRUE);
+}

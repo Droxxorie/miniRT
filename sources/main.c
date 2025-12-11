@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 15:14:45 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 17:40:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int argc, char **argv)
 	if (argc == 3 && ft_strcmp(argv[2], SAVE_FLAG) == 0)
 		scene->render_mode = SHADED;
 	prepare_cameras(scene);
-	if (init_buffer(scene) == FALSE)                // TODO
-		print_error_free_exit(scene, ERR_MLX_INIT); //? changer msg ?
+	if (init_graphics(scene) == EXIT_FAILURE)
+		print_error_free_exit(scene, ERR_INIT_GRAPHICS);
 	if (update(scene) == FALSE)                         // TODO
 		print_error_free_exit(scene, ERR_SCENE_RENDER); // TODO
 	if (scene->render_mode == SHADED)
@@ -36,6 +36,6 @@ int	main(int argc, char **argv)
 		clean_exit(scene, EXIT_SUCCESS);
 	}
 	hook_init(scene);                               // TODO
-	mlx_loop(scene->mlx_window.ptr);                  // TODO
+	mlx_loop(scene->mlx_window.mlx_ptr);                  // TODO
 	return (EXIT_SUCCESS);
 }

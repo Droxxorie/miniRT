@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:13:24 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 15:06:49 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 22:38:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_mat4
 {
 	t_real		m[4][4];
 }				t_mat4;
+
+t_bool			solve_quadratic(t_poly *vars);
 
 //* Vector operations */
 t_vec3			vec3_add(const t_vec3 u, const t_vec3 v);
