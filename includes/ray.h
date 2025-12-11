@@ -6,14 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:37:26 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 15:15:45 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 15:03:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
 
-# include <vector.h>
+# include <maths.h>
 
 /*
 * origin: Ray origin point

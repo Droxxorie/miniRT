@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   substract.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 15:37:17 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 11:50:43 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/11 14:32:54 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/11 14:34:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#include <minirt.h>
 
-# include <utils.h>
-# include <engine.h>
-# include <objects.h>
+t_vec3	vec3_sub(const t_vec3 u, const t_vec3 v)
+{
+	return ((t_vec3){
+		u.x - v.x,
+		u.y - v.y,
+		u.z - v.z
+	});
+}
 
-t_status	load_scene(t_scene *scene, char *file_path);
-
-#endif
+t_vec3	vec3_sub_scalar(const t_vec3 v, const t_real k)
+{
+	return ((t_vec3){
+		v.x - k,
+		v.y - k,
+		v.z - k
+	});
+}

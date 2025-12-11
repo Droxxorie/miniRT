@@ -6,23 +6,53 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:38:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 22:28:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 11:49:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_status	init_scene(t_scene *scene, char *file_path)
+static void init_default_values(t_scene *scene)
 {
-	log_info("Initializing scene");
-	scene->mlx_window.ptr = mlx_init();
 	scene->mlx_window.width = WINDOW_WIDTH;
 	scene->mlx_window.height = WINDOW_HEIGHT;
-	scene->mlx_window.aspect_ratio = ASPECT_RATIO;
+	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH / (t_real)WINDOW_HEIGHT;
 	scene->render_mode = FLAT;
-	scene->ambient = -1;
+	scene->ambient = -1.0;
 	scene->camera_count = 0;
+	scene->objects = NULL;
+	scene->lights = NULL;
+	scene->cameras = NULL;
+}
+
+static t_status	validate_scene(t_scene *scene)
+{
+	if (scene->cameras == NULL)
+	{
+		print_error(ERR_INIT_NO_CAM);
+		return (EXIT_FAILURE);
+	}
+	if (scene->ambient < 0.0)
+	{
+		print_error(ERR_INIT_NO_AMB);
+		return (EXIT_FAILURE);
+	}
+	if (scene->mlx_window.height <= 0 || scene->mlx_window.width <= 0)
+	{
+		print_error(ERR_INIT_RES);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+t_status	load_scene(t_scene *scene, char *file_path)
+{
+	// log_info("Initializing scene"); // ? debug a voir si je laisse
+	init_default_values(scene);
+	// scene->mlx_window.ptr = mlx_init(); //? A DEPLACER dans buffer_init ?
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	return (verify_scene(scene)); // TODO
+	if (validate_scene(scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

@@ -6,15 +6,15 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:27:34 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 18:13:57 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 14:18:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void	add_camera_to_scene(t_scene *scene, t_cameras *new_camera)
+static void	add_camera_to_scene(t_scene *scene, t_camera *new_camera)
 {
-	t_cameras	*current;
+	t_camera	*current;
 
 	if (scene->cameras == NULL)
 		scene->cameras = new_camera;
@@ -29,10 +29,10 @@ static void	add_camera_to_scene(t_scene *scene, t_cameras *new_camera)
 
 t_status	parse_camera(t_scene *scene, char **line)
 {
-	t_cameras	*new_camera;
+	t_camera	*new_camera;
 	int			fov;
 
-	new_camera = ft_calloc(1, sizeof(t_cameras));
+	new_camera = ft_calloc(1, sizeof(t_camera));
 	if (new_camera == NULL)
 		return (sys_print_error(ERR_CAMERA_MEM), EXIT_FAILURE);
 	if (parse_vec3(line, &new_camera->position) == EXIT_FAILURE

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:39:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 20:35:26 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 12:26:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
-# define ASPECT_RATIO ((t_real)WINDOW_WIDTH / (t_real)WINDOW_HEIGHT)
 
 typedef enum e_mode
 {
@@ -38,36 +37,35 @@ typedef enum e_mode
 typedef struct s_hit_record
 {
 	t_ray		ray; //? redondant, on verra
-	t_objects	*object; //? Un seul objet intersecté donc peut etre pas une liste
+	t_object	*object; //? Un seul objet intersecté donc peut etre pas une liste
 	t_point3	point;
 	t_vec3		normal;
 	t_real		t;
-	t_bool		frontface;
+	t_bool		front_face;
 	t_color		color;
 }	t_hit_record;
 
 typedef struct s_scene
 {
-	char			*file; //? pk ici ?
-	char			*line; //? pk ici ?
-	t_bool			bmp_saved; //?
+	// char			*file; //? a supprimer/bouger
+	// char			*line; //? a supprimer/bouger
+	t_bool			bmp_saved; //? a voir si je garde
 	// t_real			aspect_ratio; //* ex ratio
 	t_window		mlx_window; //* ex mlx
 	t_mode			render_mode; //*ex viewport
 	t_buffer		frame_buffer; //* ex main
-	t_real			completion; //?
-	t_real			prog_add; //?
-	t_vec2			screen; //? kesako exacetement
+	t_real			completion; //? Inutile pour le moment
+	t_real			prog_add; //? Same
+	t_vec2			screen; //? doublon avec window width/height
 	t_real			ambient;
 	t_color 		ambient_color;
-	t_objects		*objects;
-	t_lights		*lights;
+	t_object		*objects;
+	t_light			*lights;
 	// t_camera_list	*cameras;
-	t_cameras		*cameras;
+	t_camera		*cameras;
 	int				camera_count;
-	// int				camera_id; //? Pourquoi, déjà dans camera_list
-	int				u; //?
-	int				v; //?
+	int				u; //? var de rendu a deplacer
+	int				v; //? var de rendu a deplacer
 } t_scene;
 
 #endif

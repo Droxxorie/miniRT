@@ -6,15 +6,15 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 18:20:24 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 12:27:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void add_light_to_scene(t_scene *scene, t_lights *new_light)
+static void add_light_to_scene(t_scene *scene, t_light *new_light)
 {
-	t_lights *current;
+	t_light	*current;
 
 	if (scene->lights == NULL)
 		scene->lights = new_light;
@@ -29,9 +29,9 @@ static void add_light_to_scene(t_scene *scene, t_lights *new_light)
 
 t_status	parse_light(t_scene *scene, char **line)
 {
-	t_lights	*new_light;
+	t_light	*new_light;
 
-	new_light = ft_calloc(1, sizeof(t_lights));
+	new_light = ft_calloc(1, sizeof(t_light));
 	if (new_light == NULL)
 		return (print_error(ERR_LIGHT_MEM), EXIT_FAILURE);
 	if (parse_vec3(line, &new_light->position) == EXIT_FAILURE

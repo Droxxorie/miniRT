@@ -6,14 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:35:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 16:39:59 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 14:26:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-# include <vector.h>
+#include <maths.h>
 
 typedef struct s_color
 {

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:13:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 22:28:44 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 14:26:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BUFFER_H
 
 # include <mlx.h>
-# include <vector.h>
+# include <maths.h>
 
 typedef struct s_buffer
 {

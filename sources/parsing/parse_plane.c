@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:49:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 21:58:10 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 12:28:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_status	parse_plane(t_scene *scene, char **line)
 {
-	t_objects	*new_obj;
+	t_object	*new_obj;
 
-	new_obj = ft_calloc(1, sizeof(t_objects));
+	new_obj = ft_calloc(1, sizeof(t_object));
 	if (new_obj == NULL)
 		return (print_error(ERR_PLANE_MEM), EXIT_FAILURE);
 	new_obj->type = PLANE;

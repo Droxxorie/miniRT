@@ -6,15 +6,15 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:32:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 21:38:49 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 14:27:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
+# include <maths.h>
 # include <color.h>
-# include <vector.h>
 
 typedef enum e_object_type
 {
@@ -34,7 +34,7 @@ typedef struct s_aabb
 	t_bool		used;
 }	t_aabb;
 
-typedef struct s_objects
+typedef struct s_object
 {
 	t_object_type	type;
 	t_color			color;
@@ -49,8 +49,8 @@ typedef struct s_objects
 		// t_square			square;
 		// t_triangle		triangle;
 	}	data;
-	struct s_objects	*next;
-}	t_objects;
+	struct s_object	*next;
+}	t_object;
 
 //* -------------------- SPHERE -------------------- *//
 /*

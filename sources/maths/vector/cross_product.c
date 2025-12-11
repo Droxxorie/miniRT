@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.h                                           :+:      :+:    :+:   */
+/*   cross_product.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 15:18:35 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/08 15:33:46 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/11 14:28:44 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/11 14:29:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRIX_H
-# define MATRIX_H
+#include <minirt.h>
 
-# include <vector.h>
-
-typedef enum e_mat_axis
+t_vec3	vec3_cross(const t_vec3 u, const t_vec3 v)
 {
-	AXIS_RIGHT, // X axis
-	AXIS_UP,   // Y axis
-	AXIS_FORWARD, // Z axis
-	AXIS_ORIGIN // Translation
-}	t_mat_axis;
-
-typedef struct s_mat4
-{
-	t_real	m[4][4];
-}	t_mat4;
-
-#endif
+	return ((t_vec3){
+		u.y * v.z - u.z * v.y,
+		u.z * v.x - u.x * v.z,
+		u.x * v.y - u.y * v.x
+	});
+}

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:39:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 22:12:15 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 12:17:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # define ERR_SPHERE_MEM "Failed to allocate sphere"
 # define ERR_PLANE_MEM "Failed to allocate plane"
 # define ERR_CYLINDER_MEM "Failed to allocate cylinder"
+
+# define ERR_INIT_NO_CAM "No camera defined in the scene (missing 'C')"
+# define ERR_INIT_NO_AMB "No ambient light defined in the scene (missing 'A')"
+# define ERR_INIT_RES "Invalid resolution settings"
 
 # define ERR_SCENE_INIT "Failed to initialize scene"
 # define ERR_SCENE_RENDER "Failed to render scene"
@@ -52,5 +56,7 @@ void	print_error_exit(const char *error_message);
 void	sys_print_error_exit(const char *error_message);
 void	print_error(const char *error_message);
 void	sys_print_error(const char *error_message);
+void	print_error_free_exit(t_scene *scene, const char *error_message);
+void	sys_print_error_free_exit(t_scene *scene, const char *error_message);
 
 #endif

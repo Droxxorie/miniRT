@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_object_to_scene.c                              :+:      :+:    :+:   */
+/*   get_ray.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 21:44:42 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 12:28:29 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/11 15:10:03 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/11 15:10:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	add_object_to_scene(t_scene *scene, t_object *new_object)
+void	get_ray(t_camera *camera, t_ray *ray, t_real u, t_real v)
 {
-	t_object	*current;
+	t_vec3	target;
 
-	if (scene->objects == NULL)
-		scene->objects = new_object;
-	else
-	{
-		current = scene->objects;
-		while (current->next)
-			current = current->next;
-		current->next = new_object;
-	}
+	ray->origin = camera->position;
+	target = camera->lower_left_corner;
+	target = vec3_add(target, vec3_scale(camera->horizontal, u));
+	target = vec3_add(target, vec3_scale(camera->vertical, v));
+	ray->direction = vec3_sub(target, ray->origin);
+	ray->direction = vec3_normalize(ray->direction);
+	ray->min = EPSILON;
+	ray->max = INFINITY;
 }

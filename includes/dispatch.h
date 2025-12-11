@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:58:43 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 20:33:29 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 14:28:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ typedef struct s_key_map
 typedef struct s_intersect_dispatch
 {
 	t_object_type	type;
-	t_bool			(*func)(t_objects *objects, t_hit_record *record);
+	t_bool			(*func)(t_object *objects, t_hit_record *record);
 }	t_intersect_dispatch;
 
 typedef struct s_construct_dispatch // ? redondant
 {
 	t_object_type	type;
-	t_bool			(*func)(t_objects *objects);
+	t_bool			(*func)(t_object *objects);
 }	t_construct_dispatch;
 
 typedef struct s_shader_dispatch

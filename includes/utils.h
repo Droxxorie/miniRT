@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:17:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 11:37:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/11 12:12:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ void	log_process(const char *message);
 
 size_t	ft_strcspn(const char *str, const char *reject);
 size_t	ft_strspn(const char *str, const char *accept);
+
+void		destroy_scene(t_scene *scene);
+t_status	clean_exit(t_scene *scene, t_status status);
 
 #endif
