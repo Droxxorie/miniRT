@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 09:47:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 14:27:33 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 18:53:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ t_status	parse_color(char **line, t_color *color);
 t_status	parse_vec3(char **line, t_vec3 *vector);
 t_status	parse_ratio(char **line, t_real *ratio, t_bool is_negative);
 void		add_object_to_scene(t_scene *scene, t_object *object);
+int			get_light_count(t_light *lights);
+int			get_camera_count(t_camera *cameras);
+int			get_object_count(t_object *objects);
 
 t_status	parse_scene_file(t_scene *scene, const char *file_path);
 t_status	parse_ambient(t_scene *scene, char **line);

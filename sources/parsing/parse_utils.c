@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 12:12:11 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 20:36:26 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 19:10:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ t_status	parse_comma(char **line)
 t_status	check_eol(char **line)
 {
 	skip_whitespace(line);
-	if (**line != '\0' && **line != '#')
-	//* On garde les commentaires pour le moment
+	if (**line != '\0' && **line != '#') //* On garde les commentaires pour le moment
 	{
 		print_error(ERR_PARSE_EOL);
 		return (EXIT_FAILURE);

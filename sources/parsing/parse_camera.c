@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:27:34 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 14:18:24 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 18:52:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ t_status	parse_camera(t_scene *scene, char **line)
 	t_camera	*new_camera;
 	int			fov;
 
+	if (get_camera_count(scene->cameras) >= MAX_CAMERAS)
+		return (print_error_limit("cameras", MAX_CAMERAS), EXIT_FAILURE);
 	new_camera = ft_calloc(1, sizeof(t_camera));
 	if (new_camera == NULL)
-		return (sys_print_error(ERR_CAMERA_MEM), EXIT_FAILURE);
+		return (sys_print_error(ERR_MEM_CAMERA), EXIT_FAILURE);
 	if (parse_vec3(line, &new_camera->position) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_vec3(line, &new_camera->direction) == EXIT_FAILURE
@@ -48,7 +50,6 @@ t_status	parse_camera(t_scene *scene, char **line)
 	if (vec3_len_squared(new_camera->direction) == 0.0)
 		return (free(new_camera), print_error(ERR_CAMERA_DIR), EXIT_FAILURE);
 	new_camera->direction = vec3_normalize(new_camera->direction);
-	new_camera->id = scene->camera_count++;
 	add_camera_to_scene(scene, new_camera);
-	return (EXIT_SUCCESS); // TODO NE PAS OUBLIER LES MATHS PLUS TARD HEIN !!!!!
+	return (EXIT_SUCCESS);
 }

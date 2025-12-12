@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:10:03 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 15:10:05 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 17:25:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,13 @@ void	get_ray(t_camera *camera, t_ray *ray, t_real u, t_real v)
 	ray->direction = vec3_normalize(ray->direction);
 	ray->min = EPSILON;
 	ray->max = INFINITY;
+}
+
+t_color	get_ray_color(t_scene *scene, t_ray *ray)
+{
+	t_hit_record record;
+
+	if (hit_objects(scene->objects, ray, &record))
+		return (phong_light(scene, &record, ray));
+	return ((t_color){0.0, 0.0, 0.0});
 }

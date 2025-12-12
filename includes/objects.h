@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:32:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 22:23:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 18:51:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,26 @@
 # define OBJECTS_H
 
 # include <maths.h>
-# include <color.h>
+
+# define MAX_OBJECTS 100
 
 typedef enum e_object_type
 {
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	SQUARE,
-	TRIANGLE,
 	NONE
 }	t_object_type;
-
-typedef struct s_aabb
-{
-	t_point3	min;
-	t_point3	max;
-	t_point3	center;
-	t_bool		used;
-}	t_aabb;
 
 typedef struct s_object
 {
 	t_object_type	type;
 	t_color			color;
-	// t_material		material;
-	// t_aabb			volume;
-	// t_bool			construct;
 	union
 	{
 		t_sphere		sphere;
 		t_plane			plane;
 		t_cylinder		cylinder;
-		// t_square			square;
-		// t_triangle		triangle;
 	}	data;
 	struct s_object	*next;
 }	t_object;
@@ -83,29 +69,15 @@ typedef struct s_sphere
 {
 	t_point3	center;
 	t_real		radius;
+	t_real		radius_squared;
 }	t_sphere;
 
 //* -------------------- PLANE -------------------- *//
-/*
-Equation: Point-Normal Form
-(P - P0) . N = 0
-t = ((P0 - O) . N) / (D . N)
-Method: Simple substitution of the ray equation into the plane equation.
-* denom: Denominator (RayDir . PlaneNormal). Checks if parallel.
-* vec_diff: Vector from RayOrigin to PlaneOrigin
-* dist: Resulting distance t
-*/
-typedef struct s_plane_vars
-{
-	t_real	denom;
-	t_vec3	vec_diff;
-	t_real	dist;
-}	t_plane_vars;
-
 typedef struct s_plane
 {
 	t_point3	origin;
 	t_vec3		normal;
+	t_real		d; //distance from origin
 }	t_plane;
 
 // //* -------------------- SQUARE -------------------- *//
@@ -144,33 +116,16 @@ typedef struct s_plane
 
 //* -------------------- CYLINDER -------------------- *//
 /*
-Equation: Quadratic Equation
-|| (O + tD - C) x A ||^2 = r^2
-Expands to: at^2 + bt + c = 0
-Method:
-1. Solve quadratic for infinite tube.
-2. Check "height" bounds (Project intersection onto axis).
-* origin: Ray origin
-* dir: Ray direction
-* oc: Vector RayOrigin -> CylinderCenter
-* a, b, c: Quadratic Coefficients
-* delta: Discriminant (b^2 - 4ac)
-* two_a: Denominator 2*a stored for division
-* sqrt_delta: Square root of discriminant
-* is_inside: Flag: Camera is inside the cylinder?
+Equation: Quadratic Equation (Infinite Cylinder) + Height Check
 */
 typedef struct s_cylinder_vars
 {
-	t_point3	origin;
-	t_vec3		dir;
-	t_vec3		oc;
-	t_real		a;
-	t_real		b;
-	t_real		c;
-	t_real		delta;
-	t_real		two_a;
-	t_real		sqrt_delta;
-	t_bool		is_inside;
+	t_poly	eq_vars;
+	t_vec3	oc;
+	t_real	dot_dir_axis;
+	t_real	dot_oc_axis;
+	t_real	half_height;
+	t_real	projection;
 }	t_cylinder_vars;
 
 typedef struct s_cylinder
@@ -178,12 +133,13 @@ typedef struct s_cylinder
 	t_point3	center;
 	t_vec3		axis;
 	t_real		radius;
+	t_real		radius_squared;
 	t_real		height;
-	t_point3	cap_top;
-	t_point3	cap_bottom;
-	t_vec3		diff;
-	t_real		half_height;
-	t_vec3		half_height_vec;
+	// t_point3	cap_top;
+	// t_point3	cap_bottom;
+	// t_vec3		diff;
+	// t_real		half_height;
+	// t_vec3		half_height_vec;
 }	t_cylinder;
 
 // //* -------------------- TRIANGLE -------------------- *//

@@ -1,23 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   product_color.c                                    :+:      :+:    :+:   */
+/*   get_count.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 17:23:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 17:23:30 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/12 18:52:04 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/12 18:53:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_color	color_scale(const t_color color, const t_real k)
+int	get_light_count(t_light *lights)
 {
-	return ((t_color){color.r * k, color.g * k, color.b * k});
+	int	count;
+
+	count = 0;
+	while (lights)
+	{
+		count++;
+		lights = lights->next;
+	}
+	return (count);
 }
 
-t_color	color_prod(const t_color c1, const t_color c2)
+static int	get_camera_count(t_camera *cameras)
 {
-	return ((t_color){c1.r * c2.r, c1.g * c2.g, c1.b * c2.b});
+	int count;
+
+	count = 0;
+	while (cameras)
+	{
+		count++;
+		cameras = cameras->next;
+	}
+	return (count);
+}
+
+int	get_object_count(t_object *objects)
+{
+	int	count;
+
+	count = 0;
+	while (objects)
+	{
+		count++;
+		objects = objects->next;
+	}
+	return (count);
 }

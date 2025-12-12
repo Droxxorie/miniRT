@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:38:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 17:16:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 17:35:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ static void init_default_values(t_scene *scene)
 	scene->mlx_window.width = WINDOW_WIDTH;
 	scene->mlx_window.height = WINDOW_HEIGHT;
 	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH / (t_real)WINDOW_HEIGHT;
-	scene->render_mode = FLAT;
 	scene->ambient.r = -1;
-	scene->camera_count = 0;
 	scene->objects = NULL;
 	scene->lights = NULL;
 	scene->cameras = NULL;
@@ -49,7 +47,6 @@ t_status	load_scene(t_scene *scene, char *file_path)
 {
 	// log_info("Initializing scene"); // ? debug a voir si je laisse
 	init_default_values(scene);
-	// scene->mlx_window.ptr = mlx_init(); //? A DEPLACER dans buffer_init ?
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (validate_scene(scene) == EXIT_FAILURE)

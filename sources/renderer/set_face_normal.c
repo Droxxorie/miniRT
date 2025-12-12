@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   set_face_normal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 16:35:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 14:26:36 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/12 09:18:07 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/12 09:19:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include <minirt.h>
 
-#include <maths.h>
-
-typedef struct s_color
+void	set_face_normal(t_hit_record *record, t_ray *ray, t_vec3 outward_normal)
 {
-	t_real	r;
-	t_real	g;
-	t_real	b;
-}			t_color;
-
-typedef struct s_material
-{
-	t_color	diffuse;
-}			t_material;
-
-#endif
+	if (vec3_dot(ray->direction, outward_normal) < 0)
+	{
+		record->front_face = TRUE;
+		record->normal = outward_normal;
+	}
+	else
+	{
+		record->front_face = FALSE;
+		record->normal = vec3_scale(outward_normal, -1.0);
+	}
+}

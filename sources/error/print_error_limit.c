@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scalar_product.c                                   :+:      :+:    :+:   */
+/*   print_error_limit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 14:30:48 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 16:48:07 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/12 18:45:57 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/12 18:47:04 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_real	vec3_dot(const t_vec3 u, const t_vec3 v)
+void	print_error_limit(const char *entity_name, int limit)
 {
-	return ((u.x * v.x) + (u.y * v.y) + (u.z * v.z));
-}
-
-t_real	color_dot(const t_color c1, const t_color c2)
-{
-	return ((c1.r * c2.r) + (c1.g * c2.g) + (c1.b * c2.b));
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Exceed maximum number of ", 2);
+	ft_putstr_fd(entity_name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putnbr_fd(limit, 2);
+	ft_putstr_fd("\n", 2);
 }

@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scalar_product.c                                   :+:      :+:    :+:   */
+/*   color_to_int.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 14:30:48 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 16:48:07 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/12 15:43:50 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/12 15:46:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_real	vec3_dot(const t_vec3 u, const t_vec3 v)
+static int	to_byte(t_real	color_component)
 {
-	return ((u.x * v.x) + (u.y * v.y) + (u.z * v.z));
+	int byte_value;
+
+	byte_value = (int)(color_component * 255.999); //* troncature vers le bas
+	if (byte_value > 255)
+		return (255);
+	if (byte_value < 0)
+		return (0);
+	return (byte_value);
 }
 
-t_real	color_dot(const t_color c1, const t_color c2)
+int	color_to_int(t_color color)
 {
-	return ((c1.r * c2.r) + (c1.g * c2.g) + (c1.b * c2.b));
+	int	r;
+	int g;
+	int	b;
+
+	r = to_byte(color.r);
+	g = to_byte(color.g);
+	b = to_byte(color.b);
+	return ((r << 16) | (g << 8) | b);
 }

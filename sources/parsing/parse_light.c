@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 12:27:45 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 18:52:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ t_status	parse_light(t_scene *scene, char **line)
 {
 	t_light	*new_light;
 
+	if (get_light_count(scene->lights) >= MAX_LIGHTS)
+		return (print_error_limit("lights", MAX_LIGHTS), EXIT_FAILURE);
 	new_light = ft_calloc(1, sizeof(t_light));
 	if (new_light == NULL)
-		return (print_error(ERR_LIGHT_MEM), EXIT_FAILURE);
+		return (print_error(ERR_MEM_LIGHT), EXIT_FAILURE);
 	if (parse_vec3(line, &new_light->position) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_ratio(line, &new_light->brightness, FALSE) == EXIT_FAILURE

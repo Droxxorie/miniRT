@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:05 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 22:53:06 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 09:53:15 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@ static void	set_sphere_record(t_sphere *sphere, t_ray *ray, t_hit_record *record
 {
 	t_vec3	outward_normal;
 
-	record->point = vec3_add(ray->origin, vec3_scale(ray->direction, record->t));
-	outward_normal = vec3_sub(record->point, sphere->center);
+	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction, record->t));
+	outward_normal = vec3_sub(record->hit_point, sphere->center);
 	outward_normal = vec3_scale(outward_normal, 1.0 / sphere->radius);
-	record->front_face = vec3_dot(ray->direction, outward_normal) < 0;
-	if (record->front_face)
-		record->normal = outward_normal;
-	else
-		record->normal = vec3_scale(outward_normal, -1.0);
+	set_face_normal(record, ray, outward_normal);
 }
 
 t_bool	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *record)
@@ -32,9 +28,10 @@ t_bool	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *record)
 	t_vec3	oc;
 	
 	oc = vec3_sub(ray->origin, sphere->center);
-	vars.a = vec3_len_squared(ray->direction);
+	// vars.a = vec3_len_squared(ray->direction);
+	vars.a = 1; //* direction normalisée ducou 1²=1
 	vars.half_b = vec3_dot(oc, ray->direction);
-	vars.c = vec3_len_squared(oc) - (sphere->radius * sphere->radius);
+	vars.c = vec3_len_squared(oc) - (sphere->radius_squared);
 	if (solve_quadratic(&vars) == FALSE)
 		return (FALSE);
 	if (vars.root1 > ray->min && vars.root1 < ray->max)

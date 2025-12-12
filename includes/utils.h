@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:17:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 12:12:39 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 19:24:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@
 # define B_WHITE "\033[1;37m"
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
-# define SAVE_FLAG "--save"
+
+# define ESCAPE_KEY 53
+# define LEFT_ARROW_KEY 123
+# define RIGHT_ARROW_KEY 124
+# define UP_ARROW_KEY 126
+# define DOWN_ARROW_KEY 125
 
 typedef int	t_status; // EXIT_SUCCESS or EXIT_FAILURE
 

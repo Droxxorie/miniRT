@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:13:06 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 14:52:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 17:33:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	prepare_cameras(t_scene *scene)
 		setup_camera(current, scene->mlx_window.aspect_ratio);
 		current = current->next;
 	}
+	scene->active_camera = scene->cameras;
 }

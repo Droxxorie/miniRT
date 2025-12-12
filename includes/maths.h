@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:13:24 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 22:38:38 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 16:53:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_color			color_add(const t_color c1, const t_color c2);
 t_color			color_add_scalar(const t_color color, const t_real k);
 t_color			color_scale(const t_color color, const t_real k);
 t_color			color_prod(const t_color c1, const t_color c2);
+t_real			color_dot(const t_color c1, const t_color c2); //* code mort pour le moment
 
 //* Matrix operations */
 #endif
