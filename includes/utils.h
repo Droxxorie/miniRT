@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:17:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:24:44 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 22:33:33 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,13 @@
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
 
-# define ESCAPE_KEY 53
-# define LEFT_ARROW_KEY 123
-# define RIGHT_ARROW_KEY 124
-# define UP_ARROW_KEY 126
-# define DOWN_ARROW_KEY 125
-
 typedef int	t_status; // EXIT_SUCCESS or EXIT_FAILURE
 
 void	print_usage(void);
 void	log_info(const char *message);
 void	log_detail(const char *message, const char *detail);
 void	log_process(const char *message);
+void	print_object_type(t_object_type type);
 
 size_t	ft_strcspn(const char *str, const char *reject);
 size_t	ft_strspn(const char *str, const char *accept);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:10:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 17:22:41 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 22:41:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@
 # include "entities.h"
 # include "engine.h"
 # include "parsing.h"
+# include "hooks.h"
 
 #endif

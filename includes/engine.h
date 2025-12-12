@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:39:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 17:35:00 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/12 23:00:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 
+typedef enum e_control_mode
+{
+	TRANSLATE,
+	ROTATE,
+	NONE
+} t_control_mode;
 typedef struct s_hit_record
 {
 	t_object	*object;
@@ -56,13 +62,16 @@ typedef struct s_window
 
 typedef struct s_scene
 {
-	t_window	mlx_window;
-	t_image		frame_buffer;
-	t_color		ambient;
-	t_object	*objects;
-	t_light		*lights;
-	t_camera	*cameras;
-	t_camera	*active_camera;
+	t_window		mlx_window;
+	t_image			frame_buffer;
+	t_color			ambient;
+	t_object		*objects;
+	t_light			*lights;
+	t_camera		*cameras;
+	t_camera		*active_camera;
+	t_object		*selected_object; // NULL = camera control
+	t_light			*selected_light;
+	t_control_mode	control_mode;
 }	t_scene;
 
 t_bool		hit_objects(t_object *objects, t_ray *ray, t_hit_record *record);
@@ -78,6 +87,5 @@ int			color_to_int(t_color color);
 void		image_pixel_put(t_image *image, int x, int y, int color);
 t_vec3		vec_reflect(t_vec3 i, t_vec3 n);
 t_color		phong_light(t_scene *scene, t_hit_record *record, t_ray *ray);
-
 
 #endif
