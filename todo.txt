@@ -1,0 +1,11 @@
+- utiliser la molette ?
+- utiliser shift + key ?
+- afficher mode, object selectionner, camera id à l'ecran ?
+- mode screenshot (caché UI)
+- appuyer sur la croix pour clean_exit
+- fontion switch_camera_next
+- fonction hook_init
+- trier les fichier et dossiers
+
+
+- comment créér des macro pour git
