@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:58:43 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:12:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/15 14:17:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,23 @@ typedef struct s_hit_dispatch
 	t_object_type	type;
 	t_bool			(*func)(t_object *objects, t_ray *ray, t_hit_record *record);
 }	t_hit_dispatch;
+
+typedef struct s_resize_map
+{
+	t_object_type	type;
+	void			(*func)(t_object *object, int key);
+}	t_resize_map;
+
+typedef struct s_translate_map
+{
+	t_object_type	type;
+	void			(*func)(t_object *object, t_vec3 transform);
+}	t_translate_map;
+
+typedef struct s_rotate_map
+{
+	t_object_type	type;
+	void			(*func)(t_object *object, t_vec3 rot_axis);
+}	t_rotate_map;
 
 #endif

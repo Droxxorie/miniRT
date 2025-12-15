@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:13:24 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 16:53:07 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/15 14:37:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ typedef struct s_vec3
 	t_real		z;
 }				t_vec3;
 
-typedef enum e_mat_axis
-{
-	AXIS_RIGHT,   // X axis
-	AXIS_UP,      // Y axis
-	AXIS_FORWARD, // Z axis
-	AXIS_ORIGIN   // Translation
-}				t_mat_axis;
-
 typedef struct s_mat4
 {
 	t_real		m[4][4];
@@ -78,4 +70,11 @@ t_color			color_prod(const t_color c1, const t_color c2);
 t_real			color_dot(const t_color c1, const t_color c2); //* code mort pour le moment
 
 //* Matrix operations */
+t_mat4			identity_matrix(void);
+t_mat4			make_rotation_matrix(t_vec3 angles);
+t_mat4			make_translation_matrix(t_vec3 translation);
+t_vec3			mat3_mult_vec3(t_mat4 mat, t_vec3 vec);
+t_vec3			mat4_mult_point(t_mat4 mat, t_point3 point);
+t_mat4			mat4_mult_mat4(t_mat4 a, t_mat4 b);
+
 #endif

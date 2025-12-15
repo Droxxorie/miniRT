@@ -9,7 +9,7 @@
 - fontion switch_camera_next
 - fonction hook_init
 - trier les fichier et dossiers
-- ajouter tor, triangle, carre
+- ajouter tor, triangle, carre, cone
 - opti aabb
 
 
