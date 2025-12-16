@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:14:00 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 20:48:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,6 @@ static void	hanlde_right_click(t_scene *scene)
 
 int	mouse_hook(int button, int x, int y, t_scene *scene)
 {
-	t_ray			ray;
-	t_hit_record	record;
-	t_light			*current_light;
-	t_real			u;
-	t_real			v;
-
 	if (button == RIGHT_CLICK)
 		hanlde_right_click(scene);
 	else if (button == LEFT_CLICK)

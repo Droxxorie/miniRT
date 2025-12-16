@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_dispatch.c                                     :+:      :+:    :+:   */
+/*   hit_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 11:08:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:08:43 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 19:09:52 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 23:04:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include <minirt.h>
 
 static t_bool	hit_dispatch(t_object *object, t_ray *ray, t_hit_record *record)
 {
-	int i;
-	static t_hit_dispatch hit_dispatch[] = {
-		{SPHERE, hit_sphere},
-		{PLANE, hit_plane},
-		{CYLINDER, hit_cylinder},
-		{NONE, NULL}
-	};
+	int					i;
+	static t_hit_map	map[] = {
+	{SPHERE, hit_sphere},
+	{PLANE, hit_plane},
+	{CYLINDER, hit_cylinder},
+	{NONE, NULL}};
 
 	i = 0;
-	while (hit_dispatch[i].type != NONE)
+	while (map[i].type != NONE)
 	{
-		if (object->type == hit_dispatch[i].type)
-			return (hit_dispatch[i].func(object, ray, record));
+		if (object->type == map[i].type)
+			return (map[i].func(object, ray, record));
 		i++;
 	}
 	return (FALSE);
@@ -42,7 +39,7 @@ t_bool	hit_objects(t_object *objects, t_ray *ray, t_hit_record *record)
 	hit_anything = FALSE;
 	while (objects)
 	{
-		if (hit(objects, ray, &temp_record))
+		if (hit_dispatch(objects, ray, &temp_record))
 		{
 			hit_anything = TRUE;
 			ray->max = temp_record.t;

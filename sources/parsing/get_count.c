@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:52:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 18:53:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:01:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	get_light_count(t_light *lights)
 	return (count);
 }
 
-static int	get_camera_count(t_camera *cameras)
+int	get_camera_count(t_camera *cameras)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (cameras)

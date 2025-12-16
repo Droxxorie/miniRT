@@ -1,16 +1,16 @@
 - utiliser la molette ?
 - utiliser shift + key ?
-- translate lights
-- hauteur cylindre
-- refacotr
+
 - afficher mode, object selectionner, camera id à l'ecran ?
 - mode screenshot (caché UI)
-- appuyer sur la croix pour clean_exit
-- fontion switch_camera_next
-- fonction hook_init
-- trier les fichier et dossiers
+
 - ajouter tor, triangle, carre, cone
 - opti aabb
+- opti plus proches voisins
 
 
 - comment créér des macro pour git
+
+
+- bool_hit any a la place de is_in_shadow
+- test intersection avec cap des cylindres

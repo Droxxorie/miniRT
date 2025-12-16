@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:13:06 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:01:40 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:06:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	setup_camera(t_camera *c, t_real aspect_ratio)
 {
 	t_real	theta;
-	t_vec3	w; //* forward
-	t_vec3	u; //* right
-	t_vec3	v; //* up
+	t_vec3	w;
+	t_vec3	u;
+	t_vec3	v;
 
 	if (c == NULL)
 		return ;
@@ -26,10 +26,9 @@ void	setup_camera(t_camera *c, t_real aspect_ratio)
 	c->viewport_width = aspect_ratio * c->viewport_height;
 	w = vec3_normalize(c->direction);
 	if (fabs(w.y) > 0.99999)
-		u = vec3_normalize(vec3_cross((t_vec3){0, 0, 1}, w)); //* world up = z
+		u = vec3_normalize(vec3_cross((t_vec3){0, 0, 1}, w));
 	else
 		u = vec3_normalize(vec3_cross((t_vec3){0, 1, 0}, w));
-	//* world up = y (default)
 	v = vec3_cross(w, u);
 	c->horizontal = vec3_scale(u, c->viewport_width);
 	c->vertical = vec3_scale(v, c->viewport_height);

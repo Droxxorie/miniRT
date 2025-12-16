@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 09:47:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:19:34 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 19:07:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "graphics.h"
+# include "structures.h"
+# include "macros.h"
 
 void		skip_whitespace(char **line);
 t_status	skip_required(char **line, const char *charset);

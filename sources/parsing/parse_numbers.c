@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:26:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 10:59:27 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:02:41 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_float_len(const char *str)
 {
-	int i;
+	int	i;
 	int	dot_count;
 
 	i = 0;
@@ -36,14 +36,12 @@ static int	get_float_len(const char *str)
 	if (i == 0 || (i == 1 && (str[0] == '+' || str[0] == '-')))
 		return (-1);
 	return (i);
-	
 }
 
 t_status	parse_int(char **line, int *value)
 {
-	int len;
-	
-	// *line += ft_strspn(*line, WHITESPACE_CHARS);
+	int	len;
+
 	skip_whitespace(line);
 	len = 0;
 	if ((*line)[len] == '+' || (*line)[len] == '-')
@@ -59,9 +57,8 @@ t_status	parse_int(char **line, int *value)
 
 t_status	parse_real(char **line, t_real *value)
 {
-	int len;
-	
-	// *line += ft_strspn(*line, WHITESPACE_CHARS);
+	int	len;
+
 	skip_whitespace(line);
 	len = get_float_len(*line);
 	if (len <= 0)
@@ -73,7 +70,7 @@ t_status	parse_real(char **line, t_real *value)
 
 t_status	parse_ratio(char **line, t_real *ratio, t_bool is_negative)
 {
-	t_real min;
+	t_real	min;
 
 	if (is_negative == TRUE)
 		min = -1.0;

@@ -6,17 +6,19 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:13 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 10:07:24 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 20:41:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_bool	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *record)
+t_bool	hit_plane(t_object *object, t_ray *ray, t_hit_record *record)
 {
+	t_plane	*plane;
 	t_real	denominator;
 	t_real	root;
 
+	plane = &object->u_data.plane;
 	denominator = vec3_dot(ray->direction, plane->normal);
 	if (fabs(denominator) < EPSILON)
 		return (FALSE);

@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 18:52:14 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:01:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void add_light_to_scene(t_scene *scene, t_light *new_light)
+static void	add_light_to_scene(t_scene *scene, t_light *new_light)
 {
 	t_light	*current;
 
@@ -43,7 +43,6 @@ t_status	parse_light(t_scene *scene, char **line)
 		|| parse_color(line, &new_light->color) == EXIT_FAILURE
 		|| check_eol(line) == EXIT_FAILURE)
 		return (free(new_light), EXIT_FAILURE);
-	new_light->color = color_scale(new_light->color, new_light->brightness);
 	add_light_to_scene(scene, new_light);
 	return (EXIT_SUCCESS);
 }

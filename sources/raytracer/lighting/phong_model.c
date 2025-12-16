@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:10:11 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:03:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_color	compute_specular(t_light *light, t_hit_record *record,
 	t_real	shininess;
 	t_real	specular;
 
-	shininess = 32.0; //* Temporaire pour tester
+	shininess = 32.0; //TODO: rendre ça configurable
 	dir = vec3_normalize(vec3_sub(light->position, record->hit_point));
 	view_dir = vec3_normalize(vec3_scale(ray->direction, -1.0));
 	reflect_dir = vec_reflect(vec3_scale(dir, -1.0), record->normal);

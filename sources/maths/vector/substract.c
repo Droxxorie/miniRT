@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:32:54 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 14:34:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:00:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,5 @@ t_vec3	vec3_sub(const t_vec3 u, const t_vec3 v)
 		u.x - v.x,
 		u.y - v.y,
 		u.z - v.z
-	});
-}
-
-t_vec3	vec3_sub_scalar(const t_vec3 v, const t_real k)
-{
-	return ((t_vec3){
-		v.x - k,
-		v.y - k,
-		v.z - k
 	});
 }

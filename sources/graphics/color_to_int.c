@@ -6,15 +6,15 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 15:43:50 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 15:46:34 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 22:59:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static int	to_byte(t_real	color_component)
+static int	to_byte(t_real color_component)
 {
-	int byte_value;
+	int	byte_value;
 
 	byte_value = (int)(color_component * 255.999); //* troncature vers le bas
 	if (byte_value > 255)
@@ -27,7 +27,7 @@ static int	to_byte(t_real	color_component)
 int	color_to_int(t_color color)
 {
 	int	r;
-	int g;
+	int	g;
 	int	b;
 
 	r = to_byte(color.r);

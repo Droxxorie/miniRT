@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 08:23:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 10:48:35 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 19:11:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	translate_camera(t_camera *camera, t_vec3 translation,
 	if (!camera)
 		return ;
 	translation_matrix = make_translation_matrix(translation);
-	camera->position = mat4_mult_point3(translation_matrix, camera->position);
+	camera->position = mat4_mult_point(translation_matrix, camera->position);
 	setup_camera(camera, aspect_ratio);
 }

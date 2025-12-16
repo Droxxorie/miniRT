@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:49:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:07:54 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:55:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static t_status	get_plane_value(char **line, t_object *obj)
 {
-	if (parse_vec3(line, &obj->data.plane.origin) == EXIT_FAILURE
+	if (parse_vec3(line, &obj->u_data.plane.origin) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
-		|| parse_vec3(line, &obj->data.plane.normal) == EXIT_FAILURE
+		|| parse_vec3(line, &obj->u_data.plane.normal) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(line, &obj->color) == EXIT_FAILURE
 		|| check_eol(line) == EXIT_FAILURE)
@@ -37,11 +37,11 @@ t_status	parse_plane(t_scene *scene, char **line)
 	new_obj->type = PLANE;
 	if (get_plane_value(line, new_obj) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
-	if (vec3_len_squared(new_obj->data.plane.normal) == 0)
+	if (vec3_len_squared(new_obj->u_data.plane.normal) == 0)
 		return (free(new_obj), print_error(ERR_PARSE_PL_N), EXIT_FAILURE);
-	new_obj->data.plane.normal = vec3_normalize(new_obj->data.plane.normal);
-	new_obj->data.plane.d = -vec3_dot(new_obj->data.plane.normal,
-			new_obj->data.plane.origin);
+	new_obj->u_data.plane.normal = vec3_normalize(new_obj->u_data.plane.normal);
+	new_obj->u_data.plane.d = -vec3_dot(new_obj->u_data.plane.normal,
+			new_obj->u_data.plane.origin);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);
 }

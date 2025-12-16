@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:52:17 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 12:17:25 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 22:59:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ void	print_error_free_exit(t_scene *scene, const char *error_message)
 	}
 	clean_exit(scene, EXIT_FAILURE);
 }
-

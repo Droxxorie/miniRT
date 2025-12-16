@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_scene.c                                       :+:      :+:    :+:   */
+/*   load_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 15:38:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 17:35:16 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 23:20:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void init_default_values(t_scene *scene)
+static void	init_default_values(t_scene *scene)
 {
 	scene->mlx_window.width = WINDOW_WIDTH;
 	scene->mlx_window.height = WINDOW_HEIGHT;
-	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH / (t_real)WINDOW_HEIGHT;
+	scene->mlx_window.inv_width = 1.0 / (t_real)(WINDOW_WIDTH - 1.0);
+	scene->mlx_window.inv_height = 1.0 / (t_real)(WINDOW_HEIGHT - 1.0);
+	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH
+		/ (t_real)WINDOW_HEIGHT;
 	scene->ambient.r = -1;
 	scene->objects = NULL;
 	scene->lights = NULL;
 	scene->cameras = NULL;
+	scene->active_camera = NULL;
+	scene->selected_object = NULL;
+	scene->selected_light = NULL;
+	scene->control_mode = TRANSLATE;
 }
 
 static t_status	validate_scene(t_scene *scene)
@@ -43,9 +50,9 @@ static t_status	validate_scene(t_scene *scene)
 	return (EXIT_SUCCESS);
 }
 
-t_status	load_scene(t_scene *scene, char *file_path)
+t_status	load_scene(t_scene *scene, const char *file_path)
 {
-	// log_info("Initializing scene"); // ? debug a voir si je laisse
+	log_info("Initializing scene"); // ? debug a voir si je laisse
 	init_default_values(scene);
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

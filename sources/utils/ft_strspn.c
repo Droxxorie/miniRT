@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 20:45:09 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/09 20:47:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 23:07:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strcspn(const char *str, const char *reject)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -28,7 +28,7 @@ size_t	ft_strcspn(const char *str, const char *reject)
 
 size_t	ft_strspn(const char *str, const char *accept)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])

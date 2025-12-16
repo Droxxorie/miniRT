@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 17:39:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 18:54:52 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 23:16:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef ERRORS_H
+# define ERRORS_H
+
+# include "structures.h"
 
 # define ERR_MEM "Memory allocation failed"
 # define ERR_MEM_CAMERA "Failed to allocate camera"

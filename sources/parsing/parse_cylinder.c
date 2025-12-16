@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 22:05:08 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:08:04 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:56:41 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static t_status	check_vars(t_real diameter, t_real height, t_vec3 axis)
 
 static t_status	get_cylinder_value(char **line, t_object *obj, t_real *d)
 {
-	if (parse_vec3(line, &obj->data.cylinder.center) == EXIT_FAILURE
+	if (parse_vec3(line, &obj->u_data.cylinder.center) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
-		|| parse_vec3(line, &obj->data.cylinder.axis) == EXIT_FAILURE
+		|| parse_vec3(line, &obj->u_data.cylinder.axis) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_real(line, d) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
-		|| parse_real(line, &obj->data.cylinder.height) == EXIT_FAILURE
+		|| parse_real(line, &obj->u_data.cylinder.height) == EXIT_FAILURE
 		|| skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(line, &obj->color) == EXIT_FAILURE
 		|| check_eol(line) == EXIT_FAILURE)
@@ -68,11 +68,11 @@ t_status	parse_cylinder(t_scene *scene, char **line)
 	obj->type = CYLINDER;
 	if (get_cylinder_value(line, obj, &diameter) == EXIT_FAILURE)
 		return (free(obj), EXIT_FAILURE);
-	if (check_vars(diameter, obj->data.cylinder.height,
-			obj->data.cylinder.axis) == EXIT_FAILURE)
+	if (check_vars(diameter, obj->u_data.cylinder.height,
+			obj->u_data.cylinder.axis) == EXIT_FAILURE)
 		return (free(obj), EXIT_FAILURE);
-	obj->data.cylinder.axis = vec3_normalize(obj->data.cylinder.axis);
-	radius_helper(&obj->data.cylinder, diameter);
+	obj->u_data.cylinder.axis = vec3_normalize(obj->u_data.cylinder.axis);
+	radius_helper(&obj->u_data.cylinder, diameter);
 	add_object_to_scene(scene, obj);
 	return (EXIT_SUCCESS);
 }

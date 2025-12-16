@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:16:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 20:48:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 	}
 }
 
-static t_bool	hit_light(t_light *light, t_ray *ray, t_real hit_radius)
+t_bool	hit_light(t_light *light, t_ray *ray, t_real hit_radius)
 {
 	t_vec3	oc;
 	t_real	a;

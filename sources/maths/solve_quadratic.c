@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 22:29:52 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/11 22:42:35 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 20:49:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_bool	solve_quadratic(t_poly *vars)
 		return (FALSE);
 	sqrt_delta = sqrt(delta);
 	if (vars->a != 0)
-		inv_a = 1 / vars->a; //? opti ?
+		inv_a = 1 / vars->a;
+	else
+		return (FALSE);
 	vars->root1 = (-vars->half_b - sqrt_delta) * inv_a;
 	vars->root2 = (-vars->half_b + sqrt_delta) * inv_a;
 	return (TRUE);
