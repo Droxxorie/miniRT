@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:26:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 12:29:45 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 10:59:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ t_status	parse_ratio(char **line, t_real *ratio, t_bool is_negative)
 {
 	t_real min;
 
-	min = (is_negative == TRUE) ? -1.0 : 0.0;
+	if (is_negative == TRUE)
+		min = -1.0;
+	else
+		min = 0.0;
 	if (!parse_real(line, ratio))
 		return (EXIT_FAILURE);
 	if (*ratio < min || *ratio > 1.0)

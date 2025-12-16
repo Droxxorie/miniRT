@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   phong_model.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 16:40:41 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:26:48 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 11:10:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 	while (current_light)
 	{
 		light_contribution = (t_color){0.0, 0.0, 0.0};
-		if (is_in_shadow(scene, record->hit_point, current_light->position) == FALSE)
+		if (is_in_shadow(scene, record->hit_point,
+				current_light->position) == FALSE)
 		{
 			diffuse = compute_diffuse(current_light, record);
 			diffuse = color_prod(diffuse, record->color);

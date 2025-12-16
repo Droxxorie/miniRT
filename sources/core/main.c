@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:23:38 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:15:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		print_error_free_exit(scene, ERR_INIT_GRAPHICS);
 	if (render_frame(scene) == EXIT_FAILURE)
 		print_error_free_exit(scene, ERR_RENDER);
-	init_hook(scene);
+	input_manager(scene);
 	mlx_loop(scene->mlx_window.mlx_ptr);
 	return (EXIT_SUCCESS);
 }

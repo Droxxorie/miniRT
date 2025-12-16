@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_object.c                                 :+:      :+:    :+:   */
+/*   transormation_dispatch.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:14:11 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/15 14:18:22 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 11:12:23 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 11:12:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	dispatch_resize(t_object *object, int key)
 {
-	int i;
-	static t_resize_map resize_map[] = {
-		{SPHERE, resize_sphere},
-		{CYLINDER, resize_cylinder},
-		{NONE, NULL}
-	};
+	int					i;
+	static t_resize_map	resize_map[] = {{SPHERE, resize_sphere}, {CYLINDER,
+			resize_cylinder}, {NONE, NULL}};
 
 	if (!object)
 		return ;
@@ -37,13 +34,10 @@ void	dispatch_resize(t_object *object, int key)
 
 void	dispatch_translate(t_object *object, t_vec3 translation)
 {
-	int i;
-	static t_translate_map translate_map[] = {
-		{SPHERE, translate_sphere},
-		{CYLINDER, translate_cylinder},
-		{PLANE, translate_plane},
-		{NONE, NULL}
-	};
+	int						i;
+	static t_translate_map	translate_map[] = {{SPHERE, translate_sphere},
+			{CYLINDER, translate_cylinder}, {PLANE, translate_plane}, {NONE,
+			NULL}};
 
 	if (!object)
 		return ;
@@ -61,12 +55,9 @@ void	dispatch_translate(t_object *object, t_vec3 translation)
 
 void	dispatch_rotate(t_object *object, t_vec3 rot_axis)
 {
-	int i;
-	static t_translate_map rotate_map[] = {
-		{CYLINDER, rotate_cylinder},
-		{PLANE, rotate_plane},
-		{NONE, NULL}
-	};
+	int						i;
+	static t_translate_map	rotate_map[] = {{CYLINDER, rotate_cylinder}, {PLANE,
+			rotate_plane}, {NONE, NULL}};
 
 	if (!object)
 		return ;

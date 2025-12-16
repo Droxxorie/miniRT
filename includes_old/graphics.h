@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:39:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 23:00:02 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 09:25:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_control_mode
 	ROTATE,
 	NONE
 } t_control_mode;
+
 typedef struct s_hit_record
 {
 	t_object	*object;
@@ -69,7 +70,7 @@ typedef struct s_scene
 	t_light			*lights;
 	t_camera		*cameras;
 	t_camera		*active_camera;
-	t_object		*selected_object; // NULL = camera control
+	t_object		*selected_object;
 	t_light			*selected_light;
 	t_control_mode	control_mode;
 }	t_scene;

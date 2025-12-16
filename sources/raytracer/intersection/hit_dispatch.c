@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   hit_dispatch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 18:47:45 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:17:06 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 11:08:31 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 11:08:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include <minirt.h>
 
-static t_bool	hit(t_object *object, t_ray *ray, t_hit_record *record)
+static t_bool	hit_dispatch(t_object *object, t_ray *ray, t_hit_record *record)
 {
 	int i;
 	static t_hit_dispatch hit_dispatch[] = {

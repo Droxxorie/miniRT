@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_palne.c                                     :+:      :+:    :+:   */
+/*   translate_light.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 14:31:16 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/15 14:38:52 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/16 09:26:34 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/16 10:48:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	rotate_plane(t_object *object, t_vec3 angles)
+void	translate_light(t_light *light, t_vec3 transation)
 {
-	t_mat4	rotation_matrix;
+	t_mat4	translation_matrix;
 
-	rotation_matrix = make_rotation_matrix(angles);
-	object->data.plane.normal = mat3_mult_vec3(rotation_matrix,
-			object->data.plane.normal);
+	if (!light)
+		return ;
+	translation_matrix = make_translation_matrix(transation);
+	light->position = apply_matrix_to_point3(translation_matrix,
+			light->position);
 }

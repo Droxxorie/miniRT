@@ -6,14 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 09:47:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 18:53:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/16 11:19:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <engine.h>
+# include "graphics.h"
 
 void		skip_whitespace(char **line);
 t_status	skip_required(char **line, const char *charset);
