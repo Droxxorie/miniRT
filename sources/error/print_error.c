@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:19:42 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/10 09:43:01 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 19:32:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	sys_print_error(const char *error_message)
 {
-	ft_putstr_fd(B_RED "Error: " RESET, STDERR_FILENO);
+	int	saved_errno;
+
+	saved_errno = errno;
+	ft_putstr_fd(B_RED "Error\n" RESET, STDERR_FILENO);
 	if (error_message)
 	{
-		// ft_putstr_fd(error_message, STDERR_FILENO);
-		// ft_putstr_fd(": ", STDERR_FILENO);
-		ft_printf_fd(STDERR_FILENO, "%s: ", error_message);
+		ft_putstr_fd((char *)error_message, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
 	}
-	ft_printf_fd(STDERR_FILENO, "%s\n", strerror(errno));
-	// ft_putstr_fd(strerror(errno), STDERR_FILENO);
-	// ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd(strerror(saved_errno), STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 void	print_error(const char *error_message)
 {
-	ft_putstr_fd(B_RED "Error: " RESET, STDERR_FILENO);
-	// ft_putstr_fd(error_message, STDERR_FILENO);
-	// ft_putstr_fd("\n", STDERR_FILENO);
-	ft_printf_fd(STDERR_FILENO, "%s\n", error_message);
-	exit(EXIT_FAILURE);
+	ft_putstr_fd(B_RED "Error\n" RESET, STDERR_FILENO);
+	if (error_message)
+		ft_putstr_fd((char *)error_message, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }

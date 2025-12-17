@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 12:40:48 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 21:43:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WINDOW_HEIGHT 1080
 
 # define MAX_LIGHTS 1
-# define MAX_CAMERAS 16
+# define MAX_CAMERAS 1
 # define MAX_OBJECTS 100
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
@@ -39,8 +39,8 @@
 # define ON_DESTROY 17
 
 # define MASK_NO_EVENT 0L
-# define MASK_KEY_PRESS (1L << 0)    //? pas bon pour norminette
-# define MASK_BUTTON_PRESS (1L << 2) //? pas bon pour norminette
+# define MASK_KEY_PRESS 1L
+# define MASK_BUTTON_PRESS 4L
 
 /* --- Mouse (Linux/X11) --- */
 # define LEFT_CLICK 1

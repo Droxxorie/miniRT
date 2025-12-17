@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 07:47:32 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 23:07:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ static t_status	validate_scene(t_scene *scene)
 
 t_status	load_scene(t_scene *scene, const char *file_path)
 {
-	log_info("Initializing scene"); //* DEBUG
+	log_detail("Loading scene from file: ", file_path);
 	init_default_values(scene);
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (validate_scene(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	log_scene_stats(scene);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 07:46:55 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 21:22:18 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,7 @@ t_status	parse_scene_file(t_scene *scene, const char *file_path)
 	while (line)
 	{
 		if (dispatch_parse(scene, line, line_index) == EXIT_FAILURE)
-		{
-			free(line);
-			close(fd);
-			return (EXIT_FAILURE);
-		}
+			return (free(line), close(fd), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
 		line_index++;

@@ -6,13 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:09:52 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 23:04:59 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 19:37:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static t_bool	hit_dispatch(t_object *object, t_ray *ray, t_hit_record *record)
+static t_bool	hit_dispatch(t_object *object, t_ray *ray,
+	t_hit_record *record)
 {
 	int					i;
 	static t_hit_map	map[] = {
@@ -37,6 +38,7 @@ t_bool	hit_objects(t_object *objects, t_ray *ray, t_hit_record *record)
 	t_hit_record	temp_record;
 
 	hit_anything = FALSE;
+	temp_record.need_details = TRUE;
 	while (objects)
 	{
 		if (hit_dispatch(objects, ray, &temp_record))
@@ -48,4 +50,19 @@ t_bool	hit_objects(t_object *objects, t_ray *ray, t_hit_record *record)
 		objects = objects->next;
 	}
 	return (hit_anything);
+}
+
+t_bool	hit_anything(t_object *objects, t_ray *ray)
+{
+	t_hit_record	temp_record;
+
+	temp_record.need_details = FALSE;
+	temp_record.t = ray->max;
+	while (objects)
+	{
+		if (hit_dispatch(objects, ray, &temp_record))
+			return (TRUE);
+		objects = objects->next;
+	}
+	return (FALSE);
 }

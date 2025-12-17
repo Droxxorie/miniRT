@@ -1,21 +1,28 @@
-- utiliser la molette ?
-- utiliser shift + key ?
-
-- afficher mode, object selectionner, camera id à l'ecran ?
+- UI
 - mode screenshot (caché UI)
+- changer facteur de transformation
 
-- ajouter tor, triangle, carre, cone
-- opti aabb
-- opti plus proches voisins
 
 
 - comment créér des macro pour git
 
-
 - bool_hit any a la place de is_in_shadow
-- test intersection avec cap des cylindres
 - adoucir ombres
+
+Errors
+- Camera en 0.0.0 rotation chelou
+- clic droit cassé
+- reload de la scene quand switch sur une seul camera
+- vérifier si interieur ok
+- UNE SEUL CAM LOLOLOL
+- modifier validata_scene pour erreur de nbr ?
+- ajouter counter d'objets et id dans object
+
+
+BONUS
+- modifier shininess
+- ajouter tor, triangle, carre, cone
+- opti aabb
+- opti plus proches voisins
 - AA
 - changer couleur lumiere
--Ambiant marche pas ?
-- Cylindre marche pas ?

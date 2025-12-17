@@ -1,0 +1,2 @@
+# Une caméra ne peut pas regarder vers (0,0,0) car ce n'est pas une direction
+C 0,0,0 0,0,0 70

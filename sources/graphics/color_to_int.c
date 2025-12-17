@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 15:43:50 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 22:59:51 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 19:35:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	to_byte(t_real color_component)
 {
 	int	byte_value;
 
-	byte_value = (int)(color_component * 255.999); //* troncature vers le bas
+	byte_value = (int)(color_component * 255.999);
 	if (byte_value > 255)
 		return (255);
 	if (byte_value < 0)

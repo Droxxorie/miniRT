@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:13:06 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 23:06:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 18:23:08 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ void	setup_camera(t_camera *c, t_real aspect_ratio)
 void	prepare_cameras(t_scene *scene)
 {
 	t_camera	*current;
+	int			count;
 
 	if (scene == NULL || scene->cameras == NULL)
 		return ;
 	current = scene->cameras;
+	count = 0;
 	while (current)
 	{
 		setup_camera(current, scene->mlx_window.aspect_ratio);
+		current->id = ++count;
 		current = current->next;
 	}
 	scene->active_camera = scene->cameras;

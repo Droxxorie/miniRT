@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: eraad <eraad@student.42.fr>                +#+  +:+      
+/*   By: eraad <eraad@student.42.fr>                +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2025/01/06 12:58:26 by eraad             #+#    #+#             */
 /*   Updated: 2025/01/06 12:58:26 by eraad            ###   ########.fr       */
@@ -14,7 +14,6 @@
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
-
 
 // TODO add support for precision in ft_printdbl_fd
 // TODO add support for %e, %g, and scientific notation
@@ -43,10 +42,10 @@ static int	ft_format(int fd, const char c, va_list args)
 
 int	ft_printf(const char *format, ...)
 {
-	int i;
-	int temp;
-	int count;
-	va_list args;
+	int		i;
+	int		temp;
+	int		count;
+	va_list	args;
 
 	if (!format)
 		return (-1);
@@ -71,10 +70,10 @@ int	ft_printf(const char *format, ...)
 
 int	ft_printf_fd(int fd, const char *format, ...)
 {
-	int i;
-	int temp;
-	int count;
-	va_list args;
+	int		i;
+	int		temp;
+	int		count;
+	va_list	args;
 
 	if (!format)
 		return (-1);

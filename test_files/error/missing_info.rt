@@ -1,0 +1,6 @@
+A 0.2 255,255,255
+C 0,0,0 0,0,1 70
+L 0,10,0 0.8 255,255,255
+
+# Il manque les composantes RGB à la fin
+sp 0,0,10 5

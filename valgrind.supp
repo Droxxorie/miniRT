@@ -1,0 +1,14 @@
+{
+   ignore_libX11_writev_uninitialized
+   Memcheck:Param
+   writev(vector[...])
+   ...
+   obj:*/libX11.so*
+}
+{
+   ignore_mlx_new_window_uninitialized
+   Memcheck:Param
+   writev(vector[...])
+   ...
+   fun:mlx_new_window
+}

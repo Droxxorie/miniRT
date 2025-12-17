@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:13:32 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 18:12:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int	key_hook(int key, t_scene *scene)
 	if (handle_transform_keys(key, scene) == TRUE)
 		render_needed = TRUE;
 	if (render_needed == TRUE)
-		render_scene(scene);
+		render_frame(scene);
 	return (EXIT_SUCCESS);
 }

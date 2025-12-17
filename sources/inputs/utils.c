@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 20:48:49 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 18:21:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,14 @@ t_bool	hit_light(t_light *light, t_ray *ray, t_real hit_radius)
 
 void	switch_camera_next(t_scene *scene)
 {
-	static int	camera_index;
-
 	if (!scene || !scene->cameras)
 		return ;
-	camera_index = 1;
 	if (scene->active_camera->next)
-	{
 		scene->active_camera = scene->active_camera->next;
-		camera_index++;
-	}
 	else
-	{
 		scene->active_camera = scene->cameras;
-		camera_index = 1;
-	}
 	ft_putstr_fd("Switched to camera ID: ", 1);
-	ft_putnbr_fd(camera_index, 1);
+	ft_putnbr_fd(scene->active_camera->id, 1);
 	ft_putstr_fd("\n", 1);
 }
 

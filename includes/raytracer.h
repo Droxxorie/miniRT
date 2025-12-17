@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 13:09:29 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 19:02:33 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void	get_ray(t_camera *camera, t_ray *ray, t_real u, t_real v);
 t_color	get_ray_color(t_scene *scene, t_ray *ray);
 t_bool	hit_objects(t_object *objs, t_ray *ray, t_hit_record *record);
+t_bool	hit_anything(t_object *objs, t_ray *ray);
 t_bool	hit_sphere(t_object *object, t_ray *ray, t_hit_record *record);
 t_bool	hit_plane(t_object *object, t_ray *ray, t_hit_record *record);
 t_bool	hit_cylinder(t_object *object, t_ray *ray, t_hit_record *record);

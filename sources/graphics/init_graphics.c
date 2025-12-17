@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 11:44:19 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 21:33:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_status	init_frame_buffer(t_scene *scene)
 {
 	t_image	*image;
 
-	log_info("Initializing frame buffer...");
 	image = &scene->frame_buffer;
 	image->width = scene->mlx_window.width;
 	image->height = scene->mlx_window.height;
@@ -33,7 +32,6 @@ t_status	init_graphics(t_scene *scene)
 {
 	t_window	*window;
 
-	log_info("Initializing window...");
 	window = &scene->mlx_window;
 	if (!window->mlx_ptr)
 	{

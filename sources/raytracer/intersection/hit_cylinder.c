@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 13:58:39 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 19:16:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	set_cylinder_record(t_object *object, t_ray *ray,
 
 	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction,
 				record->t));
+	if (record->need_details == FALSE)
+		return ;
 	axis_point = vec3_add(object->u_data.cylinder.center,
 			vec3_scale(object->u_data.cylinder.axis, vars->projection));
 	outward_normal = vec3_sub(record->hit_point, axis_point);
@@ -27,10 +29,14 @@ static void	set_cylinder_record(t_object *object, t_ray *ray,
 			/ object->u_data.cylinder.radius);
 	set_face_normal(record, ray, outward_normal);
 	record->color = object->color;
+	record->object = object;
 }
 
-static t_bool	is_valid_height(t_cylinder_vars *vars, t_real t)
+static t_bool	is_valid_intersection(t_cylinder_vars *vars, t_ray *ray,
+		t_real t)
 {
+	if (t < ray->min || t > ray->max)
+		return (FALSE);
 	vars->projection = (vars->dot_dir_axis * t) + vars->dot_oc_axis;
 	if (fabs(vars->projection) <= vars->half_height)
 		return (TRUE);
@@ -71,14 +77,12 @@ t_bool	hit_cylinder(t_object *object, t_ray *ray, t_hit_record *record)
 	hit = FALSE;
 	if (solve_quadratic(&vars.eq_vars) == TRUE)
 	{
-		if (vars.eq_vars.root1 > ray->min && vars.eq_vars.root1 < ray->max
-			&& is_valid_height(&vars, vars.eq_vars.root1))
+		if (is_valid_intersection(&vars, ray, vars.eq_vars.root1))
 		{
 			record->t = vars.eq_vars.root1;
 			hit = TRUE;
 		}
-		else if (vars.eq_vars.root2 > ray->min && vars.eq_vars.root2 < ray->max
-			&& is_valid_height(&vars, vars.eq_vars.root2))
+		else if (is_valid_intersection(&vars, ray, vars.eq_vars.root2))
 		{
 			record->t = vars.eq_vars.root2;
 			hit = TRUE;

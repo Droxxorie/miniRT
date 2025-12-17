@@ -41,7 +41,7 @@ NAME_DEBUG      := $(NAME)_debug
 DEBUG_FLAGS     := -O0 -g3 -DDEBUG
 ASAN_FLAGS      := -O0 -g3 -fsanitize=address -fno-omit-frame-pointer
 
-ARGS            := scenes/example.rt
+ARGS            := test_files/test.rt
 
 #* ==============================================================================
 #* COLORS/SYMBOLS/STYLES
@@ -82,7 +82,6 @@ SRCS := \
 SRCS += \
     $(SRC_DIR)/graphics/init_graphics.c \
     $(SRC_DIR)/graphics/render_frame.c \
-    $(SRC_DIR)/graphics/render_scene.c \
     $(SRC_DIR)/graphics/color_to_int.c \
     $(SRC_DIR)/graphics/image_pixel_put.c \
 
@@ -159,8 +158,7 @@ SRCS += \
     $(SRC_DIR)/error/print_error_exit.c \
     $(SRC_DIR)/error/print_error_free_exit.c \
     $(SRC_DIR)/error/print_error_limit.c \
-    $(SRC_DIR)/utils/print_usage.c \
-    $(SRC_DIR)/utils/print_object_type.c \
+    $(SRC_DIR)/utils/print.c \
     $(SRC_DIR)/utils/ft_strspn.c \
     $(SRC_DIR)/utils/log.c \
 
@@ -209,7 +207,7 @@ debug: $(LIBFT_A) $(MLX_A) debug_message $(OBJS)
 valgrind: debug
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME_DEBUG) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
-		--track-origins=yes --suppressions=valgrind_mlx.supp \
+		--track-origins=yes --suppressions=valgrind.supp\
 		./$(NAME_DEBUG) $(ARGS) || true
 
 #* ---- Cleanup ----
