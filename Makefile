@@ -125,6 +125,7 @@ SRCS += \
     $(SRC_DIR)/raytracer/intersection/hit_sphere.c \
     $(SRC_DIR)/raytracer/intersection/hit_plane.c \
     $(SRC_DIR)/raytracer/intersection/hit_cylinder.c \
+	$(SRC_DIR)/raytracer/intersection/check_cylinder_caps.c \
     $(SRC_DIR)/raytracer/lighting/phong_model.c \
     $(SRC_DIR)/raytracer/lighting/reflect.c \
     $(SRC_DIR)/raytracer/utils/set_face_normal.c \
@@ -259,7 +260,7 @@ project_logo:
 	@echo "${WHITE}    ┃ ┣┛  ┗┫ ┃  ┃┃  ┃ ┃ ┗┫ ┃  ┃┃  ┃ ┃┃ ┗┓    ┃ ┃                    ${RESET}"
 	@echo "${WHITE}    ┗━┛    ┗━┛  ┗┛  ┗━┛  ┗━┛  ┗┛  ┗━┛┗━━┛    ┗━┛                    ${RESET}"
 	@echo         "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "${CYAN}${BOLD}                                               eraad${RESET}"
+	@echo "${CYAN}${BOLD}                            Eloi RAAD & Jean HUBBERT${RESET}"
 	@echo ""
 
 #* ---- Phony -------------------------------------------------------------------

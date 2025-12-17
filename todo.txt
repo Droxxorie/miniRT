@@ -14,3 +14,8 @@
 
 - bool_hit any a la place de is_in_shadow
 - test intersection avec cap des cylindres
+- adoucir ombres
+- AA
+- changer couleur lumiere
+-Ambiant marche pas ?
+- Cylindre marche pas ?

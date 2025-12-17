@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 23:14:40 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 13:37:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ typedef struct s_plane
 	t_real		d;
 }	t_plane;
 
+typedef enum e_cylinder_cap
+{
+	CAP_TOP,
+	CAP_BOTTOM,
+	CAP_NONE
+}	t_cylinder_cap;
 typedef struct s_cylinder_vars
 {
 	t_poly	eq_vars;
@@ -93,6 +99,9 @@ typedef struct s_cylinder_vars
 	t_real	dot_oc_axis;
 	t_real	half_height;
 	t_real	projection;
+	t_vec3	top_center;
+	t_vec3	bottom_center;
+	t_real	cap_denom;
 }	t_cylinder_vars;
 
 typedef struct s_cylinder

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:13 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 20:41:03 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/17 08:00:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_bool	hit_plane(t_object *object, t_ray *ray, t_hit_record *record)
 	record->t = root;
 	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction, root));
 	set_face_normal(record, ray, plane->normal);
+	record->color = object->color;
 	return (TRUE);
 }
