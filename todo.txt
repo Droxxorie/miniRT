@@ -1,28 +1,24 @@
 - UI
 - mode screenshot (caché UI)
 - changer facteur de transformation
-
-
-
-- comment créér des macro pour git
-
-- bool_hit any a la place de is_in_shadow
+- changer vecteur de translation/rotation en fonction de l'objet ou du repere
+- changer le fov
 - adoucir ombres
-
+- clic dans vide pour select light
+- rendre axe de rotation/tanslation dependant de la camera
+- changer rotation et translation pour un model unitaire et mat rot
 Errors
-- Camera en 0.0.0 rotation chelou
-- clic droit cassé
-- reload de la scene quand switch sur une seul camera
-- vérifier si interieur ok
-- UNE SEUL CAM LOLOLOL
-- modifier validata_scene pour erreur de nbr ?
-- ajouter counter d'objets et id dans object
+- Camera en 0.0.0 rotation chelou tt axe
 
 
 BONUS
 - modifier shininess
-- ajouter tor, triangle, carre, cone
+- ajouter torus
+- ajouter triangle
+- ajouter pavé
+- ajouter cone
 - opti aabb
 - opti plus proches voisins
+- monté carlo ?
 - AA
 - changer couleur lumiere

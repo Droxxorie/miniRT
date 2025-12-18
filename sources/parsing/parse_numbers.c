@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:26:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 07:38:44 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 16:16:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_status	parse_int(char **line, int *value)
 	while (ft_isdigit((*line)[len]))
 		len++;
 	if (len == 0 || (len == 1 && !ft_isdigit((*line)[len - 1])))
-		return (print_error(ERR_PARSE_NUM), EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	*value = ft_atoi(*line);
 	*line += len;
 	return (EXIT_SUCCESS);
@@ -62,23 +62,33 @@ t_status	parse_real(char **line, t_real *value)
 	skip_whitespace(line);
 	len = get_float_len(*line);
 	if (len <= 0)
-		return (print_error(ERR_PARSE_NUM), EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	*value = ft_atodbl(*line);
 	*line += len;
 	return (EXIT_SUCCESS);
 }
 
-t_status	parse_ratio(char **line, t_real *ratio, t_bool is_negative)
+t_status	parse_ratio(t_scene *scene, char **line, t_real *ratio,
+		t_bool is_negative)
 {
 	t_real	min;
+	char	*start_ptr;
 
+	skip_whitespace(line);
 	if (is_negative == TRUE)
 		min = -1.0;
 	else
 		min = 0.0;
+	start_ptr = *line;
 	if (parse_real(line, ratio) == EXIT_FAILURE)
+	{
+		print_error_loc(scene, start_ptr, ERR_RATIO);
 		return (EXIT_FAILURE);
+	}
 	if (*ratio < min || *ratio > 1.0)
-		return (print_error(ERR_PARSE_OOR), EXIT_FAILURE);
+	{
+		print_error_loc(scene, start_ptr, ERR_RATIO_OOR);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

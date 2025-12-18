@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_hook.c                                       :+:      :+:    :+:   */
+/*   transpose.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 11:15:01 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 23:03:01 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/18 22:03:52 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/18 22:05:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	close_window(t_scene *scene)
+t_mat4	mat4_transpose(t_mat4 mat)
 {
-	ft_putendl_fd("", STDOUT_FILENO);
-	clean_exit(scene, EXIT_SUCCESS);
-	return (0);
+	t_mat4	result;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			result.m[i][j] = mat.m[j][i];
+			j++;
+		}
+		i++;
+	}
+	return (result);
 }

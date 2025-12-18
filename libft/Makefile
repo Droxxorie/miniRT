@@ -6,7 +6,7 @@
 #    By: eraad <eraad@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/15 12:06:42 by eraad             #+#    #+#              #
-#    Updated: 2025/10/09 19:09:39 by eraad            ###   ########.fr        #
+#    Updated: 2025/12/18 12:33:06 by eraad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,6 +112,7 @@ SRCS += \
 	
 SRCS += \
 	$(SRC_DIR)/gnl/get_next_line.c \
+	$(SRC_DIR)/gnl/consume_gnl.c \
 
 SRCS += \
 	$(SRC_DIR)/maths/ft_abs.c \

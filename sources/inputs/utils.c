@@ -6,71 +6,60 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 18:21:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 21:07:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	action_camera(t_scene *scene, t_vec3 input_vector)
+static t_vec3	get_camera_relative_vector(t_vec3 input, t_camera *camera)
 {
-	t_real	aspect_ratio;
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
+	t_vec3	direction;
+	t_vec3	world_up;
 
-	aspect_ratio = scene->mlx_window.aspect_ratio;
-	if (scene->control_mode == TRANSLATE)
-		translate_camera(scene->active_camera, vec3_scale(input_vector,
-				STEP_MOVE), aspect_ratio);
-	else if (scene->control_mode == ROTATE)
-		rotate_camera(scene->active_camera, vec3_scale(input_vector, STEP_ROT),
-			aspect_ratio);
+	world_up = (t_vec3){0.0, 1.0, 0.0};
+	forward = vec3_normalize(camera->direction);
+	right = vec3_cross(forward, world_up);
+	if (vec3_len_squared(right) < EPSILON)
+		right = (t_vec3){1.0, 0.0, 0.0};
+	else
+		right = vec3_normalize(right);
+	up = vec3_cross(right, forward);
+	up = vec3_normalize(up);
+	direction = (t_vec3){0.0, 0.0, 0.0};
+	direction = vec3_add(direction, vec3_scale(forward, input.x));
+	direction = vec3_add(direction, vec3_scale(up, input.y));
+	direction = vec3_add(direction, vec3_scale(right, -input.z));
+		//? on vera si j'inverse pas
+	return (direction);
 }
 
 void	action_selection(t_scene *scene, t_vec3 input_vector)
 {
+	t_vec3	relative_vector;
+
+	relative_vector = get_camera_relative_vector(input_vector,
+			scene->active_camera);
 	if (scene->selected_object)
 	{
 		if (scene->control_mode == TRANSLATE)
-			dispatch_translate(scene->selected_object, vec3_scale(input_vector,
-					STEP_MOVE));
+			dispatch_translate(scene->selected_object,
+				vec3_scale(relative_vector, STEP_MOVE));
 		else if (scene->control_mode == ROTATE)
-			dispatch_rotate(scene->selected_object, vec3_scale(input_vector,
+			dispatch_rotate(scene->selected_object, vec3_scale(relative_vector,
 					STEP_ROT));
 	}
 	else if (scene->selected_light)
 	{
 		if (scene->control_mode == TRANSLATE)
-			translate_light(scene->selected_light, vec3_scale(input_vector,
+			translate_light(scene->selected_light, vec3_scale(relative_vector,
 					STEP_MOVE));
 		else
 			ft_putstr_fd("Light rotation not supported\n", STDOUT_FILENO);
 	}
-}
-
-t_bool	hit_light(t_light *light, t_ray *ray, t_real hit_radius)
-{
-	t_vec3	oc;
-	t_real	a;
-	t_real	b;
-	t_real	c;
-
-	oc = vec3_sub(ray->origin, light->position);
-	a = vec3_len_squared(ray->direction);
-	b = 2.0 * vec3_dot(oc, ray->direction);
-	c = vec3_len_squared(oc) - (hit_radius * hit_radius);
-	return (b * b - 4 * a * c > 0);
-}
-
-void	switch_camera_next(t_scene *scene)
-{
-	if (!scene || !scene->cameras)
-		return ;
-	if (scene->active_camera->next)
-		scene->active_camera = scene->active_camera->next;
-	else
-		scene->active_camera = scene->cameras;
-	ft_putstr_fd("Switched to camera ID: ", 1);
-	ft_putnbr_fd(scene->active_camera->id, 1);
-	ft_putstr_fd("\n", 1);
 }
 
 t_vec3	get_input_vector(int key)
@@ -79,16 +68,16 @@ t_vec3	get_input_vector(int key)
 
 	input_vector = (t_vec3){0.0, 0.0, 0.0};
 	if (key == KEY_UP || key == KEY_Z)
-		input_vector.y = 1;
-	if (key == KEY_DOWN || key == KEY_S)
-		input_vector.y = -1;
-	if (key == KEY_LEFT || key == KEY_Q)
-		input_vector.x = -1;
-	if (key == KEY_RIGHT || key == KEY_D)
 		input_vector.x = 1;
-	if (key == KEY_A)
+	if (key == KEY_DOWN || key == KEY_S)
+		input_vector.x = -1;
+	if (key == KEY_LEFT || key == KEY_Q)
 		input_vector.z = 1;
-	if (key == KEY_E)
+	if (key == KEY_RIGHT || key == KEY_D)
 		input_vector.z = -1;
+	if (key == KEY_A)
+		input_vector.y = 1;
+	if (key == KEY_E)
+		input_vector.y = -1;
 	return (input_vector);
 }

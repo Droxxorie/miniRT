@@ -6,36 +6,28 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:20:05 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 19:09:07 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:44:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	resize_cylinder(t_object *object, int key)
+void	resize_cylinder(t_object *object, int mode, int direction)
 {
-	t_real	k;
+	t_cylinder	*cylinder;
 
-	if (key == KEY_PLUS || key == KEY_MINUS)
+	cylinder = &object->u_data.cylinder;
+	if (mode == RESIZE_RADIUS)
 	{
-		if (key == KEY_PLUS)
-			k = STEP_SIZE;
-		else
-			k = -STEP_SIZE;
-		object->u_data.cylinder.radius += k;
-		if (object->u_data.cylinder.radius < 0.1)
-			object->u_data.cylinder.radius = 0.1;
-		object->u_data.cylinder.radius_squared = object->u_data.cylinder.radius
-			* object->u_data.cylinder.radius;
+		cylinder->radius += (direction * STEP_SIZE);
+		if (cylinder->radius < 0.1)
+			cylinder->radius = 0.1;
+		cylinder->radius_squared = cylinder->radius * cylinder->radius;
 	}
-	else if (key == KEY_2 || key == KEY_8)
+	else if (mode == RESIZE_HEIGHT)
 	{
-		if (key == KEY_8)
-			k = STEP_SIZE;
-		else
-			k = -STEP_SIZE;
-		object->u_data.cylinder.height += k;
-		if (object->u_data.cylinder.height < 0.1)
-			object->u_data.cylinder.height = 0.1;
+		cylinder->height += (direction * STEP_SIZE);
+		if (cylinder->height < 0.1)
+			cylinder->height = 0.1;
 	}
 }

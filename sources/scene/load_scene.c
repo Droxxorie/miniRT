@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 23:07:53 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:49:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,24 @@ static void	init_default_values(t_scene *scene)
 	scene->selected_object = NULL;
 	scene->selected_light = NULL;
 	scene->control_mode = TRANSLATE;
+	scene->shift_pressed = FALSE;
 }
 
 static t_status	validate_scene(t_scene *scene)
 {
-	if (scene->cameras == NULL)
-	{
-		print_error(ERR_INIT_NO_CAM);
-		return (EXIT_FAILURE);
-	}
 	if (scene->ambient.r < 0)
 	{
-		print_error(ERR_INIT_NO_AMB);
+		print_error(ERR_NO_AMB);
+		return (EXIT_FAILURE);
+	}
+	if (scene->cameras == NULL)
+	{
+		print_error(ERR_NO_CAM);
 		return (EXIT_FAILURE);
 	}
 	if (scene->mlx_window.height <= 0 || scene->mlx_window.width <= 0)
 	{
-		print_error(ERR_INIT_RES);
+		print_error(ERR_RES);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

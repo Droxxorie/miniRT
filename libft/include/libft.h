@@ -109,6 +109,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 
 //* ----------------- get_next_line ------------------ *
 char	*get_next_line(int fd);
+void	consume_gnl(int fd, char **line);
 
 //* ----------------- maths -------------------------- *
 int		ft_abs(int n);

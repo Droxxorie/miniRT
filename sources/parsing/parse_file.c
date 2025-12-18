@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 21:22:18 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 16:45:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,18 @@ static t_status	match_identifier(const char *line, const char *identifier)
 	return (EXIT_SUCCESS);
 }
 
-static t_status	dispatch_parse(t_scene *scene, char *line, int line_index)
+static t_status	dispatch_parse(t_scene *scene, char *line)
 {
 	int					i;
-	static t_parse_map	map[] = {
-	{"A", parse_ambient},
-	{"C", parse_camera},
-	{"L", parse_light},
-	{"sp", parse_sphere},
-	{"pl", parse_plane},
+	char				*start_ptr;
+	static t_parse_map	map[] = {{"A", parse_ambient}, {"C", parse_camera},
+	{"L", parse_light}, {"sp", parse_sphere}, {"pl", parse_plane},
 	{"cy", parse_cylinder}, {NULL, NULL}};
 
 	skip_whitespace(&line);
 	if (*line == '\0' || *line == '#')
 		return (EXIT_SUCCESS);
+	start_ptr = line;
 	i = 0;
 	while (map[i].id)
 	{
@@ -48,8 +46,7 @@ static t_status	dispatch_parse(t_scene *scene, char *line, int line_index)
 		}
 		i++;
 	}
-	print_error(ERR_PARSE_UID);
-	ft_printf_fd(STDERR_FILENO, "Line %d: %s\n", line_index, line);
+	print_error_loc(scene, start_ptr, ERR_UID);
 	return (EXIT_FAILURE);
 }
 
@@ -71,22 +68,26 @@ t_status	parse_scene_file(t_scene *scene, const char *file_path)
 {
 	int		fd;
 	char	*line;
-	int		line_index;
 
 	if (has_extension(file_path, ".rt") == FALSE)
-		return (print_error(ERR_FILE_FORMAT), EXIT_FAILURE);
+		return (print_error(ERR_FILE_EXT), EXIT_FAILURE);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		return (sys_print_error(ERR_FILE_OPEN), EXIT_FAILURE);
-	line_index = 1;
+		return (sys_print_error(file_path), EXIT_FAILURE);
+	if (read(fd, 0, 0) < 0)
+		return (sys_print_error(file_path), close(fd), EXIT_FAILURE);
 	line = get_next_line(fd);
+	if (!line)
+		return (print_error(ERR_EMPTY), close(fd), EXIT_FAILURE);
+	scene->line_number = 1;
 	while (line)
 	{
-		if (dispatch_parse(scene, line, line_index) == EXIT_FAILURE)
-			return (free(line), close(fd), EXIT_FAILURE);
+		scene->line_ptr = line;
+		if (dispatch_parse(scene, line) == EXIT_FAILURE)
+			return (consume_gnl(fd, &line), close(fd), EXIT_FAILURE);
 		free(line);
 		line = get_next_line(fd);
-		line_index++;
+		scene->line_number++;
 	}
 	close(fd);
 	return (EXIT_SUCCESS);

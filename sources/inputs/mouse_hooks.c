@@ -6,29 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 22:00:27 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 21:02:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static t_bool	try_select_light(t_scene *scene, t_ray *ray)
-{
-	t_light	*current_light;
 
-	current_light = scene->lights;
-	while (current_light)
-	{
-		if (hit_light(current_light, ray, 2.0) == TRUE)
-		{
-			scene->selected_light = current_light;
-			ft_putstr_fd("Switched to light control mode\n", 1);
-			return (TRUE);
-		}
-		current_light = current_light->next;
-	}
-	return (FALSE);
-}
 
 static void	handle_left_click(t_scene *scene, int x, int y)
 {
@@ -67,11 +51,41 @@ static void	hanlde_right_click(t_scene *scene)
 	}
 }
 
+static void	handle_scroll(int button, t_scene *scene)
+{
+	int	mode;
+	int	direction;
+
+	if (scene->selected_object == NULL)
+		return ;
+	if (button == SCROLL_UP)
+		direction = 1;
+	else if (button == SCROLL_DOWN)
+		direction = -1;
+	else
+		return ;
+	if (scene->shift_pressed == TRUE)
+		mode = RESIZE_HEIGHT;
+	else
+		mode = RESIZE_RADIUS;
+	dispatch_resize(scene->selected_object, mode, direction);
+}
+
 int	mouse_hook(int button, int x, int y, t_scene *scene)
 {
+	t_bool	render_needed;
+
+	render_needed = FALSE;
 	if (button == RIGHT_CLICK)
 		hanlde_right_click(scene);
 	else if (button == LEFT_CLICK)
 		handle_left_click(scene, x, y);
+	else if (button == SCROLL_UP || button == SCROLL_DOWN)
+	{
+		render_needed = TRUE;
+		handle_scroll(button, scene);
+	}
+	if (render_needed == TRUE)
+		render_frame(scene);
 	return (EXIT_SUCCESS);
 }

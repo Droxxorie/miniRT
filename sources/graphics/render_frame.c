@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 22:48:36 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 16:53:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	print_progress(t_scene *scene, int y)
 	prev_percent = ((y - 1) * 100) / scene->mlx_window.height;
 	if (percent != prev_percent || y == 0)
 	{
-		ft_putstr_fd("\rRendering: ", 1);
+		ft_putstr_fd("\r\033[2KRendering: ", 1);
 		ft_putnbr_fd(percent, 1);
 		ft_putstr_fd("%", 1);
 	}
 	if (y >= scene->mlx_window.height - 1)
-		ft_putstr_fd("\r", STDOUT_FILENO);
+		ft_putstr_fd("\r\033[2K", STDOUT_FILENO);
 }
 
 static void	process_pixel(t_scene *scene, int x, int y)

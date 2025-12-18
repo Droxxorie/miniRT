@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 18:12:36 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:35:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,15 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	return (TRUE);
 }
 
-static t_bool	handle_resize_keys(int key, t_scene *scene)
-{
-	if (key == KEY_PLUS || key == KEY_MINUS || key == KEY_2 || key == KEY_8)
-	{
-		if (scene->selected_object)
-		{
-			dispatch_resize(scene->selected_object, key);
-			return (TRUE);
-		}
-	}
-	return (FALSE);
-}
-
 static t_bool	handle_state_keys(int key, t_scene *scene)
 {
 	if (key == KEY_ESC)
 		clean_exit(scene, EXIT_SUCCESS);
+	if (key == KEY_SHIFT_L || key == KEY_SHIFT_R)
+	{
+		scene->shift_pressed = TRUE;
+		return (FALSE);
+	}
 	if (key == KEY_TAB)
 	{
 		if (scene->control_mode == TRANSLATE)
@@ -58,10 +50,7 @@ static t_bool	handle_state_keys(int key, t_scene *scene)
 		return (FALSE);
 	}
 	if (key == KEY_SPACE)
-	{
-		switch_camera_next(scene);
-		return (TRUE);
-	}
+		return (switch_camera_next(scene), TRUE);
 	return (FALSE);
 }
 
@@ -71,8 +60,6 @@ int	key_hook(int key, t_scene *scene)
 
 	render_needed = FALSE;
 	if (handle_state_keys(key, scene) == TRUE)
-		render_needed = TRUE;
-	if (handle_resize_keys(key, scene) == TRUE)
 		render_needed = TRUE;
 	if (handle_transform_keys(key, scene) == TRUE)
 		render_needed = TRUE;

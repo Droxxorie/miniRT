@@ -2,7 +2,9 @@ A 0.2 255,255,255
 C 0,0,0 0,0,1 70
 L 0,10,0 0.8 255,255,255
 
+# Couleur invalide (lettre 'B' au lieu d'un entier)
+# sp 0,0,10 5 B,0,0
 # Couleur invalide (300 > 255)
-sp 0,0,10 5 300,0,0
+sp 0,0,10 5 0,300,0
 # Couleur invalide (-200 < 0)
 # sp 10,0,10 5 -200,0,0

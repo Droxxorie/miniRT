@@ -1,0 +1,11 @@
+# Scene avec la camera a l'interieur d'un cylindre
+A 0.5 255,255,255
+
+# Camera au centre du volume (0,0,20)
+C 0,0,20 0,0,1 90
+
+# Lumiere legerement decalee pour eclairer les parois interieures
+L 2,0,22 0.8 255,255,255
+
+# Cylindre : Centre 0,0,20 | Axe Y (0,1,0) | Diam 20 | Haut 50
+cy 0,0,20 0,1,0 20.0 50.0 0,0,255

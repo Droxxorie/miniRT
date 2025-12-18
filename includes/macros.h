@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 21:43:11 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 21:18:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MACROS_H
 
 /* --- Maths & Logic --- */
-# define EPSILON 1e-8
+# define EPSILON 1e-4
 # define PI 3.14159265359
 # define TWO_PI 6.28318530718
 # define INV_255 0.00392156862
@@ -22,8 +22,8 @@
 # define STEP_ROT 0.1
 # define STEP_SIZE 0.5
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 720
+# define WINDOW_HEIGHT 480
 
 # define MAX_LIGHTS 1
 # define MAX_CAMERAS 1
@@ -40,7 +40,9 @@
 
 # define MASK_NO_EVENT 0L
 # define MASK_KEY_PRESS 1L
+# define MASK_KEY_RELEASE 2L
 # define MASK_BUTTON_PRESS 4L
+# define MASK_BUTTON_RELEASE 8L
 
 /* --- Mouse (Linux/X11) --- */
 # define LEFT_CLICK 1
@@ -57,6 +59,8 @@
 # define KEY_ESC 65307
 # define KEY_TAB 65289
 # define KEY_SPACE 32
+# define KEY_SHIFT_L 65505
+# define KEY_SHIFT_R 65506
 
 /* --- Arrows --- */
 # define KEY_UP 65362

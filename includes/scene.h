@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 18:23:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:40:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "macros.h"
 # include "structures.h"
 
+//* ========================================================================= */
+//*                                PROTOTYPES                                 */
+//* ========================================================================= */
 /* Setup */
 t_status	load_scene(t_scene *scene, const char *file_path);
 void		prepare_cameras(t_scene *scene);
@@ -24,7 +27,7 @@ void		setup_camera(t_camera *cam, t_real aspect_ratio);
 /* Dispatchers */
 void		dispatch_translate(t_object *obj, t_vec3 vec);
 void		dispatch_rotate(t_object *obj, t_vec3 vec);
-void		dispatch_resize(t_object *obj, int key);
+void		dispatch_resize(t_object *obj, int mode, int direction);
 
 /* Modifiers */
 void		translate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
@@ -38,7 +41,7 @@ void		translate_cylinder(t_object *obj, t_vec3 vec);
 void		rotate_plane(t_object *obj, t_vec3 vec);
 void		rotate_cylinder(t_object *obj, t_vec3 vec);
 
-void		resize_sphere(t_object *obj, int key);
-void		resize_cylinder(t_object *obj, int key);
+void		resize_sphere(t_object *obj, int mode, int direction);
+void		resize_cylinder(t_object *obj, int mode, int direction);
 
 #endif

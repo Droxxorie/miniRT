@@ -1,0 +1,13 @@
+A 0.2 255,255,255
+C 0,-10,20 0,0,1 70
+L -10,10,-10 0.6 255,255,255
+
+# Une sphere rouge au centre
+sp 0,0,0 10.5 255,0,0
+
+# Un plan gris au sol (y=0), normale vers le haut (0,1,0)
+pl 0,-5,0 0,1,0 100,100,100
+
+# Un cylindre bleu, penche sur l'axe X
+# Pos: -10,0,10 | Axe: 1,0,0 | Diam: 5 | Haut: 10 | Coul: 0,0,255
+cy -10,0,10 1.0,0.0,0.0 5.0 10.0 0,0,255

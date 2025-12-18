@@ -1,0 +1,7 @@
+A 0.2 255,255,255
+
+# Camera avec un vecteur d'orientation invalide sur le Y
+C 0,-10,20 0,1..0,0 70
+
+L -10,10,-10 0.6 255,255,255
+pl 0,0,0 0,1,0 0,0,225

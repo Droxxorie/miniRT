@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:36:09 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 19:36:52 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 15:22:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,38 @@ void	skip_whitespace(char **line)
 		(*line)++;
 }
 
-t_status	skip_required(char **line, const char *delimiters)
+t_status	skip_required(t_scene *scene, char **line, const char *delimiters)
 {
 	size_t	len;
 
 	len = ft_strspn(*line, delimiters);
 	if (len == 0)
 	{
-		print_error(ERR_PARSE_DELIM);
+		print_error_loc(scene, *line, ERR_DELIM);
 		return (EXIT_FAILURE);
 	}
 	*line += len;
 	return (EXIT_SUCCESS);
 }
 
-t_status	parse_comma(char **line)
+t_status	parse_comma(t_scene *scene, char **line)
 {
 	skip_whitespace(line);
 	if (**line != ',')
 	{
-		print_error(ERR_PARSE_COMMA);
+		print_error_loc(scene, *line, ERR_COMMA);
 		return (EXIT_FAILURE);
 	}
 	(*line)++;
 	return (EXIT_SUCCESS);
 }
 
-t_status	check_eol(char **line)
+t_status	check_eol(t_scene *scene, char **line)
 {
 	skip_whitespace(line);
 	if (**line != '\0' && **line != '#')
 	{
-		print_error(ERR_PARSE_EOL);
+		print_error_loc(scene, *line, ERR_EOL);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

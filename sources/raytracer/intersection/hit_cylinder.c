@@ -6,27 +6,30 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 19:16:03 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 20:54:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
 static void	set_cylinder_record(t_object *object, t_ray *ray,
-		t_hit_record *record, t_cylinder_vars *vars)
+		t_hit_record *record)
 {
-	t_vec3	axis_point;
+	t_vec3	oc;
+	t_real	proj;
+	t_vec3	pt_on_axis;
 	t_vec3	outward_normal;
 
 	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction,
 				record->t));
 	if (record->need_details == FALSE)
 		return ;
-	axis_point = vec3_add(object->u_data.cylinder.center,
-			vec3_scale(object->u_data.cylinder.axis, vars->projection));
-	outward_normal = vec3_sub(record->hit_point, axis_point);
-	outward_normal = vec3_scale(outward_normal, 1.0
-			/ object->u_data.cylinder.radius);
+	oc = vec3_sub(record->hit_point, object->u_data.cylinder.center);
+	proj = vec3_dot(oc, object->u_data.cylinder.axis);
+	pt_on_axis = vec3_add(object->u_data.cylinder.center,
+			vec3_scale(object->u_data.cylinder.axis, proj));
+	outward_normal = vec3_sub(record->hit_point, pt_on_axis);
+	outward_normal = vec3_normalize(outward_normal);
 	set_face_normal(record, ray, outward_normal);
 	record->color = object->color;
 	record->object = object;
@@ -35,10 +38,12 @@ static void	set_cylinder_record(t_object *object, t_ray *ray,
 static t_bool	is_valid_intersection(t_cylinder_vars *vars, t_ray *ray,
 		t_real t)
 {
+	t_real	projection;
+	
 	if (t < ray->min || t > ray->max)
 		return (FALSE);
-	vars->projection = (vars->dot_dir_axis * t) + vars->dot_oc_axis;
-	if (fabs(vars->projection) <= vars->half_height)
+	projection = (vars->dot_dir_axis * t) + vars->dot_oc_axis;
+	if (fabs(projection) <= vars->half_height)
 		return (TRUE);
 	return (FALSE);
 }
@@ -89,7 +94,7 @@ t_bool	hit_cylinder(t_object *object, t_ray *ray, t_hit_record *record)
 		}
 	}
 	if (hit == TRUE)
-		set_cylinder_record(object, ray, record, &vars);
+		set_cylinder_record(object, ray, record);
 	else
 		record->t = ray->max;
 	check_cylinder_caps(object, ray, record, &vars);

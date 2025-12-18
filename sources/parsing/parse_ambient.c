@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:06:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 07:39:36 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 16:19:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ t_status	parse_ambient(t_scene *scene, char **line)
 	t_real	ratio;
 
 	if (scene->ambient.r != -1)
-		return (print_error(ERR_AMBIENT_DUPL), EXIT_FAILURE);
-	if (parse_ratio(line, &ratio, FALSE) == EXIT_FAILURE)
+	{
+		print_error_loc(scene, *line - 1, ERR_AMBIENT_DUP);
 		return (EXIT_FAILURE);
-	if (skip_required(line, WHITESPACE_CHARS) == EXIT_FAILURE)
+	}
+	if (parse_ratio(scene, line, &ratio, FALSE) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (parse_color(line, &scene->ambient) == EXIT_FAILURE)
+	if (skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (check_eol(line) == EXIT_FAILURE)
+	if (parse_color(scene, line, &scene->ambient) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_eol(scene, line) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	scene->ambient = color_scale(scene->ambient, ratio);
 	return (EXIT_SUCCESS);

@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 21:19:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:39:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	dispatch_resize(t_object *object, int key)
+void	dispatch_resize(t_object *object, int mode, int direction)
 {
 	int					i;
 	static t_resize_map	map[] = {
@@ -27,7 +27,7 @@ void	dispatch_resize(t_object *object, int key)
 	{
 		if (map[i].type == object->type)
 		{
-			map[i].func(object, key);
+			map[i].func(object, mode, direction);
 			return ;
 		}
 		i++;

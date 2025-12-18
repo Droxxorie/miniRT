@@ -1,0 +1,12 @@
+# Scene avec la camera a l'interieur d'une sphere
+A 0.5 255,255,255
+
+# Camera au centre (0,0,20)
+C 0,0,20 0,0,1 90
+
+# Lumiere a l'interieur aussi pour voir quelque chose
+L 0,5,20 0.8 255,255,255
+
+# Sphere : Centre 0,0,20 | Diametre 50 (Rayon 25)
+# La camera est donc largement dedans
+sp 0,0,20 50.0 255,0,0

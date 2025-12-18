@@ -6,24 +6,24 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 19:18:49 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 20:46:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static t_bool	is_in_shadow(t_scene *scene, t_point3 hit_point,
+static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
 		t_point3 light_pos)
 {
-	t_vec3			dir_to_light;
-	t_real			dist_to_light;
-	t_ray			shadow_ray;
+	t_vec3	dir_to_light;
+	t_real	dist_to_light;
+	t_ray	shadow_ray;
 
-	dir_to_light = vec3_sub(light_pos, hit_point);
+	dir_to_light = vec3_sub(light_pos, record->hit_point);
 	dist_to_light = vec3_len(dir_to_light);
-	dir_to_light = vec3_normalize(dir_to_light);
-	shadow_ray.origin = vec3_add(hit_point, vec3_scale(dir_to_light, EPSILON));
-	shadow_ray.direction = dir_to_light;
+	shadow_ray.direction = vec3_normalize(dir_to_light);
+	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
+				EPSILON));
 	shadow_ray.min = EPSILON;
 	shadow_ray.max = dist_to_light;
 	if (hit_anything(scene->objects, &shadow_ray))
@@ -74,8 +74,7 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 	while (current_light)
 	{
 		light_contribution = (t_color){0.0, 0.0, 0.0};
-		if (is_in_shadow(scene, record->hit_point,
-				current_light->position) == FALSE)
+		if (is_in_shadow(scene, record, current_light->position) == FALSE)
 		{
 			diffuse = compute_diffuse(current_light, record);
 			diffuse = color_prod(diffuse, record->color);

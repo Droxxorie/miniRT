@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 19:55:49 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 22:27:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,6 @@ typedef struct s_plane
 	t_real				d;
 }						t_plane;
 
-typedef enum e_cylinder_cap
-{
-	CAP_TOP,
-	CAP_BOTTOM,
-	CAP_NONE
-}						t_cylinder_cap;
 typedef struct s_cylinder_vars
 {
 	t_poly				eq_vars;
@@ -98,7 +92,6 @@ typedef struct s_cylinder_vars
 	t_real				dot_dir_axis;
 	t_real				dot_oc_axis;
 	t_real				half_height;
-	t_real				projection;
 	t_vec3				top_center;
 	t_vec3				bottom_center;
 	t_real				cap_denom;
@@ -117,6 +110,9 @@ typedef struct s_object
 {
 	t_object_type		type;
 	t_color				color;
+	t_mat4				transform;
+	t_mat4				inverse;
+	t_mat4				transposed_inverse;
 	union
 	{
 		t_sphere		sphere;
@@ -187,11 +183,16 @@ typedef struct s_window
 typedef enum e_control_mode
 {
 	TRANSLATE,
-	ROTATE
+	ROTATE,
 }						t_control_mode;
+
+# define	RESIZE_RADIUS	1
+# define	RESIZE_HEIGHT	2
 
 typedef struct s_scene
 {
+	char				*line_ptr;
+	int					line_number;
 	t_window			mlx_window;
 	t_image				frame_buffer;
 	t_color				ambient;
@@ -202,6 +203,7 @@ typedef struct s_scene
 	t_object			*selected_object;
 	t_light				*selected_light;
 	t_control_mode		control_mode;
+	t_bool				shift_pressed;
 }						t_scene;
 
 /* --- Dispatch --- */
@@ -227,7 +229,7 @@ typedef struct s_hit_map
 	t_hit_func			func;
 }						t_hit_map;
 
-typedef void			(*t_resize_func)(t_object *object, int key);
+typedef void			(*t_resize_func)(t_object *object, int mode, int direction);
 typedef struct s_resize_map
 {
 	t_object_type		type;

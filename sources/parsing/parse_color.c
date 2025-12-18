@@ -6,39 +6,48 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:36:10 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/12 19:19:54 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 16:44:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_bool	is_valid_color_value(int value)
+static t_bool	is_valid_color_value(int value)
 {
 	return (value >= 0 && value <= 255);
 }
 
-t_status	parse_color(char **line, t_color *color)
+static void	assign_color_values(t_color *color, int rgb[3])
 {
-	int	red;
-	int	green;
-	int	blue;
+	color->r = (t_real)rgb[0] * INV_255;
+	color->g = (t_real)rgb[1] * INV_255;
+	color->b = (t_real)rgb[2] * INV_255;
+}
 
-	if (parse_int(line, &red) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (parse_comma(line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (parse_int(line, &green) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (parse_comma(line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (parse_int(line, &blue) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (is_valid_color_value(red) == FALSE
-		|| is_valid_color_value(green) == FALSE
-		|| is_valid_color_value(blue) == FALSE)
-		return (print_error(ERR_COLOR_RANGE), EXIT_FAILURE);
-	color->r = (t_real)red * INV_255;
-	color->g = (t_real)green * INV_255;
-	color->b = (t_real)blue * INV_255;
+t_status	parse_color(t_scene *scene, char **line, t_color *color)
+{
+	int		rgb[3];
+	char	*start_ptr;
+
+	start_ptr = *line;
+	if (parse_int(line, &rgb[0]) == EXIT_FAILURE)
+		return (print_error_loc(scene, start_ptr, ERR_RED), 1);
+	if (is_valid_color_value(rgb[0]) == FALSE)
+		return (print_error_loc(scene, start_ptr, ERR_RED_OOR), 1);
+	if (parse_comma(scene, line) == EXIT_FAILURE)
+		return (1);
+	start_ptr = *line;
+	if (parse_int(line, &rgb[1]) == EXIT_FAILURE)
+		return (print_error_loc(scene, start_ptr, ERR_GREEN), 1);
+	if (is_valid_color_value(rgb[1]) == FALSE)
+		return (print_error_loc(scene, start_ptr, ERR_GREEN_OOR), 1);
+	if (parse_comma(scene, line) == EXIT_FAILURE)
+		return (1);
+	start_ptr = *line;
+	if (parse_int(line, &rgb[2]) == EXIT_FAILURE)
+		return (print_error_loc(scene, start_ptr, ERR_BLUE), 1);
+	if (is_valid_color_value(rgb[2]) == FALSE)
+		return (print_error_loc(scene, start_ptr, ERR_BLUE_OOR), 1);
+	assign_color_values(color, rgb);
 	return (EXIT_SUCCESS);
 }

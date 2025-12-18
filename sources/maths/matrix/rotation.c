@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 23:00:38 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/18 21:50:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ static t_mat4	rotation_mat_z(t_real theta)
 
 t_mat4	make_rotation_matrix(t_vec3 angles)
 {
+	t_mat4	rot_x;
+	t_mat4	rot_y;
+	t_mat4	rot_z;
 	t_mat4	mat;
 
+	rot_x = rotation_mat_x(angles.x);
+	rot_y = rotation_mat_y(angles.y);
+	rot_z = rotation_mat_z(angles.z);
 	mat = identity_matrix();
-	if (angles.x != 0)
-		mat = mat4_mult_mat4(mat, rotation_mat_x(angles.x));
-	if (angles.y != 0)
-		mat = mat4_mult_mat4(mat, rotation_mat_y(angles.y));
-	if (angles.z != 0)
-		mat = mat4_mult_mat4(mat, rotation_mat_z(angles.z));
+	mat = mat4_mult_mat4(rot_y, rot_x);
+	mat = mat4_mult_mat4(rot_z, mat);
 	return (mat);
 }
