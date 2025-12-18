@@ -134,7 +134,7 @@ SRCS += \
     $(SRC_DIR)/inputs/input_manager.c \
     $(SRC_DIR)/inputs/key_hooks.c \
     $(SRC_DIR)/inputs/mouse_hooks.c \
-    $(SRC_DIR)/inputs/close_hook.c \
+	$(SRC_DIR)/inputs/entities_utils.c \
     $(SRC_DIR)/inputs/utils.c \
 
 #* ---- Maths ----
@@ -151,13 +151,15 @@ SRCS += \
     $(SRC_DIR)/maths/matrix/translation.c \
     $(SRC_DIR)/maths/matrix/rotation.c \
     $(SRC_DIR)/maths/matrix/mult.c \
+	$(SRC_DIR)/maths/matrix/transpose.c \
+	$(SRC_DIR)/maths/matrix/inverse.c \
 
 #* ---- Errors & Utils ----
 SRCS += \
     $(SRC_DIR)/error/print_error.c \
     $(SRC_DIR)/error/print_error_exit.c \
     $(SRC_DIR)/error/print_error_free_exit.c \
-    $(SRC_DIR)/error/print_error_limit.c \
+	$(SRC_DIR)/error/print_error_loc.c \
     $(SRC_DIR)/utils/print.c \
     $(SRC_DIR)/utils/ft_strspn.c \
     $(SRC_DIR)/utils/log.c \
