@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 17:49:52 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 20:17:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	init_default_values(t_scene *scene)
 {
 	scene->mlx_window.width = WINDOW_WIDTH;
 	scene->mlx_window.height = WINDOW_HEIGHT;
-	scene->mlx_window.inv_width = 1.0 / (t_real)(WINDOW_WIDTH - 1.0);
-	scene->mlx_window.inv_height = 1.0 / (t_real)(WINDOW_HEIGHT - 1.0);
 	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH
 		/ (t_real)WINDOW_HEIGHT;
 	scene->ambient.r = -1;

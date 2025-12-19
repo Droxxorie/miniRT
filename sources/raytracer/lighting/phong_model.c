@@ -6,14 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 20:46:12 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 19:15:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
 static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
-		t_point3 light_pos)
+		t_vec3 light_pos)
 {
 	t_vec3	dir_to_light;
 	t_real	dist_to_light;

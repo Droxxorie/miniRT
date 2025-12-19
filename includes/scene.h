@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:36:31 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 22:32:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		dispatch_rotate(t_object *obj, t_vec3 vec);
 void		dispatch_resize(t_object *obj, int mode, int direction);
 
 /* Modifiers */
+void		set_transform(t_object *object, t_mat4 transform);
+
 void		update_object_matrix(t_object *object);
 void		update_sphere_matrix(t_object *object);
 void		update_plane_matrix(t_object *object);

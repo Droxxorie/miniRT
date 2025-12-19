@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:37:00 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 11:20:29 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 22:24:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_ray	transform_ray(t_ray ray, t_mat4 inverse)
 {
 	t_ray	local_ray;
 
-	local_ray.origin = mat4_mult_point(inverse, ray.origin);
+	local_ray.origin = mat4_mult_point3(inverse, ray.origin);
 	local_ray.direction = mat4_mult_vec3(inverse, ray.direction);
 	local_ray.min = ray.min;
 	local_ray.max = ray.max;
@@ -38,9 +38,9 @@ void	generate_ray(t_camera *camera, t_ray *ray, t_real x, t_real y)
 	t_real	py;
 	t_vec3	local_direction;
 
-	px = (2.0 * ((x + 0.5) / (WINDOW_WIDTH)) - 1.0) * camera->aspect_ratio
+	px = (2.0 * ((x + 0.5) / camera->width) - 1.0) * camera->aspect_ratio
 		* camera->scale_factor;
-	py = (1.0 - 2.0 * ((y + 0.5) / (WINDOW_HEIGHT))) * camera->scale_factor;
+	py = (1.0 - 2.0 * ((y + 0.5) / camera->height)) * camera->scale_factor;
 	local_direction = (t_vec3){px, py, -1.0};
 	ray->origin = camera->position;
 	ray->direction = vec3_normalize(mat4_mult_vec3(camera->camera_to_world,

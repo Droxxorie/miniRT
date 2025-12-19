@@ -6,7 +6,9 @@
 - adoucir ombres
 - clic dans vide pour select light
 - rendre axe de rotation/tanslation dependant de la camera
-- changer rotation et translation pour un model unitaire et mat rot
+
+-reset state camera et objet ?
+
 Errors
 - Camera en 0.0.0 rotation chelou tt axe
 

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:27:34 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:18:42 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 20:19:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ t_status	parse_camera(t_scene *scene, char **line)
 		|| parse_fov(scene, line, &new_camera->fov) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (free(new_camera), EXIT_FAILURE);
+	new_camera->width = (t_real)WINDOW_WIDTH;
+	new_camera->height = (t_real)WINDOW_HEIGHT;
+	new_camera->aspect_ratio = (t_real)new_camera->width
+		/ (t_real)new_camera->height;
 	add_camera_to_scene(scene, new_camera);
 	return (EXIT_SUCCESS);
 }

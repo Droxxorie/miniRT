@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:36:09 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 09:19:11 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 22:32:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,4 @@ t_status	check_eol(t_scene *scene, char **line)
 	return (EXIT_SUCCESS);
 }
 
-void	set_transform(t_object *object, t_mat4 transform)
-{
-	if (!object)
-		return ;
-	object->transform = transform;
-	object->inverse = mat4_inverse(transform);
-	object->transposed_inverse = mat4_transpose(object->inverse);
-}
+

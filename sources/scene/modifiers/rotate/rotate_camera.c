@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 08:27:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:49:06 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 19:28:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	yaw(t_camera *camera, t_real z)
 
 	if (fabs(z) > EPSILON)
 	{
-		rot_y = rotation_matrix_y(z);
+		rot_y = rotation_mat_y(z);
 		camera->direction = mat4_mult_vec3(rot_y, camera->direction);
 	}
 }
@@ -52,10 +52,6 @@ static void	tilt(t_camera *camera, t_real y)
 
 void	rotate_camera(t_camera *camera, t_vec3 input_scaled, t_real aspect_ratio)
 {
-	t_mat4	rot_x;
-	t_mat4	rot_y;
-	t_vec3	camera_right;
-
 	yaw(camera, input_scaled.z);
 	pitch(camera, input_scaled.x);
 	tilt(camera, input_scaled.y);

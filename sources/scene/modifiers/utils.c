@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resize_sphere.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:10:34 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/19 22:32:33 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/19 22:32:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	resize_sphere(t_object *object, int mode, int direction)
+void	set_transform(t_object *object, t_mat4 transform)
 {
-	t_sphere	*sphere;
-
-	if (mode == RESIZE_RADIUS)
-	{
-		sphere = &object->u_data.sphere;
-		sphere->radius += (direction * STEP_SIZE);
-		if (sphere->radius < 0.1)
-			sphere->radius = 0.1;
-		update_object_matrix(object);
-	}
+	if (!object)
+		return ;
+	object->transform = transform;
+	object->inverse = mat4_inverse(object->transform);
+	object->transposed_inverse = mat4_transpose(object->inverse);
 }

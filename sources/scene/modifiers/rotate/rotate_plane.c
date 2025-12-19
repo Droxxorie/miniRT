@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:06:18 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:15:44 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 19:14:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 void	rotate_plane(t_object *object, t_vec3 rotation_axis)
 {
 	t_real	angle;
-	t_vec3	*axis;
+	t_vec3	axis;
 
-	angle = vec3_length(rotation_axis);
+	angle = vec3_len(rotation_axis);
 	if (angle < EPSILON)
 		return ;
-	axis = vec3_normalize_ptr(rotation_axis);
-	object->u_data.plane.normal = rotate_vector(object->u_data.plane.normal, *axis, angle);
+	axis = vec3_normalize(rotation_axis);
+	object->u_data.plane.normal = rotate_vector(object->u_data.plane.normal, axis, angle);
+	object->u_data.plane.normal = vec3_normalize(object->u_data.plane.normal);
 	update_object_matrix(object);
 }

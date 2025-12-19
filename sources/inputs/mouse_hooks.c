@@ -6,27 +6,20 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 21:02:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 19:19:33 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-
-
 static void	handle_left_click(t_scene *scene, int x, int y)
 {
 	t_ray			ray;
 	t_hit_record	record;
-	t_real			u;
-	t_real			v;
 
 	scene->selected_object = NULL;
 	scene->selected_light = NULL;
-	u = (t_real)x / (t_real)(scene->mlx_window.width - 1);
-	v = (t_real)(scene->mlx_window.height - 1 - y)
-		/ (t_real)(scene->mlx_window.height - 1);
-	get_ray(scene->active_camera, &ray, u, v);
+	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
 	if (try_select_light(scene, &ray))
 		return ;
 	if (hit_objects(scene->objects, &ray, &record))
@@ -37,7 +30,7 @@ static void	handle_left_click(t_scene *scene, int x, int y)
 	}
 }
 
-static void	hanlde_right_click(t_scene *scene)
+static void	handle_right_click(t_scene *scene)
 {
 	if (scene->selected_object != NULL || scene->selected_light != NULL)
 	{
@@ -77,7 +70,7 @@ int	mouse_hook(int button, int x, int y, t_scene *scene)
 
 	render_needed = FALSE;
 	if (button == RIGHT_CLICK)
-		hanlde_right_click(scene);
+		handle_right_click(scene);
 	else if (button == LEFT_CLICK)
 		handle_left_click(scene, x, y);
 	else if (button == SCROLL_UP || button == SCROLL_DOWN)

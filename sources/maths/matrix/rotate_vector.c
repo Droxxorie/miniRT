@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resize_sphere.c                                    :+:      :+:    :+:   */
+/*   rotate_vector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:10:34 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/19 19:31:32 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/19 19:31:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	resize_sphere(t_object *object, int mode, int direction)
+t_vec3	rotate_vector(t_vec3 vector, t_vec3 axis, t_real angle)
 {
-	t_sphere	*sphere;
+	t_mat4 rotation_matrix;
 
-	if (mode == RESIZE_RADIUS)
-	{
-		sphere = &object->u_data.sphere;
-		sphere->radius += (direction * STEP_SIZE);
-		if (sphere->radius < 0.1)
-			sphere->radius = 0.1;
-		update_object_matrix(object);
-	}
+	rotation_matrix = matrix_axis_angle(axis, angle);
+	return (mat4_mult_vec3(rotation_matrix, vector));
 }

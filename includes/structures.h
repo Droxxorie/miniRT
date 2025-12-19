@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:31:37 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 20:19:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_vec3
 	t_real				y;
 	t_real				z;
 }						t_vec3;
+
+typedef t_vec3			t_point3;
 
 typedef struct s_mat4
 {
@@ -54,7 +56,7 @@ typedef struct s_color
 /* --- Raytracing --- */
 typedef struct s_ray
 {
-	t_vec3				origin;
+	t_point3			origin;
 	t_vec3				direction;
 	t_real				min;
 	t_real				max;
@@ -71,13 +73,13 @@ typedef enum e_object_type
 
 typedef struct s_sphere
 {
-	t_vec3				center;
+	t_point3			center;
 	t_real				radius;
 }						t_sphere;
 
 typedef struct s_plane
 {
-	t_vec3				origin;
+	t_point3			origin;
 	t_vec3				normal;
 }						t_plane;
 
@@ -98,7 +100,7 @@ typedef struct s_cylinder_hit
 
 typedef struct s_cylinder
 {
-	t_vec3				center;
+	t_point3			center;
 	t_vec3				axis;
 	t_real				radius;
 	t_real				height;
@@ -123,7 +125,7 @@ typedef struct s_object
 typedef struct s_hit_record
 {
 	t_object			*object;
-	t_vec3				hit_point;
+	t_point3			hit_point;
 	t_vec3				normal;
 	t_real				t;
 	t_bool				front_face;
@@ -134,7 +136,7 @@ typedef struct s_hit_record
 /* --- Entities --- */
 typedef struct s_light
 {
-	t_vec3				position;
+	t_point3			position;
 	t_real				brightness;
 	t_color				color;
 	struct s_light		*next;
@@ -143,11 +145,13 @@ typedef struct s_light
 typedef struct s_camera
 {
 	int					id;
-	t_vec3				position;
+	t_point3			position;
 	t_vec3				direction;
 	int					fov;
 	t_mat4				camera_to_world;
 	t_real				scale_factor;
+	t_real				width;
+	t_real				height;
 	t_real				aspect_ratio;
 	t_real				tilt;
 	struct s_camera		*next;
@@ -171,8 +175,6 @@ typedef struct s_window
 	void				*win_ptr;
 	int					width;
 	int					height;
-	t_real				inv_width;
-	t_real				inv_height;
 	t_real				aspect_ratio;
 }						t_window;
 

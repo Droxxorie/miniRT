@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 12:09:37 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:10:25 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/19 19:32:57 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/19 19:33:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_vec3	rotate_vector(t_vec3 vector, t_vec3 axis, t_real angle)
+t_mat4	make_scale_matrix(t_vec3 scale)
 {
-	t_mat4	rotation_matrix;
+	t_mat4 mat;
 
-	rotation_matrix = matrix_axis_angle(axis, angle);
-	return (mat4_mult_vec3(rotation_matrix, vector));
+	mat = identity_matrix();
+	mat.m[0][0] = scale.x;
+	mat.m[1][1] = scale.y;
+	mat.m[2][2] = scale.z;
+	return (mat);
 }

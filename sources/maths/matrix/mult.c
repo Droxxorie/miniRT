@@ -6,22 +6,29 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:41:45 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 11:53:33 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 22:20:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
+t_vec3	mat4_mult_point3(t_mat4 mat, t_point3 pt)
+{
+	t_vec3	result;
+
+	result.x = mat.m[0][0] * pt.x + mat.m[0][1] * pt.y + mat.m[0][2] * pt.z + mat.m[0][3];
+	result.y = mat.m[1][0] * pt.x + mat.m[1][1] * pt.y + mat.m[1][2] * pt.z + mat.m[1][3];
+	result.z = mat.m[2][0] * pt.x + mat.m[2][1] * pt.y + mat.m[2][2] * pt.z + mat.m[2][3];
+	return (result);
+}
+
 t_vec3	mat4_mult_vec3(t_mat4 mat, t_vec3 vec)
 {
 	t_vec3	result;
 
-	result.x = mat.m[0][0] * vec.x + mat.m[0][1] * vec.y + mat.m[0][2] * vec.z
-		+ mat.m[0][3];
-	result.y = mat.m[1][0] * vec.x + mat.m[1][1] * vec.y + mat.m[1][2] * vec.z
-		+ mat.m[1][3];
-	result.z = mat.m[2][0] * vec.x + mat.m[2][1] * vec.y + mat.m[2][2] * vec.z
-		+ mat.m[2][3];
+	result.x = mat.m[0][0] * vec.x + mat.m[0][1] * vec.y + mat.m[0][2] * vec.z;
+	result.y = mat.m[1][0] * vec.x + mat.m[1][1] * vec.y + mat.m[1][2] * vec.z;
+	result.z = mat.m[2][0] * vec.x + mat.m[2][1] * vec.y + mat.m[2][2] * vec.z;
 	return (result);
 }
 

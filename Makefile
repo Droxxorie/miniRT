@@ -106,6 +106,8 @@ SRCS += \
     $(SRC_DIR)/scene/load_scene.c \
     $(SRC_DIR)/scene/camera.c \
     $(SRC_DIR)/scene/modifiers/transformation_dispatch.c \
+	$(SRC_DIR)/scene/modifiers/update.c \
+	$(SRC_DIR)/scene/modifiers/utils.c \
     $(SRC_DIR)/scene/modifiers/translate/translate_camera.c \
     $(SRC_DIR)/scene/modifiers/translate/translate_light.c \
     $(SRC_DIR)/scene/modifiers/translate/translate_sphere.c \
@@ -130,10 +132,11 @@ SRCS += \
 
 #* ---- Inputs ----
 SRCS += \
+	$(SRC_DIR)/inputs/selection.c \
     $(SRC_DIR)/inputs/input_manager.c \
     $(SRC_DIR)/inputs/key_hooks.c \
     $(SRC_DIR)/inputs/mouse_hooks.c \
-	$(SRC_DIR)/inputs/entities_utils.c \
+	$(SRC_DIR)/inputs/camera_input.c \
     $(SRC_DIR)/inputs/utils.c \
 
 #* ---- Maths ----
@@ -148,10 +151,14 @@ SRCS += \
     $(SRC_DIR)/maths/vector/normalize.c \
     $(SRC_DIR)/maths/matrix/identity.c \
     $(SRC_DIR)/maths/matrix/translation.c \
-    $(SRC_DIR)/maths/matrix/rotation.c \
     $(SRC_DIR)/maths/matrix/mult.c \
 	$(SRC_DIR)/maths/matrix/transpose.c \
 	$(SRC_DIR)/maths/matrix/inverse.c \
+	$(SRC_DIR)/maths/matrix/rotate_vector.c \
+	$(SRC_DIR)/maths/matrix/scale.c \
+	$(SRC_DIR)/maths/matrix/rotation_euler.c \
+	$(SRC_DIR)/maths/matrix/rotation_axis.c \
+	$(SRC_DIR)/maths/matrix/rotation_align.c \
 
 #* ---- Errors & Utils ----
 SRCS += \

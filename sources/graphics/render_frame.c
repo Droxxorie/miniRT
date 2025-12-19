@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 10:43:52 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 22:25:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	print_progress(t_scene *scene, int y)
 
 static void	process_pixel(t_scene *scene, int x, int y)
 {
-	t_ray	ray;
-	t_color	color;
+	t_ray		ray;
+	t_color		color;
 
 	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
 	color = compute_pixel_color(scene, &ray);
