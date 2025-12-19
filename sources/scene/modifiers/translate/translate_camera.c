@@ -6,20 +6,36 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 08:23:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/16 19:11:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 12:52:46 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	translate_camera(t_camera *camera, t_vec3 translation,
+void	translate_camera(t_camera *camera, t_vec3 input_scaled,
 		t_real aspect_ratio)
 {
-	t_mat4	translation_matrix;
+	t_vec3	translation;
+	t_vec3	right;
+	t_vec3	up;
+	t_vec3	forward;
 
-	if (!camera)
-		return ;
-	translation_matrix = make_translation_matrix(translation);
-	camera->position = mat4_mult_point(translation_matrix, camera->position);
-	setup_camera(camera, aspect_ratio);
+	right = (t_vec3){
+		camera->camera_to_world.m[0][0],
+		camera->camera_to_world.m[1][0],
+		camera->camera_to_world.m[2][0]};
+	up = (t_vec3){
+		camera->camera_to_world.m[0][1],
+		camera->camera_to_world.m[1][1],
+		camera->camera_to_world.m[2][1]};
+	forward = (t_vec3){
+		camera->camera_to_world.m[0][2],
+		camera->camera_to_world.m[1][2],
+		camera->camera_to_world.m[2][2]};
+	translation = (t_vec3){0, 0, 0};
+	translation = vec3_add(translation, vec3_scale(right, input_scaled.x));
+	translation = vec3_add(translation, vec3_scale(up, input_scaled.y));
+	translation = vec3_add(translation, vec3_scale(forward, input_scaled.z));
+	camera->position = vec3_add(camera->position, translation);
+	update_camera_matrix(camera, aspect_ratio);
 }

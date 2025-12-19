@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:18:59 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 11:24:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ t_status	parse_light(t_scene *scene, char **line)
 	if (parse_vec3(scene, line, &new_light->position) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_ratio(scene, line, &new_light->brightness,
-			FALSE) == EXIT_FAILURE || skip_required(scene, line,
-			WHITESPACE_CHARS) == EXIT_FAILURE || parse_color(scene, line,
-			&new_light->color) == EXIT_FAILURE || check_eol(scene,
-			line) == EXIT_FAILURE)
+			FALSE) == EXIT_FAILURE
+		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
+		|| parse_color(scene, line, &new_light->color) == EXIT_FAILURE
+		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (free(new_light), EXIT_FAILURE);
 	add_light_to_scene(scene, new_light);
 	return (EXIT_SUCCESS);

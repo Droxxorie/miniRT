@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 22:05:08 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:44:36 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 11:44:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ t_status	parse_cylinder(t_scene *scene, char **line)
 	if (get_cylinder_value(scene, line, obj, &diameter) == EXIT_FAILURE)
 		return (free(obj), EXIT_FAILURE);
 	obj->u_data.cylinder.radius = diameter * 0.5;
-	obj->u_data.cylinder.radius_squared = obj->u_data.cylinder.radius
-		* obj->u_data.cylinder.radius;
+	update_cylinder_matrix(obj);
 	add_object_to_scene(scene, obj);
 	return (EXIT_SUCCESS);
 }

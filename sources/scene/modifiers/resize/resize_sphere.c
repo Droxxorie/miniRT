@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 17:45:06 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 12:54:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ void	resize_sphere(t_object *object, int mode, int direction)
 		sphere->radius += (direction * STEP_SIZE);
 		if (sphere->radius < 0.1)
 			sphere->radius = 0.1;
-		sphere->radius_squared = sphere->radius * sphere->radius;
 	}
 }

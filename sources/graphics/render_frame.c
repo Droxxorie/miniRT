@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:53:02 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 10:43:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,11 @@ static void	print_progress(t_scene *scene, int y)
 
 static void	process_pixel(t_scene *scene, int x, int y)
 {
-	t_real	u;
-	t_real	v;
 	t_ray	ray;
 	t_color	color;
 
-	u = (t_real)x * scene->mlx_window.inv_width;
-	v = (t_real)(scene->mlx_window.height - 1 - y)
-		* scene->mlx_window.inv_height;
-	get_ray(scene->active_camera, &ray, u, v);
-	color = get_ray_color(scene, &ray);
+	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
+	color = compute_pixel_color(scene, &ray);
 	image_pixel_put(&scene->frame_buffer, x, y, color_to_int(color));
 }
 

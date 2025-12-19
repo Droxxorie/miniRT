@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:20:05 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 17:44:44 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 12:54:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	resize_cylinder(t_object *object, int mode, int direction)
 		cylinder->radius += (direction * STEP_SIZE);
 		if (cylinder->radius < 0.1)
 			cylinder->radius = 0.1;
-		cylinder->radius_squared = cylinder->radius * cylinder->radius;
 	}
 	else if (mode == RESIZE_HEIGHT)
 	{

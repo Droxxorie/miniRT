@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_plane.c                                     :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 11:06:18 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:15:44 by eraad            ###   ########.fr       */
+/*   Created: 2025/12/19 11:59:19 by eraad             #+#    #+#             */
+/*   Updated: 2025/12/19 12:15:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	rotate_plane(t_object *object, t_vec3 rotation_axis)
+void	rotate_object(t_object *object, t_vec3 rotation_axis, t_real angle)
 {
-	t_real	angle;
-	t_vec3	*axis;
+	t_mat4	rotation_matrix;
+	t_vec3	*axis_to_rotate;
 
-	angle = vec3_length(rotation_axis);
-	if (angle < EPSILON)
+	if (object->type == PLANE)
+		axis_to_rotate = &object->u_data.plane.normal;
+	else if (object->type == CYLINDER)
+		axis_to_rotate = &object->u_data.cylinder.axis;
+	else
 		return ;
-	axis = vec3_normalize_ptr(rotation_axis);
-	object->u_data.plane.normal = rotate_vector(object->u_data.plane.normal, *axis, angle);
+	rotation_matrix = matrix_axis_angle(rotation_axis, angle);
+	*axis_to_rotate = mat4_mult_vec3(rotation_matrix, *axis_to_rotate);
+	*axis_to_rotate = vec3_normalize(*axis_to_rotate);
 	update_object_matrix(object);
 }

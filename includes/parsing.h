@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:42:53 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 09:20:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ t_status	parse_light(t_scene *scene, char **line);
 t_status	parse_sphere(t_scene *scene, char **line);
 t_status	parse_plane(t_scene *scene, char **line);
 t_status	parse_cylinder(t_scene *scene, char **line);
+
+void		set_transform(t_object *object, t_mat4 transform);
 
 #endif

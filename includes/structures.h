@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 22:27:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 12:31:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef struct s_vec3
 	t_real				y;
 	t_real				z;
 }						t_vec3;
-
-typedef t_vec3			t_point3;
 
 typedef struct s_mat4
 {
@@ -56,7 +54,7 @@ typedef struct s_color
 /* --- Raytracing --- */
 typedef struct s_ray
 {
-	t_point3			origin;
+	t_vec3				origin;
 	t_vec3				direction;
 	t_real				min;
 	t_real				max;
@@ -73,36 +71,36 @@ typedef enum e_object_type
 
 typedef struct s_sphere
 {
-	t_point3			center;
+	t_vec3				center;
 	t_real				radius;
-	t_real				radius_squared;
 }						t_sphere;
 
 typedef struct s_plane
 {
-	t_point3			origin;
+	t_vec3				origin;
 	t_vec3				normal;
-	t_real				d;
 }						t_plane;
 
-typedef struct s_cylinder_vars
+typedef enum e_cylinder_element
 {
+	BODY,
+	BOTTOM_CAP,
+	TOP_CAP,
+	NONE_ELEMENT
+}						t_cylinder_element;
+typedef struct s_cylinder_hit
+{
+	t_ray				ray;
+	t_real				t;
+	t_cylinder_element	type;
 	t_poly				eq_vars;
-	t_vec3				oc;
-	t_real				dot_dir_axis;
-	t_real				dot_oc_axis;
-	t_real				half_height;
-	t_vec3				top_center;
-	t_vec3				bottom_center;
-	t_real				cap_denom;
-}						t_cylinder_vars;
+}						t_cylinder_hit;
 
 typedef struct s_cylinder
 {
-	t_point3			center;
+	t_vec3				center;
 	t_vec3				axis;
 	t_real				radius;
-	t_real				radius_squared;
 	t_real				height;
 }						t_cylinder;
 
@@ -125,7 +123,7 @@ typedef struct s_object
 typedef struct s_hit_record
 {
 	t_object			*object;
-	t_point3			hit_point;
+	t_vec3				hit_point;
 	t_vec3				normal;
 	t_real				t;
 	t_bool				front_face;
@@ -136,7 +134,7 @@ typedef struct s_hit_record
 /* --- Entities --- */
 typedef struct s_light
 {
-	t_point3			position;
+	t_vec3				position;
 	t_real				brightness;
 	t_color				color;
 	struct s_light		*next;
@@ -145,14 +143,13 @@ typedef struct s_light
 typedef struct s_camera
 {
 	int					id;
-	t_point3			position;
+	t_vec3				position;
 	t_vec3				direction;
 	int					fov;
-	t_real				viewport_width;
-	t_real				viewport_height;
-	t_vec3				horizontal;
-	t_vec3				vertical;
-	t_vec3				lower_left_corner;
+	t_mat4				camera_to_world;
+	t_real				scale_factor;
+	t_real				aspect_ratio;
+	t_real				tilt;
 	struct s_camera		*next;
 }						t_camera;
 
@@ -186,8 +183,8 @@ typedef enum e_control_mode
 	ROTATE,
 }						t_control_mode;
 
-# define	RESIZE_RADIUS	1
-# define	RESIZE_HEIGHT	2
+# define RESIZE_RADIUS 1
+# define RESIZE_HEIGHT 2
 
 typedef struct s_scene
 {
@@ -229,7 +226,8 @@ typedef struct s_hit_map
 	t_hit_func			func;
 }						t_hit_map;
 
-typedef void			(*t_resize_func)(t_object *object, int mode, int direction);
+typedef void			(*t_resize_func)(t_object *object, int mode,
+				int direction);
 typedef struct s_resize_map
 {
 	t_object_type		type;

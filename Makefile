@@ -104,7 +104,7 @@ SRCS += \
 #* ---- Scene ----
 SRCS += \
     $(SRC_DIR)/scene/load_scene.c \
-    $(SRC_DIR)/scene/setup_camera.c \
+    $(SRC_DIR)/scene/camera.c \
     $(SRC_DIR)/scene/modifiers/transformation_dispatch.c \
     $(SRC_DIR)/scene/modifiers/translate/translate_camera.c \
     $(SRC_DIR)/scene/modifiers/translate/translate_light.c \
@@ -119,15 +119,14 @@ SRCS += \
 
 #* ---- Raytracer ----
 SRCS += \
-    $(SRC_DIR)/raytracer/get_ray.c \
     $(SRC_DIR)/raytracer/intersection/hit_objects.c \
     $(SRC_DIR)/raytracer/intersection/hit_sphere.c \
     $(SRC_DIR)/raytracer/intersection/hit_plane.c \
     $(SRC_DIR)/raytracer/intersection/hit_cylinder.c \
-	$(SRC_DIR)/raytracer/intersection/check_cylinder_caps.c \
     $(SRC_DIR)/raytracer/lighting/phong_model.c \
     $(SRC_DIR)/raytracer/lighting/reflect.c \
-    $(SRC_DIR)/raytracer/utils/set_face_normal.c \
+	$(SRC_DIR)/raytracer/utils.c \
+	$(SRC_DIR)/raytracer/ray.c \
 
 #* ---- Inputs ----
 SRCS += \

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:36:48 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 22:26:31 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 12:33:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,19 @@ t_real	color_dot(const t_color c1, const t_color c2);
 
 //* Matrix operations */
 t_mat4	identity_matrix(void);
-t_mat4	make_rotation_matrix(t_vec3 angles);
+// t_mat4	make_rotation_matrix(t_vec3 angles);
 t_mat4	make_translation_matrix(t_vec3 translation);
-t_vec3	mat3_mult_vec3(t_mat4 mat, t_vec3 vec);
-t_vec3	mat4_mult_point(t_mat4 mat, t_point3 point);
+t_vec3	mat4_mult_vec3(t_mat4 mat, t_vec3 vec);
 t_mat4	mat4_mult_mat4(t_mat4 a, t_mat4 b);
+
 t_mat4	mat4_transpose(t_mat4 mat);
 t_mat4	mat4_inverse(t_mat4 mat);
+
+t_mat4	rotation_align(t_vec3 dest);
+t_mat4	rotation_matrix_x(t_real angle);
+t_mat4	rotation_matrix_y(t_real angle);
+t_mat4	rotation_matrix_z(t_real angle);
+t_mat4	matrix_axis_angle(t_vec3 axis, t_real angle);
+t_mat4	make_scale_matrix(t_vec3 scale);
 
 #endif

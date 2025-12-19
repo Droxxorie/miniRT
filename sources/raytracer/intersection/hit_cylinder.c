@@ -6,97 +6,103 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 20:54:02 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 11:51:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void	set_cylinder_record(t_object *object, t_ray *ray,
-		t_hit_record *record)
+static void	check_tube_root(t_cylinder_hit *hit, t_real t)
 {
-	t_vec3	oc;
-	t_real	proj;
-	t_vec3	pt_on_axis;
-	t_vec3	outward_normal;
+	t_real	y;
 
+	if (t <= EPSILON || t >= hit->t)
+		return ;
+	y = hit->ray.origin.y + t * hit->ray.direction.y;
+	if (y < -0.5 || y > 0.5)
+		return ;
+	hit->t = t;
+	hit->type = BODY;
+}
+
+static void	solve_tube(t_cylinder_hit *hit)
+{
+	t_vec3	direction;
+	t_vec3	origin;
+
+	direction = hit->ray.direction;
+	origin = hit->ray.origin;
+	hit->eq_vars.a = direction.x * direction.x + direction.z * direction.z;
+	hit->eq_vars.half_b = 2.0 * (origin.x * direction.x + origin.z
+			* direction.z); //? on garde le 2* ?
+	hit->eq_vars.c = origin.x * origin.x + origin.z * origin.z - 1.0;
+	if (solve_quadratic(&hit->eq_vars) == FALSE)
+		return ;
+	check_tube_root(hit, hit->eq_vars.root1);
+	check_tube_root(hit, hit->eq_vars.root2);
+}
+
+static void	check_cap(t_cylinder_hit *hit, t_real y_plane,
+		t_cylinder_element type)
+{
+	t_real	t;
+	t_real	x;
+	t_real	z;
+
+	if (fabs(hit->ray.direction.y) < EPSILON)
+		return ;
+	t = (y_plane - hit->ray.origin.y) / hit->ray.direction.y;
+	if (t <= EPSILON || t >= hit->t)
+		return ;
+	x = hit->ray.origin.x + t * hit->ray.direction.x;
+	z = hit->ray.origin.z + t * hit->ray.direction.z;
+	if ((x * x + z * z) > 1.0)
+		return ;
+	hit->t = t;
+	hit->type = type;
+}
+
+static void	set_cylinder_record(t_object *object, t_ray *ray,
+		t_hit_record *record, t_cylinder_hit *hit)
+{
+	t_vec3	local_hit_point;
+	t_vec3	local_normal;
+
+	record->t = hit->t;
 	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction,
 				record->t));
-	if (record->need_details == FALSE)
-		return ;
-	oc = vec3_sub(record->hit_point, object->u_data.cylinder.center);
-	proj = vec3_dot(oc, object->u_data.cylinder.axis);
-	pt_on_axis = vec3_add(object->u_data.cylinder.center,
-			vec3_scale(object->u_data.cylinder.axis, proj));
-	outward_normal = vec3_sub(record->hit_point, pt_on_axis);
-	outward_normal = vec3_normalize(outward_normal);
-	set_face_normal(record, ray, outward_normal);
 	record->color = object->color;
 	record->object = object;
-}
-
-static t_bool	is_valid_intersection(t_cylinder_vars *vars, t_ray *ray,
-		t_real t)
-{
-	t_real	projection;
-	
-	if (t < ray->min || t > ray->max)
-		return (FALSE);
-	projection = (vars->dot_dir_axis * t) + vars->dot_oc_axis;
-	if (fabs(projection) <= vars->half_height)
-		return (TRUE);
-	return (FALSE);
-}
-
-static void	get_cylinder_vars(t_cylinder *cylinder, t_ray *ray,
-		t_cylinder_vars *vars)
-{
-	t_vec3	cross_dir_axis;
-	t_vec3	cross_oc_axis;
-
-	vars->oc = vec3_sub(ray->origin, cylinder->center);
-	vars->dot_dir_axis = vec3_dot(ray->direction, cylinder->axis);
-	vars->dot_oc_axis = vec3_dot(vars->oc, cylinder->axis);
-	cross_dir_axis = vec3_cross(ray->direction, cylinder->axis);
-	cross_oc_axis = vec3_cross(vars->oc, cylinder->axis);
-	vars->eq_vars.a = vec3_len_squared(cross_dir_axis);
-	vars->eq_vars.half_b = vec3_dot(cross_dir_axis, cross_oc_axis);
-	vars->eq_vars.c = vec3_len_squared(cross_oc_axis)
-		- (cylinder->radius_squared);
-	vars->eq_vars.min = ray->min;
-	vars->eq_vars.max = ray->max;
-	vars->half_height = cylinder->height * 0.5;
-	vars->top_center = vec3_add(cylinder->center, vec3_scale(cylinder->axis,
-				vars->half_height));
-	vars->bottom_center = vec3_sub(cylinder->center, vec3_scale(cylinder->axis,
-				vars->half_height));
-	vars->cap_denom = vec3_dot(ray->direction, cylinder->axis);
-}
-
-t_bool	hit_cylinder(t_object *object, t_ray *ray, t_hit_record *record)
-{
-	t_cylinder_vars	vars;
-	t_bool			hit;
-
-	get_cylinder_vars(&object->u_data.cylinder, ray, &vars);
-	hit = FALSE;
-	if (solve_quadratic(&vars.eq_vars) == TRUE)
+	if (record->need_details == FALSE)
+		return ;
+	if (hit->type == BODY)
 	{
-		if (is_valid_intersection(&vars, ray, vars.eq_vars.root1))
-		{
-			record->t = vars.eq_vars.root1;
-			hit = TRUE;
-		}
-		else if (is_valid_intersection(&vars, ray, vars.eq_vars.root2))
-		{
-			record->t = vars.eq_vars.root2;
-			hit = TRUE;
-		}
+		local_hit_point = vec3_add(hit->ray.origin,
+				vec3_scale(hit->ray.direction, record->t));
+		local_normal = (t_vec3){local_hit_point.x, 0.0, local_hit_point.z};
 	}
-	if (hit == TRUE)
-		set_cylinder_record(object, ray, record);
+	else if (hit->type == TOP_CAP)
+		local_normal = (t_vec3){0.0, 1.0, 0.0};
 	else
-		record->t = ray->max;
-	check_cylinder_caps(object, ray, record, &vars);
-	return (record->t < ray->max);
+		local_normal = (t_vec3){0.0, -1.0, 0.0};
+	record->normal = vec3_normalize(mat4_mult_vec3(object->transposed_inverse,
+				local_normal));
+	set_face_normal(record, ray, record->normal);
+}
+
+t_bool	hit_cylinder(t_object *object, t_ray *world_ray, t_hit_record *record)
+{
+	t_cylinder_hit	hit;
+
+	hit.ray = transform_ray(*world_ray, object->inverse);
+	hit.t = world_ray->max;
+	hit.type = NONE_ELEMENT;
+	solve_tube(&hit);
+	check_cap(&hit, 0.5, TOP_CAP);
+	check_cap(&hit, -0.5, BOTTOM_CAP);
+	if (hit.type == NONE_ELEMENT || hit.t < world_ray->min || hit.t > world_ray->max)
+		//? a voir pour le max
+		return (FALSE);
+	set_cylinder_record(object, world_ray, record, &hit);
+	return (TRUE);
 }

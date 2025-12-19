@@ -6,40 +6,39 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:13 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 19:16:22 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 11:13:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void	set_plane_record(t_object *object, t_ray *ray, t_hit_record *record)
+static void	set_plane_record(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
-	t_plane	*plane;
+	t_vec3	local_normal;
 
-	plane = &object->u_data.plane;
-	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction,
+	record->hit_point = vec3_add(world_ray->origin, vec3_scale(world_ray->direction,
 				record->t));
-	if (record->need_details == FALSE)
-		return ;
-	set_face_normal(record, ray, plane->normal);
 	record->color = object->color;
 	record->object = object;
+	if (record->need_details == FALSE)
+		return ;
+	local_normal = (t_vec3){0.0, 1.0, 0.0};
+	record->normal = vec3_normalize(mat4_mult_vec3(object->transposed_inverse, local_normal));
+	set_face_normal(record, world_ray, record->normal);
 }
 
-t_bool	hit_plane(t_object *object, t_ray *ray, t_hit_record *record)
+t_bool	hit_plane(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
-	t_plane	*plane;
-	t_real	denominator;
-	t_real	root;
-
-	plane = &object->u_data.plane;
-	denominator = vec3_dot(ray->direction, plane->normal);
-	if (fabs(denominator) < EPSILON)
+	t_ray	object_ray;
+	t_real t;
+	
+	object_ray = transform_ray(*world_ray, object->inverse);
+	if (fabs(object_ray.direction.y) < EPSILON)
 		return (FALSE);
-	root = -(vec3_dot(ray->origin, plane->normal) + plane->d) / denominator;
-	if (root < ray->min || root > ray->max)
+	t = -object_ray.origin.y / object_ray.direction.y;
+	if (t < world_ray->min || t > world_ray->max)
 		return (FALSE);
-	record->t = root;
-	set_plane_record(object, ray, record);
+	record->t = t;
+	set_plane_record(object, world_ray, record);
 	return (TRUE);
 }

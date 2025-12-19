@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:49:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:34:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 11:45:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ t_status	parse_plane(t_scene *scene, char **line)
 	new_obj->type = PLANE;
 	if (get_plane_value(scene, line, new_obj) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
-	new_obj->u_data.plane.d = -vec3_dot(new_obj->u_data.plane.normal,
-			new_obj->u_data.plane.origin);
+	update_plane_matrix(new_obj);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);
 }

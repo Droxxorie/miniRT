@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 21:07:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/19 12:21:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@
 
 static t_vec3	get_camera_relative_vector(t_vec3 input, t_camera *camera)
 {
-	t_vec3	forward;
-	t_vec3	right;
-	t_vec3	up;
 	t_vec3	direction;
-	t_vec3	world_up;
+	t_vec3	camera_up;
+	t_vec3	camera_right;
+	t_vec3	camera_forward;
 
-	world_up = (t_vec3){0.0, 1.0, 0.0};
-	forward = vec3_normalize(camera->direction);
-	right = vec3_cross(forward, world_up);
-	if (vec3_len_squared(right) < EPSILON)
-		right = (t_vec3){1.0, 0.0, 0.0};
-	else
-		right = vec3_normalize(right);
-	up = vec3_cross(right, forward);
-	up = vec3_normalize(up);
+	camera_up = (t_vec3){camera->camera_to_world.m[1][0],
+		camera->camera_to_world.m[1][1],
+		camera->camera_to_world.m[1][2]};
+	camera_forward = (t_vec3){camera->camera_to_world.m[2][0],
+		camera->camera_to_world.m[2][1],
+		camera->camera_to_world.m[2][2]};
+	camera_right = (t_vec3){camera->camera_to_world.m[0][0],
+		camera->camera_to_world.m[0][1],
+		camera->camera_to_world.m[0][2]};
 	direction = (t_vec3){0.0, 0.0, 0.0};
-	direction = vec3_add(direction, vec3_scale(forward, input.x));
-	direction = vec3_add(direction, vec3_scale(up, input.y));
-	direction = vec3_add(direction, vec3_scale(right, -input.z));
-		//? on vera si j'inverse pas
+	direction = vec3_add(direction, vec3_scale(camera_forward, input.x));
+	direction = vec3_add(direction, vec3_scale(camera_right, input.z));
+	direction = vec3_add(direction, vec3_scale(camera_up, input.y));
 	return (direction);
 }
 
