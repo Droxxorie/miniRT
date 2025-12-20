@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 16:43:39 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 18:43:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */
 //* ========================================================================= */
-void	print_error_exit(const char *error_message);
-void	sys_print_error_exit(const char *error_message);
 void	print_error(const char *error_message);
 void	sys_print_error(const char *error_message);
-void	print_error_free_exit(t_scene *scene, const char *error_message);
-void	sys_print_error_free_exit(t_scene *scene, const char *error_message);
-void	print_error_loc(t_scene *scene, char *current_pos, char *message);
+void	print_error_exit(const char *error_message);
 void	print_line_context(t_scene *scene, char *pos);
+void	sys_print_error_exit(const char *error_message);
+void	print_error_free_exit(t_scene *scene, const char *error_message);
+void	print_error_loc(t_scene *scene, char *current_pos, char *message);
+void	sys_print_error_free_exit(t_scene *scene, const char *error_message);
 void	print_error_limit(t_scene *scene, char *start_ptr, char *entity_name,
 			int limit);
 

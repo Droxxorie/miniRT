@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:37:28 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 11:41:33 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:07:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	update_cylinder_matrix(t_object *object)
 
 	translation = make_translation_matrix(object->u_data.cylinder.center);
 	rotation = rotation_align(object->u_data.cylinder.axis);
-	scaling = make_scale_matrix((t_vec3){
-		object->u_data.cylinder.radius,
-		object->u_data.cylinder.height,
-		object->u_data.cylinder.radius});
+	scaling = make_scale_matrix((t_vec3){object->u_data.cylinder.radius,
+			object->u_data.cylinder.height, object->u_data.cylinder.radius});
 	transform = identity_matrix();
 	transform = mat4_mult_mat4(transform, translation);
 	transform = mat4_mult_mat4(transform, rotation);

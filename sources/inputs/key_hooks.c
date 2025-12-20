@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/20 13:25:44 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:22:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	return (TRUE);
 }
 
+static void	handle_tab_key(t_scene *scene)
+{
+	if (scene->control_mode == TRANSLATE)
+	{
+		scene->control_mode = ROTATE;
+		ft_putstr_fd("Mode: ROTATE\n", STDOUT_FILENO);
+	}
+	else
+	{
+		scene->control_mode = TRANSLATE;
+		ft_putstr_fd("Mode: TRANSLATE\n", STDOUT_FILENO);
+	}
+}
+
 static t_bool	handle_state_keys(int key, t_scene *scene)
 {
 	if (key == KEY_ESC)
@@ -36,19 +50,7 @@ static t_bool	handle_state_keys(int key, t_scene *scene)
 		return (FALSE);
 	}
 	if (key == KEY_TAB)
-	{
-		if (scene->control_mode == TRANSLATE)
-		{
-			scene->control_mode = ROTATE;
-			ft_putstr_fd("Mode: ROTATE\n", STDOUT_FILENO);
-		}
-		else
-		{
-			scene->control_mode = TRANSLATE;
-			ft_putstr_fd("Mode: TRANSLATE\n", STDOUT_FILENO);
-		}
-		return (FALSE);
-	}
+		return (handle_tab_key(scene), FALSE);
 	if (key == KEY_SPACE)
 		return (switch_camera_next(scene), TRUE);
 	if (key == KEY_L)

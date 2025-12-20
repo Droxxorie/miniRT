@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:13:06 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/20 12:24:56 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:07:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	make_camera_to_world_matrix(t_camera *camera, t_vec3 up,
 	if (fabs(camera->tilt) > EPSILON)
 	{
 		roll_matrix = rotation_mat_z(camera->tilt);
-		camera->camera_to_world = mat4_mult_mat4(camera->camera_to_world, roll_matrix);
+		camera->camera_to_world = mat4_mult_mat4(camera->camera_to_world,
+				roll_matrix);
 	}
 }
 

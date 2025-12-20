@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:36:09 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 22:32:05 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:05:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,3 @@ t_status	check_eol(t_scene *scene, char **line)
 	}
 	return (EXIT_SUCCESS);
 }
-
-

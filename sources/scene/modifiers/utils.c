@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 22:32:33 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/20 12:30:50 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:07:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	set_transform(t_object *object, t_mat4 transform)
 
 void	apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix)
 {
-	t_point3 position;
-	t_mat4 old_transform;
+	t_point3	position;
+	t_mat4		old_transform;
 
 	position.x = object->transform.m[0][3];
 	position.y = object->transform.m[1][3];

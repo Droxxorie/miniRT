@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 20:10:41 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:06:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static void	solve_tube(t_cylinder_hit *hit)
 	direction = hit->ray.direction;
 	origin = hit->ray.origin;
 	hit->eq_vars.a = direction.x * direction.x + direction.z * direction.z;
-	hit->eq_vars.half_b = (origin.x * direction.x + origin.z
-			* direction.z);
+	hit->eq_vars.half_b = (origin.x * direction.x + origin.z * direction.z);
 	hit->eq_vars.c = origin.x * origin.x + origin.z * origin.z - 1.0;
 	if (solve_quadratic(&hit->eq_vars) == FALSE)
 		return ;
@@ -100,7 +99,8 @@ t_bool	hit_cylinder(t_object *object, t_ray *world_ray, t_hit_record *record)
 	solve_tube(&hit);
 	check_cap(&hit, 0.5, TOP_CAP);
 	check_cap(&hit, -0.5, BOTTOM_CAP);
-	if (hit.type == NONE_ELEMENT || hit.t < world_ray->min || hit.t > world_ray->max)
+	if (hit.type == NONE_ELEMENT || hit.t < world_ray->min
+		|| hit.t > world_ray->max)
 		return (FALSE);
 	set_cylinder_record(object, world_ray, record, &hit);
 	return (TRUE);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 19:34:43 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:34:47 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:04:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_mat4	matrix_axis_angle(t_vec3 axis, t_real angle)
 {
-	t_mat4 result;
-	t_real cos_theta;
-	t_real sin_theta;
-	t_real t;
+	t_mat4	result;
+	t_real	cos_theta;
+	t_real	sin_theta;
+	t_real	t;
 
 	cos_theta = cos(angle);
 	sin_theta = sin(angle);

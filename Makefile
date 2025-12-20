@@ -132,7 +132,6 @@ SRCS += \
 
 #* ---- Inputs ----
 SRCS += \
-	$(SRC_DIR)/inputs/selection.c \
     $(SRC_DIR)/inputs/input_manager.c \
     $(SRC_DIR)/inputs/key_hooks.c \
     $(SRC_DIR)/inputs/mouse_hooks.c \

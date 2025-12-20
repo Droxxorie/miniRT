@@ -1,62 +1,54 @@
-- UI
-- mode screenshot (caché UI)
-- changer facteur de transformation
-- changer le fov
+PHASE 1 : ARCHITECTURE & PERFS
+- Multithreading
+- Réactiver multi cams & lights
+- Mode sauvegarde (--save flag)
+- opti low res Preview
 
--reset state camera et objet ?
-
-Errors
-- Camera en 0.0.0 rotation chelou tt axe
-
-
-BONUS
-- supprimer un objet/light/camera
-- modifier shininess
-- ajouter torus
-- ajouter triangle
-- ajouter pavé
-- ajouter cone
-- Cube
-- Pyramide
-- 
-- opti aabb
-- opti plus proches voisins
-- monté carlo ?
-- AA
-- BVH
-
-PHASE 1 : Multithreading
-- pthread
-
-PHASE 2 : Primitives
-- Triangle
+PHASE 2 : PRIMITIVES
 - Disque
-- Carré
-- Rectangle
+- Triangle
+- Carré/Rectangle
 - Cône
 - Tore
 
-PHASE 3 : Objets composés
-- Cube
-- Pavé
-- Pyramide base Carré
-- Pyramide base Triangle
+PHASE 3 : OBJETS COMPOSES
+- Cube & Pavé
+- Pyramide base carré ou triangulaire
+- BVH
 
-PHASE 4 : Textures
-- Checkbaord
-- Rainbow Effect
-- Texture Sinus
+PHASE 3.5 : RAYMARCHING
+- Support SDF (mdrrrr)
+- Object SDF simples (Sphere, pavé, Tore)
+- Fractals (Mandelbulb, Julia autre)
 
-PHASE 5 : Mapping & Skybox
-- Skybox
+PHASE 4 : LUMIERE & MAT
+- SUN (Lumière parallèle)
+- Spotlight
+- Texture procedurale (checkboard, rainbow, Sinus)
 - UV Mapping
 - Normal Map / Bump Map
+- Skybox
+- BRDF basique (Lambert & Phong/Blinn-Phong)
+- BRDF avancé (Oren - Nayar & Cook-Torrance)
+- Matériaux (Choix, Matte/Lambert/Color, plastique (blinn-Phong), Miroir (refraction verre/eau/autre), Texture (UV mapping))
 
-PHASE 6 : Lumières & Filtres
-- Lumières parallèle (Sun)
-- Post process (gamma, Sobel)
-- Anti Aliasing (Supersampling ou autre ?)
+PHASE 5 : UX et Interactions
+- Rework UX clavier/Souris
+- Ajout facteur de transformation
+- Modifier FOV
+- Touche Reset (toute la scene et objet selectionné)
+- UI (Objet selectionné / ID camera / ID lumière / Coordonnées / commandes etc)
 
-PHASE 7 : UX
-- Rework de l'UX (clavier & souris)
-- Ajout UI
+PHASE 6 : POST-PROCESS & QUALITE
+- Tonemapping
+- Filtres (gamma correction, Sepia, B&W)
+- Sobel
+- AA (via Supersampling)
+
+PHASE 7 : MONTE CARLO & PBR
+- Matériaux PBR
+- Lumière surfacique (quad)
+- Matériaux Emissifs
+- Path Tracing
+- Soft Shadows
+- DOF

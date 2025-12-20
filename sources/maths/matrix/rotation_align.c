@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:35:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:04:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_mat4	rotation_align(t_vec3	dest)
+t_mat4	rotation_align(t_vec3 dest)
 {
 	t_vec3	axis;
 	t_real	angle;

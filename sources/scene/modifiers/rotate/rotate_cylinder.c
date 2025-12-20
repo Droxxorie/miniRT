@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:16:34 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/20 12:33:41 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:10:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	rotate_cylinder(t_object *object, t_vec3 rotation_axis)
 {
-	t_real	angle;
-	t_vec3	axis_input;
-	t_mat4	rotation_matrix;
+	t_real		angle;
+	t_vec3		axis_input;
+	t_mat4		rotation_matrix;
 	t_cylinder	*cylinder;
 
 	angle = vec3_len(rotation_axis);

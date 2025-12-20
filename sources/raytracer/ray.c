@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:37:00 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 22:24:51 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:05:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_ray	transform_ray(t_ray ray, t_mat4 inverse)
 
 t_color	compute_pixel_color(t_scene *scene, t_ray *ray)
 {
-	t_hit_record record;
+	t_hit_record	record;
 
 	if (hit_objects(scene->objects, ray, &record))
 		return (phong_light(scene, &record, ray));

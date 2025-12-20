@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 19:33:32 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:33:46 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 19:04:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_mat4	rotation_mat_y(t_real theta)
 
 t_mat4	rotation_mat_z(t_real theta)
 {
-	t_mat4 mat;
-	t_real cos_theta;
-	t_real sin_theta;
+	t_mat4	mat;
+	t_real	cos_theta;
+	t_real	sin_theta;
 
 	cos_theta = cos(theta);
 	sin_theta = sin(theta);
