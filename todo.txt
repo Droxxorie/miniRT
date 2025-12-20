@@ -1,11 +1,7 @@
 - UI
 - mode screenshot (caché UI)
 - changer facteur de transformation
-- changer vecteur de translation/rotation en fonction de l'objet ou du repere
 - changer le fov
-- adoucir ombres
-- clic dans vide pour select light
-- rendre axe de rotation/tanslation dependant de la camera
 
 -reset state camera et objet ?
 
@@ -14,13 +10,53 @@ Errors
 
 
 BONUS
+- supprimer un objet/light/camera
 - modifier shininess
 - ajouter torus
 - ajouter triangle
 - ajouter pavé
 - ajouter cone
+- Cube
+- Pyramide
+- 
 - opti aabb
 - opti plus proches voisins
 - monté carlo ?
 - AA
-- changer couleur lumiere
+- BVH
+
+PHASE 1 : Multithreading
+- pthread
+
+PHASE 2 : Primitives
+- Triangle
+- Disque
+- Carré
+- Rectangle
+- Cône
+- Tore
+
+PHASE 3 : Objets composés
+- Cube
+- Pavé
+- Pyramide base Carré
+- Pyramide base Triangle
+
+PHASE 4 : Textures
+- Checkbaord
+- Rainbow Effect
+- Texture Sinus
+
+PHASE 5 : Mapping & Skybox
+- Skybox
+- UV Mapping
+- Normal Map / Bump Map
+
+PHASE 6 : Lumières & Filtres
+- Lumières parallèle (Sun)
+- Post process (gamma, Sobel)
+- Anti Aliasing (Supersampling ou autre ?)
+
+PHASE 7 : UX
+- Rework de l'UX (clavier & souris)
+- Ajout UI

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:19:33 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 13:24:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	handle_left_click(t_scene *scene, int x, int y)
 	scene->selected_object = NULL;
 	scene->selected_light = NULL;
 	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
-	if (try_select_light(scene, &ray))
-		return ;
-	if (hit_objects(scene->objects, &ray, &record))
+	// if (try_select_light(scene, &ray))
+	// 	return ;
+	if (hit_objects(scene->objects, &ray, &record) && record.object != scene->selected_object)
 	{
 		scene->selected_object = record.object;
 		ft_putstr_fd("Switched to object control mode\n", 1);

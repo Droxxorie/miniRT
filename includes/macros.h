@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 21:18:17 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 13:26:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define STEP_ROT 0.1
 # define STEP_SIZE 0.5
 
-# define WINDOW_WIDTH 720
+# define WINDOW_WIDTH 854
 # define WINDOW_HEIGHT 480
 
 # define MAX_LIGHTS 1
@@ -76,6 +76,8 @@
 # define KEY_Q 113
 # define KEY_E 101
 # define KEY_Z 122
+# define KEY_L 108
+# define KEY_C 99
 
 /* --- Numbers (Top Row) --- */
 # define KEY_1 49

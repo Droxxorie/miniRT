@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/18 17:35:51 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/20 13:25:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ static t_bool	handle_state_keys(int key, t_scene *scene)
 	}
 	if (key == KEY_SPACE)
 		return (switch_camera_next(scene), TRUE);
+	if (key == KEY_L)
+	{
+		scene->selected_light = scene->lights;
+		scene->selected_object = NULL;
+		ft_putstr_fd("Switched to light control mode\n", 1);
+	}
 	return (FALSE);
 }
 
