@@ -1,0 +1,4 @@
+# MSG: Extra comma at end of line (Syntax test)
+A 0.2 255,255,255
+C 0,0,-10 0,0,1, 70  # Virgule en trop
+L 0,0,0 0.5 255,255,255

@@ -1,0 +1,4 @@
+# MSG: Normal vector out of bounds (Test OOB)
+A 0.2 255,255,255
+C 0,0,-10 0,0,2.5 70  # Z = 2.5 est invalide pour une direction
+L 0,0,0 0.5 255,255,255
