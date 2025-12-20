@@ -84,11 +84,11 @@ rm -f test_perm.rt
 echo -e "\n${BRIGHT_CYAN}${BOLD}- TESTS DE SYNTAXE -${RESET}"
 
 count=0
-ls err_*.rt >/dev/null 2>&1
+ls test_files/err_*.rt >/dev/null 2>&1
 if [ $? -ne 0 ]; then
     echo -e "${RED}Aucun fichier err_*.rt trouvé.${RESET}"
 else
-    for file in err_*.rt; do
+    for file in test_files/err_*.rt; do
         msg=$(grep "^# MSG:" "$file" | head -n 1 | sed 's/^# MSG:[[:space:]]*//')
         
         if [ -z "$msg" ]; then
