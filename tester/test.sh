@@ -94,7 +94,7 @@ else
         if [ -z "$msg" ]; then
             msg="Test fichier $file"
         fi
-        output=$($MINIRT "$file" 2>&1)
+        output=$(timeout 0.1s $MINIRT "$file" 2>&1)
         exit_code=$?
         check_result "$msg" "$file" $exit_code "$output"
         ((count++))

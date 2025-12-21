@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:58 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/20 19:06:19 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/21 16:46:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,25 @@ static void	handle_right_click(t_scene *scene)
 	}
 }
 
-static void	handle_scroll(int button, t_scene *scene)
+static t_bool	handle_scroll(int button, t_scene *scene)
 {
 	int	mode;
 	int	direction;
 
 	if (scene->selected_object == NULL)
-		return ;
+		return (FALSE);
 	if (button == SCROLL_UP)
 		direction = 1;
 	else if (button == SCROLL_DOWN)
 		direction = -1;
 	else
-		return ;
+		return (FALSE);
 	if (scene->shift_pressed == TRUE)
 		mode = RESIZE_HEIGHT;
 	else
 		mode = RESIZE_RADIUS;
 	dispatch_resize(scene->selected_object, mode, direction);
+	return (TRUE);
 }
 
 int	mouse_hook(int button, int x, int y, t_scene *scene)
@@ -73,10 +74,8 @@ int	mouse_hook(int button, int x, int y, t_scene *scene)
 	else if (button == LEFT_CLICK)
 		handle_left_click(scene, x, y);
 	else if (button == SCROLL_UP || button == SCROLL_DOWN)
-	{
-		render_needed = TRUE;
-		handle_scroll(button, scene);
-	}
+		if (handle_scroll(button, scene) == TRUE)
+			render_needed = TRUE;
 	if (render_needed == TRUE)
 		render_frame(scene);
 	return (EXIT_SUCCESS);

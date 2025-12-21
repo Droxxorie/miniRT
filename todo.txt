@@ -1,3 +1,6 @@
+ERRORS
+- Resize meme sur camera -> changer fov ?
+
 PHASE 1 : ARCHITECTURE & PERFS
 - Multithreading
 - Réactiver multi cams & lights
