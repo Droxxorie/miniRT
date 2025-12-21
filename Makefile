@@ -39,9 +39,8 @@ LDLIBS          := -lft -lmlx -lXext -lX11 -lm -lz
 
 NAME_DEBUG      := $(NAME)_debug
 DEBUG_FLAGS     := -O0 -g3 -DDEBUG
-ASAN_FLAGS      := -O0 -g3 -fsanitize=address -fno-omit-frame-pointer
 
-ARGS            := test_files/test.rt
+ARGS            := assets/scenes/valgrind_test.rt
 
 #* ==============================================================================
 #*                                  COLORS/SYMBOLS/STYLES

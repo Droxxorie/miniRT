@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/20 19:22:13 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/21 18:16:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	if (vec3_len_squared(input_vector) < EPSILON)
 		return (FALSE);
 	if (scene->selected_object || scene->selected_light)
+	{
 		action_selection(scene, input_vector);
+		if (scene->selected_object->type == SPHERE && 
+			scene->control_mode == ROTATE)
+			return (FALSE);
+	}
 	else
 		action_camera(scene, input_vector);
 	return (TRUE);

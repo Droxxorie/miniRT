@@ -1,14 +1,19 @@
 {
-   ignore_libX11_writev_uninitialized
+   ignore_libxcb_writev
    Memcheck:Param
-   writev(vector[...])
+   writev(vector[0])
    ...
-   obj:*/libX11.so*
+   obj:*/libxcb.*
 }
 {
-   ignore_mlx_new_window_uninitialized
-   Memcheck:Param
-   writev(vector[...])
+   ignore_mlx_new_window_leak
+   Memcheck:Leak
    ...
    fun:mlx_new_window
+}
+{
+   ignore_mlx_init_leak
+   Memcheck:Leak
+   ...
+   fun:mlx_init
 }

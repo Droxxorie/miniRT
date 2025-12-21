@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/17 23:02:30 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/21 17:25:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	destroy_scene(t_scene *scene)
 {
 	if (!scene)
 		return ;
-	log_info("Cleaning up scene resources...");
+	log_info("\nCleaning up scene resources...");
 	if (scene->mlx_window.mlx_ptr)
 	{
 		if (scene->frame_buffer.ptr)
