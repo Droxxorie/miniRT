@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 08:27:57 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:28:20 by eraad            ###   ########.fr       */
+/*   Updated: 2025/12/21 19:01:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void	pitch(t_camera *camera, t_real x)
 	if (fabs(x) > EPSILON)
 	{
 		camera_right = (t_vec3){camera->camera_to_world.m[0][0],
-			camera->camera_to_world.m[1][0],
-			camera->camera_to_world.m[2][0]};
+			camera->camera_to_world.m[1][0], camera->camera_to_world.m[2][0]};
 		rot_x = matrix_axis_angle(camera_right, x);
 		camera->direction = mat4_mult_vec3(rot_x, camera->direction);
 	}
@@ -50,7 +49,8 @@ static void	tilt(t_camera *camera, t_real y)
 	}
 }
 
-void	rotate_camera(t_camera *camera, t_vec3 input_scaled, t_real aspect_ratio)
+void	rotate_camera(t_camera *camera, t_vec3 input_scaled,
+		t_real aspect_ratio)
 {
 	yaw(camera, input_scaled.z);
 	pitch(camera, input_scaled.x);
