@@ -3,6 +3,8 @@ ERRORS
 
 PHASE 1 : ARCHITECTURE & PERFS
 - Ajouter support resize ? R
+- Toogle light
+- Cycle camera
 - Multithreading
 - Réactiver multi cams & lights
 - Mode sauvegarde (--save flag)
