@@ -1,8 +1,8 @@
 ERRORS
-- Resize meme sur camera -> changer fov ?
+
 
 PHASE 1 : ARCHITECTURE & PERFS
-- Ajouter support resize ? R
+- Ajouter support resolution ? R 
 - Toogle light
 - Cycle camera
 - Multithreading
