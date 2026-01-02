@@ -18,55 +18,56 @@ NAME            := miniRT
 #* ==============================================================================
 #*                                  LAYOUT
 #* ==============================================================================
-SRC_DIR         := sources
-OBJ_DIR         := objects
+SRC_DIR			:= sources
+OBJ_DIR			:= objects
+OBJ_DIR			:= objects
 
-LIBFT_DIR       := libft
-LIBFT_A         := $(LIBFT_DIR)/libft.a
+LIBFT_DIR		:= libft
+LIBFT_A			:= $(LIBFT_DIR)/libft.a
 
-MLX_DIR         := minilibx-linux
-MLX_A           := $(MLX_DIR)/libmlx.a
+MLX_DIR			:= minilibx-linux
+MLX_A			:= $(MLX_DIR)/libmlx.a
 
 #* ==============================================================================
 #*                                  TOOLCHAIN
 #* ==============================================================================
-CC              := cc
-CFLAGS          := -Wall -Wextra -Werror -O3 -ffast-math -g3
-CPPFLAGS        := -Iincludes -Ilibft -Iminilibx-linux
+CC				:= cc
+CFLAGS			:= -Wall -Wextra -Werror -O3 -ffast-math -g3
+CPPFLAGS		:= -Iincludes -Ilibft -Iminilibx-linux
 
-LDFLAGS         := -L$(LIBFT_DIR) -L$(MLX_DIR)
-LDLIBS          := -lft -lmlx -lXext -lX11 -lm -lz
+LDFLAGS			:= -L$(LIBFT_DIR) -L$(MLX_DIR)
+LDLIBS			:= -lft -lmlx -lXext -lX11 -lm -lz
 
-NAME_DEBUG      := $(NAME)_debug
-DEBUG_FLAGS     := -O0 -g3 -DDEBUG
+NAME_DEBUG		:= $(NAME)_debug
+DEBUG_FLAGS		:= -O0 -g3 -DDEBUG
 
-ARGS            := assets/scenes/valgrind_test.rt
+ARGS			:= assets/scenes/valgrind_test.rt
 
 #* ==============================================================================
 #*                                  COLORS/SYMBOLS/STYLES
 #* ==============================================================================
-RESET        := \033[0m
-BOLD         := \033[1m
-DIM          := \033[2m
-ITALIC       := \033[3m
-UNDERLINE    := \033[4m
+RESET			:= \033[0m
+BOLD			:= \033[1m
+DIM				:= \033[2m
+ITALIC			:= \033[3m
+UNDERLINE		:= \033[4m
 
-BLACK        := \033[30m
-RED          := \033[31m
-GREEN        := \033[32m
-YELLOW       := \033[33m
-BLUE         := \033[34m
-MAGENTA      := \033[35m
-CYAN         := \033[36m
-WHITE        := \033[37m
+BLACK			:= \033[30m
+RED				:= \033[31m
+GREEN			:= \033[32m
+YELLOW			:= \033[33m
+BLUE			:= \033[34m
+MAGENTA			:= \033[35m
+CYAN			:= \033[36m
+WHITE			:= \033[37m
 
-BRIGHT_GREEN   := \033[92m
-BRIGHT_MAGENTA := \033[95m
-BRIGHT_CYAN    := \033[96m
+BRIGHT_GREEN	:= \033[92m
+BRIGHT_MAGENTA	:= \033[95m
+BRIGHT_CYAN		:= \033[96m
 
-OK      := ✓
-KO      := ✗
-INFO    := ⓘ
+OK				:= ✓
+KO				:= ✗
+INFO			:= ⓘ
 
 #* ==============================================================================
 #*                                  SOURCES

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   scene_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:37:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/02 16:37:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef SCENE_BONUS_H
+# define SCENE_BONUS_H
 
-# include "macros.h"
-# include "structures.h"
+# include "macros_bonus.h"
+# include "structures_bonus.h"
 
 //* ========================================================================= */
 //*                                SETUP                                      */
