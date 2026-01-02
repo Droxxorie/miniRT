@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 11:24:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/02 20:34:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ t_status	parse_light(t_scene *scene, char **line)
 		|| parse_color(scene, line, &new_light->color) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (free(new_light), EXIT_FAILURE);
+	new_light->color.r = 1;
+	new_light->color.g = 1;
+	new_light->color.b = 1;
 	add_light_to_scene(scene, new_light);
 	return (EXIT_SUCCESS);
 }

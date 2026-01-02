@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:40:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/02 20:59:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	if (scene->selected_object || scene->selected_light)
 	{
 		action_selection(scene, input_vector);
-		if (scene->selected_object->type == SPHERE
+		if (scene->selected_object && scene->selected_object->type == SPHERE
 			&& scene->control_mode == ROTATE)
+			return (FALSE);
+		else if (scene->selected_light && scene->control_mode == ROTATE)
 			return (FALSE);
 	}
 	else
@@ -36,7 +38,13 @@ static void	handle_tab_key(t_scene *scene)
 	if (scene->control_mode == TRANSLATE)
 	{
 		scene->control_mode = ROTATE;
-		ft_putstr_fd("Mode: ROTATE\n", STDOUT_FILENO);
+		if (scene->selected_object && scene->selected_object->type == SPHERE)
+			ft_putstr_fd("Warning: Spheres cannot be rotated.\n",
+				STDOUT_FILENO);
+		else if (scene->selected_light)
+			ft_putstr_fd("Warning: Lights cannot be rotated.\n", STDOUT_FILENO);
+		else
+			ft_putstr_fd("Mode: ROTATE\n", STDOUT_FILENO);
 	}
 	else
 	{
@@ -56,9 +64,9 @@ static t_bool	handle_state_keys(int key, t_scene *scene)
 	}
 	if (key == KEY_TAB)
 		return (handle_tab_key(scene), FALSE);
-	if (key == KEY_SPACE)
+	if (key == KEY_SPACE && scene->cameras->id > 1)
 		return (switch_camera_next(scene), TRUE);
-	if (key == KEY_L)
+	if (key == KEY_L && scene->selected_light == NULL)
 	{
 		scene->selected_light = scene->lights;
 		scene->selected_object = NULL;

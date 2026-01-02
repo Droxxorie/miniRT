@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 12:21:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/02 20:45:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 		if (scene->control_mode == TRANSLATE)
 			translate_light(scene->selected_light, vec3_scale(relative_vector,
 					STEP_MOVE));
-		else
-			ft_putstr_fd("Light rotation not supported\n", STDOUT_FILENO);
 	}
 }
 

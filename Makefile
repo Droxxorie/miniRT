@@ -338,7 +338,7 @@ valgrind: debug
 #* ---- Cleanup ----
 clean:
 	@if [ -d $(OBJ_DIR) ] ; then echo "$(RED)[RM] objects$(RESET)" ; rm -rf $(OBJ_DIR) ; fi
-	@if [ -d $(OBJ_DIR_BONUS) ] ; then echo "$(RED)[RM] bonus objects$(RESET)" ; rm -rf $(OBJ_DIR_BONUS) ; fi
+	@if [ -d $(OBJ_DIR_BONUS) ] ; then echo "$(RED)[RM] objects_bonus$(RESET)" ; rm -rf $(OBJ_DIR_BONUS) ; fi
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) clean
 
 fclean: clean
@@ -406,14 +406,14 @@ project_logo_bonus:
 	@echo "${WHITE}    ┃ ┃┣┛┗┫┃ ┃  ┃┃  ┃ ┣┛┃┃ ┃  ┃┃  ┃ ┏┓ ┏┛    ┃ ┃                    ${RESET}"
 	@echo "${WHITE}    ┃ ┣┛  ┗┫ ┃  ┃┃  ┃ ┃ ┗┫ ┃  ┃┃  ┃ ┃┃ ┗┓    ┃ ┃                    ${RESET}"
 	@echo "${WHITE}    ┗━┛    ┗━┛  ┗┛  ┗━┛  ┗━┛  ┗┛  ┗━┛┗━━┛    ┗━┛                    ${RESET}"
-	@echo         "  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+	@echo         "  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
 	@echo "${WHITE}                    ┏━━━━┓   ┏━━━━┓  ┏━┓  ┏━┓  ┏┓   ┏┓  ┏━━━━┓    ${RESET}"
 	@echo "${WHITE}                    ┃ ┏┓ ┃   ┃┏━━┓┃  ┃ ┣┓ ┃ ┃  ┃┃   ┃┃  ┃┏━━━┛    ${RESET}"
 	@echo "${WHITE}                    ┃ ┗┛ ┗┓  ┃┃┏┓┃┃  ┃ ┃┃┏┫ ┃  ┃┃ ┃ ┃┃  ┃┗━━━━━┓  ${RESET}"
 	@echo "${WHITE}                    ┃ ┏━┓ ┃  ┃┃┗┛┃┃  ┃ ┣┛┃┃ ┃  ┃┃   ┃┃  ┗━━━━┓ ┃  ${RESET}"
 	@echo "${WHITE}                    ┃ ┗━┛ ┃  ┃┗━━┛┃  ┃ ┃ ┗┫ ┃  ┃┗━━━┛┃  ┏━━━━┛ ┃  ${RESET}"
 	@echo "${WHITE}                    ┗━━━━━┛  ┗━━━━┛  ┗━┛  ┗━┛  ┗━━━━━┛  ┗━━━━━━┛  ${RESET}"
-	@echo         "                ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+	@echo         "                  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
 	@echo "${CYAN}${BOLD}                                          Eloi RAAD & Jean HUBBERT${RESET}"
 	@echo ""
 

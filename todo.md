@@ -1,14 +1,14 @@
 # ERRORS / ROADMAP
 - désactiver specular du mandatory
-- désactiver couleur lumière mandatory
+
 
 
 ## PHASE 1 : ARCHITECTURE & PERFS
 - [ ] Ajouter support resolution ? R
 - [ ] Toggle lights
-- [ ] Cycle cameras
+- [x] Cycle cameras
 - [ ] Multithreading
-- [ ] Réactiver multi cams & lights
+- [x] Réactiver multi cams & lights
 - [ ] Mode sauvegarde (`--save` flag)
 - [ ] Opti low res Preview
 
