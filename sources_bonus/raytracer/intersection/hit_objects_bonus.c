@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:09:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:43:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 23:47:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ t_bool	hit_objects(t_object *objects, t_ray *ray, t_hit_record *record)
 	temp_record.need_details = TRUE;
 	while (objects)
 	{
+		if (objects->visible == FALSE)
+		{
+			objects = objects->next;
+			continue ;
+		}
 		if (hit_dispatch(objects, ray, &temp_record))
 		{
 			hit_anything = TRUE;
@@ -60,6 +65,11 @@ t_bool	hit_anything(t_object *objects, t_ray *ray)
 	temp_record.t = ray->max;
 	while (objects)
 	{
+		if (objects->visible == FALSE)
+		{
+			objects = objects->next;
+			continue ;
+		}
 		if (hit_dispatch(objects, ray, &temp_record))
 			return (TRUE);
 		objects = objects->next;

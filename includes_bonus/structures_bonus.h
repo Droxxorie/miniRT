@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 19:42:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 22:56:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_object
 	t_mat4				transform;
 	t_mat4				inverse;
 	t_mat4				transposed_inverse;
+	t_bool				visible;
 	union
 	{
 		t_sphere		sphere;
@@ -150,6 +151,7 @@ typedef struct s_light
 	t_point3			position;
 	t_real				brightness;
 	t_color				color;
+	t_bool				active;
 	struct s_light		*next;
 }						t_light;
 

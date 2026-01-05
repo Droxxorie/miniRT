@@ -1,16 +1,14 @@
-# ERRORS / ROADMAP
-- désactiver specular du mandatory
+# ERRORS
 
-
-
+# ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
 - [x] Ajouter support resolution ? R
-- [ ] Toggle lights ?
+- [x] Afficher resolution dans nom fenetre
+- [x] Toggle lights & objects
 - [x] Cycle cameras
 - [x] Multithreading
 - [x] Réactiver multi cams & lights
 - [ ] Mode sauvegarde (`--save` flag)
-- [ ] Opti low res Preview ?
 
 ## PHASE 2 : PRIMITIVES
 - [ ] Disque

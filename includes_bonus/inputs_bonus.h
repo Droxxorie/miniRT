@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 21:09:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 22:59:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ void	action_selection(t_scene *scene, t_vec3 input_vector);
 t_vec3	get_camera_relative_vector(t_vec3 input, t_camera *camera);
 
 //* --- Handle Keys --- */
+void	handle_t_key(t_scene *scene);
 void	handle_c_key(t_scene *scene);
 void	handle_l_key(t_scene *scene);
 void	handle_tab_key(t_scene *scene);
-void	handle_space_key(t_scene *scene);
+t_bool	handle_space_key(t_scene *scene);
 
 //* --- Handle Mouse --- */
 t_bool	handle_scroll(int button, t_scene *scene);

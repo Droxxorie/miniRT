@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 21:10:41 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 23:44:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ void	*render_routine(void *arg)
 		pthread_mutex_lock(&data->scene->line_mutex);
 		y = data->scene->next_line;
 		data->scene->next_line++;
+		if (y < data->scene->mlx_window.height)
+			print_progress(data->scene, y);
 		pthread_mutex_unlock(&data->scene->line_mutex);
 		if (y >= data->scene->mlx_window.height)
 			break ;
-		print_progress(data->scene, y);
 		x = 0;
 		while (x < data->scene->mlx_window.width)
 		{
@@ -78,7 +79,7 @@ t_status	render_frame(t_scene *scene)
 	if (scene->mlx_window.win_ptr)
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
-	ft_putstr_fd("  Render time: ", STDOUT_FILENO);
+	ft_putstr_fd("Render time: ", STDOUT_FILENO);
 	ft_putnbr_fd(get_time_ms() - start_time, STDOUT_FILENO);
 	ft_putstr_fd(" ms\n", STDOUT_FILENO);
 	return (EXIT_SUCCESS);

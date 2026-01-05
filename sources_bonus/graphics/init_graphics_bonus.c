@@ -6,11 +6,37 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:39:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 22:21:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static char	*get_window_title(t_scene *scene)
+{
+	char	*width_str;
+	char	*height_str;
+	char	*title;
+	char	*temp;
+
+	width_str = ft_itoa(scene->mlx_window.width);
+	height_str = ft_itoa(scene->mlx_window.height);
+	if (!width_str || !height_str)
+	{
+		free(width_str);
+		free(height_str);
+		return (NULL);
+	}
+	temp = ft_strjoin("miniRT - ", width_str);
+	title = ft_strjoin(temp, "x");
+	free(temp);
+	temp = title;
+	title = ft_strjoin(title, height_str);
+	free(temp);
+	free(width_str);
+	free(height_str);
+	return (title);
+}
 
 static t_status	init_frame_buffer(t_scene *scene)
 {
@@ -40,7 +66,7 @@ t_status	init_graphics(t_scene *scene)
 			return (print_error(ERR_MLX), EXIT_FAILURE);
 	}
 	window->win_ptr = mlx_new_window(window->mlx_ptr, window->width,
-			window->height, "miniRT");
+			window->height, get_window_title(scene));
 	if (!window->win_ptr)
 		return (print_error(ERR_WIN), EXIT_FAILURE);
 	if (init_frame_buffer(scene) == EXIT_FAILURE)

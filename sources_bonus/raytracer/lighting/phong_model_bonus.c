@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:43:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 00:15:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
 	shadow_ray.direction = vec3_normalize(dir_to_light);
 	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
 				EPSILON));
-	shadow_ray.min = EPSILON;
-	shadow_ray.max = dist_to_light;
+	shadow_ray.min = 0.0;
+	shadow_ray.max = dist_to_light - EPSILON;
 	if (hit_anything(scene->objects, &shadow_ray))
 		return (TRUE);
 	return (FALSE);
@@ -61,27 +61,33 @@ static t_color	compute_specular(t_light *light, t_hit_record *record,
 	return (color_scale(light->color, light->brightness * specular));
 }
 
+static t_color	compute_light_contribution(t_scene *scene, t_light *light,
+		t_hit_record *record, t_ray *ray)
+{
+	t_color	diffuse;
+	t_color	specular;
+	t_color	contribution;
+
+	if (is_in_shadow(scene, record, light->position) == TRUE
+		|| light->active == FALSE)
+		return ((t_color){0.0, 0.0, 0.0});
+	diffuse = color_prod(compute_diffuse(light, record), record->color);
+	specular = compute_specular(light, record, ray);
+	contribution = color_add(diffuse, specular);
+	return (contribution);
+}
+
 t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 {
 	t_color	total_light;
-	t_color	light_contribution;
 	t_light	*current_light;
-	t_color	diffuse;
-	t_color	specular;
+	t_color	light_contribution;
 
 	total_light = color_prod(scene->ambient, record->color);
 	current_light = scene->lights;
 	while (current_light)
 	{
-		light_contribution = (t_color){0.0, 0.0, 0.0};
-		if (is_in_shadow(scene, record, current_light->position) == FALSE)
-		{
-			diffuse = compute_diffuse(current_light, record);
-			diffuse = color_prod(diffuse, record->color);
-			light_contribution = color_add(light_contribution, diffuse);
-			specular = compute_specular(current_light, record, ray);
-			light_contribution = color_add(light_contribution, specular);
-		}
+		light_contribution = compute_light_contribution(scene, current_light, record, ray);
 		total_light = color_add(total_light, light_contribution);
 		current_light = current_light->next;
 	}

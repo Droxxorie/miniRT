@@ -253,6 +253,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/inputs/handles/handle_scroll_bonus.c \
     $(SRC_DIR_BONUS)/inputs/handles/handle_space_key.c \
     $(SRC_DIR_BONUS)/inputs/handles/handle_tab_key_bonus.c \
+	$(SRC_DIR_BONUS)/inputs/handles/handle_t_key_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \

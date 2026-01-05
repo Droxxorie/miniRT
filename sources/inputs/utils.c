@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 20:45:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 22:53:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ t_vec3	get_input_vector(int key)
 
 	input_vector = (t_vec3){0.0, 0.0, 0.0};
 	if (key == KEY_UP || key == KEY_Z)
-		input_vector.x = 1;
-	if (key == KEY_DOWN || key == KEY_S)
-		input_vector.x = -1;
-	if (key == KEY_LEFT || key == KEY_Q)
-		input_vector.z = 1;
-	if (key == KEY_RIGHT || key == KEY_D)
 		input_vector.z = -1;
+	if (key == KEY_DOWN || key == KEY_S)
+		input_vector.z = 1;
+	if (key == KEY_LEFT || key == KEY_Q)
+		input_vector.x = -1;
+	if (key == KEY_RIGHT || key == KEY_D)
+		input_vector.x = 1;
 	if (key == KEY_A)
 		input_vector.y = 1;
 	if (key == KEY_E)

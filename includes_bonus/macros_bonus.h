@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/04 16:01:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 00:11:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@
 # define KEY_Z 122
 # define KEY_L 108
 # define KEY_C 99
+# define KEY_T 116
 
 //* --- Numbers --- */
 # define KEY_1 49

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/19 19:15:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 00:19:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
 	shadow_ray.direction = vec3_normalize(dir_to_light);
 	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
 				EPSILON));
-	shadow_ray.min = EPSILON;
-	shadow_ray.max = dist_to_light;
+	shadow_ray.min = 0.0;
+	shadow_ray.max = dist_to_light - EPSILON;
 	if (hit_anything(scene->objects, &shadow_ray))
 		return (TRUE);
 	return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:45:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 21:10:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 22:50:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	switch_light_next(t_scene *scene)
 		scene->selected_light = scene->selected_light->next;
 	else
 		scene->selected_light = scene->lights;
-	ft_putstr_fd("Switched to light ID: ", 1);
+	ft_putstr_fd("Light ID: ", 1);
 	ft_putnbr_fd(scene->selected_light->id, 1);
 	ft_putstr_fd("\n", 1);
 }

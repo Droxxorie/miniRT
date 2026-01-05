@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_space_key.c                                 :+:      :+:    :+:   */
+/*   handle_t_key_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 13:28:40 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:48:44 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/05 22:55:18 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/06 00:20:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-t_bool	handle_space_key(t_scene *scene)
+void	handle_t_key(t_scene *scene)
 {
-	if (scene->selected_light && scene->lights->id >= 1)
-	{
-		switch_light_next(scene);
-		return (FALSE);
-	}
-	if (!scene->selected_object && scene->active_camera->id >= 1)
-	{
-		switch_camera_next(scene);
-		return (TRUE);
-	}
-	return (FALSE);
+	if (scene->selected_object)
+		scene->selected_object->visible = !scene->selected_object->visible;
+	else if (scene->selected_light)
+		scene->selected_light->active = !scene->selected_light->active;
 }
