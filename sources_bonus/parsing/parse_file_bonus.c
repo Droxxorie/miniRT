@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:42:31 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 21:11:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static t_status	dispatch_parse(t_scene *scene, char *line)
 {
 	int					i;
 	char				*start_ptr;
-	static t_parse_map	map[] = {{"A", parse_ambient}, {"C", parse_camera},
-	{"L", parse_light}, {"sp", parse_sphere}, {"pl", parse_plane},
-	{"cy", parse_cylinder}, {NULL, NULL}};
+	static t_parse_map	map[] = {{"R", parse_resolution}, {"A", parse_ambient},
+	{"C", parse_camera}, {"L", parse_light}, {"sp", parse_sphere},
+	{"pl", parse_plane}, {"cy", parse_cylinder}, {NULL, NULL}};
 
 	skip_whitespace(&line);
 	if (*line == '\0' || *line == '#')

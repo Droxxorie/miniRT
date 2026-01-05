@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:39:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 21:10:41 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 static void	print_progress(t_scene *scene, int y)
 {
 	int	percent;
-	int	prev_percent;
 
 	percent = (y * 100) / scene->mlx_window.height;
-	prev_percent = ((y - 1) * 100) / scene->mlx_window.height;
-	if (percent != prev_percent || y == 0)
+	if (percent != ((y - 1) * 100) / scene->mlx_window.height)
 	{
 		ft_putstr_fd("\r\033[2KRendering: ", 1);
 		ft_putnbr_fd(percent, 1);
@@ -31,39 +29,57 @@ static void	print_progress(t_scene *scene, int y)
 
 static void	process_pixel(t_scene *scene, int x, int y)
 {
-	t_ray		ray;
-	t_color		color;
+	t_ray	ray;
+	t_color	color;
 
 	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
 	color = compute_pixel_color(scene, &ray);
 	image_pixel_put(&scene->frame_buffer, x, y, color_to_int(color));
 }
 
-static void	render_scene(t_scene *scene)
+void	*render_routine(void *arg)
 {
-	int	x;
-	int	y;
+	t_thread_data	*data;
+	int				x;
+	int				y;
 
-	y = 0;
-	while (y < scene->mlx_window.height)
+	data = (t_thread_data *)arg;
+	while (1)
 	{
+		pthread_mutex_lock(&data->scene->line_mutex);
+		y = data->scene->next_line;
+		data->scene->next_line++;
+		pthread_mutex_unlock(&data->scene->line_mutex);
+		if (y >= data->scene->mlx_window.height)
+			break ;
+		print_progress(data->scene, y);
 		x = 0;
-		while (x < scene->mlx_window.width)
+		while (x < data->scene->mlx_window.width)
 		{
-			process_pixel(scene, x, y);
+			process_pixel(data->scene, x, y);
 			x++;
 		}
-		print_progress(scene, y);
-		y++;
 	}
-	print_progress(scene, scene->mlx_window.height);
+	return (NULL);
 }
 
 t_status	render_frame(t_scene *scene)
 {
-	render_scene(scene);
+	pthread_t		*threads;
+	t_thread_data	*data;
+	int				thread_count;
+	long			start_time;
+
+	start_time = get_time_ms();
+	thread_count = init_render_threads(scene, &threads, &data);
+	start_render_threads(scene, thread_count, threads, data);
+	wait_render_threads(thread_count, threads);
+	cleanup_render_threads(scene, threads, data);
 	if (scene->mlx_window.win_ptr)
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
+	ft_putstr_fd("  Render time: ", STDOUT_FILENO);
+	ft_putnbr_fd(get_time_ms() - start_time, STDOUT_FILENO);
+	ft_putstr_fd(" ms\n", STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }

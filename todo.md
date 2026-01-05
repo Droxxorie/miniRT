@@ -4,13 +4,13 @@
 
 
 ## PHASE 1 : ARCHITECTURE & PERFS
-- [ ] Ajouter support resolution ? R
-- [ ] Toggle lights
+- [x] Ajouter support resolution ? R
+- [ ] Toggle lights ?
 - [x] Cycle cameras
-- [ ] Multithreading
+- [x] Multithreading
 - [x] Réactiver multi cams & lights
 - [ ] Mode sauvegarde (`--save` flag)
-- [ ] Opti low res Preview
+- [ ] Opti low res Preview ?
 
 ## PHASE 2 : PRIMITIVES
 - [ ] Disque
@@ -41,6 +41,7 @@
 - [ ] Matériaux :
     - [ ] Choix
     - [ ] Matte/Lambert/Color
+    - [ ] Transparent
     - [ ] Plastique (Blinn-Phong)
     - [ ] Miroir (refraction verre/eau/autre)
     - [ ] Texture (UV mapping)

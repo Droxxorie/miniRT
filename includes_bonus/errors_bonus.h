@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:14:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 16:17:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_MEM_SCENE "Failed to allocate scene structure"
 # define ERR_MEM_LIGHT "Failed to allocate light structure"
 # define ERR_MEM_OBJECT "Failed to allocate object structure"
+# define ERR_THREAD "Thread creation failed"
 
 //* ========================================================================= */
 //*                            INITIALIZATION ERRORS                          */
@@ -63,6 +64,13 @@
 # define ERR_Z "Invalid Z component in vector"
 # define ERR_UZ_OOR "Z component out of range [-1.0, 1.0]"
 # define ERR_VEC3_ZERO "Vector cannot be the zero vector (0,0,0)"
+
+//* --- Resolution --- */
+# define ERR_RES_DUP "Duplicate resolution definition"
+# define ERR_RES_WITDH "Invalid resolution width value"
+# define ERR_RES_HEIGHT "Invalid resolution height value"
+# define ERR_RES_WITDH_OOB "Resolution width out of range [1, 3840]"
+# define ERR_RES_HEIGHT_OOB "Resolution height out of range [1, 2160]"
 
 //* --- Light --- */
 # define ERR_RATIO "Invalid ratio value"

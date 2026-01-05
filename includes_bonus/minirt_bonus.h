@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:42:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:36:14 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 18:52:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 //* ========================================================================= */
 //*                                EXTERNAL LIBRARIES                         */

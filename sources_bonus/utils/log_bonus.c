@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:44:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 19:48:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,17 @@ void	log_scene_stats(t_scene *scene)
 	ft_putstr_fd("[", STDOUT_FILENO);
 	ft_putstr_fd(B_CYAN "miniRT" RESET, STDOUT_FILENO);
 	ft_putstr_fd("]: ", STDOUT_FILENO);
-	ft_putstr_fd("Scene Statistics:", STDOUT_FILENO);
+	ft_putstr_fd("Scene Statistics:\n", STDOUT_FILENO);
 	ft_putstr_fd("  Objects: ", STDOUT_FILENO);
 	ft_putnbr_fd(object_count, STDOUT_FILENO);
 	ft_putstr_fd("  Lights: ", STDOUT_FILENO);
 	ft_putnbr_fd(light_count, STDOUT_FILENO);
 	ft_putstr_fd("  Cameras: ", STDOUT_FILENO);
 	ft_putnbr_fd(camera_count, STDOUT_FILENO);
+	ft_putstr_fd("\n", STDOUT_FILENO);
+	ft_putstr_fd("  Resolution: ", STDOUT_FILENO);
+	ft_putnbr_fd(scene->mlx_window.width, STDOUT_FILENO);
+	ft_putstr_fd("x", STDOUT_FILENO);
+	ft_putnbr_fd(scene->mlx_window.height, STDOUT_FILENO);
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }

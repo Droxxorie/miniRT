@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 20:59:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/04 13:29:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,45 +33,20 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	return (TRUE);
 }
 
-static void	handle_tab_key(t_scene *scene)
-{
-	if (scene->control_mode == TRANSLATE)
-	{
-		scene->control_mode = ROTATE;
-		if (scene->selected_object && scene->selected_object->type == SPHERE)
-			ft_putstr_fd("Warning: Spheres cannot be rotated.\n",
-				STDOUT_FILENO);
-		else if (scene->selected_light)
-			ft_putstr_fd("Warning: Lights cannot be rotated.\n", STDOUT_FILENO);
-		else
-			ft_putstr_fd("Mode: ROTATE\n", STDOUT_FILENO);
-	}
-	else
-	{
-		scene->control_mode = TRANSLATE;
-		ft_putstr_fd("Mode: TRANSLATE\n", STDOUT_FILENO);
-	}
-}
-
 static t_bool	handle_state_keys(int key, t_scene *scene)
 {
 	if (key == KEY_ESC)
 		clean_exit(scene, EXIT_SUCCESS);
-	if (key == KEY_SHIFT_L || key == KEY_SHIFT_R)
-	{
+	else if (key == KEY_SHIFT_L || key == KEY_SHIFT_R)
 		scene->shift_pressed = TRUE;
-		return (FALSE);
-	}
-	if (key == KEY_TAB)
+	else if (key == KEY_TAB)
 		return (handle_tab_key(scene), FALSE);
-	if (key == KEY_SPACE && scene->cameras->id > 1)
-		return (switch_camera_next(scene), TRUE);
-	if (key == KEY_L && scene->selected_light == NULL)
-	{
-		scene->selected_light = scene->lights;
-		scene->selected_object = NULL;
-		ft_putstr_fd("Switched to light control mode\n", 1);
-	}
+	else if (key == KEY_SPACE)
+		return (handle_space_key(scene), TRUE);
+	else if (key == KEY_L)
+		return (handle_l_key(scene), FALSE);
+	else if (key == KEY_C)
+		return (handle_c_key(scene), FALSE);
 	return (FALSE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:42:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/04 13:35:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ static void	add_light_to_scene(t_scene *scene, t_light *new_light)
 t_status	parse_light(t_scene *scene, char **line)
 {
 	t_light	*new_light;
+	int		count;
 
-	if (get_light_count(scene->lights) >= MAX_LIGHTS)
+	count = get_light_count(scene->lights);
+	if (count >= MAX_LIGHTS)
 		return (print_error_limit(scene, *line - 1, "lights", MAX_LIGHTS),
 			EXIT_FAILURE);
 	new_light = ft_calloc(1, sizeof(t_light));
 	if (new_light == NULL)
 		return (sys_print_error(ERR_MEM_LIGHT), EXIT_FAILURE);
+	new_light->id = count + 1;
 	if (parse_vec3(scene, line, &new_light->position) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_ratio(scene, line, &new_light->brightness,

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 20:51:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/04 16:01:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define STEP_ROT 0.1
 # define STEP_SIZE 0.5
 
-# define WINDOW_WIDTH 720
-# define WINDOW_HEIGHT 480
+# define DEF_WINDOW_WIDTH 720
+# define DEF_WINDOW_HEIGHT 480
+# define MAX_WINDOW_WIDTH 3840
+# define MAX_WINDOW_HEIGHT 2160
 
 # define MAX_LIGHTS 10
 # define MAX_CAMERAS 10

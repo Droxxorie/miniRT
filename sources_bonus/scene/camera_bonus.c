@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:13:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:44:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 20:11:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ void	prepare_cameras(t_scene *scene)
 	count = 0;
 	while (current)
 	{
+		current->width = scene->mlx_window.width;
+		current->height = scene->mlx_window.height;
+		current->aspect_ratio = (t_real)current->width
+			/ (t_real)current->height;
 		update_camera_matrix(current, scene->mlx_window.aspect_ratio);
 		current->id = ++count;
 		current = current->next;

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:44:25 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 19:47:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 static void	init_default_values(t_scene *scene)
 {
-	scene->mlx_window.width = WINDOW_WIDTH;
-	scene->mlx_window.height = WINDOW_HEIGHT;
-	scene->mlx_window.aspect_ratio = (t_real)WINDOW_WIDTH
-		/ (t_real)WINDOW_HEIGHT;
+	scene->mlx_window.width = -1;
+	scene->mlx_window.height = -1;
+	scene->mlx_window.aspect_ratio = -1.0;
 	scene->ambient.r = -1;
 	scene->objects = NULL;
 	scene->lights = NULL;
@@ -55,6 +54,14 @@ t_status	load_scene(t_scene *scene, const char *file_path)
 	init_default_values(scene);
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	if (scene->mlx_window.width == -1 || scene->mlx_window.height == -1)
+	{
+		scene->mlx_window.width = DEF_WINDOW_WIDTH;
+		scene->mlx_window.height = DEF_WINDOW_HEIGHT;
+		scene->mlx_window.aspect_ratio = (t_real)DEF_WINDOW_WIDTH
+			/ (t_real)DEF_WINDOW_HEIGHT;
+		log_info("No resolution specified. Using default resolution");
+	}
 	if (validate_scene(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	log_scene_stats(scene);

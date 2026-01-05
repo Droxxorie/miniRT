@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hooks_bonus.c                                :+:      :+:    :+:   */
+/*   time_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 11:13:58 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/04 13:37:10 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/05 19:16:09 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/05 21:11:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-int	mouse_hook(int button, int x, int y, t_scene *scene)
+long	get_time_ms(void)
 {
-	t_bool	render_needed;
+	struct timeval	value;
 
-	render_needed = FALSE;
-	if (button == LEFT_CLICK)
-		handle_left_click(scene, x, y);
-	else if (button == SCROLL_UP || button == SCROLL_DOWN)
-		if (handle_scroll(button, scene) == TRUE)
-			render_needed = TRUE;
-	if (render_needed == TRUE)
-		render_frame(scene);
-	return (EXIT_SUCCESS);
+	if (gettimeofday(&value, NULL) == -1)
+		return (-1);
+	return (value.tv_sec * 1000 + value.tv_usec / 1000);
 }

@@ -1,0 +1,67 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multi_threading_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/05 18:52:46 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/05 19:37:38 by eraad            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minirt_bonus.h>
+
+int	init_render_threads(t_scene *scene, pthread_t **threads,
+		t_thread_data **data)
+{
+	int	thread_count;
+
+	thread_count = sysconf(_SC_NPROCESSORS_ONLN);
+	if (thread_count <= 0)
+		thread_count = 4;
+	*threads = malloc(sizeof(pthread_t) * thread_count);
+	*data = malloc(sizeof(t_thread_data) * thread_count);
+	if (!*threads || !*data)
+		sys_print_error_free_exit(scene, ERR_MEM);
+	scene->next_line = 0;
+	pthread_mutex_init(&scene->line_mutex, NULL);
+	return (thread_count);
+}
+
+void	start_render_threads(t_scene *scene, int count, pthread_t *threads,
+		t_thread_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		data[i].thread_id = i;
+		data[i].scene = scene;
+		if (pthread_create(&threads[i], NULL, (void *)render_routine,
+				&data[i]) != 0)
+			sys_print_error_free_exit(scene, ERR_THREAD);
+		i++;
+	}
+}
+
+void	wait_render_threads(int count, pthread_t *threads)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
+	}
+}
+
+void	cleanup_render_threads(t_scene *scene, pthread_t *threads,
+		t_thread_data *data)
+{
+	pthread_mutex_destroy(&scene->line_mutex);
+	free(threads);
+	free(data);
+}

@@ -189,32 +189,34 @@ SRCS_BONUS := \
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/graphics/init_graphics_bonus.c \
     $(SRC_DIR_BONUS)/graphics/render_frame_bonus.c \
+    $(SRC_DIR_BONUS)/graphics/multi_threading_bonus.c \
     $(SRC_DIR_BONUS)/graphics/color_to_int_bonus.c \
     $(SRC_DIR_BONUS)/graphics/image_pixel_put_bonus.c \
 
 #* ---- Parsing ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/parse_file_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/utils_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_numbers_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_vec3_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_color_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_ambient_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_camera_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_light_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_sphere_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_plane_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/parse_cylinder_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/add_object_to_scene_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/get_count_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_cylinder_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_plane_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_sphere_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/add_object_to_scene_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/get_count_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/parse_color_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/parse_numbers_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/parse_vec3_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/utils_bonus.c \
 
 #* ---- Scene ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/load_scene_bonus.c \
     $(SRC_DIR_BONUS)/scene/camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/transformation_dispatch_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/update_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/utils_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/update_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/utils_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_light_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_sphere_bonus.c \
@@ -234,16 +236,23 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/raytracer/intersection/hit_cylinder_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/ray_bonus.c \
+    $(SRC_DIR_BONUS)/raytracer/ray_bonus.c \
+    $(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
 
 #* ---- Inputs ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/inputs/input_manager_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/key_camera_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/key_edit_bonus.c \
     $(SRC_DIR_BONUS)/inputs/key_hooks_bonus.c \
     $(SRC_DIR_BONUS)/inputs/mouse_hooks_bonus.c \
-	$(SRC_DIR_BONUS)/inputs/camera_input_bonus.c \
     $(SRC_DIR_BONUS)/inputs/utils_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_c_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_click_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_l_key.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_scroll_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_space_key.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_tab_key_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \
@@ -258,23 +267,24 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/maths/matrix/identity_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/translation_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/mult_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/transpose_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/inverse_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/rotate_vector_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/scale_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/rotation_euler_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/rotation_axis_bonus.c \
-	$(SRC_DIR_BONUS)/maths/matrix/rotation_align_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/transpose_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/inverse_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotate_vector_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/scale_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotation_euler_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotation_axis_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotation_align_bonus.c \
 
 #* ---- Errors & Utils ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/error/print_error_bonus.c \
     $(SRC_DIR_BONUS)/error/print_error_exit_bonus.c \
     $(SRC_DIR_BONUS)/error/print_error_free_exit_bonus.c \
-	$(SRC_DIR_BONUS)/error/print_error_loc_bonus.c \
+    $(SRC_DIR_BONUS)/error/print_error_loc_bonus.c \
     $(SRC_DIR_BONUS)/utils/print_bonus.c \
     $(SRC_DIR_BONUS)/utils/ft_strspn_bonus.c \
     $(SRC_DIR_BONUS)/utils/log_bonus.c \
+    $(SRC_DIR_BONUS)/utils/time_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

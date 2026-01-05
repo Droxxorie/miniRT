@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:27 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:40:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/04 13:47:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static t_vec3	get_camera_relative_vector(t_vec3 input, t_camera *camera)
+t_vec3	get_camera_relative_vector(t_vec3 input, t_camera *camera)
 {
 	t_vec3	direction;
 	t_vec3	camera_up;
@@ -33,31 +33,6 @@ static t_vec3	get_camera_relative_vector(t_vec3 input, t_camera *camera)
 	direction = vec3_add(direction, vec3_scale(camera_right, input.z));
 	direction = vec3_add(direction, vec3_scale(camera_up, input.y));
 	return (direction);
-}
-
-void	action_selection(t_scene *scene, t_vec3 input_vector)
-{
-	t_vec3	relative_vector;
-
-	relative_vector = get_camera_relative_vector(input_vector,
-			scene->active_camera);
-	if (scene->selected_object)
-	{
-		if (scene->control_mode == TRANSLATE)
-			dispatch_translate(scene->selected_object,
-				vec3_scale(relative_vector, STEP_MOVE));
-		else if (scene->control_mode == ROTATE)
-			dispatch_rotate(scene->selected_object, vec3_scale(relative_vector,
-					STEP_ROT));
-	}
-	else if (scene->selected_light)
-	{
-		if (scene->control_mode == TRANSLATE)
-			translate_light(scene->selected_light, vec3_scale(relative_vector,
-					STEP_MOVE));
-		else
-			ft_putstr_fd("Light rotation not supported\n", STDOUT_FILENO);
-	}
 }
 
 t_vec3	get_input_vector(int key)

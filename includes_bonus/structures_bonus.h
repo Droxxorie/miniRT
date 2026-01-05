@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:34:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/05 19:42:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct s_hit_record
 //* ========================================================================= */
 typedef struct s_light
 {
+	int					id;
 	t_point3			position;
 	t_real				brightness;
 	t_color				color;
@@ -217,7 +218,16 @@ typedef struct s_scene
 	t_light				*selected_light;
 	t_control_mode		control_mode;
 	t_bool				shift_pressed;
+	pthread_mutex_t		line_mutex;
+	int					next_line;
 }						t_scene;
+
+//* --- Multi-threading --- */
+typedef struct s_thread_data
+{
+	int				thread_id;
+	t_scene			*scene;
+}						t_thread_data;
 
 //* ========================================================================= */
 //*                                DISPATCH                                   */
