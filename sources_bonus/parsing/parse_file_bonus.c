@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 21:11:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 17:32:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_status	dispatch_parse(t_scene *scene, char *line)
 	return (EXIT_FAILURE);
 }
 
-static t_bool	has_extension(const char *file, const char *extension)
+t_bool	has_extension(const char *file, const char *extension)
 {
 	size_t	file_len;
 	size_t	ext_len;

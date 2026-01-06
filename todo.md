@@ -8,7 +8,9 @@
 - [x] Cycle cameras
 - [x] Multithreading
 - [x] Réactiver multi cams & lights
-- [ ] Mode sauvegarde (`--save` flag)
+- [ ] Modifier usage
+- [ ] Modifier control message
+- [ ] Mode sauvegarde (`--save` flag) + dossier save ?
 
 ## PHASE 2 : PRIMITIVES
 - [ ] Disque

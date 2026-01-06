@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:19:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:39:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 17:28:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ void	sys_print_error(const char *error_message)
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
 	ft_putstr_fd(strerror(saved_errno), STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
+
+void	print_error_detail(const char *error_message, const char *detail)
+{
+	ft_putstr_fd(B_RED "Error\n" RESET, STDERR_FILENO);
+	if (error_message)
+		ft_putstr_fd((char *)error_message, STDERR_FILENO);
+	if (detail)
+	{
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putstr_fd((char *)detail, STDERR_FILENO);
+	}
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 

@@ -184,6 +184,7 @@ SRC_COUNT := $(words $(SRCS))
 SRCS_BONUS := \
     $(SRC_DIR_BONUS)/core/main_bonus.c \
     $(SRC_DIR_BONUS)/core/cleanup_bonus.c \
+	$(SRC_DIR_BONUS)/core/save_bonus.c \
 
 #* ---- Graphics ----
 SRCS_BONUS += \

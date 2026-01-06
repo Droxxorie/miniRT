@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 14:13:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 20:11:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 16:54:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	prepare_cameras(t_scene *scene)
 	t_camera	*current;
 	int			count;
 
+	log_info("Preparing cameras...");
 	if (scene == NULL || scene->cameras == NULL)
 		return ;
 	current = scene->cameras;

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 16:17:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 17:34:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define ERR_IMG "Image creation failed"
 # define ERR_GRAPHICS "Graphics initialization failed"
 # define ERR_RENDER "Frame rendering failed"
+# define ERR_SAVE_FILE "Cannot create or write to save file"
+# define ERR_ARG "Invalid argument"
+# define ERR_SAVE_EXT "Save file must have a .bmp extension"
 
 //* ========================================================================= */
 //*                               PARSING ERRORS                              */
@@ -91,6 +94,7 @@
 //*                                PROTOTYPES                                 */
 //* ========================================================================= */
 void	print_error(const char *error_message);
+void	print_error_detail(const char *error_message, const char *detail);
 void	sys_print_error(const char *error_message);
 void	print_error_exit(const char *error_message);
 void	print_line_context(t_scene *scene, char *pos);

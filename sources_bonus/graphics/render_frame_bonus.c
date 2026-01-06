@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 23:44:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 17:04:04 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*render_routine(void *arg)
 	return (NULL);
 }
 
-t_status	render_frame(t_scene *scene)
+void	render_frame(t_scene *scene)
 {
 	pthread_t		*threads;
 	t_thread_data	*data;
@@ -82,5 +82,4 @@ t_status	render_frame(t_scene *scene)
 	ft_putstr_fd("Render time: ", STDOUT_FILENO);
 	ft_putnbr_fd(get_time_ms() - start_time, STDOUT_FILENO);
 	ft_putstr_fd(" ms\n", STDOUT_FILENO);
-	return (EXIT_SUCCESS);
 }

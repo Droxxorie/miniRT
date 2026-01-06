@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:56:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 17:06:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,8 @@ typedef struct s_scene
 	t_bool				shift_pressed;
 	pthread_mutex_t		line_mutex;
 	int					next_line;
+	t_bool				to_save;
+	char				*save_file;
 }						t_scene;
 
 //* --- Multi-threading --- */

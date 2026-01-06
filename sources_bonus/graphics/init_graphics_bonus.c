@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:21:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/06 16:54:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_status	init_graphics(t_scene *scene)
 {
 	t_window	*window;
 
+	log_info("Initializing graphics...");
 	window = &scene->mlx_window;
 	if (!window->mlx_ptr)
 	{
