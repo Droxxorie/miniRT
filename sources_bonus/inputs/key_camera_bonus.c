@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 21:01:09 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 12:58:09 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 00:05:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ void	switch_camera_next(t_scene *scene)
 		scene->active_camera = scene->active_camera->next;
 	else
 		scene->active_camera = scene->cameras;
-	log_event("INFO", "Switched to camera ID: ", scene->active_camera->id);
-
+	log_event("INFO", "Switched to camera ID: %d", scene->active_camera->id);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 17:34:54 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 00:03:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define ERR_MEM_LIGHT "Failed to allocate light structure"
 # define ERR_MEM_OBJECT "Failed to allocate object structure"
 # define ERR_THREAD "Thread creation failed"
+# define ERR_ITOA "Integer to ASCII conversion failed"
+# define ERR_MUTEX "Mutex initialization failed"
+# define ERR_WRITE "File write operation failed"
 
 //* ========================================================================= */
 //*                            INITIALIZATION ERRORS                          */

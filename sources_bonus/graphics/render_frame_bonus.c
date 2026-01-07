@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 12:36:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 00:22:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,13 @@ void	*render_routine(void *arg)
 	return (NULL);
 }
 
-static void	log_render_time(long	start_time)
-{
-	char	*temp_1;
-	char	*temp_2;
-
-	temp_1 = ft_itoa(get_time_ms() - start_time);
-	temp_2 = ft_strjoin("Render time: ", temp_1);
-	free(temp_1);
-	temp_1 = ft_strjoin(temp_2, " ms");
-	free(temp_2);
-	log_event("PERF", temp_1, 0);
-	free(temp_1);
-}
-
 void	render_frame(t_scene *scene)
 {
 	pthread_t		*threads;
 	t_thread_data	*data;
 	int				thread_count;
 	long			start_time;
+	long			end_time;
 
 	start_time = get_time_ms();
 	thread_count = init_render_threads(scene, &threads, &data);
@@ -78,5 +65,10 @@ void	render_frame(t_scene *scene)
 	if (scene->mlx_window.win_ptr)
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
-	log_render_time(start_time);
+	end_time = get_time_ms();
+	if (end_time - start_time < 1000)
+		log_event("PERF", "Render time: %ld ms (WoW)", end_time - start_time);
+	else
+		log_event("PERF", "%sRender time: %ld ms (Ouch)", end_time
+			- start_time);
 }

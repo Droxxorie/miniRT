@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 12:58:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 12:43:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 23:07:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_c_key(t_scene *scene)
 	{
 		scene->selected_object = NULL;
 		scene->selected_light = NULL;
-		log_event("INFO", "Switched to camera ID: ",
+		log_event("INFO", "Switched to camera ID: %d",
 			scene->active_camera->id);
 	}
 }

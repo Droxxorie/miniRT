@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 00:15:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 00:04:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 	current_light = scene->lights;
 	while (current_light)
 	{
-		light_contribution = compute_light_contribution(scene, current_light, record, ray);
+		light_contribution = compute_light_contribution(scene, current_light,
+				record, ray);
 		total_light = color_add(total_light, light_contribution);
 		current_light = current_light->next;
 	}

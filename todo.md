@@ -1,11 +1,8 @@
 # ERRORS
-changer log message pour render (\r\033[2K])
 créer dossier si néssecaire ?
-créer fonction log render
-ajouter horodatage
-ajouter message tootgle off/on
 ajouter touche pour save
 reset button
+
 
 
 # ROADMAP

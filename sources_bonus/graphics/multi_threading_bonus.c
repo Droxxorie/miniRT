@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:52:46 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:37:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 00:03:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	init_render_threads(t_scene *scene, pthread_t **threads,
 	if (!*threads || !*data)
 		sys_print_error_free_exit(scene, ERR_MEM);
 	scene->next_line = 0;
-	pthread_mutex_init(&scene->line_mutex, NULL);
+	if (pthread_mutex_init(&scene->line_mutex, NULL) != 0)
+		sys_print_error_free_exit(scene, ERR_MUTEX);
 	return (thread_count);
 }
 

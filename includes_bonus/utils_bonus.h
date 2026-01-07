@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 12:53:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 23:58:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@
 void		print_usage(void);
 void		print_controls(void);
 void		print_render_log(const char *message);
-void		log_info(const char *msg);
-void		log_scene_stats(t_scene *scene);
-void		print_object_details(t_object_type type);
-void		log_detail(const char *message, const char *detail);
 void		display_progress(int current, int total);
 
-void	log_event(char *type, char *message, int detail);
-void	log_event_object(char *type, char *message, t_object_type object_type);
+void		log_event(char *type, char *format, ...);
+void		log_event_object(char *type, char *message,
+				t_object_type object_type);
 
 //* ========================================================================= */
 //*                                STRINGS                                    */

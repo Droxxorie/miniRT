@@ -41,9 +41,6 @@ CPPFLAGS_BONUS	:= -Iincludes_bonus -Ilibft -Iminilibx-linux
 LDFLAGS			:= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LDLIBS			:= -lft -lmlx -lXext -lX11 -lm -lz
 
-NAME_DEBUG		:= $(NAME)_debug
-DEBUG_FLAGS		:= -O0 -g3 -DDEBUG
-
 ARGS			:= assets/scenes/valgrind_test.rt
 
 #* ==============================================================================
@@ -337,16 +334,17 @@ run: $(NAME)
 	@echo "$(YELLOW)${BOLD}[RUN] ./$(NAME) $(ARGS)$(RESET)"
 	@-./$(NAME) $(ARGS)
 
-debug: $(LIBFT_A) $(MLX_A) debug_message $(OBJS)
-	@echo "${GREEN}${BOLD} DONE${RESET}"
-	@$(CC) $(DEBUG_FLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME_DEBUG)
-	@echo "$(MAGENTA)${BOLD}${NAME_DEBUG} created\n$(RESET)"
-
 valgrind: debug
-	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME_DEBUG) $(ARGS)$(RESET)"
+	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --suppressions=valgrind.supp\
-		./$(NAME_DEBUG) $(ARGS) || true
+		./$(NAME) $(ARGS) || true
+
+valgrind_bonus: debug_bonus
+	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME_BONUS) $(ARGS)$(RESET)"
+	@valgrind --leak-check=full --show-leak-kinds=all \
+		--track-origins=yes --suppressions=valgrind.supp\
+		./$(NAME_BONUS) $(ARGS) || true
 
 #* ---- Cleanup ----
 clean:
@@ -357,11 +355,10 @@ clean:
 fclean: clean
 	@if [ -f $(NAME) ] ; then echo "$(RED)[RM] $(NAME)$(RESET)" ; fi
 	@if [ -f $(NAME_BONUS) ] ; then echo "$(RED)[RM] $(NAME_BONUS)$(RESET)" ; fi
-	@if [ -f $(NAME_DEBUG) ] ; then echo "$(RED)[RM] $(NAME_DEBUG)$(RESET)" ; fi
 	@if [ -f libft/libft.a ] ; then echo "$(RED)[RM] libft.a$(RESET)" ; fi
 	@if [ -f minilibx-linux/libmlx.a ] ; then echo "$(RED)[RM] libmlx.a$(RESET)" ; fi
 	@if [ -f minilibx-linux/libmlx_Linux.a ] ; then echo "$(RED)[RM] libmlx_Linux.a$(RESET)" ; fi
-	@rm -f $(NAME) $(NAME_BONUS) $(NAME_DEBUG)
+	@rm -f $(NAME) $(NAME_BONUS)
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) fclean
 	@$(MAKE) --no-print-directory -C $(MLX_DIR) clean >/dev/null 2>&1 || true
 
@@ -379,7 +376,6 @@ help:
 	@echo "$(BRIGHT_MAGENTA)re_bonus  →  ${RESET}Rebuilds the bonus version."
 	@echo "$(BRIGHT_MAGENTA)run       →  ${RESET}Executes the program."
 	@echo "$(BRIGHT_MAGENTA)valgrind  →  ${RESET}Check for memory leaks."
-	@echo "$(BRIGHT_MAGENTA)debug     →  ${RESET}Compile with debug flags."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 #* ---- Messages ----
@@ -431,4 +427,4 @@ project_logo_bonus:
 	@echo ""
 
 #* ---- Phony -------------------------------------------------------------------
-.PHONY: all clean fclean re re_bonus bonus help run valgrind debug
+.PHONY: all clean fclean re re_bonus bonus help run valgrind valgrind_bonus

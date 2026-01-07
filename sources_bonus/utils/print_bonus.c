@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:35:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 12:18:25 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 00:05:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_render_log(const char *message)
 {
 	char	*log;
-	
+
 	log = ft_strjoin("\r\033[2K", (char *)message);
 	ft_putstr_fd(log, STDOUT_FILENO);
 	free(log);
