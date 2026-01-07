@@ -6,11 +6,17 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:35:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 17:45:10 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 00:55:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+void	print_render_log(const char *message)
+{
+		ft_putstr_fd("\033[2K", STDOUT_FILENO);
+		ft_putstr_fd((char *)message, STDOUT_FILENO);
+}
 
 void	print_usage(void)
 {

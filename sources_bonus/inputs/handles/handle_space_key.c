@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:28:40 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:48:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 00:45:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_bool	handle_space_key(t_scene *scene)
 {
-	if (scene->selected_light && scene->lights->id >= 1)
+	if (scene->selected_light && scene->lights->next)
 	{
 		switch_light_next(scene);
 		return (FALSE);
 	}
-	if (!scene->selected_object && scene->active_camera->id >= 1)
+	if (!scene->selected_object && scene->cameras->next)
 	{
 		switch_camera_next(scene);
 		return (TRUE);

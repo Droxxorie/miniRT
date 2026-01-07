@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:08:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/04 13:15:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 01:00:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void	handle_tab_key(t_scene *scene)
 		else if (scene->selected_light)
 			ft_putstr_fd("Warning: Lights cannot be rotated.\n", STDOUT_FILENO);
 		else
-			ft_putstr_fd("Mode: ROTATE\n", STDOUT_FILENO);
+			// print_render_log("Mode: ROTATE");
+			ft_putstr_fd("\r\033[2KMode: ROTATE", STDOUT_FILENO);
 	}
 	else
 	{
 		scene->control_mode = TRANSLATE;
-		ft_putstr_fd("Mode: TRANSLATE\n", STDOUT_FILENO);
+		ft_putstr_fd("\033[2KMode: TRANSLATE", STDOUT_FILENO);
+		// print_render_log("Mode: TRANSLATE");
 	}
 }

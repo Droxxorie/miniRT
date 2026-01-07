@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 16:54:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 00:20:29 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static t_status	init_frame_buffer(t_scene *scene)
 t_status	init_graphics(t_scene *scene)
 {
 	t_window	*window;
+	char		*title;
 
 	log_info("Initializing graphics...");
 	window = &scene->mlx_window;
@@ -66,8 +67,10 @@ t_status	init_graphics(t_scene *scene)
 		if (!window->mlx_ptr)
 			return (print_error(ERR_MLX), EXIT_FAILURE);
 	}
+	title = get_window_title(scene);
 	window->win_ptr = mlx_new_window(window->mlx_ptr, window->width,
-			window->height, get_window_title(scene));
+			window->height, title);
+	free(title);
 	if (!window->win_ptr)
 		return (print_error(ERR_WIN), EXIT_FAILURE);
 	if (init_frame_buffer(scene) == EXIT_FAILURE)

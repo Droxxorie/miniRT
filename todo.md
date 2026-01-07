@@ -1,4 +1,8 @@
 # ERRORS
+changer log message pour render (\r\033[2K])
+créer dossier si néssecaire ?
+créer fonction log render
+
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -10,7 +14,7 @@
 - [x] Réactiver multi cams & lights
 - [ ] Modifier usage
 - [ ] Modifier control message
-- [ ] Mode sauvegarde (`--save` flag) + dossier save ?
+- [ ] Mode sauvegarde (`--save` flag)
 
 ## PHASE 2 : PRIMITIVES
 - [ ] Disque

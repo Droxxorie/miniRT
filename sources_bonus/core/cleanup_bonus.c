@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:39:05 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 00:26:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	destroy_scene(t_scene *scene)
 {
 	if (!scene)
 		return ;
-	ft_putstr_fd("\n", 1);
 	log_info("Cleaning up scene resources...");
 	if (scene->mlx_window.mlx_ptr)
 	{
@@ -68,6 +67,7 @@ void	destroy_scene(t_scene *scene)
 	free_objects(scene->objects);
 	free_lights(scene->lights);
 	free_cameras(scene->cameras);
+	free(scene->save_file);
 	free(scene);
 }
 
@@ -75,9 +75,9 @@ t_status	clean_exit(t_scene *scene, t_status status)
 {
 	destroy_scene(scene);
 	if (status == EXIT_SUCCESS)
-		log_info("Exited cleanly");
+		log_info("Exited cleanly!");
 	else
-		log_info("Exited with errors");
+		log_info("Exited with errors!");
 	exit(status);
 	return (status);
 }

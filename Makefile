@@ -287,6 +287,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/utils/ft_strspn_bonus.c \
     $(SRC_DIR_BONUS)/utils/log_bonus.c \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
+	$(SRC_DIR_BONUS)/utils/display_progress_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 
