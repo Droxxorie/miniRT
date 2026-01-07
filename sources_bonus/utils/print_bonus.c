@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:35:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 00:55:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 12:18:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	print_render_log(const char *message)
 {
-		ft_putstr_fd("\033[2K", STDOUT_FILENO);
-		ft_putstr_fd((char *)message, STDOUT_FILENO);
+	char	*log;
+	
+	log = ft_strjoin("\r\033[2K", (char *)message);
+	ft_putstr_fd(log, STDOUT_FILENO);
+	free(log);
 }
 
 void	print_usage(void)
@@ -27,18 +30,6 @@ void	print_usage(void)
 	printf("Path to the scene description file (.rt format)\n");
 	printf("Example:\n");
 	printf("  ./miniRT test_files/exemple.rt\n");
-}
-
-void	print_object_details(t_object_type type)
-{
-	if (type == SPHERE)
-		ft_putstr_fd("Object Type: SPHERE\n", 1);
-	else if (type == PLANE)
-		ft_putstr_fd("Object Type: PLANE\n", 1);
-	else if (type == CYLINDER)
-		ft_putstr_fd("Object Type: CYLINDER\n", 1);
-	else
-		ft_putstr_fd("Object Type: NONE\n", 1);
 }
 
 void	print_controls(void)

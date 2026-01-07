@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:27:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:50:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 13:04:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ void	handle_l_key(t_scene *scene)
 	{
 		scene->selected_light = scene->lights;
 		scene->selected_object = NULL;
-		ft_putstr_fd("Switched to light control mode\n", 1);
-		ft_putstr_fd("Light ID: ", 1);
-		ft_putnbr_fd(scene->selected_light->id, 1);
-		ft_putstr_fd("\n", 1);
+		log_event("INFO", "Switched to light ID: ", scene->selected_light->id);
 	}
 }

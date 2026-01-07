@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 19:48:05 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 12:56:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,61 @@ void	log_scene_stats(t_scene *scene)
 	ft_putstr_fd("x", STDOUT_FILENO);
 	ft_putnbr_fd(scene->mlx_window.height, STDOUT_FILENO);
 	ft_putstr_fd("\n", STDOUT_FILENO);
+}
+
+
+void	log_event(char *type, char *message, int detail)
+{
+    time_t      now;
+    struct tm   *local;
+    char        *color;
+
+    now = time(NULL);
+    local = localtime(&now);
+	printf("[%s%02i:%02i:%02i%s] ", RED, local->tm_hour, local->tm_min, local->tm_sec, RESET);
+    if (ft_strncmp(type, "ERROR", 5) == 0)
+        color = RED;
+    else if (ft_strncmp(type, "SUCCESS", 7) == 0)
+        color = GREEN;
+    else if (ft_strncmp(type, "PERF", 4) == 0)
+        color = MAGENTA;
+    else if (ft_strncmp(type, "WARN", 4) == 0)
+        color = YELLOW;
+    else if (ft_strncmp(type, "INFO", 4) == 0)
+        color = B_BLUE;
+	else
+		color = CYAN;
+	printf("[%s%s%s] %s", color, type, RESET, message);
+	if (detail)
+		printf("%i", detail);
+	printf("\n");
+}
+
+char *get_object_type_string(t_object_type type)
+{
+	if (type == SPHERE)
+		return ("SPHERE");
+	else if (type == PLANE)
+		return ("PLANE");
+	else if (type == CYLINDER)
+		return ("CYLINDER");
+	else
+		return ("NONE");
+}
+
+void	log_event_object(char *type, char *message, t_object_type object_type)
+{
+	char *temp;
+
+	temp = get_object_type_string(object_type);
+	temp = ft_strjoin(message, temp);
+	if (object_type == SPHERE)
+		log_event(type, temp, 0);
+	else if (object_type == PLANE)
+		log_event(type, temp, 0);
+	else if (object_type == CYLINDER)
+		log_event(type, temp, 0);
+	else
+		log_event(type, temp, 0);
+	free(temp);
 }

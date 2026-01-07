@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 00:54:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 12:53:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void		log_scene_stats(t_scene *scene);
 void		print_object_details(t_object_type type);
 void		log_detail(const char *message, const char *detail);
 void		display_progress(int current, int total);
+
+void	log_event(char *type, char *message, int detail);
+void	log_event_object(char *type, char *message, t_object_type object_type);
 
 //* ========================================================================= */
 //*                                STRINGS                                    */

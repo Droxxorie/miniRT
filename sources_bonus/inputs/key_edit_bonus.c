@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:45:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:50:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 13:04:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	switch_light_next(t_scene *scene)
 		scene->selected_light = scene->selected_light->next;
 	else
 		scene->selected_light = scene->lights;
-	ft_putstr_fd("Light ID: ", 1);
-	ft_putnbr_fd(scene->selected_light->id, 1);
-	ft_putstr_fd("\n", 1);
+	log_event("INFO", "Selected light ID: ", scene->selected_light->id);
 }
 
 void	action_selection(t_scene *scene, t_vec3 input_vector)
@@ -47,7 +45,5 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 		if (scene->control_mode == TRANSLATE)
 			translate_light(scene->selected_light, vec3_scale(relative_vector,
 					STEP_MOVE));
-		else
-			ft_putstr_fd("Light rotation not supported\n", STDOUT_FILENO);
 	}
 }

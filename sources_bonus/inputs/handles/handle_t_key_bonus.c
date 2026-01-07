@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 22:55:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 00:20:17 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/07 13:00:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 void	handle_t_key(t_scene *scene)
 {
 	if (scene->selected_object)
+	{
 		scene->selected_object->visible = !scene->selected_object->visible;
+		log_event_object("WARN", "Toggled object type: ",
+			scene->selected_object->type);
+	}
 	else if (scene->selected_light)
+	{
 		scene->selected_light->active = !scene->selected_light->active;
+		log_event("WARN", "Toggled light ID: ",
+			scene->selected_light->id);
+	}
 }
