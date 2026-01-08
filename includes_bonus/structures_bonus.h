@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 12:28:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 20:29:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef enum e_object_type
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	RECTANGLE,
 	NONE
 }						t_object_type;
 
@@ -122,6 +123,18 @@ typedef struct s_cylinder
 	t_real				initial_height;
 }						t_cylinder;
 
+typedef struct s_rectangle
+{
+	t_point3			center;
+	t_vec3				normal;
+	t_real				width;
+	t_real				height;
+	t_point3			initial_center;
+	t_vec3				initial_normal;
+	t_real				initial_width;
+	t_real				initial_height;
+}						t_rectangle;
+
 typedef struct s_object
 {
 	t_object_type		type;
@@ -135,6 +148,7 @@ typedef struct s_object
 		t_sphere		sphere;
 		t_plane			plane;
 		t_cylinder		cylinder;
+		t_rectangle		rectangle;
 	} u_data;
 	struct s_object		*next;
 }						t_object;
@@ -215,8 +229,9 @@ typedef enum e_control_mode
 	ROTATE,
 }						t_control_mode;
 
-# define RESIZE_RADIUS 1
-# define RESIZE_HEIGHT 2
+# define RESIZE_X 1
+# define RESIZE_Y 2
+# define RESIZE_Z 3
 
 typedef struct s_scene
 {
@@ -233,6 +248,7 @@ typedef struct s_scene
 	t_light				*selected_light;
 	t_control_mode		control_mode;
 	t_bool				shift_pressed;
+	t_bool				ctrl_pressed;
 	pthread_mutex_t		line_mutex;
 	int					next_line;
 	t_bool				to_save;

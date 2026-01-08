@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 17:33:14 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 17:48:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_status	parse_camera(t_scene *scene, char **line);
 t_status	parse_sphere(t_scene *scene, char **line);
 t_status	parse_ambient(t_scene *scene, char **line);
 t_status	parse_cylinder(t_scene *scene, char **line);
+t_status	parse_rectangle(t_scene *scene, char **line);
 t_status	parse_resolution(t_scene *scene, char **line);
 t_status	parse_axis(t_scene *scene, char **line, t_vec3 *axis);
 t_status	parse_vec3(t_scene *scene, char **line, t_vec3 *vector);

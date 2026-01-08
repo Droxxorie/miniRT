@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:04:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/04 13:04:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 20:29:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ t_bool	handle_scroll(int button, t_scene *scene)
 	else
 		return (FALSE);
 	if (scene->shift_pressed == TRUE)
-		mode = RESIZE_HEIGHT;
+		mode = RESIZE_X;
+	else if (scene->ctrl_pressed == TRUE)
+		mode = RESIZE_Y;
 	else
-		mode = RESIZE_RADIUS;
+		mode = RESIZE_Z;
 	dispatch_resize(scene->selected_object, mode, direction);
 	return (TRUE);
 }

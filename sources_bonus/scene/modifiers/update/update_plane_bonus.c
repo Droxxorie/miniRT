@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resize_sphere_bonus.c                              :+:      :+:    :+:   */
+/*   update_plane_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:06 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 17:40:17 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 17:40:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	resize_sphere(t_object *object, int mode, int direction)
+void	update_plane_matrix(t_object *object)
 {
-	t_sphere	*sphere;
+	t_mat4	translation;
+	t_mat4	rotation;
+	t_mat4	transform;
 
-	if (mode == RESIZE_X)
-	{
-		sphere = &object->u_data.sphere;
-		sphere->radius += (direction * STEP_SIZE);
-		if (sphere->radius < 0.1)
-			sphere->radius = 0.1;
-		log_event(stdout, "INFO", "Sphere radius resized to %.2f",
-			sphere->radius);
-		update_object_matrix(object);
-	}
+	translation = make_translation_matrix(object->u_data.plane.origin);
+	rotation = rotation_align(object->u_data.plane.normal);
+	transform = identity_matrix();
+	transform = mat4_mult_mat4(transform, translation);
+	transform = mat4_mult_mat4(transform, rotation);
+	set_transform(object, transform);
 }

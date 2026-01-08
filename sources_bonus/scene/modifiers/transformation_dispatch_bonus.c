@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:44:10 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 19:47:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	dispatch_resize(t_object *object, int mode, int direction)
 	static t_resize_map	map[] = {
 	{SPHERE, resize_sphere},
 	{CYLINDER, resize_cylinder},
+	{RECTANGLE, resize_rectangle},
 	{NONE, NULL}};
 
 	if (!object)
@@ -41,6 +42,7 @@ void	dispatch_translate(t_object *object, t_vec3 translation)
 	{SPHERE, translate_sphere},
 	{CYLINDER, translate_cylinder},
 	{PLANE, translate_plane},
+	{RECTANGLE, translate_rectangle},
 	{NONE, NULL}};
 
 	if (!object)
@@ -63,6 +65,7 @@ void	dispatch_rotate(t_object *object, t_vec3 rot_axis)
 	static t_translate_map	map[] = {
 	{CYLINDER, rotate_cylinder},
 	{PLANE, rotate_plane},
+	{RECTANGLE, rotate_rectangle},
 	{NONE, NULL}};
 
 	if (!object)

@@ -197,6 +197,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/objects/parse_cylinder_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parse_plane_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parse_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/parse_rectangle_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
@@ -213,22 +214,41 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/load_scene_bonus.c \
     $(SRC_DIR_BONUS)/scene/camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/transformation_dispatch_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/update_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/utils_bonus.c \
+#* ---- Update ---
+SRCS_BONUS += \
+    $(SRC_DIR_BONUS)/scene/modifiers/update/update_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/update/update_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/update/update_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/update/update_plane_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/update/update_cylinder_bonus.c \
+#* ---- Translate ---
+SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_light_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_sphere_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_plane_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/translate/translate_rectangle_bonus.c \
+#* ---- Rotate ---
+SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_plane_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_rectangle_bonus.c \
+#* ---- Resize ---
+SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_rectangle_bonus.c \
+#* ---- Save ----
+SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/scene/save_state/save_scene_bonus.c \
 	$(SRC_DIR_BONUS)/scene/save_state/objects/save_plane_bonus.c \
 	$(SRC_DIR_BONUS)/scene/save_state/objects/save_sphere_bonus.c \
 	$(SRC_DIR_BONUS)/scene/save_state/objects/save_cylinder_bonus.c \
+#* ---- Reset ----
+SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/scene/reset_state/reset_scene_bonus.c \
 	$(SRC_DIR_BONUS)/scene/reset_state/objects/reset_plane_bonus.c \
 	$(SRC_DIR_BONUS)/scene/reset_state/objects/reset_sphere_bonus.c \
@@ -240,6 +260,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/raytracer/intersection/hit_sphere_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/intersection/hit_plane_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/intersection/hit_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/hit_rectangle_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
     $(SRC_DIR_BONUS)/raytracer/ray_bonus.c \

@@ -1,4 +1,9 @@
 # ERRORS
+Ajouter tests save
+test rectangle
+rajouter scaling factor au resize
+print caractéristics object/entité select
+rajouter log transform ?
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -15,9 +20,10 @@
 ## PHASE 2 : PRIMITIVES
 - [ ] Disque
 - [ ] Triangle
-- [ ] Carré/Rectangle
+- [x] Carré/Rectangle
 - [ ] Cône
 - [ ] Tore (hyperboloid, paraboloid)
+- [ ] elispe ?
 
 ## PHASE 3 : OBJETS COMPOSES
 - [ ] Cube & Pavé

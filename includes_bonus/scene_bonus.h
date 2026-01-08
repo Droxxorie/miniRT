@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 13:02:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 19:44:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,20 @@ void		dispatch_translate(t_object *obj, t_vec3 vec);
 void		dispatch_resize(t_object *obj, int mode, int direction);
 
 //* ========================================================================= */
-//*                                MODIFIERS                                  */
+//*                                UPDATE                                     */
 //* ========================================================================= */
-void		set_transform(t_object *object, t_mat4 transform);
-void		apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix);
-
-//* --- Update matrices --- */
 void		update_plane_matrix(t_object *object);
 void		update_object_matrix(t_object *object);
 void		update_sphere_matrix(t_object *object);
 void		update_cylinder_matrix(t_object *object);
 void		update_camera_matrix(t_camera *camera, t_real aspect_ratio);
+void		update_rectangle_matrix(t_object *object);
+
+//* ========================================================================= */
+//*                                MODIFIERS                                  */
+//* ========================================================================= */
+void		set_transform(t_object *object, t_mat4 transform);
+void		apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix);
 
 //* --- Translate --- */
 void		translate_light(t_light *light, t_vec3 vec);
@@ -67,15 +70,18 @@ void		translate_plane(t_object *obj, t_vec3 translation);
 void		translate_sphere(t_object *obj, t_vec3 translation);
 void		translate_cylinder(t_object *obj, t_vec3 translation);
 void		translate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
+void		translate_rectangle(t_object *obj, t_vec3 translation);
 
 //* --- Rotate --- */
 void		rotate_plane(t_object *obj, t_vec3 rotation_axis);
 void		rotate_cylinder(t_object *obj, t_vec3 rotation_axis);
 void		rotate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
 t_vec3		rotate_vector(t_vec3 vector, t_vec3 axis, t_real angle);
+void		rotate_rectangle(t_object *obj, t_vec3 rotation_axis);
 
 //* --- Resize --- */
 void		resize_sphere(t_object *obj, int mode, int direction);
 void		resize_cylinder(t_object *obj, int mode, int direction);
+void		resize_rectangle(t_object *obj, int mode, int direction);
 
 #endif

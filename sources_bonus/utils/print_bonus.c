@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:35:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:06:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 19:39:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ void	print_controls(void)
 	printf("║%s  [TAB]         Switch ROT / TRANS Mode  %s║\n", B_W, Y);
 	printf("║%s  [C] / [L]     Control Camera / Light   %s║\n", B_W, Y);
 	printf("║%s  [SPACE]       Toggle Cam / Light       %s║\n", B_W, Y);
-	printf("║%s  [Mouse]       Select Object / Camera   %s║\n", B_W, Y);
+	printf("║%s  [R Click]     Select Object / Camera   %s║\n", B_W, Y);
 	printf("║%s                                         %s║\n", B_W, Y);
 	printf("║%s  [W / S]       Move Fwd / Back          %s║\n", B_W, Y);
 	printf("║%s  [A / D]       Move Left / Right        %s║\n", B_W, Y);
 	printf("║%s  [Q / E]       Move Up / Down           %s║\n", B_W, Y);
 	printf("║%s                                         %s║\n", B_W, Y);
-	printf("║%s  [+ / -]       Resize Diameter          %s║\n", B_W, Y);
-	printf("║%s  [SHIFT] +/-   Resize Height (Cyl)      %s║\n", B_W, Y);
+	printf("║%s  [Scroll ↑/↓]            Resize Height  %s║\n", B_W, Y);
+	printf("║%s  [SHIFT] + [Scroll ↑/↓]  Resize Width   %s║\n", B_W, Y);
+	printf("║%s  [CTRL] + [Scroll ↑/↓]   Resize Radius  %s║\n", B_W, Y);
 	printf("╚═════════════════════════════════════════╝\n");
 	printf(RESET "\n");
 }

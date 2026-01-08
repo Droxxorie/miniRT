@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resize_sphere_bonus.c                              :+:      :+:    :+:   */
+/*   translate_rectangle_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:06 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 19:42:52 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 20:41:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	resize_sphere(t_object *object, int mode, int direction)
+void	translate_rectangle(t_object *object, t_vec3 translation)
 {
-	t_sphere	*sphere;
+	t_rectangle	*rectangle;
 
-	if (mode == RESIZE_X)
-	{
-		sphere = &object->u_data.sphere;
-		sphere->radius += (direction * STEP_SIZE);
-		if (sphere->radius < 0.1)
-			sphere->radius = 0.1;
-		log_event(stdout, "INFO", "Sphere radius resized to %.2f",
-			sphere->radius);
-		update_object_matrix(object);
-	}
+	if (!object)
+		return ;
+	rectangle = &object->u_data.rectangle;
+	rectangle->center = vec3_add(rectangle->center, translation);
+	update_object_matrix(object);
 }
