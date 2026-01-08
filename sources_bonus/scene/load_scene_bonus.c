@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:26:12 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:36:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static t_status	validate_scene(t_scene *scene)
 
 t_status	load_scene(t_scene *scene, const char *file_path)
 {
-	log_event("INFO", "Loading scene from file: %s%s%s", UNDERLINE, file_path,
-		RESET);
+	log_event(stdout, "INFO", "Loading scene from file: %s%s%s", UNDERLINE,
+		file_path, RESET);
 	init_default_values(scene);
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -61,15 +61,16 @@ t_status	load_scene(t_scene *scene, const char *file_path)
 		scene->mlx_window.height = DEF_WINDOW_HEIGHT;
 		scene->mlx_window.aspect_ratio = (t_real)DEF_WINDOW_WIDTH
 			/ (t_real)DEF_WINDOW_HEIGHT;
-		log_event("WARN",
+		log_event(stdout, "WARN",
 			"No resolution specified. Using default resolution (%dx%d)",
 			DEF_WINDOW_WIDTH, DEF_WINDOW_HEIGHT);
 	}
 	if (validate_scene(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	log_event("SUCCESS", "Scene loaded successfully!");
-	log_event("INFO", "Scene Statistics: %d Objects, %d Lights, %d Cameras",
-		get_object_count(scene->objects), get_light_count(scene->lights),
+	log_event(stdout, "SUCCESS", "Scene loaded successfully!");
+	log_event(stdout, "INFO", "Loaded: %d Objects, %d Lights, %d Cameras",
+		get_object_count(scene->objects),
+		get_light_count(scene->lights),
 		get_camera_count(scene->cameras));
 	return (EXIT_SUCCESS);
 }

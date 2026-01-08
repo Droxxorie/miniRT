@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 23:08:58 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:37:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	log_event(char *type, char *format, ...)
+void	log_event(FILE *stream, char *type, char *format, ...)
 {
 	va_list		args;
 	time_t		now;
@@ -22,23 +22,23 @@ void	log_event(char *type, char *format, ...)
 	now = time(NULL);
 	local = localtime(&now);
 	if (ft_strncmp(type, "ERROR", 5) == 0)
-		color = RED;
+		color = R;
 	else if (ft_strncmp(type, "SUCCESS", 7) == 0)
-		color = GREEN;
+		color = G;
 	else if (ft_strncmp(type, "PERF", 4) == 0)
 		color = MAGENTA;
 	else if (ft_strncmp(type, "WARN", 4) == 0)
-		color = YELLOW;
+		color = Y;
 	else if (ft_strncmp(type, "INFO", 4) == 0)
-		color = B_BLUE;
+		color = B_B;
 	else
 		return ;
-	printf("[%s%02i:%02i:%02i%s] [%s%s%s] ", RED, local->tm_hour, local->tm_min,
-		local->tm_sec, RESET, color, type, RESET);
+	fprintf((FILE *)stream, "[%s%02i:%02i:%02i%s] [%s%s%s] ", R, local->tm_hour,
+		local->tm_min, local->tm_sec, RESET, color, type, RESET);
 	va_start(args, format);
-	vprintf(format, args);
+	vfprintf((FILE *)stream, format, args);
 	va_end(args);
-	printf("\n");
+	fprintf((FILE *)stream, "\n");
 }
 
 char	*get_object_type_string(t_object_type type)
@@ -59,11 +59,11 @@ void	log_event_object(char *type, char *message, t_object_type object_type)
 
 	temp = get_object_type_string(object_type);
 	if (object_type == SPHERE)
-		log_event(type, "%s%s", message, temp);
+		log_event(stdout, type, "%s%s", message, temp);
 	else if (object_type == PLANE)
-		log_event(type, "%s%s", message, temp);
+		log_event(stdout, type, "%s%s", message, temp);
 	else if (object_type == CYLINDER)
-		log_event(type, "%s%s", message, temp);
+		log_event(stdout, type, "%s%s", message, temp);
 	else
-		log_event(type, "%s%s", message, temp);
+		log_event(stdout, type, "%s%s", message, temp);
 }

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_c_key_bonus.c                               :+:      :+:    :+:   */
+/*   reset_cylinder_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 12:58:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:26:07 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 12:57:15 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 13:06:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	handle_c_key(t_scene *scene)
+void	reset_cylinder_state(t_object *object)
 {
-	if (scene->selected_object != NULL || scene->selected_light != NULL)
-	{
-		scene->selected_object = NULL;
-		scene->selected_light = NULL;
-		log_event(stdout, "INFO", "Switched to camera ID: %d (FOV %i)",
-			scene->active_camera->id, scene->active_camera->fov);
-	}
+	object->u_data.cylinder.center = object->u_data.cylinder.initial_center;
+	object->u_data.cylinder.axis = object->u_data.cylinder.initial_axis;
+	object->u_data.cylinder.radius = object->u_data.cylinder.initial_radius;
+	object->u_data.cylinder.height = object->u_data.cylinder.initial_height;
+	update_object_matrix(object);
 }

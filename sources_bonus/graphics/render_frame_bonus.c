@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:22:14 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:33:47 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void	render_frame(t_scene *scene)
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
 	end_time = get_time_ms();
 	if (end_time - start_time < 1000)
-		log_event("PERF", "Render time: %ld ms (WoW)", end_time - start_time);
+		log_event(stdout, "PERF", "Render time: %ld ms (WoW)", end_time
+			- start_time);
 	else
-		log_event("PERF", "%sRender time: %ld ms (Ouch)", end_time
+		log_event(stdout, "PERF", "Render time: %ld ms (Ouch)", end_time
 			- start_time);
 }

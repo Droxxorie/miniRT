@@ -225,6 +225,14 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_cylinder_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/scene/save_state/save_scene_bonus.c \
+	$(SRC_DIR_BONUS)/scene/save_state/objects/save_plane_bonus.c \
+	$(SRC_DIR_BONUS)/scene/save_state/objects/save_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/scene/save_state/objects/save_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/scene/reset_state/reset_scene_bonus.c \
+	$(SRC_DIR_BONUS)/scene/reset_state/objects/reset_plane_bonus.c \
+	$(SRC_DIR_BONUS)/scene/reset_state/objects/reset_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/scene/reset_state/objects/reset_cylinder_bonus.c \
 
 #* ---- Raytracer ----
 SRCS_BONUS += \
@@ -247,11 +255,14 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/inputs/utils_bonus.c \
     $(SRC_DIR_BONUS)/inputs/handles/handle_c_key_bonus.c \
     $(SRC_DIR_BONUS)/inputs/handles/handle_click_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_l_key.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_l_key_bonus.c \
     $(SRC_DIR_BONUS)/inputs/handles/handle_scroll_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_space_key.c \
+    $(SRC_DIR_BONUS)/inputs/handles/handle_space_key_bonus.c \
     $(SRC_DIR_BONUS)/inputs/handles/handle_tab_key_bonus.c \
 	$(SRC_DIR_BONUS)/inputs/handles/handle_t_key_bonus.c \
+	$(SRC_DIR_BONUS)/inputs/handles/handle_h_key_bonus.c \
+	$(SRC_DIR_BONUS)/inputs/handles/handle_r_key_bonus.c \
+	$(SRC_DIR_BONUS)/inputs/handles/handle_enter_key_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \
@@ -334,13 +345,13 @@ run: $(NAME)
 	@echo "$(YELLOW)${BOLD}[RUN] ./$(NAME) $(ARGS)$(RESET)"
 	@-./$(NAME) $(ARGS)
 
-valgrind: debug
+valgrind:
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --suppressions=valgrind.supp\
 		./$(NAME) $(ARGS) || true
 
-valgrind_bonus: debug_bonus
+valgrind_bonus:
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME_BONUS) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --suppressions=valgrind.supp\

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 17:04:46 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:21:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:25:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ static t_status	check_save_file(t_scene *scene)
 	if (has_extension(scene->save_file, ".bmp") == FALSE)
 	{
 		print_error_detail(ERR_SAVE_EXT, scene->save_file);
-		clean_exit(scene, EXIT_FAILURE);
+		return (EXIT_FAILURE);
+	}
+	if (mkdir("saved", 0755) == 0)
+	{
+		log_event(stdout, "WARN", "'saved' directory do not exist");
+		log_event(stdout, "INFO", "Created 'saved' directory for output files");
 	}
 	fd = open(scene->save_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
@@ -51,7 +56,6 @@ void	setup_save_mode(int argc, char **argv, t_scene *scene)
 		ret = TRUE;
 	if (ret == TRUE)
 	{
-		ft_putstr_fd("\n", 1); //TODO a voir
 		print_usage();
 		clean_exit(scene, EXIT_FAILURE);
 	}
@@ -91,14 +95,11 @@ static t_status	write_pixel_data(int fd, t_scene *scene)
 	char	*pixel_ptr;
 
 	line_len = scene->frame_buffer.line_len;
-	// line_len = scene->mlx_window.width * 4;
 	y = 0;
 	while (y < scene->mlx_window.height)
 	{
 		display_progress(y, scene->mlx_window.height - 1);
 		pixel_ptr = scene->frame_buffer.addr + (y * line_len);
-		// pixel_ptr = scene->frame_buffer.addr
-			// + ((scene->mlx_window.height - y - 1) * line_len);
 		if (write(fd, pixel_ptr, line_len) < 0)
 			return (EXIT_FAILURE);
 		y++;
@@ -111,7 +112,7 @@ void	save_image_to_bmp(t_scene *scene)
 	int	fd;
 	int	status;
 
-	log_event("INFO", "Saving image to BMP file: %s%s%s", UNDERLINE,
+	log_event(stdout, "INFO", "Saving image to BMP file: %s%s%s", UNDERLINE,
 		scene->save_file, RESET);
 	fd = open(scene->save_file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
@@ -123,5 +124,5 @@ void	save_image_to_bmp(t_scene *scene)
 	close(fd);
 	if (status == EXIT_FAILURE)
 		sys_print_error_free_exit(scene, ERR_WRITE);
-	log_event("SUCCESS", "Image saved successfully!");
+	log_event(stdout, "SUCCESS", "Image saved successfully!");
 }

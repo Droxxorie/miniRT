@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_c_key_bonus.c                               :+:      :+:    :+:   */
+/*   reset_sphere_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 12:58:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:26:07 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 12:56:49 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 13:06:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	handle_c_key(t_scene *scene)
+void	reset_sphere_state(t_object *object)
 {
-	if (scene->selected_object != NULL || scene->selected_light != NULL)
-	{
-		scene->selected_object = NULL;
-		scene->selected_light = NULL;
-		log_event(stdout, "INFO", "Switched to camera ID: %d (FOV %i)",
-			scene->active_camera->id, scene->active_camera->fov);
-	}
+	object->u_data.sphere.center = object->u_data.sphere.initial_center;
+	object->u_data.sphere.radius = object->u_data.sphere.initial_radius;
+	update_object_matrix(object);
 }

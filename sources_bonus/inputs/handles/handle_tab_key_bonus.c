@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:08:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 23:43:48 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:26:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	handle_tab_key(t_scene *scene)
 	{
 		scene->control_mode = ROTATE;
 		if (scene->selected_object && scene->selected_object->type == SPHERE)
-			log_event("WARNING", "Spheres cannot be rotated");
+			log_event(stdout, "WARNING", "Spheres cannot be rotated");
 		else if (scene->selected_light)
-			log_event("WARNING", "Lights cannot be rotated");
+			log_event(stdout, "WARNING", "Lights cannot be rotated");
 		else
-			log_event("INFO", "Switched to ROTATE mode");
+			log_event(stdout, "INFO", "Switched to ROTATE mode");
 	}
 	else
 	{
 		scene->control_mode = TRANSLATE;
-		log_event("INFO", "Switched to TRANSLATE mode");
+		log_event(stdout, "INFO", "Switched to TRANSLATE mode");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 23:58:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:27:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		print_controls(void);
 void		print_render_log(const char *message);
 void		display_progress(int current, int total);
 
-void		log_event(char *type, char *format, ...);
+void		log_event(FILE *stream, char *type, char *format, ...);
 void		log_event_object(char *type, char *message,
 				t_object_type object_type);
 

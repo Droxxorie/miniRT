@@ -1,9 +1,4 @@
 # ERRORS
-créer dossier si néssecaire ?
-ajouter touche pour save
-reset button
-
-
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -13,9 +8,9 @@ reset button
 - [x] Cycle cameras
 - [x] Multithreading
 - [x] Réactiver multi cams & lights
-- [ ] Modifier usage
-- [ ] Modifier control message
-- [ ] Mode sauvegarde (`--save` flag)
+- [x] Modifier usage
+- [x] Modifier control message
+- [x] Mode sauvegarde (`--save` flag)
 
 ## PHASE 2 : PRIMITIVES
 - [ ] Disque

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 22:59:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 14:44:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	handle_c_key(t_scene *scene);
 void	handle_l_key(t_scene *scene);
 void	handle_tab_key(t_scene *scene);
 t_bool	handle_space_key(t_scene *scene);
+void	handle_h_key(void);
+void	handle_r_key(t_scene *scene);
+void	handle_enter_key(t_scene *scene);
 
 //* --- Handle Mouse --- */
 t_bool	handle_scroll(int button, t_scene *scene);

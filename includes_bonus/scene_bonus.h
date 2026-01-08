@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:37:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 13:02:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@
 //* ========================================================================= */
 void		prepare_cameras(t_scene *scene);
 t_status	load_scene(t_scene *scene, const char *file_path);
+
+//* ========================================================================= */
+//*                                SAVE STATE                                 */
+//* ========================================================================= */
+void		save_scene_state(t_scene *scene);
+void		save_plane_state(t_plane *plane);
+void		save_sphere_state(t_sphere *sphere);
+void		save_cylinder_state(t_cylinder *cylinder);
+
+//* ========================================================================= */
+//*                                RESET STATE                                */
+//* ========================================================================= */
+void		reset_scene_state(t_scene *scene);
+void		reset_camera_state(t_camera *camera);
+void		reset_light_state(t_light *light);
+void		reset_object_state(t_object *object);
+void		reset_sphere_state(t_object *object);
+void		reset_plane_state(t_object *object);
+void		reset_cylinder_state(t_object *object);
 
 //* ========================================================================= */
 //*                                DISPATCHERS                                */

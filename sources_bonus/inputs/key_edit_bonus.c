@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:45:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 23:44:04 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:34:04 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	switch_light_next(t_scene *scene)
 		scene->selected_light = scene->selected_light->next;
 	else
 		scene->selected_light = scene->lights;
-	log_event("INFO", "Selected light ID: %d", scene->selected_light->id);
+	log_event(stdout, "INFO", "Selected light ID: %d",
+		scene->selected_light->id);
 }
 
 void	action_selection(t_scene *scene, t_vec3 input_vector)

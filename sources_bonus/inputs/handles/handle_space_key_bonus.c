@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_c_key_bonus.c                               :+:      :+:    :+:   */
+/*   handle_space_key_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 12:58:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:26:07 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/04 13:28:40 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 11:57:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	handle_c_key(t_scene *scene)
+t_bool	handle_space_key(t_scene *scene)
 {
-	if (scene->selected_object != NULL || scene->selected_light != NULL)
+	if (scene->selected_light && scene->lights->next)
 	{
-		scene->selected_object = NULL;
-		scene->selected_light = NULL;
-		log_event(stdout, "INFO", "Switched to camera ID: %d (FOV %i)",
-			scene->active_camera->id, scene->active_camera->fov);
+		switch_light_next(scene);
+		return (FALSE);
 	}
+	if (!scene->selected_object && scene->cameras->next)
+	{
+		switch_camera_next(scene);
+		return (TRUE);
+	}
+	return (FALSE);
 }

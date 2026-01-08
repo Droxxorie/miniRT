@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/07 00:12:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 12:28:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,16 @@ typedef struct s_sphere
 {
 	t_point3			center;
 	t_real				radius;
+	t_point3			initial_center;
+	t_real				initial_radius;
 }						t_sphere;
 
 typedef struct s_plane
 {
 	t_point3			origin;
 	t_vec3				normal;
+	t_point3			initial_origin;
+	t_vec3				initial_normal;
 }						t_plane;
 
 typedef enum e_cylinder_element
@@ -112,6 +116,10 @@ typedef struct s_cylinder
 	t_vec3				axis;
 	t_real				radius;
 	t_real				height;
+	t_point3			initial_center;
+	t_vec3				initial_axis;
+	t_real				initial_radius;
+	t_real				initial_height;
 }						t_cylinder;
 
 typedef struct s_object
@@ -150,6 +158,8 @@ typedef struct s_light
 	int					id;
 	t_point3			position;
 	t_real				brightness;
+	t_point3			initial_position;
+	t_real				initial_brightness;
 	t_color				color;
 	t_bool				active;
 	struct s_light		*next;
@@ -161,6 +171,9 @@ typedef struct s_camera
 	t_point3			position;
 	t_vec3				direction;
 	int					fov;
+	t_point3			initial_position;
+	t_vec3				initial_direction;
+	int					initial_fov;
 	t_mat4				camera_to_world;
 	t_real				scale_factor;
 	t_real				width;

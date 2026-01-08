@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:25:29 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 16:25:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static t_status	init_frame_buffer(t_scene *scene)
 {
 	t_image	*image;
 
-	log_event("INFO", "Initializing frame buffer...");
 	image = &scene->frame_buffer;
 	image->width = scene->mlx_window.width;
 	image->height = scene->mlx_window.height;
@@ -48,7 +47,6 @@ static t_status	init_frame_buffer(t_scene *scene)
 		return (print_error(ERR_IMG), EXIT_FAILURE);
 	image->addr = mlx_get_data_addr(image->ptr, &image->bpp, &image->line_len,
 			&image->endian);
-	log_event("SUCCESS", "Frame buffer initialized successfully!");
 	return (EXIT_SUCCESS);
 }
 
@@ -57,7 +55,7 @@ t_status	init_graphics(t_scene *scene)
 	t_window	*window;
 	char		*title;
 
-	log_event("INFO", "Initializing graphics subsystem...");
+	log_event(stdout, "INFO", "Initializing graphics subsystem...");
 	window = &scene->mlx_window;
 	if (!window->mlx_ptr)
 	{
@@ -73,6 +71,6 @@ t_status	init_graphics(t_scene *scene)
 		return (print_error(ERR_WIN), EXIT_FAILURE);
 	if (init_frame_buffer(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	log_event("SUCCESS", "Graphics subsystem initialized successfully!");
+	log_event(stdout, "SUCCESS", "Graphics context ready!");
 	return (EXIT_SUCCESS);
 }

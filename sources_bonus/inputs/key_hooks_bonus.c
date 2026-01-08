@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/06 23:48:28 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 14:44:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ static t_bool	handle_state_keys(int key, t_scene *scene)
 		return (handle_c_key(scene), FALSE);
 	else if (key == KEY_T)
 		return (handle_t_key(scene), TRUE);
+	else if (key == KEY_H)
+		return (handle_h_key(), FALSE);
+	else if (key == KEY_R)
+		return (handle_r_key(scene), TRUE);
+	else if (key == KEY_ENTER)
+		return (handle_enter_key(scene), FALSE);
 	return (FALSE);
 }
 

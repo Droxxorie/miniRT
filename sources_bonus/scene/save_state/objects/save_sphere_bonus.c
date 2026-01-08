@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_l_key.c                                     :+:      :+:    :+:   */
+/*   save_sphere_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 13:27:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:05:52 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 12:39:15 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 16:36:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	handle_l_key(t_scene *scene)
+void	save_sphere_state(t_sphere *sphere)
 {
-	if (scene->selected_light == NULL)
-	{
-		scene->selected_light = scene->lights;
-		scene->selected_object = NULL;
-		log_event("INFO", "Switched to light ID: %d",
-			scene->selected_light->id);
-	}
+	sphere->initial_center = sphere->center;
+	sphere->initial_radius = sphere->radius;
 }

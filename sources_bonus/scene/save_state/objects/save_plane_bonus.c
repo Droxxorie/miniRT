@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_c_key_bonus.c                               :+:      :+:    :+:   */
+/*   save_plane_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 12:58:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:26:07 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 12:40:03 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 16:36:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	handle_c_key(t_scene *scene)
+void	save_plane_state(t_plane *plane)
 {
-	if (scene->selected_object != NULL || scene->selected_light != NULL)
-	{
-		scene->selected_object = NULL;
-		scene->selected_light = NULL;
-		log_event(stdout, "INFO", "Switched to camera ID: %d (FOV %i)",
-			scene->active_camera->id, scene->active_camera->fov);
-	}
+	plane->initial_origin = plane->origin;
+	plane->initial_normal = plane->normal;
 }
