@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 18:00:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 22:25:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_bool	hit_plane(t_object *object, t_ray *ray, t_hit_record *record);
 t_bool	hit_sphere(t_object *object, t_ray *ray, t_hit_record *record);
 t_bool	hit_cylinder(t_object *object, t_ray *ray, t_hit_record *record);
 t_bool	hit_rectangle(t_object *object, t_ray *ray, t_hit_record *record);
+t_bool	hit_disk(t_object *object, t_ray *ray, t_hit_record *record);
+t_bool	hit_triangle(t_object *object, t_ray *ray, t_hit_record *record);
 
 //* ========================================================================= */
 //*                                LIGHTING                                   */

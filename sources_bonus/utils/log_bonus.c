@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 19:50:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 22:26:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ char	*get_object_type_string(t_object_type type)
 		return ("CYLINDER");
 	else if (type == RECTANGLE)
 		return ("RECTANGLE");
+	else if (type == DISK)
+		return ("DISK");
+	else if (type == TRIANGLE)
+		return ("TRIANGLE");
 	else
 		return ("NONE");
 }
@@ -60,12 +64,5 @@ void	log_event_object(char *type, char *message, t_object_type object_type)
 	char	*temp;
 
 	temp = get_object_type_string(object_type);
-	if (object_type == SPHERE)
-		log_event(stdout, type, "%s%s", message, temp);
-	else if (object_type == PLANE)
-		log_event(stdout, type, "%s%s", message, temp);
-	else if (object_type == CYLINDER)
-		log_event(stdout, type, "%s%s", message, temp);
-	else
-		log_event(stdout, type, "%s%s", message, temp);
+	log_event(stdout, type, "%s%s", message, temp);
 }

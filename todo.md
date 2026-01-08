@@ -18,16 +18,16 @@ rajouter log transform ?
 - [x] Mode sauvegarde (`--save` flag)
 
 ## PHASE 2 : PRIMITIVES
-- [ ] Disque
-- [ ] Triangle
+- [x] Disque
+- [x] Triangle
 - [x] Carré/Rectangle
-- [ ] Cône
 - [ ] Tore (hyperboloid, paraboloid)
 - [ ] elispe ?
 
 ## PHASE 3 : OBJETS COMPOSES
 - [ ] Cube & Pavé
 - [ ] Pyramide base carré ou triangulaire
+- [ ] Cône
 - [ ] BVH
 
 ## PHASE 3.5 : RAYMARCHING

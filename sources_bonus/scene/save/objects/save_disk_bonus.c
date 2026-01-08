@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_bonus.c                                     :+:      :+:    :+:   */
+/*   save_disk_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 11:37:28 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 17:45:05 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/08 21:44:13 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/08 21:44:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	update_object_matrix(t_object *object)
+void	save_disk_state(t_disk *disk)
 {
-	if (object->type == SPHERE)
-		update_sphere_matrix(object);
-	else if (object->type == PLANE)
-		update_plane_matrix(object);
-	else if (object->type == CYLINDER)
-		update_cylinder_matrix(object);
-	else if (object->type == RECTANGLE)
-		update_rectangle_matrix(object);
+	disk->initial_center = disk->center;
+	disk->initial_normal = disk->normal;
+	disk->initial_radius = disk->radius;
 }

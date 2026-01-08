@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:09:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 18:51:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 22:25:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static t_bool	hit_dispatch(t_object *object, t_ray *ray,
 	{PLANE, hit_plane},
 	{CYLINDER, hit_cylinder},
 	{RECTANGLE, hit_rectangle},
+	{DISK, hit_disk},
+	{TRIANGLE, hit_triangle},
 	{NONE, NULL}};
 
 	i = 0;

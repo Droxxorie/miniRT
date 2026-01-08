@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:31:15 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:27:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 23:33:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static void	save_objects_state(t_object *objects)
 			save_plane_state(&current->u_data.plane);
 		else if (current->type == CYLINDER)
 			save_cylinder_state(&current->u_data.cylinder);
+		else if (current->type == RECTANGLE)
+			save_rectangle_state(&current->u_data.rectangle);
+		else if (current->type == DISK)
+			save_disk_state(&current->u_data.disk);
+		else if (current->type == TRIANGLE)
+			save_triangle_state(&current->u_data.triangle);
 		current = current->next;
 	}
 }

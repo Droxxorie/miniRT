@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_state_bonus.c                                :+:      :+:    :+:   */
+/*   reset_scene_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 13:02:41 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/08 23:45:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,24 @@ void	reset_light_state(t_light *light)
 {
 	light->position = light->initial_position;
 	light->brightness = light->initial_brightness;
+	light->active = TRUE;
 }
 
 void	reset_object_state(t_object *object)
 {
+	object->visible = TRUE;
 	if (object->type == SPHERE)
 		reset_sphere_state(object);
 	else if (object->type == PLANE)
 		reset_plane_state(object);
 	else if (object->type == CYLINDER)
 		reset_cylinder_state(object);
+	else if (object->type == RECTANGLE)
+		reset_rectangle_state(object);
+	else if (object->type == DISK)
+		reset_disk_state(object);
+	else if (object->type == TRIANGLE)
+		reset_triangle_state(object);
 }
 
 void	reset_scene_state(t_scene *scene)
@@ -60,4 +68,5 @@ void	reset_scene_state(t_scene *scene)
 		reset_camera_state(current_camera);
 		current_camera = current_camera->next;
 	}
+	scene->active_camera = scene->cameras;
 }
