@@ -6,24 +6,24 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:37:28 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 22:11:55 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:12:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	update_object_matrix(t_object *object)
+void	update_object(t_object *object)
 {
 	if (object->type == SPHERE)
-		update_sphere_matrix(object);
+		update_sphere(object);
 	else if (object->type == PLANE)
-		update_plane_matrix(object);
+		update_plane(object);
 	else if (object->type == CYLINDER)
-		update_cylinder_matrix(object);
+		update_cylinder(object);
 	else if (object->type == RECTANGLE)
-		update_rectangle_matrix(object);
+		update_rectangle(object);
 	else if (object->type == DISK)
-		update_disk_matrix(object);
+		update_disk(object);
 	else if (object->type == TRIANGLE)
-		update_triangle_matrix(object);
+		update_triangle(object);
 }

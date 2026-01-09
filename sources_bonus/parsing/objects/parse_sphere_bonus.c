@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 19:57:59 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:42:46 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 13:03:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_status	parse_sphere(t_scene *scene, char **line)
 	if (get_sphere_value(scene, line, new_obj, &diameter) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
 	new_obj->u_data.sphere.radius = diameter * 0.5;
-	update_sphere_matrix(new_obj);
+	update_object(new_obj);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);
 }

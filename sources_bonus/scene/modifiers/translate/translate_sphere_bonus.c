@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:33:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:44:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:16:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	translate_sphere(t_object *object, t_vec3 translation)
 		return ;
 	sphere = &object->u_data.sphere;
 	sphere->center = vec3_add(sphere->center, translation);
-	update_object_matrix(object);
+	update_object(object);
 }

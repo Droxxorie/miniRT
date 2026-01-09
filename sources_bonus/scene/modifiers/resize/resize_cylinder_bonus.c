@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:20:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	resize_cylinder(t_object *object, int mode, int direction)
 			cylinder->radius = 0.1;
 		log_event(stdout, "INFO", "Cylinder radius resized to %.2f",
 			cylinder->radius);
-		update_object_matrix(object);
+		update_object(object);
 	}
 	else if (mode == RESIZE_Y)
 	{
@@ -35,6 +35,6 @@ void	resize_cylinder(t_object *object, int mode, int direction)
 			cylinder->height = 0.1;
 		log_event(stdout, "INFO", "Cylinder height resized to %.2f",
 			cylinder->height);
-		update_object_matrix(object);
+		update_object(object);
 	}
 }

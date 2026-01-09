@@ -4,6 +4,8 @@ test rectangle
 rajouter scaling factor au resize
 print caractéristics object/entité select
 rajouter log transform ?
+ajouter barre de chargement makefile
+migrate to geometric
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -29,6 +31,7 @@ rajouter log transform ?
 - [ ] Pyramide base carré ou triangulaire
 - [ ] Cône
 - [ ] BVH
+- [ ] Back-Face-Culling
 
 ## PHASE 3.5 : RAYMARCHING
 - [ ] Support SDF (mdrrrr)

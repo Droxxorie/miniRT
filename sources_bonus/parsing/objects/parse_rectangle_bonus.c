@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:34:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 17:47:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:20:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_status	parse_rectangle(t_scene *scene, char **line)
 	new_object->type = RECTANGLE;
 	if (get_rectangle_values(scene, line, new_object) == EXIT_FAILURE)
 		return (free(new_object), EXIT_FAILURE);
-	update_rectangle_matrix(new_object);
+	update_object(new_object);
 	add_object_to_scene(scene, new_object);
 	return (EXIT_SUCCESS);
 }

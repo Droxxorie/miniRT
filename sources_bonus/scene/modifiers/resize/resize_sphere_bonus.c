@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:46 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	resize_sphere(t_object *object, int mode, int direction)
 			sphere->radius = 0.1;
 		log_event(stdout, "INFO", "Sphere radius resized to %.2f",
 			sphere->radius);
-		update_object_matrix(object);
+		update_object(object);
 	}
 }

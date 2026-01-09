@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 22:01:01 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 14:17:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_sphere
 {
 	t_point3			center;
 	t_real				radius;
+	t_real				sq_radius;
+	t_real				inv_radius;
 	t_point3			initial_center;
 	t_real				initial_radius;
 }						t_sphere;
@@ -105,6 +107,7 @@ typedef enum e_cylinder_element
 	TOP_CAP,
 	NONE_ELEMENT
 }						t_cylinder_element;
+
 typedef struct s_cylinder_hit
 {
 	t_ray				ray;
@@ -147,11 +150,27 @@ typedef struct s_disk
 	t_real				initial_radius;
 }						t_disk;
 
+typedef struct s_triangle_hit
+{
+	t_vec3		h;
+	t_vec3		s;
+	t_vec3		q;
+	t_real		a;
+	t_real		f;
+	t_real		u;
+	t_real		v;
+	t_real		t;
+}					t_triangle_hit;
+
+
 typedef struct s_triangle
 {
 	t_point3	p1;
 	t_point3	p2;
 	t_point3	p3;
+	t_vec3		edge1;
+	t_vec3		edge2;
+	t_vec3		normal;
 	t_point3	initial_p1;
 	t_point3	initial_p2;
 	t_point3	initial_p3;

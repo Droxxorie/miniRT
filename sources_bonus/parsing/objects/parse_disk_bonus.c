@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:55:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 21:05:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:19:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_status	parse_disk(t_scene *scene, char **line)
 	new_obj->type = DISK;
 	if (get_disk_values(scene, line, new_obj) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
-	update_disk_matrix(new_obj);
+	update_object(new_obj);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);
 }

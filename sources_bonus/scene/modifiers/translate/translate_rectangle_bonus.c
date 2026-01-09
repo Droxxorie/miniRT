@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:42:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:37 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:16:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	translate_rectangle(t_object *object, t_vec3 translation)
 		return ;
 	rectangle = &object->u_data.rectangle;
 	rectangle->center = vec3_add(rectangle->center, translation);
-	update_object_matrix(object);
+	update_object(object);
 }

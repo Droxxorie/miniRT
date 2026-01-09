@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 08:27:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:43:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:14:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void	rotate_camera(t_camera *camera, t_vec3 input_scaled,
 	pitch(camera, input_scaled.x);
 	tilt(camera, input_scaled.y);
 	camera->direction = vec3_normalize(camera->direction);
-	update_camera_matrix(camera, aspect_ratio);
+	update_camera(camera, aspect_ratio);
 }

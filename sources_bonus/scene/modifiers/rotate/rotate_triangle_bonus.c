@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:40:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 22:47:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:16:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ void	rotate_triangle(t_object *object, t_vec3 rotation_axis)
 			rotation_matrix);
 	triangle->p3 = rotate_point_around_center(triangle->p3, center,
 			rotation_matrix);
-	update_object_matrix(object);
+	update_object(object);
 }

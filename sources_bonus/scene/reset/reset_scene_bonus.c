@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:45:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 10:40:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	reset_camera_state(t_camera *camera)
 	camera->position = camera->initial_position;
 	camera->direction = camera->initial_direction;
 	camera->fov = camera->initial_fov;
-	update_camera_matrix(camera, camera->aspect_ratio);
+	update_camera(camera, camera->aspect_ratio);
 }
 
 void	reset_light_state(t_light *light)

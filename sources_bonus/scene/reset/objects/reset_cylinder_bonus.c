@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:57:15 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:40:56 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:08 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	reset_cylinder_state(t_object *object)
 	object->u_data.cylinder.axis = object->u_data.cylinder.initial_axis;
 	object->u_data.cylinder.radius = object->u_data.cylinder.initial_radius;
 	object->u_data.cylinder.height = object->u_data.cylinder.initial_height;
-	update_object_matrix(object);
+	update_object(object);
 }

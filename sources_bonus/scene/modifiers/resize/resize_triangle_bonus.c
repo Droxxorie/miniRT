@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:48:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:48:05 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	resize_triangle(t_object *object, int mode, int direction)
 				scale_factor));
 	log_event(stdout, "INFO", "Triangle resized by a factor of %.2f",
 		scale_factor);
-	update_object_matrix(object);
+	update_object(object);
 }

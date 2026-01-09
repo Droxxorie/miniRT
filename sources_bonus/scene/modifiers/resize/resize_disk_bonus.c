@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:20:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 21:22:37 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	resize_disk(t_object *object, int mode, int direction)
 			disk->radius = 0.1;
 		log_event(stdout, "INFO", "Disk radius resized to %.2f",
 			disk->radius);
-		update_object_matrix(object);
+		update_object(object);
 	}
 }

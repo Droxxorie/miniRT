@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:25:10 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:40:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	resize_rectangle(t_object *object, int mode, int direction)
 			rectangle->width = 0.1;
 		log_event(stdout, "INFO", "Rectangle width resized to %.2f",
 			rectangle->width);
-		update_object_matrix(object);
+		update_object(object);
 	}
 	else if (mode == RESIZE_Y)
 	{
@@ -35,6 +35,6 @@ void	resize_rectangle(t_object *object, int mode, int direction)
 			rectangle->height = 0.1;
 		log_event(stdout, "INFO", "Rectangle height resized to %.2f",
 			rectangle->height);
-		update_object_matrix(object);
+		update_object(object);
 	}
 }

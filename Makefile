@@ -228,6 +228,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/scene/update/update_cylinder_bonus.c \
 	$(SRC_DIR_BONUS)/scene/update/update_disk_bonus.c \
 	$(SRC_DIR_BONUS)/scene/update/update_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/scene/update/update_camera_bonus.c \
 #* ---- Translate ---
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_camera_bonus.c \

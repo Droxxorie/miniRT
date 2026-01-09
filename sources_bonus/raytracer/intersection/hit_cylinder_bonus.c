@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:43:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 13:43:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ static void	check_cap(t_cylinder_hit *hit, t_real y_plane,
 static void	set_cylinder_record(t_object *object, t_ray *ray,
 		t_hit_record *record, t_cylinder_hit *hit)
 {
-	t_vec3	local_hit_point;
-	t_vec3	local_normal;
+	t_cylinder	*cylinder;
+	t_vec3		cp;
+	t_real		h;
+	t_vec3		q;
 
 	record->t = hit->t;
 	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction,
@@ -74,18 +76,18 @@ static void	set_cylinder_record(t_object *object, t_ray *ray,
 	record->object = object;
 	if (record->need_details == FALSE)
 		return ;
-	if (hit->type == BODY)
-	{
-		local_hit_point = vec3_add(hit->ray.origin,
-				vec3_scale(hit->ray.direction, record->t));
-		local_normal = (t_vec3){local_hit_point.x, 0.0, local_hit_point.z};
-	}
-	else if (hit->type == TOP_CAP)
-		local_normal = (t_vec3){0.0, 1.0, 0.0};
+	cylinder = &object->u_data.cylinder;
+	if (hit->type == TOP_CAP)
+		record->normal = cylinder->axis;
+	else if (hit->type == BOTTOM_CAP)
+		record->normal = vec3_scale(cylinder->axis, -1);
 	else
-		local_normal = (t_vec3){0.0, -1.0, 0.0};
-	record->normal = vec3_normalize(mat4_mult_vec3(object->transposed_inverse,
-				local_normal));
+	{
+		cp = vec3_sub(record->hit_point, cylinder->center);
+		h = vec3_dot(cp, cylinder->axis);
+		q = vec3_add(cylinder->center, vec3_scale(cylinder->axis, h));
+		record->normal = vec3_normalize(vec3_sub(record->hit_point, q));
+	}
 	set_face_normal(record, ray, record->normal);
 }
 

@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:41:33 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:11:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	update_rectangle_matrix(t_object *object)
+void	update_rectangle(t_object *object)
 {
 	t_mat4	translation;
 	t_mat4	rotation;

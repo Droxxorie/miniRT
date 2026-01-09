@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:59:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:47:29 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:20:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_status	parse_triangle(t_scene *scene, char **line)
 	new_object->type = TRIANGLE;
 	if (get_triangle_values(scene, line, new_object) == EXIT_FAILURE)
 		return (free(new_object), EXIT_FAILURE);
-	update_triangle_matrix(new_object);
+	update_object(new_object);
 	add_object_to_scene(scene, new_object);
 	return (EXIT_SUCCESS);
 }

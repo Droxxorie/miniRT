@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:32:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:32:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:54:47 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void	reset_triangle_state(t_object *object)
 	object->u_data.triangle.p1 = object->u_data.triangle.initial_p1;
 	object->u_data.triangle.p2 = object->u_data.triangle.initial_p2;
 	object->u_data.triangle.p3 = object->u_data.triangle.initial_p3;
-	update_object_matrix(object);
+	update_object(object);
 }

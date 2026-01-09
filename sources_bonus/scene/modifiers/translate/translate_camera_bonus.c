@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 08:23:58 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:41:33 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:14:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	translate_camera(t_camera *camera, t_vec3 input_scaled,
 	translation = vec3_add(translation, vec3_scale(up, input_scaled.y));
 	translation = vec3_add(translation, vec3_scale(forward, input_scaled.z));
 	camera->position = vec3_add(camera->position, translation);
-	update_camera_matrix(camera, aspect_ratio);
+	update_camera(camera, aspect_ratio);
 }

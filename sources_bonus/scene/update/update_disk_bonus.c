@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:58:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:48:24 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:11:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	update_disk_matrix(t_object *obj)
+void	update_disk(t_object *obj)
 {
 	t_mat4	translation;
 	t_mat4	rotation;

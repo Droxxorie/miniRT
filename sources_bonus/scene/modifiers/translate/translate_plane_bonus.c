@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:39:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:44:04 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:16:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	translate_plane(t_object *object, t_vec3 translation)
 		return ;
 	plane = &object->u_data.plane;
 	plane->origin = vec3_add(plane->origin, translation);
-	update_object_matrix(object);
+	update_object(object);
 }

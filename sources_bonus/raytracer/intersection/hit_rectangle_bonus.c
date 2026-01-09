@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:53:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:39:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 13:20:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,13 @@
 static void	set_rectangle_record(t_object *object, t_ray *world_ray,
 		t_hit_record *record)
 {
-	t_vec3	local_normal;
-
 	record->hit_point = vec3_add(world_ray->origin,
 			vec3_scale(world_ray->direction, record->t));
 	record->color = object->color;
 	record->object = object;
 	if (record->need_details == FALSE)
 		return ;
-	local_normal = (t_vec3){0.0, 1.0, 0.0};
-	if (world_ray->direction.y > 0)
-		local_normal = (t_vec3){0.0, -1.0, 0.0};
-	record->normal = vec3_normalize(mat4_mult_vec3(object->transposed_inverse,
-				local_normal));
+	record->normal = object->u_data.rectangle.normal;
 	set_face_normal(record, world_ray, record->normal);
 }
 

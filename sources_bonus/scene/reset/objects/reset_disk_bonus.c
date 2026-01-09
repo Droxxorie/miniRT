@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:44:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 21:45:29 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:55:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void	reset_disk_state(t_object *object)
 	object->u_data.disk.center = object->u_data.disk.initial_center;
 	object->u_data.disk.normal = object->u_data.disk.initial_normal;
 	object->u_data.disk.radius = object->u_data.disk.initial_radius;
-	update_object_matrix(object);
+	update_object(object);
 }

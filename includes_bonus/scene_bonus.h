@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:32:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 11:21:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void		dispatch_resize(t_object *obj, int mode, int direction);
 //* ========================================================================= */
 //*                                UPDATE                                     */
 //* ========================================================================= */
-void		update_plane_matrix(t_object *object);
-void		update_object_matrix(t_object *object);
-void		update_sphere_matrix(t_object *object);
-void		update_cylinder_matrix(t_object *object);
-void		update_camera_matrix(t_camera *camera, t_real aspect_ratio);
-void		update_rectangle_matrix(t_object *object);
-void		update_disk_matrix(t_object *obj);
-void		update_triangle_matrix(t_object *object);
+void		update_plane(t_object *object);
+void		update_object(t_object *object);
+void		update_sphere(t_object *object);
+void		update_cylinder(t_object *object);
+void		update_camera(t_camera *camera, t_real aspect_ratio);
+void		update_rectangle(t_object *object);
+void		update_disk(t_object *obj);
+void		update_triangle(t_object *object);
 
 //* ========================================================================= */
 //*                                MODIFIERS                                  */

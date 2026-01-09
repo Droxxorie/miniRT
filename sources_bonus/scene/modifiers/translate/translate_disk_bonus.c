@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:25:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 21:42:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 09:16:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	translate_disk(t_object *object, t_vec3 translation)
 		return ;
 	disk = &object->u_data.disk;
 	disk->center = vec3_add(disk->center, translation);
-	update_object_matrix(object);
+	update_object(object);
 }

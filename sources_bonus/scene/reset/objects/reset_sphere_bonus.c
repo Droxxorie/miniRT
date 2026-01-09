@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:56:49 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 13:06:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 08:54:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	reset_sphere_state(t_object *object)
 {
 	object->u_data.sphere.center = object->u_data.sphere.initial_center;
 	object->u_data.sphere.radius = object->u_data.sphere.initial_radius;
-	update_object_matrix(object);
+	update_object(object);
 }
