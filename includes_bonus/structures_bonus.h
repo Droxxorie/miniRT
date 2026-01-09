@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 14:17:31 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 16:09:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,50 @@ typedef struct s_mat4
 	t_real				m[4][4];
 }						t_mat4;
 
-typedef struct s_poly
+typedef struct s_quadratic
 {
 	t_real				a;
 	t_real				half_b;
 	t_real				c;
-	t_real				min;
-	t_real				max;
 	t_real				root1;
 	t_real				root2;
-}						t_poly;
+}						t_quadratic;
+
+typedef struct s_cubic
+{
+	t_real	coeffs[4];
+	t_real	roots[3];
+	int		roots_count;
+	t_real	a;
+	t_real	sq_a;
+	t_real	b;
+	t_real	c;
+	t_real	p;
+	t_real	cube_p;
+	t_real	q;
+	t_real	delta;
+	t_real	sqrt_delta;
+	t_real	phi;
+	t_real	u;
+	t_real	v;
+}						t_cubic;
+
+typedef struct s_quartic
+{
+	t_real	coeffs[5];
+	t_real	roots[4];
+	int		roots_count;
+	t_real	a;
+	t_real	sq_a;
+	t_real	b;
+	t_real	c;
+	t_real	d;
+	t_real	y;
+	t_real	r_var;
+	t_real	e;
+	t_real	f;
+	t_cubic	cubic_vars;
+}						t_quartic;
 
 typedef struct s_color
 {
@@ -113,7 +147,7 @@ typedef struct s_cylinder_hit
 	t_ray				ray;
 	t_real				t;
 	t_cylinder_element	type;
-	t_poly				eq_vars;
+	t_quadratic			quadratic_vars;
 }						t_cylinder_hit;
 
 typedef struct s_cylinder
@@ -161,7 +195,6 @@ typedef struct s_triangle_hit
 	t_real		v;
 	t_real		t;
 }					t_triangle_hit;
-
 
 typedef struct s_triangle
 {

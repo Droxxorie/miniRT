@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:36:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:17:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 16:02:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_mat4	matrix_axis_angle(t_vec3 axis, t_real angle);
 //* ========================================================================= */
 //*                                SOLVER                                     */
 //* ========================================================================= */
-t_bool	solve_quadratic(t_poly *vars);
+t_bool	solve_quadratic(t_quadratic *vars);
+t_bool	solve_cubic(t_cubic *vars);
+t_bool	solve_quartic(t_quartic *vars);
 
 #endif

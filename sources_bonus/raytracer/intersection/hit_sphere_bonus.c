@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 14:23:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 16:07:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	hit_sphere(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
 	t_sphere	*sphere;
 	t_vec3		oc;
-	t_poly		vars;
+	t_quadratic	vars;
 
 	sphere = &object->u_data.sphere;
 	oc = vec3_sub(world_ray->origin, sphere->center);

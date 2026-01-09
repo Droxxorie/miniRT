@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 22:29:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:41:58 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 15:43:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-t_bool	solve_quadratic(t_poly *vars)
+t_bool	solve_quadratic(t_quadratic *vars)
 {
 	t_real	delta;
 	t_real	sqrt_delta;

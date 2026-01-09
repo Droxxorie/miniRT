@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 13:43:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 16:09:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ static void	check_tube_root(t_cylinder_hit *hit, t_real t)
 
 static void	solve_tube(t_cylinder_hit *hit)
 {
-	t_vec3	direction;
-	t_vec3	origin;
+	t_vec3		direction;
+	t_vec3		origin;
+	t_quadratic	*vars;
 
+	vars = &hit->quadratic_vars;
 	direction = hit->ray.direction;
 	origin = hit->ray.origin;
-	hit->eq_vars.a = direction.x * direction.x + direction.z * direction.z;
-	hit->eq_vars.half_b = (origin.x * direction.x + origin.z * direction.z);
-	hit->eq_vars.c = origin.x * origin.x + origin.z * origin.z - 1.0;
-	if (solve_quadratic(&hit->eq_vars) == FALSE)
+	vars->a = direction.x * direction.x + direction.z * direction.z;
+	vars->half_b = (origin.x * direction.x + origin.z * direction.z);
+	vars->c = origin.x * origin.x + origin.z * origin.z - 1.0;
+	if (solve_quadratic(vars) == FALSE)
 		return ;
-	check_tube_root(hit, hit->eq_vars.root1);
-	check_tube_root(hit, hit->eq_vars.root2);
+	check_tube_root(hit, vars->root1);
+	check_tube_root(hit, vars->root2);
 }
 
 static void	check_cap(t_cylinder_hit *hit, t_real y_plane,

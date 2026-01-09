@@ -312,7 +312,9 @@ SRCS_BONUS += \
 
 #* ---- Maths ----
 SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/maths/solve_quadratic_bonus.c \
+    $(SRC_DIR_BONUS)/maths/solve/solve_quadratic_bonus.c \
+	$(SRC_DIR_BONUS)/maths/solve/solve_cubic_bonus.c \
+	$(SRC_DIR_BONUS)/maths/solve/solve_quartic_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/add_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/substract_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/product_bonus.c \
