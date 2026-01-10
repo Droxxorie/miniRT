@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:13:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:54:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	dispatch_resize(t_object *object, int mode, int direction)
 	{DISK, resize_disk},
 	{TRIANGLE, resize_triangle},
 	{TORUS, resize_torus},
+	{CONE, resize_cone},
 	{NONE, NULL}};
 
 	if (!object)
@@ -49,6 +50,7 @@ void	dispatch_translate(t_object *object, t_vec3 translation)
 	{DISK, translate_disk},
 	{TRIANGLE, translate_triangle},
 	{TORUS, translate_torus},
+	{CONE, translate_cone},
 	{NONE, NULL}};
 
 	if (!object)
@@ -74,6 +76,7 @@ void	dispatch_rotate(t_object *object, t_vec3 rot_axis)
 	{RECTANGLE, rotate_rectangle},
 	{DISK, rotate_disk},
 	{TRIANGLE, rotate_triangle},
+	{CONE, rotate_cone},
 	{NONE, NULL}};
 
 	if (!object)

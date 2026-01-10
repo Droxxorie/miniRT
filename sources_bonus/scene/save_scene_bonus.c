@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:31:15 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:27:59 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:46:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	save_objects_state(t_object *objects)
 {
 	t_object	*current;
+	t_torus		*torus;
+	t_cone		*cone;
 
 	current = objects;
 	while (current)
@@ -22,10 +24,15 @@ static void	save_objects_state(t_object *objects)
 		current->initial_transform = current->transform;
 		if (current->type == TORUS)
 		{
-			current->u_data.torus.initial_major_radius
-				= current->u_data.torus.major_radius;
-			current->u_data.torus.initial_minor_radius
-				= current->u_data.torus.minor_radius;
+			torus = &current->u_data.torus;
+			torus->initial_major_radius = torus->major_radius;
+			torus->initial_minor_radius = torus->minor_radius;
+		}
+		else if (current->type == CONE)
+		{
+			cone = &current->u_data.cone;
+			cone->initial_height = cone->height;
+			cone->initial_radius = cone->radius;
 		}
 		current = current->next;
 	}

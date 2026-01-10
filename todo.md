@@ -4,6 +4,8 @@ rajouter scaling factor au resize
 print caractéristics object/entité select
 rajouter log transform ?
 ajouter barre de chargement makefilemake 
+gere resize non homogène sphere ?
+
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -22,12 +24,11 @@ ajouter barre de chargement makefilemake
 - [x] Triangle
 - [x] Carré/Rectangle
 - [x] Tore (hyperboloid, paraboloid)
-- [ ] elispe ?
 
 ## PHASE 3 : OBJETS COMPOSES
 - [ ] Cube & Pavé
 - [ ] Pyramide base carré ou triangulaire
-- [ ] Cône
+- [x] Cône
 - [ ] BVH
 - [ ] Back-Face-Culling
 

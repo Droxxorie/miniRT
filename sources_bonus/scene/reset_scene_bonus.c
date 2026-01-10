@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:27:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:45:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,26 @@ void	reset_light_state(t_light *light)
 
 void	reset_object_state(t_object *object)
 {
+	t_torus	*torus;
+	t_cone	*cone;
+
 	object->visible = TRUE;
 	object->transform = object->initial_transform;
 	set_transform(object, object->transform);
 	if (object->type == TORUS)
 	{
-		object->u_data.torus.major_radius
-			= object->u_data.torus.initial_major_radius;
-		object->u_data.torus.minor_radius
-			= object->u_data.torus.initial_minor_radius;
-		object->u_data.torus.major_radius_sq
-			= object->u_data.torus.major_radius
-			* object->u_data.torus.major_radius;
-		object->u_data.torus.minor_radius_sq
-			= object->u_data.torus.minor_radius
-			* object->u_data.torus.minor_radius;
-		object->u_data.torus.diff_radius_sq
-			= object->u_data.torus.major_radius_sq
-			- object->u_data.torus.minor_radius_sq;
+		torus = &object->u_data.torus;
+		torus->major_radius = object->u_data.torus.initial_major_radius;
+		torus->minor_radius = object->u_data.torus.initial_minor_radius;
+		torus->major_radius_sq = torus->major_radius * torus->major_radius;
+		torus->minor_radius_sq = torus->minor_radius * torus->minor_radius;
+		torus->diff_radius_sq = torus->major_radius_sq - torus->minor_radius_sq;
+	}
+	else if (object->type == CONE)
+	{
+		cone = &object->u_data.cone;
+		cone->height = cone->initial_height;
+		cone->radius = cone->initial_radius;
 	}
 }
 

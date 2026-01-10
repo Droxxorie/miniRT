@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:36:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:52:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void		translate_rectangle(t_object *obj, t_vec3 translation);
 void		translate_disk(t_object *obj, t_vec3 translation);
 void		translate_triangle(t_object *obj, t_vec3 translation);
 void		translate_torus(t_object *obj, t_vec3 translation);
+void		translate_cone(t_object *obj, t_vec3 translation);
 
 //* --- Rotate --- */
 void		rotate_plane(t_object *obj, t_vec3 rotation_axis);
@@ -72,6 +73,7 @@ t_vec3		rotate_vector(t_vec3 vector, t_vec3 axis, t_real angle);
 void		rotate_rectangle(t_object *obj, t_vec3 rotation_axis);
 void		rotate_disk(t_object *obj, t_vec3 rotation_axis);
 void		rotate_triangle(t_object *obj, t_vec3 rotation_axis);
+void		rotate_cone(t_object *obj, t_vec3 rotation_axis);
 
 //* --- Resize --- */
 void		resize_sphere(t_object *obj, int mode, int direction);
@@ -81,5 +83,6 @@ void		resize_disk(t_object *obj, int mode, int direction);
 void		resize_triangle(t_object *obj, int mode, int direction);
 void		resize_torus(t_object *obj, int mode, int direction);
 void		resize_camera_fov(t_camera *camera, int mode, int direction);
+void		resize_cone(t_object *obj, int mode, int direction);
 
 #endif

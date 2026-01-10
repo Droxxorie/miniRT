@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 20:46:05 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:47:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*get_object_type_string(t_object_type type)
 		return ("TRIANGLE");
 	else if (type == TORUS)
 		return ("TORUS");
+	else if (type == CONE)
+		return ("CONE");
 	else
 		return ("NONE");
 }
