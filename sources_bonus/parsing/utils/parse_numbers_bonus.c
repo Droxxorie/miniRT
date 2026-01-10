@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:26:27 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:42:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:40:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_status	parse_ratio(t_scene *scene, char **line, t_real *ratio,
 	}
 	if (*ratio < min || *ratio > 1.0)
 	{
-		print_error_loc(scene, start_ptr, ERR_RATIO_OOR);
+		print_error_loc(scene, start_ptr, ERR_RATIO_OOB);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

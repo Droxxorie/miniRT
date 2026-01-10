@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 16:09:01 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:39:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ static void	set_cylinder_record(t_object *object, t_ray *ray,
 	t_vec3		q;
 
 	record->t = hit->t;
-	record->hit_point = vec3_add(ray->origin, vec3_scale(ray->direction,
-				record->t));
+	record->hit_point = ray_at(ray, record->t);
 	record->color = object->color;
 	record->object = object;
 	if (record->need_details == FALSE)

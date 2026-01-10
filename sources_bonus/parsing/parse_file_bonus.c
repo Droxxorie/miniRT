@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 22:12:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 18:37:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_status	dispatch_parse(t_scene *scene, char *line)
 	{"C", parse_camera}, {"L", parse_light}, {"sp", parse_sphere},
 	{"pl", parse_plane}, {"cy", parse_cylinder},
 	{"rec", parse_rectangle}, {"dis", parse_disk},
-	{"tri", parse_triangle}};
+	{"tri", parse_triangle}, {"tor", parse_torus}};
 
 	skip_whitespace(&line);
 	if (*line == '\0' || *line == '#')

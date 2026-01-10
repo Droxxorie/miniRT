@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:53:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 13:20:05 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:32:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 static void	set_rectangle_record(t_object *object, t_ray *world_ray,
 		t_hit_record *record)
 {
-	record->hit_point = vec3_add(world_ray->origin,
-			vec3_scale(world_ray->direction, record->t));
+	record->hit_point = ray_at(world_ray, record->t);
 	record->color = object->color;
 	record->object = object;
 	if (record->need_details == FALSE)

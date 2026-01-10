@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:37:28 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:12:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 18:49:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ void	update_object(t_object *object)
 		update_disk(object);
 	else if (object->type == TRIANGLE)
 		update_triangle(object);
+	else if (object->type == TORUS)
+		update_torus(object);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 11:21:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 21:30:10 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		save_cylinder_state(t_cylinder *cylinder);
 void		save_rectangle_state(t_rectangle *rectangle);
 void		save_disk_state(t_disk *disk);
 void		save_triangle_state(t_triangle *triangle);
+void		save_torus_state(t_torus *torus);
 
 //* ========================================================================= */
 //*                                RESET STATE                                */
@@ -46,6 +47,7 @@ void		reset_cylinder_state(t_object *object);
 void		reset_rectangle_state(t_object *object);
 void		reset_disk_state(t_object *object);
 void		reset_triangle_state(t_object *object);
+void		reset_torus_state(t_object *object);
 
 //* ========================================================================= */
 //*                                DISPATCHERS                                */
@@ -65,6 +67,7 @@ void		update_camera(t_camera *camera, t_real aspect_ratio);
 void		update_rectangle(t_object *object);
 void		update_disk(t_object *obj);
 void		update_triangle(t_object *object);
+void		update_torus(t_object *object);
 
 //* ========================================================================= */
 //*                                MODIFIERS                                  */
@@ -81,6 +84,7 @@ void		translate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
 void		translate_rectangle(t_object *obj, t_vec3 translation);
 void		translate_disk(t_object *obj, t_vec3 translation);
 void		translate_triangle(t_object *obj, t_vec3 translation);
+void		translate_torus(t_object *obj, t_vec3 translation);
 
 //* --- Rotate --- */
 void		rotate_plane(t_object *obj, t_vec3 rotation_axis);
@@ -90,6 +94,7 @@ t_vec3		rotate_vector(t_vec3 vector, t_vec3 axis, t_real angle);
 void		rotate_rectangle(t_object *obj, t_vec3 rotation_axis);
 void		rotate_disk(t_object *obj, t_vec3 rotation_axis);
 void		rotate_triangle(t_object *obj, t_vec3 rotation_axis);
+void		rotate_torus(t_object *obj, t_vec3 rotation_axis);
 
 //* --- Resize --- */
 void		resize_sphere(t_object *obj, int mode, int direction);
@@ -97,5 +102,6 @@ void		resize_cylinder(t_object *obj, int mode, int direction);
 void		resize_rectangle(t_object *obj, int mode, int direction);
 void		resize_disk(t_object *obj, int mode, int direction);
 void		resize_triangle(t_object *obj, int mode, int direction);
+void		resize_torus(t_object *obj, int mode, int direction);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 22:26:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 20:46:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*get_object_type_string(t_object_type type)
 		return ("DISK");
 	else if (type == TRIANGLE)
 		return ("TRIANGLE");
+	else if (type == TORUS)
+		return ("TORUS");
 	else
 		return ("NONE");
 }

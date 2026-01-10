@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:46:48 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 18:33:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_status	parse_scene_file(t_scene *scene, const char *file_path);
 t_status	parse_color(t_scene *scene, char **line, t_color *color);
 t_status	parse_ratio(t_scene *scene, char **line, t_real *ratio,
 				t_bool is_negative);
+t_status	parse_dim(t_scene *scene, char **line, t_real *dim);
 
 //* ========================================================================= */
 //*                                OBJECTS                                    */
@@ -38,6 +39,7 @@ t_status	parse_cylinder(t_scene *scene, char **line);
 t_status	parse_rectangle(t_scene *scene, char **line);
 t_status	parse_disk(t_scene *scene, char **line);
 t_status	parse_triangle(t_scene *scene, char **line);
+t_status	parse_torus(t_scene *scene, char **line);
 
 //* ========================================================================= */
 //*                                ENTITIES                                   */

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_sphere_bonus.c                               :+:      :+:    :+:   */
+/*   parse_torus_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 19:57:59 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 19:42:03 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/09 18:07:13 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/10 01:05:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static t_status	get_sphere_values(t_scene *scene, char **line, t_object *obj)
+static t_status	get_torus_values(t_scene *scene, char **line, t_object *obj)
 {
-	if (parse_vec3(scene, line, &obj->u_data.sphere.center) == EXIT_FAILURE
+	if (parse_vec3(scene, line, &obj->u_data.torus.center) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
-		|| parse_dim(scene, line, &obj->u_data.sphere.radius) == EXIT_FAILURE
+		|| parse_vec3(scene, line, &obj->u_data.torus.axis) == EXIT_FAILURE
+		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
+		|| parse_dim(scene, line,
+			&obj->u_data.torus.major_radius) == EXIT_FAILURE
+		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
+		|| parse_dim(scene, line,
+			&obj->u_data.torus.minor_radius) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
@@ -24,7 +30,7 @@ static t_status	get_sphere_values(t_scene *scene, char **line, t_object *obj)
 	return (EXIT_SUCCESS);
 }
 
-t_status	parse_sphere(t_scene *scene, char **line)
+t_status	parse_torus(t_scene *scene, char **line)
 {
 	t_object	*new_obj;
 
@@ -34,10 +40,9 @@ t_status	parse_sphere(t_scene *scene, char **line)
 	new_obj = ft_calloc(1, sizeof(t_object));
 	if (new_obj == NULL)
 		return (print_error(ERR_MEM_OBJECT), EXIT_FAILURE);
-	new_obj->type = SPHERE;
-	if (get_sphere_values(scene, line, new_obj) == EXIT_FAILURE)
+	new_obj->type = TORUS;
+	if (get_torus_values(scene, line, new_obj) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
-	new_obj->u_data.sphere.radius *= 0.5;
 	update_object(new_obj);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);

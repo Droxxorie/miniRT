@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:31:15 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 23:33:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 20:42:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	save_objects_state(t_object *objects)
 			save_disk_state(&current->u_data.disk);
 		else if (current->type == TRIANGLE)
 			save_triangle_state(&current->u_data.triangle);
+		else if (current->type == TORUS)
+			save_torus_state(&current->u_data.torus);
 		current = current->next;
 	}
 }

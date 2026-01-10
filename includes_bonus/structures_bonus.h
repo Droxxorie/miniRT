@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 16:09:07 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:32:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef enum e_object_type
 	RECTANGLE,
 	DISK,
 	TRIANGLE,
+	TORUS,
 	NONE
 }						t_object_type;
 
@@ -209,6 +210,21 @@ typedef struct s_triangle
 	t_point3	initial_p3;
 }						t_triangle;
 
+typedef struct s_torus
+{
+	t_point3	center;
+	t_vec3		axis;
+	t_real		major_radius;
+	t_real		minor_radius;
+	t_point3	initial_center;
+	t_vec3		initial_axis;
+	t_real		initial_major_radius;
+	t_real		initial_minor_radius;
+	t_real		major_radius_sq;
+	t_real		minor_radius_sq;
+	t_real		diff_radius_sq;
+}						t_torus;
+
 typedef struct s_object
 {
 	t_object_type		type;
@@ -225,6 +241,7 @@ typedef struct s_object
 		t_rectangle		rectangle;
 		t_disk			disk;
 		t_triangle		triangle;
+		t_torus			torus;
 	} u_data;
 	struct s_object		*next;
 }						t_object;

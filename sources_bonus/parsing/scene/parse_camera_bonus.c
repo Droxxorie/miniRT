@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:27:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/05 20:57:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:41:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_status	parse_fov(t_scene *scene, char **line, int *fov)
 	if (parse_int(line, fov) == EXIT_FAILURE)
 		return (print_error_loc(scene, start_line, ERR_FOV), EXIT_FAILURE);
 	if (*fov <= 0 || *fov >= 180)
-		return (print_error_loc(scene, start_line, ERR_FOV_OOR), EXIT_FAILURE);
+		return (print_error_loc(scene, start_line, ERR_FOV_OOB), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

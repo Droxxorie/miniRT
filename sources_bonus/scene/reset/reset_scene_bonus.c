@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 10:40:56 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 20:44:46 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	reset_object_state(t_object *object)
 		reset_disk_state(object);
 	else if (object->type == TRIANGLE)
 		reset_triangle_state(object);
+	else if (object->type == TORUS)
+		reset_torus_state(object);
 }
 
 void	reset_scene_state(t_scene *scene)

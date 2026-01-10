@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:55:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:19:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 18:36:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_status	get_disk_values(t_scene *scene, char **line, t_object *obj)
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_axis(scene, line, &obj->u_data.disk.normal) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
-		|| parse_real(line, &obj->u_data.disk.radius) == EXIT_FAILURE
+		|| parse_dim(scene, line, &obj->u_data.disk.radius) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)

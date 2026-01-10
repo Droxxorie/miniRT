@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:03:24 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:41:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,19 @@
 
 //* --- Colors --- */
 # define ERR_RED "Invalid red color value"
-# define ERR_RED_OOR "Red color value out of range [0, 255]"
+# define ERR_RED_OOB "Red color value out of range [0, 255]"
 # define ERR_GREEN "Invalid green color value"
-# define ERR_GREEN_OOR "Green color value out of range [0, 255]"
+# define ERR_GREEN_OOB "Green color value out of range [0, 255]"
 # define ERR_BLUE "Invalid blue color value"
-# define ERR_BLUE_OOR "Blue color value out of range [0, 255]"
+# define ERR_BLUE_OOB "Blue color value out of range [0, 255]"
 
 //* --- Vectors & Points --- */
 # define ERR_X "Invalid X component in vector"
-# define ERR_UX_OOR "X component out of range [-1.0, 1.0]"
+# define ERR_UX_OOB "X component out of range [-1.0, 1.0]"
 # define ERR_Y "Invalid Y component in vector"
-# define ERR_UY_OOR "Y component out of range [-1.0, 1.0]"
+# define ERR_UY_OOB "Y component out of range [-1.0, 1.0]"
 # define ERR_Z "Invalid Z component in vector"
-# define ERR_UZ_OOR "Z component out of range [-1.0, 1.0]"
+# define ERR_UZ_OOB "Z component out of range [-1.0, 1.0]"
 # define ERR_VEC3_ZERO "Vector cannot be the zero vector (0,0,0)"
 
 //* --- Resolution --- */
@@ -80,18 +80,22 @@
 
 //* --- Light --- */
 # define ERR_RATIO "Invalid ratio value"
-# define ERR_RATIO_OOR "Value out of range [-1.0, 1.0]"
+# define ERR_RATIO_OOB "Value out of range [-1.0, 1.0]"
 # define ERR_AMBIENT_DUP "Duplicate ambient light definition"
 
 //* --- Camera --- */
 # define ERR_FOV "Invalid field of view (FOV) value"
-# define ERR_FOV_OOR "Camera FOV out of range ]0, 180["
+# define ERR_FOV_OOB "Camera FOV out of range ]0, 180["
 
 //* --- Objects --- */
-# define ERR_D "Invalid diameter value"
-# define ERR_H "Invalid height value"
-# define ERR_D_OOR "Diameter must be positive (> 0)"
-# define ERR_H_OOR "Cylinder height must be positive (> 0)"
+# define ERR_DIM "Invalid dimension value"
+# define ERR_DIM_OOB "Dimension must be positive (> 0)"
+// # define ERR_D "Invalid diameter value"
+// # define ERR_R "Invalid radius value"
+// # define ERR_H "Invalid height value"
+// # define ERR_D_OOB "Diameter must be positive (> 0)"
+// # define ERR_R_OOB "Radius must be positive (> 0)"
+// # define ERR_H_OOB "Cylinder height must be positive (> 0)"
 
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 16:07:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/09 19:39:10 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static void	set_sphere_record(t_object *object, t_ray *world_ray,
 	t_sphere	*sphere;
 
 	sphere = &object->u_data.sphere;
-	record->hit_point = vec3_add(world_ray->origin,
-			vec3_scale(world_ray->direction, record->t));
+	record->hit_point = ray_at(world_ray, record->t);
 	record->color = object->color;
 	record->object = object;
 	if (record->need_details == FALSE)
