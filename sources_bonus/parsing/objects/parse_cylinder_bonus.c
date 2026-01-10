@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 22:05:08 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 18:35:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:58:46 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ static t_status	get_cylinder_value(t_scene *scene, char **line, t_object *obj)
 	return (EXIT_SUCCESS);
 }
 
+static void	init_cylinder_matrix(t_object *object)
+{
+	t_mat4		translation;
+	t_mat4		rotation;
+	t_mat4		scaling;
+	t_mat4		transform;
+	t_cylinder	*cylinder;
+
+	cylinder = &object->u_data.cylinder;
+	translation = make_translation_matrix(cylinder->center);
+	rotation = rotation_align(cylinder->axis);
+	scaling = make_scale_matrix((t_vec3){cylinder->radius, cylinder->height,
+			cylinder->radius});
+	transform = identity_matrix();
+	transform = mat4_mult_mat4(transform, translation);
+	transform = mat4_mult_mat4(transform, rotation);
+	transform = mat4_mult_mat4(transform, scaling);
+	set_transform(object, transform);
+}
+
 t_status	parse_cylinder(t_scene *scene, char **line)
 {
 	t_object	*obj;
@@ -42,7 +62,7 @@ t_status	parse_cylinder(t_scene *scene, char **line)
 	if (get_cylinder_value(scene, line, obj) == EXIT_FAILURE)
 		return (free(obj), EXIT_FAILURE);
 	obj->u_data.cylinder.radius *= 0.5;
-	update_object(obj);
+	init_cylinder_matrix(obj);
 	add_object_to_scene(scene, obj);
 	return (EXIT_SUCCESS);
 }

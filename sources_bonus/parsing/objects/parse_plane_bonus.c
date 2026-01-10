@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:49:32 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:19:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 14:34:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ static t_status	get_plane_values(t_scene *scene, char **line, t_object *obj)
 	return (EXIT_SUCCESS);
 }
 
+static void	init_plane_matrix(t_object *object)
+{
+	t_mat4	translation;
+	t_mat4	rotation;
+	t_mat4	transform;
+	t_plane	*plane;
+
+	plane = &object->u_data.plane;
+	translation = make_translation_matrix(plane->origin);
+	rotation = rotation_align(plane->normal);
+	transform = identity_matrix();
+	transform = mat4_mult_mat4(transform, translation);
+	transform = mat4_mult_mat4(transform, rotation);
+	set_transform(object, transform);
+}
+
 t_status	parse_plane(t_scene *scene, char **line)
 {
 	t_object	*new_obj;
@@ -37,7 +53,7 @@ t_status	parse_plane(t_scene *scene, char **line)
 	new_obj->type = PLANE;
 	if (get_plane_values(scene, line, new_obj) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
-	update_object(new_obj);
+	init_plane_matrix(new_obj);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:25:10 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 08:55:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:01:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 void	resize_rectangle(t_object *object, int mode, int direction)
 {
-	t_rectangle	*rectangle;
-	t_real		change;
+	t_vec3	scale_factors;
+	t_mat4	scale_matrix;
+	t_real	factor;
 
-	rectangle = &object->u_data.rectangle;
-	change = direction * STEP_SIZE;
+	if (direction == 1)
+		factor = 1.1;
+	else
+		factor = 0.9;
 	if (mode == RESIZE_X)
-	{
-		rectangle->width += change;
-		if (rectangle->width < 0.1)
-			rectangle->width = 0.1;
-		log_event(stdout, "INFO", "Rectangle width resized to %.2f",
-			rectangle->width);
-		update_object(object);
-	}
+		scale_factors = (t_vec3){factor, 1.0, 1.0};
 	else if (mode == RESIZE_Y)
-	{
-		rectangle->height += change;
-		if (rectangle->height < 0.1)
-			rectangle->height = 0.1;
-		log_event(stdout, "INFO", "Rectangle height resized to %.2f",
-			rectangle->height);
-		update_object(object);
-	}
+		scale_factors = (t_vec3){1.0, factor, 1.0};
+	else
+		return ;
+	scale_matrix = make_scale_matrix(scale_factors);
+	object->transform = mat4_mult_mat4(object->transform, scale_matrix);
+	set_transform(object, object->transform);
+	log_event(stdout, "INFO", "Rectangle resized");
 }

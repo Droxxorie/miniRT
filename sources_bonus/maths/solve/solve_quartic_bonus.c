@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:33:56 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 20:40:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:56:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static void	normalize_coeffs(t_quartic *vars)
 	vars->d = vars->coeffs[0] * a_inv;
 }
 
+//* y^3 - b*y^2 + (ac - 4d)*y - (a^2*d + c^2 - 4*b*d) = 0
 static void	solve_resolvent(t_quartic *vars)
 {
+	int	i;
+
 	vars->sq_a = vars->a * vars->a;
 	vars->cubic_vars.coeffs[3] = 1.0;
 	vars->cubic_vars.coeffs[2] = -vars->b;
@@ -33,6 +36,13 @@ static void	solve_resolvent(t_quartic *vars)
 		- vars->c * vars->c;
 	solve_cubic(&vars->cubic_vars);
 	vars->y = vars->cubic_vars.roots[0];
+	i = 1;
+	while (i < vars->cubic_vars.roots_count)
+	{
+		if (vars->cubic_vars.roots[i] > vars->y)
+			vars->y = vars->cubic_vars.roots[i];
+		i++;
+	}
 }
 
 static void	set_quartic_roots(t_quartic *vars, t_real t1, t_real t2)

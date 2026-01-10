@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:38:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:16:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:02:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 void	translate_triangle(t_object *object, t_vec3 translation)
 {
-	t_triangle	*triangle;
+	t_mat4	translation_matrix;
 
 	if (!object)
 		return ;
-	triangle = &object->u_data.triangle;
-	triangle->p1 = vec3_add(triangle->p1, translation);
-	triangle->p2 = vec3_add(triangle->p2, translation);
-	triangle->p3 = vec3_add(triangle->p3, translation);
-	update_object(object);
+	translation_matrix = make_translation_matrix(translation);
+	object->transform = mat4_mult_mat4(translation_matrix, object->transform);
+	set_transform(object, object->transform);
 }

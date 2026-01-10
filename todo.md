@@ -1,12 +1,9 @@
 # ERRORS
 Ajouter tests save
-test rectangle
 rajouter scaling factor au resize
 print caractéristics object/entité select
 rajouter log transform ?
-ajouter barre de chargement makefile
-rotation torus cassé + enelver t_bool apply_rotation_martix
-vérifier scaling torus update
+ajouter barre de chargement makefilemake 
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -24,7 +21,7 @@ vérifier scaling torus update
 - [x] Disque
 - [x] Triangle
 - [x] Carré/Rectangle
-- [ ] Tore (hyperboloid, paraboloid)
+- [x] Tore (hyperboloid, paraboloid)
 - [ ] elispe ?
 
 ## PHASE 3 : OBJETS COMPOSES

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:59:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:20:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 16:14:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,27 @@ static t_status	get_triangle_values(t_scene *scene, char **line,
 	return (EXIT_SUCCESS);
 }
 
+static void	init_triangle_matrix(t_object *object)
+{
+	t_triangle	*triangle;
+	t_vec3		center;
+	t_mat4		transform;
+
+	triangle = &object->u_data.triangle;
+	center = vec3_add(triangle->p1, triangle->p2);
+	center = vec3_add(center, triangle->p3);
+	center = vec3_scale(center, 1.0 / 3.0);
+	triangle->p1 = vec3_sub(triangle->p1, center);
+	triangle->p2 = vec3_sub(triangle->p2, center);
+	triangle->p3 = vec3_sub(triangle->p3, center);
+	triangle->edge1 = vec3_sub(triangle->p2, triangle->p1);
+	triangle->edge2 = vec3_sub(triangle->p3, triangle->p1);
+	triangle->normal = vec3_normalize(vec3_cross(triangle->edge1,
+				triangle->edge2));
+	transform = make_translation_matrix(center);
+	set_transform(object, transform);
+}
+
 t_status	parse_triangle(t_scene *scene, char **line)
 {
 	t_object	*new_object;
@@ -40,7 +61,7 @@ t_status	parse_triangle(t_scene *scene, char **line)
 	new_object->type = TRIANGLE;
 	if (get_triangle_values(scene, line, new_object) == EXIT_FAILURE)
 		return (free(new_object), EXIT_FAILURE);
-	update_object(new_object);
+	init_triangle_matrix(new_object);
 	add_object_to_scene(scene, new_object);
 	return (EXIT_SUCCESS);
 }

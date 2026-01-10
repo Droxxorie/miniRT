@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:18:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 08:55:46 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:01:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 void	resize_sphere(t_object *object, int mode, int direction)
 {
-	t_sphere	*sphere;
+	t_real	scale_factor;
+	t_mat4	scale_matrix;
 
 	if (mode == RESIZE_X)
 	{
-		sphere = &object->u_data.sphere;
-		sphere->radius += (direction * STEP_SIZE);
-		if (sphere->radius < 0.1)
-			sphere->radius = 0.1;
-		log_event(stdout, "INFO", "Sphere radius resized to %.2f",
-			sphere->radius);
-		update_object(object);
+		if (direction > 0)
+			scale_factor = 1.1;
+		else
+			scale_factor = 0.9;
+		scale_matrix = make_scale_matrix((t_vec3){scale_factor, scale_factor,
+				scale_factor});
+		object->transform = mat4_mult_mat4(object->transform, scale_matrix);
+		set_transform(object, object->transform);
+		log_event(stdout, "INFO", "Sphere resized");
 	}
 }

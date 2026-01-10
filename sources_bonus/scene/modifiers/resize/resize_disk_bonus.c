@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:20:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 08:55:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:01:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 void	resize_disk(t_object *object, int mode, int direction)
 {
-	t_disk	*disk;
+	t_vec3	scale_factors;
+	t_mat4	scale_matrix;
+	t_real	factor;
 
+	if (direction > 0)
+		factor = 1.1;
+	else
+		factor = 0.9;
 	if (mode == RESIZE_X)
-	{
-		disk = &object->u_data.disk;
-		disk->radius += (direction * STEP_SIZE);
-		if (disk->radius < 0.1)
-			disk->radius = 0.1;
-		log_event(stdout, "INFO", "Disk radius resized to %.2f",
-			disk->radius);
-		update_object(object);
-	}
+		scale_factors = (t_vec3){factor, 1.0, factor};
+	else
+		return ;
+	scale_matrix = make_scale_matrix(scale_factors);
+	object->transform = mat4_mult_mat4(object->transform, scale_matrix);
+	set_transform(object, object->transform);
+	log_event(stdout, "INFO", "Disk resized");
 }

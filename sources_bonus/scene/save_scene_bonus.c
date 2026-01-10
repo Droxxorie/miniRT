@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:31:15 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 20:42:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:27:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,14 @@ static void	save_objects_state(t_object *objects)
 	current = objects;
 	while (current)
 	{
-		if (current->type == SPHERE)
-			save_sphere_state(&current->u_data.sphere);
-		else if (current->type == PLANE)
-			save_plane_state(&current->u_data.plane);
-		else if (current->type == CYLINDER)
-			save_cylinder_state(&current->u_data.cylinder);
-		else if (current->type == RECTANGLE)
-			save_rectangle_state(&current->u_data.rectangle);
-		else if (current->type == DISK)
-			save_disk_state(&current->u_data.disk);
-		else if (current->type == TRIANGLE)
-			save_triangle_state(&current->u_data.triangle);
-		else if (current->type == TORUS)
-			save_torus_state(&current->u_data.torus);
+		current->initial_transform = current->transform;
+		if (current->type == TORUS)
+		{
+			current->u_data.torus.initial_major_radius
+				= current->u_data.torus.major_radius;
+			current->u_data.torus.initial_minor_radius
+				= current->u_data.torus.minor_radius;
+		}
 		current = current->next;
 	}
 }
@@ -47,6 +41,7 @@ static void	save_cameras_state(t_camera *cameras)
 		current->initial_position = current->position;
 		current->initial_direction = current->direction;
 		current->initial_fov = current->fov;
+		current->initial_tilt = current->tilt;
 		current = current->next;
 	}
 }

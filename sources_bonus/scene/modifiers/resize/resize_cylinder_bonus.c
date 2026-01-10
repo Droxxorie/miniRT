@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:20:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 08:55:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:01:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 void	resize_cylinder(t_object *object, int mode, int direction)
 {
-	t_cylinder	*cylinder;
-	t_real		change;
+	t_vec3	scale_factors;
+	t_mat4	scale_matrix;
+	t_real	factor;
 
-	cylinder = &object->u_data.cylinder;
-	change = direction * STEP_SIZE;
+	if (direction > 0)
+		factor = 1.1;
+	else
+		factor = 0.9;
 	if (mode == RESIZE_X)
-	{
-		cylinder->radius += change;
-		if (cylinder->radius < 0.1)
-			cylinder->radius = 0.1;
-		log_event(stdout, "INFO", "Cylinder radius resized to %.2f",
-			cylinder->radius);
-		update_object(object);
-	}
+		scale_factors = (t_vec3){factor, 1.0, factor};
 	else if (mode == RESIZE_Y)
-	{
-		cylinder->height += change;
-		if (cylinder->height < 0.1)
-			cylinder->height = 0.1;
-		log_event(stdout, "INFO", "Cylinder height resized to %.2f",
-			cylinder->height);
-		update_object(object);
-	}
+		scale_factors = (t_vec3){1.0, factor, 1.0};
+	else
+		return ;
+	scale_matrix = make_scale_matrix(scale_factors);
+	object->transform = mat4_mult_mat4(object->transform, scale_matrix);
+	set_transform(object, object->transform);
+	log_event(stdout, "INFO", "Cylinder resized");
 }

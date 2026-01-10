@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:07:13 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 01:05:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 18:18:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ static t_status	get_torus_values(t_scene *scene, char **line, t_object *obj)
 	return (EXIT_SUCCESS);
 }
 
+static void	init_torus_matrix(t_object *object)
+{
+	t_mat4	translation;
+	t_mat4	rotation;
+	t_mat4	transform;
+	t_torus	*torus;
+
+	torus = &object->u_data.torus;
+	torus->major_radius_sq = torus->major_radius * torus->major_radius;
+	torus->minor_radius_sq = torus->minor_radius * torus->minor_radius;
+	torus->diff_radius_sq = torus->major_radius_sq - torus->minor_radius_sq;
+	translation = make_translation_matrix(torus->center);
+	rotation = rotation_align(torus->axis);
+	transform = identity_matrix();
+	transform = mat4_mult_mat4(transform, translation);
+	transform = mat4_mult_mat4(transform, rotation);
+	set_transform(object, transform);
+}
+
 t_status	parse_torus(t_scene *scene, char **line)
 {
 	t_object	*new_obj;
@@ -43,7 +62,7 @@ t_status	parse_torus(t_scene *scene, char **line)
 	new_obj->type = TORUS;
 	if (get_torus_values(scene, line, new_obj) == EXIT_FAILURE)
 		return (free(new_obj), EXIT_FAILURE);
-	update_object(new_obj);
+	init_torus_matrix(new_obj);
 	add_object_to_scene(scene, new_obj);
 	return (EXIT_SUCCESS);
 }

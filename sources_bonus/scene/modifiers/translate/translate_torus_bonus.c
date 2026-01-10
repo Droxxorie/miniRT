@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:54:27 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 20:54:56 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 17:05:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	translate_torus(t_object *object, t_vec3 translation)
 {
-	t_torus	*torus;
+	t_mat4	translation_matrix;
 
 	if (!object)
 		return ;
-	torus = &object->u_data.torus;
-	torus->center = vec3_add(torus->center, translation);
-	update_object(object);
+	translation_matrix = make_translation_matrix(translation);
+	object->transform = mat4_mult_mat4(translation_matrix,
+			object->transform);
+	set_transform(object, object->transform);
 }

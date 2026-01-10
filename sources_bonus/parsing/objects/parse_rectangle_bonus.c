@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:34:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:20:01 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:59:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,26 @@ static t_status	get_rectangle_values(t_scene *scene, char **line,
 	return (EXIT_SUCCESS);
 }
 
+static void	init_rectangle_matrix(t_object *object)
+{
+	t_mat4		translation;
+	t_mat4		rotation;
+	t_mat4		scaling;
+	t_mat4		transform;
+	t_rectangle	*rectangle;
+
+	rectangle = &object->u_data.rectangle;
+	translation = make_translation_matrix(rectangle->center);
+	rotation = rotation_align(rectangle->normal);
+	scaling = make_scale_matrix((t_vec3){rectangle->width, 1.0,
+			rectangle->height});
+	transform = identity_matrix();
+	transform = mat4_mult_mat4(transform, translation);
+	transform = mat4_mult_mat4(transform, rotation);
+	transform = mat4_mult_mat4(transform, scaling);
+	set_transform(object, transform);
+}
+
 t_status	parse_rectangle(t_scene *scene, char **line)
 {
 	t_object	*new_object;
@@ -44,7 +64,7 @@ t_status	parse_rectangle(t_scene *scene, char **line)
 	new_object->type = RECTANGLE;
 	if (get_rectangle_values(scene, line, new_object) == EXIT_FAILURE)
 		return (free(new_object), EXIT_FAILURE);
-	update_object(new_object);
+	init_rectangle_matrix(new_object);
 	add_object_to_scene(scene, new_object);
 	return (EXIT_SUCCESS);
 }

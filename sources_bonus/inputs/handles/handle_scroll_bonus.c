@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:04:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 21:08:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:40:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_bool	handle_scroll(int button, t_scene *scene)
 	int	mode;
 	int	direction;
 
-	if (scene->selected_object == NULL)
-		return (FALSE);
 	if (button == SCROLL_UP)
 		direction = 1;
 	else if (button == SCROLL_DOWN)
@@ -31,6 +29,11 @@ t_bool	handle_scroll(int button, t_scene *scene)
 		mode = RESIZE_Y;
 	else
 		mode = RESIZE_X;
-	dispatch_resize(scene->selected_object, mode, direction);
+	if (scene->selected_object && scene->selected_object->visible != FALSE)
+		dispatch_resize(scene->selected_object, mode, direction);
+	else if (scene->selected_light == NULL)
+		resize_camera_fov(scene->active_camera, mode, direction);
+	else
+		return (FALSE);
 	return (TRUE);
 }

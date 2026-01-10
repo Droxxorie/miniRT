@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 19:32:17 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:51:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,12 @@ typedef struct s_sphere
 {
 	t_point3			center;
 	t_real				radius;
-	t_real				sq_radius;
-	t_real				inv_radius;
-	t_point3			initial_center;
-	t_real				initial_radius;
 }						t_sphere;
 
 typedef struct s_plane
 {
 	t_point3			origin;
 	t_vec3				normal;
-	t_point3			initial_origin;
-	t_vec3				initial_normal;
 }						t_plane;
 
 typedef enum e_cylinder_element
@@ -157,10 +151,6 @@ typedef struct s_cylinder
 	t_vec3				axis;
 	t_real				radius;
 	t_real				height;
-	t_point3			initial_center;
-	t_vec3				initial_axis;
-	t_real				initial_radius;
-	t_real				initial_height;
 }						t_cylinder;
 
 typedef struct s_rectangle
@@ -169,10 +159,6 @@ typedef struct s_rectangle
 	t_vec3				normal;
 	t_real				width;
 	t_real				height;
-	t_point3			initial_center;
-	t_vec3				initial_normal;
-	t_real				initial_width;
-	t_real				initial_height;
 }						t_rectangle;
 
 typedef struct s_disk
@@ -180,9 +166,6 @@ typedef struct s_disk
 	t_point3			center;
 	t_vec3				normal;
 	t_real				radius;
-	t_point3			initial_center;
-	t_vec3				initial_normal;
-	t_real				initial_radius;
 }						t_disk;
 
 typedef struct s_triangle_hit
@@ -205,9 +188,6 @@ typedef struct s_triangle
 	t_vec3		edge1;
 	t_vec3		edge2;
 	t_vec3		normal;
-	t_point3	initial_p1;
-	t_point3	initial_p2;
-	t_point3	initial_p3;
 }						t_triangle;
 
 typedef struct s_torus
@@ -216,8 +196,6 @@ typedef struct s_torus
 	t_vec3		axis;
 	t_real		major_radius;
 	t_real		minor_radius;
-	t_point3	initial_center;
-	t_vec3		initial_axis;
 	t_real		initial_major_radius;
 	t_real		initial_minor_radius;
 	t_real		major_radius_sq;
@@ -230,6 +208,7 @@ typedef struct s_object
 	t_object_type		type;
 	t_color				color;
 	t_mat4				transform;
+	t_mat4				initial_transform;
 	t_mat4				inverse;
 	t_mat4				transposed_inverse;
 	t_bool				visible;
@@ -278,15 +257,16 @@ typedef struct s_camera
 	t_point3			position;
 	t_vec3				direction;
 	int					fov;
-	t_point3			initial_position;
-	t_vec3				initial_direction;
-	int					initial_fov;
 	t_mat4				camera_to_world;
 	t_real				scale_factor;
 	t_real				width;
 	t_real				height;
 	t_real				aspect_ratio;
 	t_real				tilt;
+	t_point3			initial_position;
+	t_vec3				initial_direction;
+	int					initial_fov;
+	t_real				initial_tilt;
 	struct s_camera		*next;
 }						t_camera;
 

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 20:44:46 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:27:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	reset_camera_state(t_camera *camera)
 	camera->position = camera->initial_position;
 	camera->direction = camera->initial_direction;
 	camera->fov = camera->initial_fov;
+	camera->tilt = camera->initial_tilt;
 	update_camera(camera, camera->aspect_ratio);
 }
 
@@ -30,20 +31,24 @@ void	reset_light_state(t_light *light)
 void	reset_object_state(t_object *object)
 {
 	object->visible = TRUE;
-	if (object->type == SPHERE)
-		reset_sphere_state(object);
-	else if (object->type == PLANE)
-		reset_plane_state(object);
-	else if (object->type == CYLINDER)
-		reset_cylinder_state(object);
-	else if (object->type == RECTANGLE)
-		reset_rectangle_state(object);
-	else if (object->type == DISK)
-		reset_disk_state(object);
-	else if (object->type == TRIANGLE)
-		reset_triangle_state(object);
-	else if (object->type == TORUS)
-		reset_torus_state(object);
+	object->transform = object->initial_transform;
+	set_transform(object, object->transform);
+	if (object->type == TORUS)
+	{
+		object->u_data.torus.major_radius
+			= object->u_data.torus.initial_major_radius;
+		object->u_data.torus.minor_radius
+			= object->u_data.torus.initial_minor_radius;
+		object->u_data.torus.major_radius_sq
+			= object->u_data.torus.major_radius
+			* object->u_data.torus.major_radius;
+		object->u_data.torus.minor_radius_sq
+			= object->u_data.torus.minor_radius
+			* object->u_data.torus.minor_radius;
+		object->u_data.torus.diff_radius_sq
+			= object->u_data.torus.major_radius_sq
+			- object->u_data.torus.minor_radius_sq;
+	}
 }
 
 void	reset_scene_state(t_scene *scene)

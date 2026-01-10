@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:48:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 08:55:48 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:01:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,16 @@
 
 void	resize_triangle(t_object *object, int mode, int direction)
 {
-	t_triangle	*triangle;
-	t_point3	center;
-	t_real		scale_factor;
+	t_mat4		scale_matrix;
+	t_real		factor;
 
 	(void)mode;
-	triangle = &object->u_data.triangle;
-	scale_factor = 1.0 + (direction * STEP_SIZE);
-	center = vec3_scale(vec3_add(vec3_add(triangle->p1, triangle->p2),
-				triangle->p3), 1.0 / 3.0);
-	triangle->p1 = vec3_add(center, vec3_scale(vec3_sub(triangle->p1, center),
-				scale_factor));
-	triangle->p2 = vec3_add(center, vec3_scale(vec3_sub(triangle->p2, center),
-				scale_factor));
-	triangle->p3 = vec3_add(center, vec3_scale(vec3_sub(triangle->p3, center),
-				scale_factor));
-	log_event(stdout, "INFO", "Triangle resized by a factor of %.2f",
-		scale_factor);
-	update_object(object);
+	if (direction > 0)
+		factor = 1.1;
+	else
+		factor = 0.9;
+	scale_matrix = make_scale_matrix((t_vec3){factor, factor, factor});
+	object->transform = mat4_mult_mat4(object->transform, scale_matrix);
+	set_transform(object, object->transform);
+	log_event(stdout, "INFO", "Triangle resized");
 }

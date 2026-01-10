@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 20:55:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 19:13:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	dispatch_rotate(t_object *object, t_vec3 rot_axis)
 	{RECTANGLE, rotate_rectangle},
 	{DISK, rotate_disk},
 	{TRIANGLE, rotate_triangle},
-	{TORUS, rotate_torus},
 	{NONE, NULL}};
 
 	if (!object)

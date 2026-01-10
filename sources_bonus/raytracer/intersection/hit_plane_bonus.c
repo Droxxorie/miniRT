@@ -6,42 +6,44 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:13 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 19:39:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:00:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
 static void	set_plane_record(t_object *object, t_ray *world_ray,
-		t_hit_record *record)
+		t_ray *local_ray, t_hit_record *record)
 {
+	t_vec3	local_normal;
+
 	record->hit_point = ray_at(world_ray, record->t);
 	record->color = object->color;
 	record->object = object;
 	if (record->need_details == FALSE)
 		return ;
-	record->normal = object->u_data.plane.normal;
+	if (local_ray->direction.y < 0)
+		local_normal = (t_vec3){0, 1, 0};
+	else
+		local_normal = (t_vec3){0, -1, 0};
+	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
+	record->normal = vec3_normalize(record->normal);
 	set_face_normal(record, world_ray, record->normal);
 }
 
 //* t = ((P - O) * N) / (D * N)
 t_bool	hit_plane(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
-	t_plane	*plane;
+	t_ray	local_ray;
 	t_real	t;
-	t_real	numerator;
-	t_real	denominator;
 
-	plane = &object->u_data.plane;
-	denominator = vec3_dot(world_ray->direction, plane->normal);
-	if (fabs(denominator) < EPSILON)
+	local_ray = transform_ray(*world_ray, object->inverse);
+	if (fabs(local_ray.direction.y) < EPSILON)
 		return (FALSE);
-	numerator = vec3_dot(vec3_sub(plane->origin, world_ray->origin),
-			plane->normal);
-	t = numerator / denominator;
+	t = -local_ray.origin.y / local_ray.direction.y;
 	if (t < world_ray->min || t > world_ray->max)
 		return (FALSE);
 	record->t = t;
-	set_plane_record(object, world_ray, record);
+	set_plane_record(object, world_ray, &local_ray, record);
 	return (TRUE);
 }

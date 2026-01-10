@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:25:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 09:16:24 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:02:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	translate_disk(t_object *object, t_vec3 translation)
 {
-	t_disk	*disk;
+	t_mat4	translation_matrix;
 
 	if (!object)
 		return ;
-	disk = &object->u_data.disk;
-	disk->center = vec3_add(disk->center, translation);
-	update_object(object);
+	translation_matrix = make_translation_matrix(translation);
+	object->transform = mat4_mult_mat4(translation_matrix, object->transform);
+	set_transform(object, object->transform);
 }

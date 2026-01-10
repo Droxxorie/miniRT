@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:45:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:34:04 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 13:37:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 
 	relative_vector = get_camera_relative_vector(input_vector,
 			scene->active_camera);
-	if (scene->selected_object)
+	if (scene->selected_object && scene->selected_object->visible == TRUE)
 	{
 		if (scene->control_mode == TRANSLATE)
 			dispatch_translate(scene->selected_object,
@@ -41,7 +41,7 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 			dispatch_rotate(scene->selected_object, vec3_scale(relative_vector,
 					STEP_ROT));
 	}
-	else if (scene->selected_light)
+	else if (scene->selected_light && scene->selected_light->active == TRUE)
 	{
 		if (scene->control_mode == TRANSLATE)
 			translate_light(scene->selected_light, vec3_scale(relative_vector,

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 19:39:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/10 20:00:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ static void	check_tube_root(t_cylinder_hit *hit, t_real t)
 
 static void	solve_tube(t_cylinder_hit *hit)
 {
-	t_vec3		direction;
-	t_vec3		origin;
+	t_vec3		d;
+	t_vec3		o;
 	t_quadratic	*vars;
 
 	vars = &hit->quadratic_vars;
-	direction = hit->ray.direction;
-	origin = hit->ray.origin;
-	vars->a = direction.x * direction.x + direction.z * direction.z;
-	vars->half_b = (origin.x * direction.x + origin.z * direction.z);
-	vars->c = origin.x * origin.x + origin.z * origin.z - 1.0;
+	d = hit->ray.direction;
+	o = hit->ray.origin;
+	vars->a = (d.x * d.x) + (d.z * d.z);
+	if (fabs(vars->a) < EPSILON)
+		return ;
+	vars->half_b = (o.x * d.x) + (o.z * d.z);
+	vars->c = (o.x * o.x) + (o.z * o.z) - 1.0;
 	if (solve_quadratic(vars) == FALSE)
 		return ;
 	check_tube_root(hit, vars->root1);
@@ -49,47 +51,49 @@ static void	check_cap(t_cylinder_hit *hit, t_real y_plane,
 	t_real	t;
 	t_real	x;
 	t_real	z;
+	t_vec3	d;
+	t_vec3	o;
 
-	if (fabs(hit->ray.direction.y) < EPSILON)
+	d = hit->ray.direction;
+	o = hit->ray.origin;
+	if (fabs(d.y) < EPSILON)
 		return ;
-	t = (y_plane - hit->ray.origin.y) / hit->ray.direction.y;
+	t = (y_plane - o.y) / d.y;
 	if (t <= EPSILON || t >= hit->t)
 		return ;
-	x = hit->ray.origin.x + t * hit->ray.direction.x;
-	z = hit->ray.origin.z + t * hit->ray.direction.z;
-	if ((x * x + z * z) > 1.0)
+	x = o.x + (t * d.x);
+	z = o.z + (t * d.z);
+	if ((x * x) + (z * z) > 1.0)
 		return ;
 	hit->t = t;
 	hit->type = type;
 }
 
-static void	set_cylinder_record(t_object *object, t_ray *ray,
+static void	set_cylinder_record(t_object *object, t_ray *world_ray,
 		t_hit_record *record, t_cylinder_hit *hit)
 {
-	t_cylinder	*cylinder;
-	t_vec3		cp;
-	t_real		h;
-	t_vec3		q;
+	t_ray	*local_ray;
+	t_vec3	local_normal;
+	t_vec3	local_hit_point;
 
-	record->t = hit->t;
-	record->hit_point = ray_at(ray, record->t);
+	record->hit_point = ray_at(world_ray, record->t);
 	record->color = object->color;
 	record->object = object;
+	local_ray = &hit->ray;
 	if (record->need_details == FALSE)
 		return ;
-	cylinder = &object->u_data.cylinder;
 	if (hit->type == TOP_CAP)
-		record->normal = cylinder->axis;
+		local_normal = (t_vec3){0, 1, 0};
 	else if (hit->type == BOTTOM_CAP)
-		record->normal = vec3_scale(cylinder->axis, -1);
+		local_normal = (t_vec3){0, -1, 0};
 	else
 	{
-		cp = vec3_sub(record->hit_point, cylinder->center);
-		h = vec3_dot(cp, cylinder->axis);
-		q = vec3_add(cylinder->center, vec3_scale(cylinder->axis, h));
-		record->normal = vec3_normalize(vec3_sub(record->hit_point, q));
+		local_hit_point = ray_at(local_ray, record->t);
+		local_normal = (t_vec3){local_hit_point.x, 0, local_hit_point.z};
 	}
-	set_face_normal(record, ray, record->normal);
+	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
+	record->normal = vec3_normalize(record->normal);
+	set_face_normal(record, world_ray, record->normal);
 }
 
 t_bool	hit_cylinder(t_object *object, t_ray *world_ray, t_hit_record *record)
@@ -102,9 +106,9 @@ t_bool	hit_cylinder(t_object *object, t_ray *world_ray, t_hit_record *record)
 	solve_tube(&hit);
 	check_cap(&hit, 0.5, TOP_CAP);
 	check_cap(&hit, -0.5, BOTTOM_CAP);
-	if (hit.type == NONE_ELEMENT || hit.t < world_ray->min
-		|| hit.t > world_ray->max)
+	if (hit.type == NONE_ELEMENT || hit.t < world_ray->min)
 		return (FALSE);
+	record->t = hit.t;
 	set_cylinder_record(object, world_ray, record, &hit);
 	return (TRUE);
 }

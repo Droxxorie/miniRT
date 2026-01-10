@@ -221,17 +221,9 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/transformation_dispatch_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/utils_bonus.c \
-#* ---- Update ---
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/scene/update/update_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_plane_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_disk_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_camera_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update/update_torus_bonus.c \
+	$(SRC_DIR_BONUS)/scene/update_camera_bonus.c \
+	$(SRC_DIR_BONUS)/scene/save_scene_bonus.c \
+	$(SRC_DIR_BONUS)/scene/reset_scene_bonus.c \
 #* ---- Translate ---
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_camera_bonus.c \
@@ -251,7 +243,6 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_rectangle_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_disk_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_torus_bonus.c \
 #* ---- Resize ---
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
@@ -260,26 +251,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_disk_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_triangle_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_torus_bonus.c \
-#* ---- Save ----
-SRCS_BONUS += \
-	$(SRC_DIR_BONUS)/scene/save/save_scene_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_plane_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_disk_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save/objects/save_torus_bonus.c \
-#* ---- Reset ----
-SRCS_BONUS += \
-	$(SRC_DIR_BONUS)/scene/reset/reset_scene_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_plane_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_disk_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset/objects/reset_torus_bonus.c \
+	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_camera_bonus.c \
 
 #* ---- Raytracer ----
 SRCS_BONUS += \
@@ -402,13 +374,13 @@ run: $(NAME)
 	@echo "$(YELLOW)${BOLD}[RUN] ./$(NAME) $(ARGS)$(RESET)"
 	@-./$(NAME) $(ARGS)
 
-valgrind:
+valgrind: $(NAME)
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --suppressions=valgrind.supp\
 		./$(NAME) $(ARGS) || true
 
-valgrind_bonus:
+valgrind_bonus: $(NAME_BONUS)
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME_BONUS) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes --suppressions=valgrind.supp\
