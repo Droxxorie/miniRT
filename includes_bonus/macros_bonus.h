@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 19:33:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:46:41 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@
 # define KEY_CTRL_L 65507
 # define KEY_CTRL_R 65508
 # define KEY_ENTER 65293
+# define KEY_ALT_L 65513
+# define KEY_ALT_R 65514
 
 //* --- Arrows --- */
 # define KEY_UP 65362

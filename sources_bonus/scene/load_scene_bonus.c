@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 20:53:50 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:47:33 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	init_default_values(t_scene *scene)
 	scene->selected_light = NULL;
 	scene->control_mode = TRANSLATE;
 	scene->shift_pressed = FALSE;
+	scene->ctrl_pressed = FALSE;
+	scene->alt_pressed = FALSE;
 }
 
 static t_status	validate_scene(t_scene *scene)

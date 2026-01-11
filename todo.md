@@ -3,9 +3,7 @@ Ajouter tests save
 rajouter scaling factor au resize
 print caractéristics object/entité select
 rajouter log transform ?
-ajouter barre de chargement makefilemake 
-gere resize non homogène sphere ?
-
+peut etre revoir rotate/translate dans mandatory et clean tt ç&
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -26,7 +24,7 @@ gere resize non homogène sphere ?
 - [x] Tore (hyperboloid, paraboloid)
 
 ## PHASE 3 : OBJETS COMPOSES
-- [ ] Cube & Pavé
+- [x] Cube & Pavé
 - [ ] Pyramide base carré ou triangulaire
 - [x] Cône
 - [ ] BVH

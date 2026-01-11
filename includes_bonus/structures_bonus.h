@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 02:44:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:47:10 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,6 +327,8 @@ typedef enum e_control_mode
 	ROTATE,
 }						t_control_mode;
 
+# define RESIZE_NONE -1
+# define RESIZE_UNIFORM 0
 # define RESIZE_X 1
 # define RESIZE_Y 2
 # define RESIZE_Z 3
@@ -347,6 +349,7 @@ typedef struct s_scene
 	t_control_mode		control_mode;
 	t_bool				shift_pressed;
 	t_bool				ctrl_pressed;
+	t_bool				alt_pressed;
 	pthread_mutex_t		line_mutex;
 	int					next_line;
 	t_bool				to_save;

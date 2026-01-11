@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 20:00:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:44:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_bool	hit_sphere(t_object *object, t_ray *world_ray, t_hit_record *record)
 	t_quadratic	vars;
 
 	local_ray = transform_ray(*world_ray, object->inverse);
-	vars.a = 1.0;
+	vars.a = vec3_len_squared(local_ray.direction);
 	vars.half_b = vec3_dot(local_ray.origin, local_ray.direction);
 	vars.c = vec3_len_squared(local_ray.origin) - 1.0;
 	if (solve_quadratic(&vars) == FALSE)

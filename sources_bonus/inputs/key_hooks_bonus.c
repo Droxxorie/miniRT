@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:56:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:48:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static t_bool	handle_state_keys(int key, t_scene *scene)
 		scene->shift_pressed = TRUE;
 	else if (key == KEY_CTRL_L || key == KEY_CTRL_R)
 		scene->ctrl_pressed = TRUE;
+	else if (key == KEY_ALT_L || key == KEY_ALT_R)
+		scene->alt_pressed = TRUE;
 	else if (key == KEY_TAB)
 		return (handle_tab_key(scene), FALSE);
 	else if (key == KEY_SPACE)

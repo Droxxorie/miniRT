@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 03:03:43 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 03:05:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:50:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	resize_box(t_object *object, int mode, int direction)
 		scale_factors = (t_vec3){1.0, factor, 1.0};
 	else if (mode == RESIZE_Z)
 		scale_factors = (t_vec3){1.0, 1.0, factor};
+	else if (mode == RESIZE_UNIFORM)
+		scale_factors = (t_vec3){factor, factor, factor};
 	else
 		return ;
 	scale_matrix = make_scale_matrix(scale_factors);

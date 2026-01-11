@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:04:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:40:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:48:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ t_bool	handle_scroll(int button, t_scene *scene)
 		mode = RESIZE_Z;
 	else if (scene->shift_pressed == TRUE)
 		mode = RESIZE_Y;
-	else
+	else if (scene->alt_pressed == TRUE)
 		mode = RESIZE_X;
+	else
+		mode = RESIZE_UNIFORM;
 	if (scene->selected_object && scene->selected_object->visible != FALSE)
 		dispatch_resize(scene->selected_object, mode, direction);
 	else if (scene->selected_light == NULL)

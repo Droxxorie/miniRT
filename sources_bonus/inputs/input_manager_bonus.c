@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 10:55:33 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 19:32:46 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:47:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	key_release_hook(int key, t_scene *scene)
 		scene->shift_pressed = FALSE;
 	else if (key == KEY_CTRL_L || key == KEY_CTRL_R)
 		scene->ctrl_pressed = FALSE;
+	else if (key == KEY_ALT_L || key == KEY_ALT_R)
+		scene->alt_pressed = FALSE;
 	return (0);
 }
 

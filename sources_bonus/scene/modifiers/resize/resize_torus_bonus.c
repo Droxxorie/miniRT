@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 20:46:21 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 17:09:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:57:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ void	resize_torus(t_object *object, int mode, int direction)
 		factor = 0.9;
 	if (mode == RESIZE_X)
 		torus->major_radius *= factor;
-	else if (mode == RESIZE_Y)
+	else if (mode == RESIZE_Y || mode == RESIZE_Z)
 		torus->minor_radius *= factor;
+	else if (mode == RESIZE_UNIFORM)
+	{
+		torus->major_radius *= factor;
+		torus->minor_radius *= factor;
+	}
 	else
 		return ;
 	torus->major_radius_sq = torus->major_radius * torus->major_radius;

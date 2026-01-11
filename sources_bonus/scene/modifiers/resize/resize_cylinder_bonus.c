@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:20:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 20:01:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 14:56:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ void	resize_cylinder(t_object *object, int mode, int direction)
 	else
 		factor = 0.9;
 	if (mode == RESIZE_X)
-		scale_factors = (t_vec3){factor, 1.0, factor};
+		scale_factors = (t_vec3){factor, 1.0, 1.0};
 	else if (mode == RESIZE_Y)
 		scale_factors = (t_vec3){1.0, factor, 1.0};
+	else if (mode == RESIZE_Z)
+		scale_factors = (t_vec3){1.0, 1.0, factor};
+	else if (mode == RESIZE_UNIFORM)
+		scale_factors = (t_vec3){factor, factor, factor};
 	else
 		return ;
 	scale_matrix = make_scale_matrix(scale_factors);
