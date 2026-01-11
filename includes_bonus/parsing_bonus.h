@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 20:22:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 02:16:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_status	parse_disk(t_scene *scene, char **line);
 t_status	parse_triangle(t_scene *scene, char **line);
 t_status	parse_torus(t_scene *scene, char **line);
 t_status	parse_cone(t_scene *scene, char **line);
+t_status	parse_box(t_scene *scene, char **line);
 
 //* ========================================================================= */
 //*                                ENTITIES                                   */

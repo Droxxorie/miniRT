@@ -217,12 +217,13 @@ SRCS_BONUS += \
 	${SRC_DIR_BONUS}/parsing/objects/parse_triangle_bonus.c \
 	${SRC_DIR_BONUS}/parsing/objects/parse_torus_bonus.c \
 	${SRC_DIR_BONUS}/parsing/objects/parse_cone_bonus.c \
+	${SRC_DIR_BONUS}/parsing/objects/parse_box_bonus.c \
 
 #* ---- Scene ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/load_scene_bonus.c \
     $(SRC_DIR_BONUS)/scene/camera_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/transformation_dispatch_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/transformation_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/utils_bonus.c \
 	$(SRC_DIR_BONUS)/scene/update_camera_bonus.c \
 	$(SRC_DIR_BONUS)/scene/save_scene_bonus.c \
@@ -231,23 +232,10 @@ SRCS_BONUS += \
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_light_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_sphere_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_plane_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/translate/translate_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/translate/translate_disk_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/translate/translate_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/translate/translate_torus_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/translate/translate_cone_bonus.c \
 #* ---- Rotate ---
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_camera_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_plane_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_disk_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_cone_bonus.c \
+
 #* ---- Resize ---
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
@@ -258,6 +246,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_torus_bonus.c \
 	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_camera_bonus.c \
 	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_cone_bonus.c \
+	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_box_bonus.c \
 
 #* ---- Raytracer ----
 SRCS_BONUS += \
@@ -276,6 +265,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/intersection/hit_triangle_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/intersection/hit_torus_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/intersection/hit_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/hit_box_bonus.c \
 
 #* ---- Inputs ----
 SRCS_BONUS += \
@@ -315,7 +305,6 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/maths/matrix/mult_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/transpose_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/inverse_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/rotate_vector_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/scale_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/rotation_euler_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/rotation_axis_bonus.c \
@@ -407,6 +396,7 @@ valgrind_bonus: $(NAME_BONUS)
 clean:
 	@if [ -d $(OBJ_DIR) ] ; then echo "$(RED)[RM] objects$(RESET)" ; rm -rf $(OBJ_DIR) ; fi
 	@if [ -d $(OBJ_DIR_BONUS) ] ; then echo "$(RED)[RM] objects_bonus$(RESET)" ; rm -rf $(OBJ_DIR_BONUS) ; fi
+	@rm -f $(COUNT_FILE)
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) clean
 
 fclean: clean

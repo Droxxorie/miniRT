@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 21:11:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 02:44:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef enum e_object_type
 	TRIANGLE,
 	TORUS,
 	CONE,
+	BOX,
 	NONE
 }						t_object_type;
 
@@ -216,6 +217,15 @@ typedef struct s_cone
 	t_real		initial_radius;
 }						t_cone;
 
+typedef struct s_box
+{
+	t_point3	center;
+	t_vec3		axis;
+	t_real		width;
+	t_real		height;
+	t_real		depth;
+}						t_box;
+
 typedef struct s_object
 {
 	t_object_type		type;
@@ -235,6 +245,7 @@ typedef struct s_object
 		t_triangle		triangle;
 		t_torus			torus;
 		t_cone			cone;
+		t_box			box;
 	} u_data;
 	struct s_object		*next;
 }						t_object;
