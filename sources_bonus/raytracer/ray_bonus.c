@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:37:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:43:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 19:04:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_color	compute_pixel_color(t_scene *scene, t_ray *ray)
 {
 	t_hit_record	record;
 
-	if (hit_objects(scene->objects, ray, &record))
+	if (hit_objects(scene, ray, &record))
 		return (phong_light(scene, &record, ray));
 	return ((t_color){0.0, 0.0, 0.0});
 }

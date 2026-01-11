@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:55:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 03:03:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 16:18:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static t_bool	update_intervals(t_real dir, t_real origin, t_real *t_min,
 		t1 = t0 - t1;
 		t0 = t0 - t1;
 	}
-	if (t0 > *t_min)
-		*t_min = t0;
-	if (t1 < *t_max)
-		*t_max = t1;
+	*t_min = fmax(t0, *t_min);
+	*t_max = fmin(t1, *t_max);
 	return (*t_max > *t_min);
 }
 

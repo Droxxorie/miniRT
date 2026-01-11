@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 00:04:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 19:02:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
 				EPSILON));
 	shadow_ray.min = 0.0;
 	shadow_ray.max = dist_to_light - EPSILON;
-	if (hit_anything(scene->objects, &shadow_ray))
+	if (hit_anything(scene, &shadow_ray))
 		return (TRUE);
 	return (FALSE);
 }

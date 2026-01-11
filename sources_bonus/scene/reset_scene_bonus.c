@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 20:45:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 21:20:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	reset_object_state(t_object *object)
 	if (object->type == TORUS)
 	{
 		torus = &object->u_data.torus;
-		torus->major_radius = object->u_data.torus.initial_major_radius;
-		torus->minor_radius = object->u_data.torus.initial_minor_radius;
+		torus->major_radius = torus->initial_major_radius;
+		torus->minor_radius = torus->initial_minor_radius;
 		torus->major_radius_sq = torus->major_radius * torus->major_radius;
 		torus->minor_radius_sq = torus->minor_radius * torus->minor_radius;
 		torus->diff_radius_sq = torus->major_radius_sq - torus->minor_radius_sq;
@@ -78,4 +78,5 @@ void	reset_scene_state(t_scene *scene)
 		current_camera = current_camera->next;
 	}
 	scene->active_camera = scene->cameras;
+	refresh_bvh(scene, scene->objects);
 }

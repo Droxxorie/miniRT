@@ -27,8 +27,9 @@ peut etre revoir rotate/translate dans mandatory et clean tt ç&
 - [x] Cube & Pavé
 - [ ] Pyramide base carré ou triangulaire
 - [x] Cône
-- [ ] BVH
-- [ ] Back-Face-Culling
+- [x] BVH
+- [x] Occlusion culling
+- [x] Back-Face-Culling
 
 ## PHASE 3.5 : RAYMARCHING
 - [ ] Support SDF (mdrrrr)

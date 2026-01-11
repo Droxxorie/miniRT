@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:30:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 14:47:10 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 23:31:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,12 @@ typedef struct s_box
 	t_real		depth;
 }						t_box;
 
+typedef struct s_aabb
+{
+	t_point3	min;
+	t_point3	max;
+}						t_aabb;
+
 typedef struct s_object
 {
 	t_object_type		type;
@@ -234,6 +240,7 @@ typedef struct s_object
 	t_mat4				initial_transform;
 	t_mat4				inverse;
 	t_mat4				transposed_inverse;
+	t_aabb				aabb;
 	t_bool				visible;
 	union
 	{
@@ -260,6 +267,15 @@ typedef struct s_hit_record
 	t_color				color;
 	t_bool				need_details;
 }						t_hit_record;
+
+typedef struct s_bvh_node
+{
+	t_aabb				box;
+	struct s_bvh_node	*left_child;
+	struct s_bvh_node	*right_child;
+	t_object			*content;
+	int					axis;
+}						t_bvh_node;
 
 //* ========================================================================= */
 //*                                ENTITIES                                   */
@@ -341,6 +357,7 @@ typedef struct s_scene
 	t_image				frame_buffer;
 	t_color				ambient;
 	t_object			*objects;
+	t_bvh_node			*bvh_root;
 	t_light				*lights;
 	t_camera			*cameras;
 	t_camera			*active_camera;
@@ -373,12 +390,12 @@ typedef struct s_parse_map
 	t_parse_func		func;
 }						t_parse_map;
 
-typedef t_bool			(*t_key_func)(t_scene *scene);
-typedef struct s_key_map
-{
-	int					keycode;
-	t_key_func			func;
-}						t_key_map;
+// typedef t_bool			(*t_key_func)(t_scene *scene);
+// typedef struct s_key_map
+// {
+// 	int					keycode;
+// 	t_key_func			func;
+// }						t_key_map;
 
 typedef t_bool			(*t_hit_func)(t_object *objects, t_ray *ray,
 				t_hit_record *record);
@@ -395,19 +412,5 @@ typedef struct s_resize_map
 	t_object_type		type;
 	t_resize_func		func;
 }						t_resize_map;
-
-typedef void			(*t_translate_func)(t_object *object, t_vec3 transform);
-typedef struct s_translate_map
-{
-	t_object_type		type;
-	t_translate_func	func;
-}						t_translate_map;
-
-typedef void			(*t_rotate_func)(t_object *object, t_vec3 rot_axis);
-typedef struct s_rotate_map
-{
-	t_object_type		type;
-	t_rotate_func		func;
-}						t_rotate_map;
 
 #endif

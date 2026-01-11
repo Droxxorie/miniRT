@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 03:27:18 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 21:21:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void		reset_object_state(t_object *object);
 //* ========================================================================= */
 //*                                DISPATCHERS                                */
 //* ========================================================================= */
-// void		dispatch_rotate(t_object *obj, t_vec3 vec);
-// void		dispatch_translate(t_object *obj, t_vec3 vec);
 void		dispatch_resize(t_object *obj, int mode, int direction);
 
 //* ========================================================================= */

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:15:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 16:18:17 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 23:44:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_bool	hit_triangle(t_object *object, t_ray *world_ray, t_hit_record *record)
 	local_ray = transform_ray(*world_ray, object->inverse);
 	vars.h = vec3_cross(local_ray.direction, triangle->edge2);
 	vars.a = vec3_dot(triangle->edge1, vars.h);
-	if (vars.a > -EPSILON && vars.a < EPSILON)
+	if (vars.a < EPSILON)
 		return (FALSE);
 	vars.f = 1.0 / vars.a;
 	vars.s = vec3_sub(local_ray.origin, triangle->p1);

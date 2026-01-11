@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:52:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:42:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 17:57:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	get_object_count(t_object *objects)
 {
 	int	count;
 
+	if (!objects)
+		return (-1);
 	count = 0;
 	while (objects)
 	{

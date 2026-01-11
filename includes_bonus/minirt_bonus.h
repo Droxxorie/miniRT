@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:42:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 15:16:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 16:38:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@
 # include "raytracer_bonus.h"
 # include "scene_bonus.h"
 # include "utils_bonus.h"
+# include "acceleration_bonus.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 01:58:25 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 18:31:10 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	execute_minirt(t_scene *scene)
 		scene->mlx_window.width, scene->mlx_window.height, RESET);
 	log_event(stdout, "INFO", "Starting multi-threaded rendering");
 	log_event(stdout, "INFO", "Threads: %li", sysconf(_SC_NPROCESSORS_ONLN));
+	build_bvh(scene);
 	render_frame(scene);
 	log_event(stdout, "INFO", "Selected Camera ID: %d (FOV %i)",
 		scene->active_camera->id, scene->active_camera->fov);

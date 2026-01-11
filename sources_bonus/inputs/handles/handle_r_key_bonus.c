@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:46:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:34:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 21:37:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	handle_r_key(t_scene *scene)
 	{
 		log_event(stdout, "WARN", "Resetting scene to initial state");
 		reset_scene_state(scene);
+		refresh_bvh(scene, scene->objects);
 	}
 	else
 	{
@@ -25,6 +26,7 @@ void	handle_r_key(t_scene *scene)
 		{
 			log_event(stdout, "WARN", "Resetting object state");
 			reset_object_state(scene->selected_object);
+			refresh_bvh(scene, scene->objects);
 		}
 		else if (scene->selected_light)
 		{

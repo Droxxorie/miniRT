@@ -185,6 +185,25 @@ SRCS_BONUS := \
 	$(SRC_DIR_BONUS)/core/save_bonus.c \
 	$(SRC_DIR_BONUS)/core/entry_message_bonus.c \
 
+#* ---- Acceleration ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/acceleration/aabb/utils_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/compute_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/hit_aabb_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/bvh/build_bvh_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/bvh/hit_bvh_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/bvh/quick_sort_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/bvh/utils_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cylinder_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/plane_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/sphere_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/rectangle_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/disk_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/triangle_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/torus_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cone_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/box_bounds_bonus.c \
+
 #* ---- Graphics ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/graphics/init_graphics_bonus.c \
@@ -257,16 +276,15 @@ SRCS_BONUS += \
 #* ---- Intersection ---
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/raytracer/intersection/hit_objects_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/intersection/hit_sphere_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/intersection/hit_plane_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/intersection/hit_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_disk_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_torus_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_cone_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_box_bonus.c \
-
+    $(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_sphere_bonus.c \
+    $(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_plane_bonus.c \
+    $(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_disk_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_torus_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_box_bonus.c \
 #* ---- Inputs ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/inputs/input_manager_bonus.c \
@@ -321,6 +339,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/utils/log_bonus.c \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
 	$(SRC_DIR_BONUS)/utils/display_progress_bonus.c \
+	$(SRC_DIR_BONUS)/utils/swap_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

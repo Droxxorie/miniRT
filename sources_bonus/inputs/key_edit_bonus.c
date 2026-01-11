@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:45:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 03:22:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 19:59:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 		else if (scene->control_mode == ROTATE)
 			rotate_object(scene->selected_object,
 				vec3_scale(relative_vector, STEP_ROT));
+		refresh_bvh(scene, scene->selected_object);
 	}
 	else if (scene->selected_light && scene->selected_light->active == TRUE)
 	{

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:24:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 21:32:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	destroy_scene(t_scene *scene)
 		mlx_destroy_display(scene->mlx_window.mlx_ptr);
 		free(scene->mlx_window.mlx_ptr);
 	}
+	destroy_bvh(scene);
 	free_objects(scene->objects);
 	free_lights(scene->lights);
 	free_cameras(scene->cameras);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:09:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 16:50:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 23:59:09 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_bool	hit_disk(t_object *object, t_ray *world_ray, t_hit_record *record)
 	t_real	r_squared;
 
 	local_ray = transform_ray(*world_ray, object->inverse);
+	if (local_ray.direction.y > EPSILON)
+		return (FALSE);
 	if (fabs(local_ray.direction.y) < EPSILON)
 		return (FALSE);
 	t = -local_ray.origin.y / local_ray.direction.y;

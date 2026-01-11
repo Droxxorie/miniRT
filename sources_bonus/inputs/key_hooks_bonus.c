@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 14:48:09 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 23:55:46 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	if (scene->selected_object || scene->selected_light)
 	{
 		action_selection(scene, input_vector);
-		if (scene->selected_object->type == SPHERE
-			&& scene->control_mode == ROTATE)
-			return (FALSE);
 		if (scene->selected_object->type == TORUS
 			&& scene->control_mode == ROTATE)
 			return (FALSE);
