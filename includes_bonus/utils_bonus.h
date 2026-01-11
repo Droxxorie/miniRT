@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:27:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 01:54:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		destroy_scene(t_scene *scene);
 t_status	clean_exit(t_scene *scene, t_status status);
 void		setup_save_mode(int argc, char **argv, t_scene *scene);
 void		save_image_to_bmp(t_scene *scene);
+void		entry_message(void);
 
 //* ========================================================================= */
 //*                                TIME                                       */

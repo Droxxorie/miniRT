@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/08 16:33:17 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 01:58:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	main(int argc, char **argv)
 {
 	t_scene	*scene;
 
+	entry_message();
 	scene = init_scene_struct(argc, argv);
+	if (scene == NULL)
+		return (EXIT_FAILURE);
 	load_scene_data(scene, argv[1]);
 	execute_minirt(scene);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 #    By: eraad <eraad@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/15 12:06:42 by eraad             #+#    #+#              #
-#    Updated: 2025/12/18 12:33:06 by eraad            ###   ########.fr        #
+#    Updated: 2026/01/11 01:31:47 by eraad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,32 +24,30 @@ CFLAGS      := -Wall -Wextra -Werror -MMD -MP
 INCLUDES    := -Iinclude
 
 #* ==============================================================================
-#*                                   COLORS/SYMBOLS/STYLES
+#*                                  COLORS/SYMBOLS/STYLES
 #* ==============================================================================
+RESET			:= \033[0m
+BOLD			:= \033[1m
+DIM				:= \033[2m
+ITALIC			:= \033[3m
+UNDERLINE		:= \033[4m
 
-# NORMAL = 0
-# BOLD = 1
-# LOW INTENSITY = 2
-# ITALIC = 3
-# UNDERLINED = 4
-# BLINKING = 5
-# INVERTED/UNDERLINE = 7
-# HIDDEN = 8
-# CROSSED OUT = 9
+BLACK			:= \033[30m
+RED				:= \033[31m
+GREEN			:= \033[32m
+YELLOW			:= \033[33m
+BLUE			:= \033[34m
+MAGENTA			:= \033[35m
+CYAN			:= \033[36m
+WHITE			:= \033[37m
 
-RESET   := \033[0m
-BLACK   := \033[0;30m
-RED     := \033[0;31m
-GREEN   := \033[1;32m
-YELLOW  := \033[0;33m
-BLUE    := \033[0;34m
-PURPLE  := \033[1;35m
-CYAN    := \033[1;36m
-WHITE   := \033[0;37m
+BRIGHT_GREEN	:= \033[92m
+BRIGHT_MAGENTA	:= \033[95m
+BRIGHT_CYAN		:= \033[96m
 
-OK      := ✓
-KO      := ✗
-INFO    := ⓘ
+OK				:= ✓
+KO				:= ✗
+INFO			:= ⓘ
 
 #* ==============================================================================
 #*                                   LAYOUT
@@ -156,15 +154,19 @@ SRC_COUNT := $(words $(SRCS))
 #* ==============================================================================
 all: $(NAME)
 
-$(NAME): entry_message $(OBJS)
-	@echo "${GREEN} DONE${RESET}"
+$(NAME): $(OBJS)
+	@rm -f $(COUNT_FILE)
+	@echo ""
 	@$(AR) $@ $(OBJS)
-	@echo "$(PURPLE)${NAME} created\n$(RESET)"
+	@echo "$(MAGENTA)${BOLD}${NAME} created!\n$(RESET)"
 
 $(OBJ_DIR)/%.c.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@printf "$(GREEN)$(OK)$(RESET)"
+	@count=$$(cat $(COUNT_FILE) 2>/dev/null || echo 0); \
+	count=$$((count + 1)); \
+	echo $$count > $(COUNT_FILE); \
+	$(call progress_bar,$$count,$(SRC_COUNT),$(NAME),$<)
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -174,9 +176,23 @@ fclean: clean
 
 re: fclean all
 
-entry_message:
-	@echo "$(GREEN)Compiling ${NAME}$(RESET)"
-	@echo "$(YELLOW)$(INFO) ${SRC_COUNT} files$(RESET)"
+#* ==============================================================================
+#* PROGRESS BAR
+#* ==============================================================================
+
+CURRENT_FILE = 0
+
+define progress_bar
+	if [ $(1) -eq 1  ] ; then printf "$(CYAN)Building $(3)...\n$(GREEN)${BOLD}Compiling ${3}\n$(YELLOW)$(INFO) ${2} files$(RESET)\n" ; fi; \
+	percent=$$(( $(1) * 100 / $(2) )); \
+	progress=$$(( $(1) * 50 / $(2) )); \
+	printf "\r\033[K$(WHITE)"; \
+	for i in $$(seq 1 $$progress); do printf "█"; done; \
+	for i in $$(seq $$((progress + 1)) 50); do printf "░"; done; \
+	printf " %d%% $(RESET)" $$percent;
+endef
+
+COUNT_FILE := .make_count
 
 #* ==============================================================================
 #*                                   DEPENDENCIES

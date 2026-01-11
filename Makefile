@@ -77,6 +77,7 @@ INFO			:= ⓘ
 SRCS := \
     $(SRC_DIR)/core/main.c \
     $(SRC_DIR)/core/cleanup.c \
+	$(SRC_DIR)/core/entry_message.c \
 
 #* ---- Graphics ----
 SRCS += \
@@ -182,6 +183,7 @@ SRCS_BONUS := \
     $(SRC_DIR_BONUS)/core/main_bonus.c \
     $(SRC_DIR_BONUS)/core/cleanup_bonus.c \
 	$(SRC_DIR_BONUS)/core/save_bonus.c \
+	$(SRC_DIR_BONUS)/core/entry_message_bonus.c \
 
 #* ---- Graphics ----
 SRCS_BONUS += \
@@ -334,37 +336,45 @@ SRCS_BONUS += \
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 
 SRC_COUNT_BONUS := $(words $(SRCS_BONUS))
+
 #* ==============================================================================
 #*                                  RULES
 #* ==============================================================================
-all: $(NAME) project_logo
+all:  $(NAME) 
 
-$(NAME): $(LIBFT_A) $(MLX_A) entry_message $(OBJS)
-	@echo "${GREEN}${BOLD} DONE${RESET}"
+$(NAME): $(LIBFT_A) $(MLX_A) $(OBJS)
+	@rm -f $(COUNT_FILE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $@
-	@echo "$(MAGENTA)${BOLD}${NAME} created\n$(RESET)"
+	@echo "\r\033[K██████████████████████████████████████████████████ 100%"
+	@echo "$(MAGENTA)${BOLD}${NAME} created!$(RESET)"
 
-bonus: $(NAME_BONUS) project_logo_bonus
+bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(LIBFT_A) $(MLX_A) entry_message_bonus $(OBJS_BONUS)
-	@echo "${GREEN}${BOLD} DONE${RESET}"
+$(NAME_BONUS): $(LIBFT_A) $(MLX_A) $(OBJS_BONUS)
+	@rm -f $(COUNT_FILE)
+	@echo "\r\033[K██████████████████████████████████████████████████ 100%"
 	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(LDFLAGS) $(LDLIBS) -o $@
-	@echo "$(MAGENTA)${BOLD}${NAME_BONUS} created\n$(RESET)"
+	@echo "$(MAGENTA)${BOLD}${NAME_BONUS} created!$(RESET)"
 
 #* ---- Objects ----
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@printf "$(GREEN)${BOLD}$(OK)$(RESET)"
+	@count=$$(cat $(COUNT_FILE) 2>/dev/null || echo 0); \
+	count=$$((count + 1)); \
+	echo $$count > $(COUNT_FILE); \
+	$(call progress_bar,$$count,$(SRC_COUNT),$(NAME),$<)
 
 $(OBJ_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(CPPFLAGS_BONUS) -c $< -o $@
-	@printf "$(GREEN)${BOLD}$(OK)$(RESET)"
+	@count=$$(cat $(COUNT_FILE) 2>/dev/null || echo 0); \
+	count=$$((count + 1)); \
+	echo $$count > $(COUNT_FILE); \
+	$(call progress_bar,$$count,$(SRC_COUNT_BONUS),$(NAME_BONUS),$<)
 
 #* ---- Libft ----
 $(LIBFT_A):
-	@echo "$(CYAN)Building Libft...$(RESET)"
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 #* ---- MinilibX ----
@@ -372,7 +382,9 @@ $(MLX_A):
 	@echo "$(CYAN)Building MiniLibX...$(RESET)"
 	@chmod +x $(MLX_DIR)/configure 2>/dev/null || true
 	@$(MAKE) --no-print-directory -C $(MLX_DIR) >/dev/null 2>&1 || true
-	@echo "$(MAGENTA)${BOLD}libmlx.a created\n$(RESET)"
+	@echo "$(MAGENTA)${BOLD}libmlx.a created!$(RESET)"
+	@echo "$(MAGENTA)${BOLD}libmlx_Linux.a created!\n$(RESET)"
+
 
 #* ---- Convenience ----
 run: $(NAME)
@@ -421,55 +433,27 @@ help:
 	@echo "$(BRIGHT_MAGENTA)re_bonus  →  ${RESET}Rebuilds the bonus version."
 	@echo "$(BRIGHT_MAGENTA)run       →  ${RESET}Executes the program."
 	@echo "$(BRIGHT_MAGENTA)valgrind  →  ${RESET}Check for memory leaks."
+	@echo "$(BRIGHT_MAGENTA)valgrind_bonus →  ${RESET}Check for memory leaks in bonus version."
+	@echo "$(BRIGHT_MAGENTA)help      →  ${RESET}Displays this help message."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-#* ---- Messages ----
-entry_message:
-	@echo "$(GREEN)${BOLD}Compiling ${NAME}$(RESET)"
-	@echo "$(YELLOW)$(INFO) ${SRC_COUNT} files$(RESET)"
+#* ==============================================================================
+#* PROGRESS BAR
+#* ==============================================================================
 
-entry_message_bonus:
-	@echo "$(GREEN)${BOLD}Compiling ${NAME_BONUS}$(RESET)"
-	@echo "$(YELLOW)$(INFO) ${SRC_COUNT_BONUS} files$(RESET)"
+CURRENT_FILE = 0
 
-debug_message:
-	@echo "$(GREEN)${BOLD}Compiling ${NAME_DEBUG}$(RESET)"
-	@echo "$(YELLOW)$(INFO) ${SRC_COUNT} files$(RESET)"
+define progress_bar
+	if [ $(1) -eq 1  ] ; then printf "$(CYAN)Building $(3)...\n$(GREEN)${BOLD}Compiling ${3}\n$(YELLOW)$(INFO) ${2} files$(RESET)\n" ; fi; \
+	percent=$$(( $(1) * 100 / $(2) )); \
+	progress=$$(( $(1) * 50 / $(2) )); \
+	printf "\r\033[K$(WHITE)"; \
+	for i in $$(seq 1 $$progress); do printf "█"; done; \
+	for i in $$(seq $$((progress + 1)) 50); do printf "░"; done; \
+	printf " %d%% $(RESET)" $$percent;
+endef
 
-project_logo:
-	@echo ""
-	@echo "${CYAN}${BOLD}                     m  i  n  i  R  T                        ${RESET}"
-	@echo         "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "${WHITE}    ┏━┓    ┏━┓  ┏┓  ┏━┓  ┏━┓  ┏┓  ┏━━━━━┓ ┏━━━━━━━┓                 ${RESET}"
-	@echo "${WHITE}    ┃ ┣┓  ┏┫ ┃  ┃┃  ┃ ┣┓ ┃ ┃  ┃┃  ┃ ┏━┓ ┃ ┗━━┓ ┏━━┛                 ${RESET}"
-	@echo "${WHITE}    ┃ ┃┣┓┏┫┃ ┃  ┃┃  ┃ ┃┃┏┫ ┃  ┃┃  ┃ ┗━┛ ┃    ┃ ┃                    ${RESET}"
-	@echo "${WHITE}    ┃ ┃┣┛┗┫┃ ┃  ┃┃  ┃ ┣┛┃┃ ┃  ┃┃  ┃ ┏┓ ┏┛    ┃ ┃                    ${RESET}"
-	@echo "${WHITE}    ┃ ┣┛  ┗┫ ┃  ┃┃  ┃ ┃ ┗┫ ┃  ┃┃  ┃ ┃┃ ┗┓    ┃ ┃                    ${RESET}"
-	@echo "${WHITE}    ┗━┛    ┗━┛  ┗┛  ┗━┛  ┗━┛  ┗┛  ┗━┛┗━━┛    ┗━┛                    ${RESET}"
-	@echo         "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "${CYAN}${BOLD}                            Eloi RAAD & Jean HUBBERT${RESET}"
-	@echo ""
-
-project_logo_bonus:
-	@echo ""
-	@echo "${CYAN}${BOLD}                     m  i  n  i  R  T                         ${RESET}"
-	@echo         "  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-	@echo "${WHITE}    ┏━┓    ┏━┓  ┏┓  ┏━┓  ┏━┓  ┏┓  ┏━━━━━┓ ┏━━━━━━━┓                 ${RESET}"
-	@echo "${WHITE}    ┃ ┣┓  ┏┫ ┃  ┃┃  ┃ ┣┓ ┃ ┃  ┃┃  ┃ ┏━┓ ┃ ┗━━┓ ┏━━┛                 ${RESET}"
-	@echo "${WHITE}    ┃ ┃┣┓┏┫┃ ┃  ┃┃  ┃ ┃┃┏┫ ┃  ┃┃  ┃ ┗━┛ ┃    ┃ ┃                    ${RESET}"
-	@echo "${WHITE}    ┃ ┃┣┛┗┫┃ ┃  ┃┃  ┃ ┣┛┃┃ ┃  ┃┃  ┃ ┏┓ ┏┛    ┃ ┃                    ${RESET}"
-	@echo "${WHITE}    ┃ ┣┛  ┗┫ ┃  ┃┃  ┃ ┃ ┗┫ ┃  ┃┃  ┃ ┃┃ ┗┓    ┃ ┃                    ${RESET}"
-	@echo "${WHITE}    ┗━┛    ┗━┛  ┗┛  ┗━┛  ┗━┛  ┗┛  ┗━┛┗━━┛    ┗━┛                    ${RESET}"
-	@echo         "  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-	@echo "${WHITE}                    ┏━━━━┓   ┏━━━━┓  ┏━┓  ┏━┓  ┏┓   ┏┓  ┏━━━━┓    ${RESET}"
-	@echo "${WHITE}                    ┃ ┏┓ ┃   ┃┏━━┓┃  ┃ ┣┓ ┃ ┃  ┃┃   ┃┃  ┃┏━━━┛    ${RESET}"
-	@echo "${WHITE}                    ┃ ┗┛ ┗┓  ┃┃┏┓┃┃  ┃ ┃┃┏┫ ┃  ┃┃ ┃ ┃┃  ┃┗━━━━━┓  ${RESET}"
-	@echo "${WHITE}                    ┃ ┏━┓ ┃  ┃┃┗┛┃┃  ┃ ┣┛┃┃ ┃  ┃┃   ┃┃  ┗━━━━┓ ┃  ${RESET}"
-	@echo "${WHITE}                    ┃ ┗━┛ ┃  ┃┗━━┛┃  ┃ ┃ ┗┫ ┃  ┃┗━━━┛┃  ┏━━━━┛ ┃  ${RESET}"
-	@echo "${WHITE}                    ┗━━━━━┛  ┗━━━━┛  ┗━┛  ┗━┛  ┗━━━━━┛  ┗━━━━━━┛  ${RESET}"
-	@echo         "                  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
-	@echo "${CYAN}${BOLD}                                          Eloi RAAD & Jean HUBBERT${RESET}"
-	@echo ""
+COUNT_FILE := .make_count
 
 #* ---- Phony -------------------------------------------------------------------
 .PHONY: all clean fclean re re_bonus bonus help run valgrind valgrind_bonus

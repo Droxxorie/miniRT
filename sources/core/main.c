@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2025/12/21 18:59:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/11 01:33:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 {
 	t_scene	*scene;
 
+	entry_message();
 	if (argc != 2)
 		print_usage();
 	log_info("Initializing miniRT...");
