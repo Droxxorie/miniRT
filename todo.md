@@ -1,7 +1,7 @@
-# ERRORS
+# ERRORS / Todo
 Ajouter tests save
+fusioner test bonus et mandatory
 rajouter scaling factor au resize
-print caractéristics object/entité select
 rajouter log transform ?
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
 

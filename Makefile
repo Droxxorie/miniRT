@@ -19,24 +19,29 @@ NAME_BONUS      := miniRT_bonus
 #* ==============================================================================
 #*                                  LAYOUT
 #* ==============================================================================
-SRC_DIR			:= sources
-SRC_DIR_BONUS	:= sources_bonus
-OBJ_DIR			:= objects
-OBJ_DIR_BONUS	:= objects_bonus
+SRC_DIR			:= sources/mandatory
+SRC_DIR_BONUS	:= sources/bonus
+BUILD_DIR		:= build
+OBJ_DIR			:= $(BUILD_DIR)/mandatory
+OBJ_DIR_BONUS	:= $(BUILD_DIR)/bonus
 
-LIBFT_DIR		:= libft
+LIBS_DIR		:= libraries
+LIBFT_DIR		:= $(LIBS_DIR)/libft
+MLX_DIR			:= $(LIBS_DIR)/minilibx-linux
+
 LIBFT_A			:= $(LIBFT_DIR)/libft.a
-
-MLX_DIR			:= minilibx-linux
 MLX_A			:= $(MLX_DIR)/libmlx.a
+
+INC_DIR			:= includes/mandatory
+INC_DIR_BONUS	:= includes/bonus
 
 #* ==============================================================================
 #*                                  TOOLCHAIN
 #* ==============================================================================
 CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror -O3 -ffast-math -g3
-CPPFLAGS		:= -Iincludes -Ilibft -Iminilibx-linux
-CPPFLAGS_BONUS	:= -Iincludes_bonus -Ilibft -Iminilibx-linux
+CPPFLAGS		:= -I$(INC_DIR) -I$(LIBFT_DIR) -I${MLX_DIR}
+CPPFLAGS_BONUS	:= -I$(INC_DIR_BONUS) -I$(LIBFT_DIR) -I${MLX_DIR}
 
 LDFLAGS			:= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LDLIBS			:= -lft -lmlx -lXext -lX11 -lm -lz
@@ -75,16 +80,11 @@ INFO			:= ⓘ
 
 #* ---- Core ----
 SRCS := \
-    $(SRC_DIR)/core/main.c \
-    $(SRC_DIR)/core/cleanup.c \
-	$(SRC_DIR)/core/entry_message.c \
+    $(SRC_DIR)/core/main.c $(SRC_DIR)/core/cleanup.c $(SRC_DIR)/core/entry_message.c \
 
 #* ---- Graphics ----
 SRCS += \
-    $(SRC_DIR)/graphics/init_graphics.c \
-    $(SRC_DIR)/graphics/render_frame.c \
-    $(SRC_DIR)/graphics/color_to_int.c \
-    $(SRC_DIR)/graphics/image_pixel_put.c \
+    $(SRC_DIR)/graphics/init_graphics.c $(SRC_DIR)/graphics/render_frame.c $(SRC_DIR)/graphics/color_to_int.c $(SRC_DIR)/graphics/image_pixel_put.c \
 
 #* ---- Parsing ----
 SRCS += \
@@ -182,35 +182,32 @@ SRC_COUNT := $(words $(SRCS))
 SRCS_BONUS := \
     $(SRC_DIR_BONUS)/core/main_bonus.c \
     $(SRC_DIR_BONUS)/core/cleanup_bonus.c \
-	$(SRC_DIR_BONUS)/core/save_bonus.c \
-	$(SRC_DIR_BONUS)/core/entry_message_bonus.c \
-
-#* ---- Acceleration ----
-SRCS_BONUS += \
-	$(SRC_DIR_BONUS)/acceleration/aabb/utils_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/compute_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/hit_aabb_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/bvh/build_bvh_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/bvh/hit_bvh_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/bvh/quick_sort_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/bvh/utils_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cylinder_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/plane_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/sphere_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/rectangle_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/disk_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/triangle_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/torus_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cone_bounds_bonus.c \
-	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/box_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/core/save_bonus.c \
 
 #* ---- Graphics ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/graphics/init_graphics_bonus.c \
+    $(SRC_DIR_BONUS)/graphics/multithreading_bonus.c \
     $(SRC_DIR_BONUS)/graphics/render_frame_bonus.c \
-    $(SRC_DIR_BONUS)/graphics/multi_threading_bonus.c \
-    $(SRC_DIR_BONUS)/graphics/color_to_int_bonus.c \
-    $(SRC_DIR_BONUS)/graphics/image_pixel_put_bonus.c \
+    $(SRC_DIR_BONUS)/graphics/utils_bonus.c \
+
+#* ---- Inputs ----
+SRCS_BONUS += \
+    $(SRC_DIR_BONUS)/inputs/input_manager_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/utils_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/key_hooks_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_c_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_enter_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_h_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_i_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_l_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_r_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_space_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_t_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_tab_key_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/mouse/mouse_hooks_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/mouse/handles/handle_click_bonus.c \
+    $(SRC_DIR_BONUS)/inputs/mouse/handles/handle_scroll_bonus.c \
 
 #* ---- Parsing ----
 SRCS_BONUS += \
@@ -218,115 +215,104 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/utils/add_object_to_scene_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/get_count_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_color_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/parse_dim_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_numbers_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_vec3_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/utils_bonus.c \
-	$(SRC_DIR_BONUS)/parsing/utils/parse_dim_bonus.c \
-#* ---- Objects / Entities ----
-SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_box_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_cone_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parse_cylinder_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_disk_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parse_plane_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_rectangle_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parse_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/parsing/objects/parse_rectangle_bonus.c \
-	${SRC_DIR_BONUS}/parsing/objects/parse_disk_bonus.c \
-	${SRC_DIR_BONUS}/parsing/objects/parse_triangle_bonus.c \
-	${SRC_DIR_BONUS}/parsing/objects/parse_torus_bonus.c \
-	${SRC_DIR_BONUS}/parsing/objects/parse_cone_bonus.c \
-	${SRC_DIR_BONUS}/parsing/objects/parse_box_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_torus_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parse_triangle_bonus.c \
 
-#* ---- Scene ----
+#* ---- Acceleration (BVH/AABB) ----
 SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/scene/load_scene_bonus.c \
-    $(SRC_DIR_BONUS)/scene/camera_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/compute_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/hit_aabb_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/box_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cone_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cylinder_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/disk_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/plane_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/rectangle_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/sphere_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/torus_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/triangle_bounds_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/bvh/build_bvh_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/bvh/hit_bvh_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/bvh/quick_sort_bonus.c \
+    $(SRC_DIR_BONUS)/acceleration/bvh/utils_bonus.c \
+
+#* ---- Scene & Modifiers ----
+SRCS_BONUS += \
+    $(SRC_DIR_BONUS)/scene/persistence/load_scene_bonus.c \
+    $(SRC_DIR_BONUS)/scene/persistence/save_scene_bonus.c \
+    $(SRC_DIR_BONUS)/scene/persistence/reset_scene_bonus.c \
+    $(SRC_DIR_BONUS)/scene/selection/action_selection_bonus.c \
+    $(SRC_DIR_BONUS)/scene/camera/init_camera_bonus.c \
+    $(SRC_DIR_BONUS)/scene/camera/camera_action_bonus.c \
+    $(SRC_DIR_BONUS)/scene/camera/camera_matrix_bonus.c \
+    $(SRC_DIR_BONUS)/scene/camera/movement/resize_camera_bonus.c \
+    $(SRC_DIR_BONUS)/scene/camera/movement/rotate_camera_bonus.c \
+    $(SRC_DIR_BONUS)/scene/camera/movement/translate_camera_bonus.c \
+    $(SRC_DIR_BONUS)/scene/lights/translate_light_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/transformation_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/utils_bonus.c \
-	$(SRC_DIR_BONUS)/scene/update_camera_bonus.c \
-	$(SRC_DIR_BONUS)/scene/save_scene_bonus.c \
-	$(SRC_DIR_BONUS)/scene/reset_scene_bonus.c \
-#* ---- Translate ---
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_camera_bonus.c \
-    $(SRC_DIR_BONUS)/scene/modifiers/translate/translate_light_bonus.c \
-#* ---- Rotate ---
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/scene/modifiers/rotate/rotate_camera_bonus.c \
-
-#* ---- Resize ---
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_box_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_cone_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_disk_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_torus_bonus.c \
-	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_camera_bonus.c \
-	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_cone_bonus.c \
-	${SRC_DIR_BONUS}/scene/modifiers/resize/resize_box_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_disk_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_rectangle_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_torus_bonus.c \
+    $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_triangle_bonus.c \
 
 #* ---- Raytracer ----
 SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/ray_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
-#* ---- Intersection ---
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/raytracer/intersection/hit_objects_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_sphere_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_plane_bonus.c \
-    $(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_disk_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_triangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_torus_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_cone_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/objects/hit_box_bonus.c \
-#* ---- Inputs ----
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/inputs/input_manager_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/key_camera_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/key_edit_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/key_hooks_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/mouse_hooks_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/utils_bonus.c \
-#* ---- Input Handlers ----
-SRCS_BONUS += \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_c_key_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_click_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_l_key_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_scroll_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_space_key_bonus.c \
-    $(SRC_DIR_BONUS)/inputs/handles/handle_tab_key_bonus.c \
-	$(SRC_DIR_BONUS)/inputs/handles/handle_t_key_bonus.c \
-	$(SRC_DIR_BONUS)/inputs/handles/handle_h_key_bonus.c \
-	$(SRC_DIR_BONUS)/inputs/handles/handle_r_key_bonus.c \
-	$(SRC_DIR_BONUS)/inputs/handles/handle_enter_key_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/hit_objects_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_box_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_disk_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_plane_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_torus_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \
+    $(SRC_DIR_BONUS)/maths/matrix/identity_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/inverse_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/mult_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotate_vector_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotation_align_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotation_axis_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/rotation_euler_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/scale_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/translation_bonus.c \
+    $(SRC_DIR_BONUS)/maths/matrix/transpose_bonus.c \
+    $(SRC_DIR_BONUS)/maths/solve/solve_cubic_bonus.c \
     $(SRC_DIR_BONUS)/maths/solve/solve_quadratic_bonus.c \
-	$(SRC_DIR_BONUS)/maths/solve/solve_cubic_bonus.c \
-	$(SRC_DIR_BONUS)/maths/solve/solve_quartic_bonus.c \
+    $(SRC_DIR_BONUS)/maths/solve/solve_quartic_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/add_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/substract_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/product_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/scalar_product_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/cross_product_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/len_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/normalize_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/identity_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/translation_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/mult_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/transpose_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/inverse_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/scale_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/rotation_euler_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/rotation_axis_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/rotation_align_bonus.c \
+    $(SRC_DIR_BONUS)/maths/vector/product_bonus.c \
+    $(SRC_DIR_BONUS)/maths/vector/scalar_product_bonus.c \
+    $(SRC_DIR_BONUS)/maths/vector/substract_bonus.c \
 
 #* ---- Errors & Utils ----
 SRCS_BONUS += \
@@ -334,12 +320,14 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/error/print_error_exit_bonus.c \
     $(SRC_DIR_BONUS)/error/print_error_free_exit_bonus.c \
     $(SRC_DIR_BONUS)/error/print_error_loc_bonus.c \
-    $(SRC_DIR_BONUS)/utils/print_bonus.c \
+    $(SRC_DIR_BONUS)/utils/display/display_progress_bonus.c \
+    $(SRC_DIR_BONUS)/utils/display/entry_message_bonus.c \
+    $(SRC_DIR_BONUS)/utils/display/log_bonus.c \
+    $(SRC_DIR_BONUS)/utils/display/print_bonus.c \
+    $(SRC_DIR_BONUS)/utils/display/utils_bonus.c \
     $(SRC_DIR_BONUS)/utils/ft_strspn_bonus.c \
-    $(SRC_DIR_BONUS)/utils/log_bonus.c \
+    $(SRC_DIR_BONUS)/utils/swap_bonus.c \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
-	$(SRC_DIR_BONUS)/utils/display_progress_bonus.c \
-	$(SRC_DIR_BONUS)/utils/swap_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 
@@ -413,8 +401,7 @@ valgrind_bonus: $(NAME_BONUS)
 
 #* ---- Cleanup ----
 clean:
-	@if [ -d $(OBJ_DIR) ] ; then echo "$(RED)[RM] objects$(RESET)" ; rm -rf $(OBJ_DIR) ; fi
-	@if [ -d $(OBJ_DIR_BONUS) ] ; then echo "$(RED)[RM] objects_bonus$(RESET)" ; rm -rf $(OBJ_DIR_BONUS) ; fi
+	@if [ -d $(BUILD_DIR) ] ; then echo "$(RED)[RM] build directory$(RESET)" ; rm -rf $(BUILD_DIR) ; fi
 	@rm -f $(COUNT_FILE)
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) clean
 
