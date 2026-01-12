@@ -390,13 +390,13 @@ run: $(NAME)
 valgrind: $(NAME)
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
-		--track-origins=yes --suppressions=valgrind.supp\
+		--track-origins=yes --suppressions=test/valgrind.supp\
 		./$(NAME) $(ARGS) || true
 
 valgrind_bonus: $(NAME_BONUS)
 	@echo "$(YELLOW)${BOLD}[VG] ./$(NAME_BONUS) $(ARGS)$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all \
-		--track-origins=yes --suppressions=valgrind.supp\
+		--track-origins=yes --suppressions=test/valgrind.supp\
 		./$(NAME_BONUS) $(ARGS) || true
 
 #* ---- Cleanup ----

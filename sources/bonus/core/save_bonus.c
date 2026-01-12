@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 17:04:46 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 16:09:46 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/12 16:12:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static t_status	check_save_file(t_scene *scene)
 		print_error_detail(ERR_SAVE_EXT, scene->save_file);
 		return (EXIT_FAILURE);
 	}
-	if (mkdir("saved", 0755) == 0)
+	if (mkdir("output", 0755) == 0)
 	{
-		log_event(stdout, "WARN", "'saved' directory do not exist\n");
+		log_event(stdout, "WARN", "'output' directory do not exist\n");
 		log_event(stdout, "INFO",
-			"Created 'saved' directory for output files\n");
+			"Created 'output' directory for output files\n");
 	}
 	fd = open(scene->save_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
@@ -50,9 +50,9 @@ void	setup_save_mode(int argc, char **argv, t_scene *scene)
 	}
 	scene->to_save = TRUE;
 	if (argc == 4)
-		scene->save_file = ft_strjoin("saved/", argv[3]);
+		scene->save_file = ft_strjoin("output/", argv[3]);
 	else
-		scene->save_file = ft_strdup("saved/output.bmp");
+		scene->save_file = ft_strdup("output/output.bmp");
 	if (check_save_file(scene) == EXIT_FAILURE)
 		ret = TRUE;
 	if (ret == TRUE)
