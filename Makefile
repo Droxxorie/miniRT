@@ -219,6 +219,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/utils/parse_numbers_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_vec3_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/utils_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/utils/parse_sdf_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
@@ -241,7 +242,6 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cone_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cylinder_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/disk_bounds_bonus.c \
-    $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/plane_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/rectangle_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/sphere_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/torus_bounds_bonus.c \
@@ -276,20 +276,30 @@ SRCS_BONUS += \
 
 #* ---- Raytracer ----
 SRCS_BONUS += \
-	$(SRC_DIR_BONUS)/raytracer/intersection/hit_objects_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_box_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_cone_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_disk_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_plane_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_torus_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/intersection/primitives/hit_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/hit_dispatch_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/ray_tracing_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_box_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_disk_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_torus_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/primitives/hit_triangle_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/dispatch_sdf_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_box_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_torus_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_disk_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_triangle_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \
@@ -328,6 +338,8 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/utils/ft_strspn_bonus.c \
     $(SRC_DIR_BONUS)/utils/swap_bonus.c \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
+	$(SRC_DIR_BONUS)/utils/clamp_bonus.c \
+	$(SRC_DIR_BONUS)/utils/sign_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

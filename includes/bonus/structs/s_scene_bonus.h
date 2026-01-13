@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:59:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 10:12:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,6 @@ typedef struct s_parse_map
 	char			*id;
 	t_parse_func	func;
 }					t_parse_map;
-
-typedef t_bool		(*t_hit_func)(t_object *objects, t_ray *ray,
-			t_hit_record *record);
-typedef struct s_hit_map
-{
-	t_object_type	type;
-	t_hit_func		func;
-}					t_hit_map;
 
 typedef void		(*t_resize_func)(t_object *object, int mode, int direction);
 typedef struct s_resize_map

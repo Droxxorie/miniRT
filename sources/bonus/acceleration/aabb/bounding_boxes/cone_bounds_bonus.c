@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:33:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 21:36:01 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 13:59:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_aabb	compute_cone_bounds(void)
 {
 	t_aabb	box;
 
-	box.min = (t_point3){-1.0, -1.0, -1.0};
+	box.min = (t_point3){-1.0, 0, -1.0};
 	box.max = (t_point3){1.0, 1.0, 1.0};
 	return (box);
 }

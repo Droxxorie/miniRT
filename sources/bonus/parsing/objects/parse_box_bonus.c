@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:10:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 03:29:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 13:12:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_status	get_box_values(t_scene *scene, char **line, t_object *object)
 		|| parse_dim(scene, line, &box->depth) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
+		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

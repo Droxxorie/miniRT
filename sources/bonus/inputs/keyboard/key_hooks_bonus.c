@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:23:10 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 11:13:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,18 @@ static t_bool	handle_transform_keys(int key, t_scene *scene)
 	if (scene->selected_object || scene->selected_light)
 	{
 		action_selection(scene, input_vector);
-		if (scene->selected_object->type == TORUS
-			&& scene->control_mode == ROTATE)
-			return (FALSE);
-		else if (scene->selected_object->visible != TRUE)
-			return (FALSE);
-		else if (scene->selected_light && scene->control_mode == ROTATE
-			&& scene->selected_light->active != TRUE)
-			return (FALSE);
+		if (scene->selected_object)
+		{
+			if (scene->selected_object->type == TORUS
+				&& scene->control_mode == ROTATE)
+				return (FALSE);
+			else if (scene->selected_object->visible != TRUE)
+				return (FALSE);
+		}
+		else if (scene->selected_light)
+			if (scene->control_mode == ROTATE
+				&& scene->selected_light->active != TRUE)
+				return (FALSE);
 	}
 	else
 		action_camera(scene, input_vector);

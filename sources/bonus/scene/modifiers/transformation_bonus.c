@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 13:58:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:35:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void	set_transform(t_object *object, t_mat4 transform)
 	object->transform = transform;
 	object->inverse = mat4_inverse(object->transform);
 	object->transposed_inverse = mat4_transpose(object->inverse);
+	object->sdf_scale = get_min_scale_factor(object->transform);
+	if (object->sdf_scale < EPSILON)
+		object->sdf_scale = 1.0;
+	compute_object_bounds(object);
 }
 
 static void	apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix)
@@ -52,7 +56,8 @@ void	dispatch_resize(t_object *object, int mode, int direction)
 	{TORUS, resize_torus},
 	{CONE, resize_cone},
 	{BOX, resize_box},
-	{NONE, NULL}};
+	{NONE, NULL}
+	};
 
 	if (!object)
 		return ;

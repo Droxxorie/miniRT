@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 14:40:30 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 16:13:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 13:48:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_enter_key(t_scene *scene)
 	}
 	now = time(NULL);
 	t = localtime(&now);
-	sprintf(filename, "saved/%d%02d%02d_%02d%02d%02d.bmp", t->tm_year + 1900,
+	sprintf(filename, "output/%d%02d%02d_%02d%02d%02d.bmp", t->tm_year + 1900,
 		t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 	scene->save_file = filename;
 	if (mkdir("output", 0755) == 0)

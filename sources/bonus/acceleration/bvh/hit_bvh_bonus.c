@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 18:31:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 00:07:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 18:43:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static t_bool	hit_leaf_content(t_object *objects, t_ray *ray,
 
 	hit_anything = FALSE;
 	temp = objects;
-	temp_record.need_details = record->need_details;
 	while (temp)
 	{
 		if (temp->visible == FALSE)
@@ -52,26 +51,61 @@ static t_bool	hit_leaf_content(t_object *objects, t_ray *ray,
 
 t_bool	hit_bvh(t_bvh_node *node, t_ray *ray, t_hit_record *record)
 {
-	t_bool		hit_first;
-	t_bool		hit_second;
+	t_bool		hit[2];
 	t_bvh_node	*first;
 	t_bvh_node	*second;
 
-	if (!node || !hit_aabb(&node->box, ray, ray->min, ray->max))
+	if (!node || hit_aabb(&node->box, ray, ray->min, ray->max) == FALSE)
 		return (FALSE);
 	if (node->left_child == NULL && node->right_child == NULL)
-		return (hit_leaf_content(node->content, ray, record));
+	{
+		if (hit_aabb(&node->box, ray, ray->min, ray->max) == FALSE)
+			return (FALSE);
+		return (hit_leaf_content(node->content, ray, record) == TRUE);
+	}
+	first = node->right_child;
+	second = node->left_child;
 	if (get_axis_value(ray->direction, node->axis) >= 0)
 	{
 		first = node->left_child;
 		second = node->right_child;
 	}
-	else
-	{
-		first = node->right_child;
-		second = node->left_child;
-	}
-	hit_first = hit_bvh(first, ray, record);
-	hit_second = hit_bvh(second, ray, record);
-	return (hit_first || hit_second);
+	hit[0] = hit_bvh(first, ray, record);
+	if (ray->is_shadow_ray && hit[0] == TRUE)
+		return (TRUE);
+	hit[1] = hit_bvh(second, ray, record);
+	return (hit[0] || hit[1]);
 }
+
+// t_bool	hit_bvh(t_bvh_node *node, t_ray *ray, t_hit_record *record)
+// {
+// 	t_bool		hit[2];
+// 	t_real		t[2];
+// 	t_bvh_node	*first;
+// 	t_bvh_node	*second;
+
+// 	if (!node)
+// 		return (FALSE);
+// 	if (node->left_child == NULL && node->right_child == NULL)
+// 	{
+// 		if (!intersect_aabb_values(&node->box, ray, &t[0], &t[1]))
+// 			return (FALSE);
+// 		if (hit_leaf_content(node->content, ray, record) == TRUE)
+// 			return (TRUE);
+// 		return (FALSE);
+// 	}
+// 	if (hit_aabb(&node->box, ray, ray->min, ray->max) == FALSE)
+// 		return (FALSE);
+// 	first = node->right_child;
+// 	second = node->left_child;
+// 	if (get_axis_value(ray->direction, node->axis) >= 0)
+// 	{
+// 		first = node->left_child;
+// 		second = node->right_child;
+// 	}
+// 	hit[0] = hit_bvh(first, ray, record);
+// 	if (ray->is_shadow_ray && hit[0] == TRUE)
+// 		return (TRUE);
+// 	hit[1] = hit_bvh(second, ray, record);
+// 	return (hit[0] || hit[1]);
+// }

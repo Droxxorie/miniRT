@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:20:56 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:22:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 15:02:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 t_vec3	vec3_scale(const t_vec3 v, const t_real k)
 {
 	return ((t_vec3){v.x * k, v.y * k, v.z * k});
+}
+
+t_vec2	vec2_scale(const t_vec2 v, const t_real k)
+{
+	return ((t_vec2){v.x * k, v.y * k});
 }
 
 // t_vec3	vec3_prod(const t_vec3 u, const t_vec3 v)

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:51:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:39:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_ray
 	t_vec3				direction;
 	t_real				min;
 	t_real				max;
+	t_bool				is_shadow_ray;
 }						t_ray;
 
 typedef struct s_aabb
@@ -39,7 +40,6 @@ typedef struct s_hit_record
 	t_real				t;
 	t_bool				front_face;
 	t_color				color;
-	t_bool				need_details;
 }						t_hit_record;
 
 typedef struct s_bvh_node
@@ -50,5 +50,16 @@ typedef struct s_bvh_node
 	t_object			*content;
 	int					axis;
 }						t_bvh_node;
+
+typedef struct s_ray_march_data
+{
+	t_point3			world_p;
+	t_point3			local_p;
+	t_real				depth;
+	t_real				local_dist;
+	t_real				world_dist;
+	int					steps;
+	t_real				scale;
+}						t_ray_march_data;
 
 #endif

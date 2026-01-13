@@ -4,6 +4,10 @@ fusioner test bonus et mandatory
 rajouter scaling factor au resize
 rajouter log transform ?
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
+kd-tree
+shift r marche plus ...
+camera cassée rotation z
+
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -32,8 +36,8 @@ peut etre revoir rotate/translate dans mandatory et clean tt ç&
 - [x] Back-Face-Culling
 
 ## PHASE 3.5 : RAYMARCHING
-- [ ] Support SDF (mdrrrr)
-- [ ] Object SDF simples (Sphere, pavé, Tore)
+- [x] Support SDF (mdrrrr)
+- [x] Object SDF simples (Sphere, pavé, Tore)
 - [ ] Fractals (Mandelbulb, Julia, autre)
 
 ## PHASE 4 : LUMIERE & MAT
@@ -56,9 +60,9 @@ peut etre revoir rotate/translate dans mandatory et clean tt ç&
 ## PHASE 5 : UX et Interactions
 - [ ] Rework UX clavier/Souris
 - [ ] Ajout facteur de transformation
-- [ ] Modifier FOV
-- [ ] Touche Reset (toute la scène et objet sélectionné)
-- [ ] UI (Objet sélectionné / ID camera / ID lumière / Coordonnées / commandes etc)
+- [x] Modifier FOV
+- [x] Touche Reset (toute la scène et objet sélectionné)
+- [x] UI (Objet sélectionné / ID camera / ID lumière / Coordonnées / commandes etc)
 
 ## PHASE 6 : POST-PROCESS & QUALITE
 - [ ] Tonemapping

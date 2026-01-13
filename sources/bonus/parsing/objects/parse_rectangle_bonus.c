@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:34:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 19:59:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 13:12:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_status	get_rectangle_values(t_scene *scene, char **line,
 		|| parse_real(line, &object->u_data.rectangle.height) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
+		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

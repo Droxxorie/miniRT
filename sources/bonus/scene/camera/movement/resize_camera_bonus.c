@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 19:32:37 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:48:41 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 12:59:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	resize_camera_fov(t_camera *camera, int mode, int direction)
 		new_fov = 179.0;
 	if ((int)new_fov != current_fov)
 		camera->fov = (int)new_fov;
+	camera->scale_factor = tan((camera->fov * PI / 180.0) / 2.0);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:20:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 18:47:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 //* ========================================================================= */
 //*                                MATHS & LOGIC                              */
 //* ========================================================================= */
-# define EPSILON 1e-4
-# define LIMIT 1e4
+# define EPSILON 1e-6
 # define PI 3.14159265359
 # define TWO_PI 6.28318530718
 # define INV_255 0.00392156862
+# define INV_SQRT_2 0.70710678118
 
 # define STEP_MOVE 1.0
 # define STEP_ROT 0.1
+
+# define SHADOW_BIAS 1e-4
 
 # define DEF_WINDOW_WIDTH 720
 # define DEF_WINDOW_HEIGHT 480
@@ -33,6 +35,13 @@
 # define MAX_LIGHTS 10
 # define MAX_CAMERAS 10
 # define MAX_OBJECTS 100
+
+# define PLANE_SCALE 2000.0
+
+# define BVH_PADDING 0.005
+# define SDF_THICKNESS 0.001
+# define MAX_SDF_STEPS 256
+# define MAX_SDF_DISTANCE 1000.0
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
 

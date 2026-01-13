@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 19:02:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 18:13:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
 		t_vec3 light_pos)
 {
-	t_vec3	dir_to_light;
-	t_real	dist_to_light;
-	t_ray	shadow_ray;
+	t_vec3			dir_to_light;
+	t_real			dist_to_light;
+	t_ray			shadow_ray;
+	t_hit_record	shadow_record;
 
 	dir_to_light = vec3_sub(light_pos, record->hit_point);
 	dist_to_light = vec3_len(dir_to_light);
 	shadow_ray.direction = vec3_normalize(dir_to_light);
 	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
-				EPSILON));
-	shadow_ray.min = 0.0;
+				SHADOW_BIAS));
+	shadow_ray.min = EPSILON;
 	shadow_ray.max = dist_to_light - EPSILON;
-	if (hit_anything(scene, &shadow_ray))
+	shadow_ray.is_shadow_ray = TRUE;
+	if (hit_bvh(scene->bvh_root, &shadow_ray, &shadow_record) == TRUE)
 		return (TRUE);
 	return (FALSE);
 }
@@ -53,7 +55,7 @@ static t_color	compute_specular(t_light *light, t_hit_record *record,
 	t_real	shininess;
 	t_real	specular;
 
-	shininess = 32.0;
+	shininess = 32.0; //TODO make it configurable per material
 	dir = vec3_normalize(vec3_sub(light->position, record->hit_point));
 	view_dir = vec3_normalize(vec3_scale(ray->direction, -1.0));
 	reflect_dir = vec_reflect(vec3_scale(dir, -1.0), record->normal);

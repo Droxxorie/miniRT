@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:54:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 13:09:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_status	clean_exit(t_scene *scene, t_status status)
 	if (status == EXIT_SUCCESS)
 		log_event(stdout, "SUCCESS", "Exited successfully!\n");
 	else
-		log_event(stdout, "ERROR", "Exited with errors!");
+		log_event(stdout, "ERROR", "Exited with errors!\n");
 	exit(status);
 	return (status);
 }

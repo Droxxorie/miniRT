@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:42:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 14:59:26 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 10:48:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # include "inputs_bonus.h"
 # include "utils_bonus.h"
 # include "./raytracer/raytracer_bonus.h"
+# include "./raytracer/sdf_bonus.h"
 
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */

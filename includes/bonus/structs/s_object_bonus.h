@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 16:07:37 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:14:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,11 @@
 
 # include "s_ray_bonus.h"
 
-typedef enum e_object_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	RECTANGLE,
-	DISK,
-	TRIANGLE,
-	TORUS,
-	CONE,
-	BOX,
-	NONE
-}						t_object_type;
-
 typedef struct s_sphere
 {
 	t_point3			center;
 	t_real				radius;
 }						t_sphere;
-
-typedef struct s_plane
-{
-	t_point3			origin;
-	t_vec3				normal;
-}						t_plane;
 
 typedef enum e_cylinder_element
 {
@@ -92,6 +72,17 @@ typedef struct s_triangle_hit
 	t_real				t;
 }						t_triangle_hit;
 
+typedef struct s_triangle_sdf
+{
+	t_vec3				ba;
+	t_vec3				pa;
+	t_vec3				cb;
+	t_vec3				pb;
+	t_vec3				ac;
+	t_vec3				pc;
+	t_vec3				normal;
+}					t_triangle_sdf;
+
 typedef struct s_triangle
 {
 	t_point3			p1;
@@ -134,6 +125,27 @@ typedef struct s_box
 	t_real				depth;
 }						t_box;
 
+typedef struct s_sdf
+{
+	t_real				p1;
+	t_real				p2;
+	t_real				p3;
+}						t_sdf;
+
+typedef enum e_object_type
+{
+	SPHERE,
+	// PLANE,
+	CYLINDER,
+	RECTANGLE,
+	DISK,
+	TRIANGLE,
+	TORUS,
+	CONE,
+	BOX,
+	NONE,
+}						t_object_type;
+
 typedef struct s_object
 {
 	t_object_type		type;
@@ -144,10 +156,12 @@ typedef struct s_object
 	t_mat4				transposed_inverse;
 	t_aabb				aabb;
 	t_bool				visible;
+	t_bool				render_as_sdf;
+	t_sdf				sdf_data;
+	t_real				sdf_scale;
 	union
 	{
 		t_sphere		sphere;
-		t_plane			plane;
 		t_cylinder		cylinder;
 		t_rectangle		rectangle;
 		t_disk			disk;

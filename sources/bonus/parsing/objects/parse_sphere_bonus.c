@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 19:57:59 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/10 13:15:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 13:12:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static t_status	get_sphere_values(t_scene *scene, char **line, t_object *obj)
 		|| parse_dim(scene, line, &obj->u_data.sphere.radius) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
+		|| parse_sdf(scene, line, &obj->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

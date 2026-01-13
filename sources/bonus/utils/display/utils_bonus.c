@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:26:28 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 16:09:18 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:30:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ char	*get_object_type_str(t_object_type type)
 {
 	if (type == SPHERE)
 		return ("SPHERE");
-	else if (type == PLANE)
-		return ("PLANE");
 	else if (type == CYLINDER)
 		return ("CYLINDER");
 	else if (type == RECTANGLE)

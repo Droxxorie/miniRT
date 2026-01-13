@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:36:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:28:04 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 15:03:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ t_vec3	vec3_sub(const t_vec3 u, const t_vec3 v);
 t_vec3	vec3_cross(const t_vec3 u, const t_vec3 v);
 t_vec3	vec3_scale(const t_vec3 v, const t_real k);
 t_vec3	vec3_add_scalar(const t_vec3 v, const t_real k);
+
+t_real	vec2_dot(const t_vec2 u, const t_vec2 v);
+t_real	vec2_len(const t_vec2 v);
+t_real	vec2_len_squared(const t_vec2 v);
+t_vec2	vec2_sub(const t_vec2 u, const t_vec2 v);
+t_vec2	vec2_scale(const t_vec2 v, const t_real k);
 
 //* ========================================================================= */
 //*                                COLOR                                      */
@@ -50,6 +56,7 @@ t_vec3	mat4_mult_vec3(t_mat4 mat, t_vec3 vec);
 t_vec3	mat4_mult_point3(t_mat4 mat, t_point3 pt);
 t_mat4	make_translation_matrix(t_vec3 translation);
 t_mat4	matrix_axis_angle(t_vec3 axis, t_real angle);
+t_real	get_min_scale_factor(t_mat4 mat);
 
 //* ========================================================================= */
 //*                                SOLVER                                     */

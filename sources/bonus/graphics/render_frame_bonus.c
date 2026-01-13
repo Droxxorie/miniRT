@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:55:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 11:44:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	render_frame(t_scene *scene)
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
 	end_time = get_time_ms();
-	log_event(stdout, "PERF", "Render time: %ld ms\r", end_time
+	log_event(stdout, "PERF", "Render time: %ld ms\r\033[K", end_time
 		- start_time);
 }

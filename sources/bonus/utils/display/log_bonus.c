@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 14:45:48 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 18:52:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ void	log_object_info(t_object *object)
 		return ;
 	get_scale_and_position(object, &scale, &pos, &color);
 	log_event(stdout, "WARN", "------\n");
-	log_event(stdout, "INFO", "Type: %s\n", get_object_type_str(object->type));
+	if (object->render_as_sdf == TRUE)
+		log_event(stdout, "INFO", "Type: %s [SDF]\n",
+			get_object_type_str(object->type));
+	else
+		log_event(stdout, "INFO", "Type: %s\n",
+			get_object_type_str(object->type));
 	log_event(stdout, "INFO", "Pos: [%.2f, %.2f, %.2f]\n", pos.x, pos.y, pos.z);
 	log_event(stdout, "INFO", "Scale: [%.2f, %.2f, %.2f]\n", scale.x, scale.y,
 		scale.z);

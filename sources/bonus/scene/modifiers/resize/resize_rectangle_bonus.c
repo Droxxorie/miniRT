@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:25:10 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:48:09 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:11:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	resize_rectangle(t_object *object, int mode, int direction)
 	else if (mode == RESIZE_Y)
 		scale_factors = (t_vec3){1.0, 1.0, factor};
 	else if (mode == RESIZE_UNIFORM || mode == RESIZE_Z)
-		scale_factors = (t_vec3){factor, factor, factor};
+		scale_factors = (t_vec3){factor, 1.0, factor};
 	else
 		return ;
 	scale_matrix = make_scale_matrix(scale_factors);

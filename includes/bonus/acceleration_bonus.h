@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:36:49 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:09:31 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:29:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_aabb	empty_aabb(void);
 t_aabb	compute_box_bounds(void);
 t_aabb	compute_disk_bounds(void);
 t_aabb	compute_cone_bounds(void);
-t_aabb	compute_plane_bounds(void);
+// t_aabb	compute_plane_bounds(void);
 t_aabb	compute_sphere_bounds(void);
 t_aabb	compute_cylinder_bounds(void);
 t_aabb	compute_rectangle_bounds(void);
@@ -32,6 +32,8 @@ t_aabb	compute_torus_bounds(t_object *object);
 t_aabb	surrounding_box(t_aabb box0, t_aabb box1);
 t_aabb	compute_triangle_bounds(t_object *object);
 t_bool	hit_aabb(t_aabb *box, t_ray *ray, t_real t_min, t_real t_max);
+t_bool	intersect_aabb_values(t_aabb *box, t_ray *ray,
+			t_real *t_in, t_real *t_out);
 
 //* ========================================================================= */
 //*                                BVH                                        */

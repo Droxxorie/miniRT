@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:37:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 13:03:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:53:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,24 @@ void	compute_object_bounds(t_object *object)
 
 	if (object->type == BOX)
 		local_box = compute_box_bounds();
-	if (object->type == RECTANGLE)
+	else if (object->type == RECTANGLE)
 		local_box = compute_rectangle_bounds();
-	if (object->type == DISK)
+	else if (object->type == DISK)
 		local_box = compute_disk_bounds();
-	if (object->type == PLANE)
-		local_box = compute_plane_bounds();
-	if (object->type == SPHERE)
+	else if (object->type == SPHERE)
 		local_box = compute_sphere_bounds();
-	if (object->type == TORUS)
+	else if (object->type == TORUS)
 		local_box = compute_torus_bounds(object);
-	if (object->type == CYLINDER)
+	else if (object->type == CYLINDER)
 		local_box = compute_cylinder_bounds();
-	if (object->type == CONE)
+	else if (object->type == CONE)
 		local_box = compute_cone_bounds();
-	if (object->type == TRIANGLE)
+	else if (object->type == TRIANGLE)
 	{
 		object->aabb = compute_triangle_bounds(object);
 		return ;
 	}
+	local_box.min = vec3_add_scalar(local_box.min, -BVH_PADDING);
+	local_box.max = vec3_add_scalar(local_box.max, BVH_PADDING);
 	object->aabb = transform_aabb(local_box, object->transform);
 }
