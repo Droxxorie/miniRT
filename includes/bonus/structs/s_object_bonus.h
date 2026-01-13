@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 17:14:31 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 23:16:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_triangle_sdf
 	t_vec3				ac;
 	t_vec3				pc;
 	t_vec3				normal;
-}					t_triangle_sdf;
+}						t_triangle_sdf;
 
 typedef struct s_triangle
 {
@@ -125,6 +125,29 @@ typedef struct s_box
 	t_real				depth;
 }						t_box;
 
+typedef struct s_menger_sponge
+{
+	t_point3			postition;
+	t_vec3				normal;
+	t_real				size;
+}						t_menger_sponge;
+
+typedef struct s_mandelbulb
+{
+	t_point3			postition;
+	t_vec3				normal;
+	t_real				radius;
+	t_real				power;
+}						t_mandelbulb;
+
+typedef struct s_mandelbox
+{
+	t_point3			postition;
+	t_vec3				normal;
+	t_real				size;
+	t_real				fold_scale;
+}						t_mandelbox;
+
 typedef struct s_sdf
 {
 	t_real				p1;
@@ -135,7 +158,6 @@ typedef struct s_sdf
 typedef enum e_object_type
 {
 	SPHERE,
-	// PLANE,
 	CYLINDER,
 	RECTANGLE,
 	DISK,
@@ -143,6 +165,13 @@ typedef enum e_object_type
 	TORUS,
 	CONE,
 	BOX,
+	MENGER_SPONGE,
+	MANDELBULB,
+	MANDELBOX,
+	// JULIA_SET,
+	// JULIA_BOX,
+	// SIERPINSKI_TETRAHEDRON,
+	// SIERPINSKI_CARPET,
 	NONE,
 }						t_object_type;
 
@@ -169,6 +198,9 @@ typedef struct s_object
 		t_torus			torus;
 		t_cone			cone;
 		t_box			box;
+		t_menger_sponge	menger_sponge;
+		t_mandelbulb	mandelbulb;
+		t_mandelbox		mandelbox;
 	} u_data;
 	struct s_object		*next;
 }						t_object;

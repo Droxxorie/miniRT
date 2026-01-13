@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 18:47:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 23:48:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,9 @@
 # define B_MAGENTA "\033[1;35m"
 # define B_CYAN "\033[1;36m"
 # define B_W "\033[1;37m"
+
+# define MANDELBULB_SYNTAX "Mandelbulb syntax:\n" \
+		"\t'mandelbulb' <position x,y,z> <normal x,y,z> <radius> <power> " \
+		"<color r,g,b>\n"
 
 #endif

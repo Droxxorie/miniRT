@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:26:28 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 16:30:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 23:52:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ char	*get_object_type_str(t_object_type type)
 		return ("CONE");
 	else if (type == BOX)
 		return ("BOX");
-	else
-		return ("NONE");
+	else if (type == MENGER_SPONGE)
+		return ("MENGER_SPONGE");
+	else if (type == MANDELBULB)
+		return ("MANDELBULB");
+	else if (type == MANDELBOX)
+		return ("MANDELBOX");
+	return ("NONE");
 }
 
 void	get_scale_and_position(t_object *object, t_vec3 *s, t_vec3 *p,

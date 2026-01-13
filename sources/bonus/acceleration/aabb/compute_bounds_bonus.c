@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:37:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 16:53:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 23:23:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,12 @@ void	compute_object_bounds(t_object *object)
 		object->aabb = compute_triangle_bounds(object);
 		return ;
 	}
+	else if (object->type == MENGER_SPONGE)
+		local_box = compute_menger_sponge_bounds();
+	else if (object->type == MANDELBULB)
+		local_box = compute_mandelbulb_bounds();
+	else if (object->type == MANDELBOX)
+		local_box = compute_mandelbox_bounds();
 	local_box.min = vec3_add_scalar(local_box.min, -BVH_PADDING);
 	local_box.max = vec3_add_scalar(local_box.max, BVH_PADDING);
 	object->aabb = transform_aabb(local_box, object->transform);

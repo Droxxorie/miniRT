@@ -7,6 +7,13 @@ peut etre revoir rotate/translate dans mandatory et clean tt ç&
 kd-tree
 shift r marche plus ...
 camera cassée rotation z
+mesh + .obj
+beautifuls colors for fractals + shadow acne
+add syntax messages for all shapes
+segfault resize fractal
+power entier naturel/relatif reel ?
+fractals 2D
+fractals 3D bizzare avec sdf (si déplacé agit bizzarement)->désactivé resize/rotate/translate ? plus de détails ?
 
 
 # ROADMAP

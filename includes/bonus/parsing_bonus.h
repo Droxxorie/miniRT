@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 16:38:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/13 23:18:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_status	parse_sdf(t_scene *scene, char **line, t_bool *is_sdf);
 //* ========================================================================= */
 //*                                OBJECTS                                    */
 //* ========================================================================= */
+//* Parametric Objects */
 t_status	parse_box(t_scene *scene, char **line);
 t_status	parse_disk(t_scene *scene, char **line);
 t_status	parse_cone(t_scene *scene, char **line);
@@ -42,6 +43,11 @@ t_status	parse_sphere(t_scene *scene, char **line);
 t_status	parse_cylinder(t_scene *scene, char **line);
 t_status	parse_triangle(t_scene *scene, char **line);
 t_status	parse_rectangle(t_scene *scene, char **line);
+//* Implicit Objects */
+t_status	parse_menger_sponge(t_scene *scene, char **line);
+t_status	parse_mandelbulb(t_scene *scene, char **line);
+t_status	parse_mandelbox(t_scene *scene, char **line);
+
 
 //* ========================================================================= */
 //*                                ENTITIES                                   */
@@ -62,5 +68,7 @@ t_status	check_eol(t_scene *scene, char **line);
 void		add_object_to_scene(t_scene *scene, t_object *object);
 t_bool		has_extension(const char *file, const char *extension);
 t_status	skip_required(t_scene *scene, char **line, const char *charset);
+void		init_fractal_matrix(t_object *obj, t_point3 position,
+				t_vec3 normal, t_real size);
 
 #endif

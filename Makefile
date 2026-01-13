@@ -224,15 +224,19 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_box_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_cone_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_cylinder_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_disk_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_plane_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_rectangle_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_sphere_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_torus_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/objects/parse_triangle_bonus.c \
+	${SRC_DIR_BONUS}/parsing/objects/utils_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_box_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_cone_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_cylinder_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_disk_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_plane_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_rectangle_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_sphere_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_torus_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbulb_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbox_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_menger_sponge_bonus.c \
 
 #* ---- Acceleration (BVH/AABB) ----
 SRCS_BONUS += \
@@ -246,6 +250,9 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/sphere_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/torus_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/triangle_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/menger_sponge_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/mandelbulb_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/mandelbox_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/bvh/build_bvh_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/bvh/hit_bvh_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/bvh/quick_sort_bonus.c \
@@ -279,27 +286,27 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/hit_dispatch_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_tracing_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_box_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_cone_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_disk_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_torus_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/primitives/hit_triangle_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/dispatch_sdf_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_box_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_cone_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_cylinder_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_sphere_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_torus_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_disk_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_rectangle_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/sdf/primitives/sdf_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_box_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_disk_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_torus_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_box_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_cone_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_cylinder_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_sphere_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_torus_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_disk_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_rectangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbulb_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \
