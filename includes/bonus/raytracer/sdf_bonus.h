@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:38:58 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:39:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:42:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 t_bool	ray_march(t_object *object, t_ray *world_ray,
 			t_hit_record *record);
+t_real	dispatch_sdf(t_point3 p, t_object *object);
 t_real	sdf_sphere(t_point3 p);
 t_real	sdf_cylinder(t_point3 p);
 t_real	sdf_cone(t_point3 p);
@@ -27,6 +28,13 @@ t_real	sdf_rectangle(t_point3 p);
 t_real	sdf_triangle(t_point3 p, t_object *object);
 // t_real	sdf_menger_sponge(t_point3 p, t_object *object);
 t_real	sdf_mandelbulb(t_point3 p, t_object *object);
-// t_real	sdf_mandelbox(t_point3 p, t_object *object);
+t_real	sdf_mandelbox(t_point3 p, t_object *object);
+
+//* Fractals Colors
+t_color	lerp_color(t_color c1, t_color c2, double t);
+t_real	get_trap_distance(t_vec3 z, int mode);
+t_color	cosine_palette(t_real t, t_color *params);
+t_color	get_mandelbulb_color(t_point3 p, t_object *obj);
+t_color	get_mandelbox_color(t_point3 p, t_object *object);
 
 #endif

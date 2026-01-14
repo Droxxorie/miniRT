@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 22:55:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:17:32 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:58:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ t_status	parse_menger_sponge(t_scene *scene, char **line)
 		return (print_error(ERR_MEM_OBJECT), EXIT_FAILURE);
 	new_object->type = MENGER_SPONGE;
 	new_object->render_as_sdf = TRUE;
+	new_object->is_fractal = TRUE;
 	if (get_menger_sponge_values(scene, line, new_object) == EXIT_FAILURE)
 	{
 		free(new_object);
 		return (EXIT_FAILURE);
 	}
-	init_fractal_matrix(new_object,
-		new_object->u_data.menger_sponge.postition,
+	init_fractal_matrix(new_object, new_object->u_data.menger_sponge.postition,
 		new_object->u_data.menger_sponge.normal,
 		new_object->u_data.menger_sponge.size);
 	add_object_to_scene(scene, new_object);

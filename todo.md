@@ -14,6 +14,9 @@ segfault resize fractal
 power entier naturel/relatif reel ?
 fractals 2D
 fractals 3D bizzare avec sdf (si déplacé agit bizzarement)->désactivé resize/rotate/translate ? plus de détails ?
+ajouter plus de fractals 3D ?
+mode de save meilleur qualité ?
+shift + r rescale la scene
 
 
 # ROADMAP
@@ -45,7 +48,8 @@ fractals 3D bizzare avec sdf (si déplacé agit bizzarement)->désactivé resize
 ## PHASE 3.5 : RAYMARCHING
 - [x] Support SDF (mdrrrr)
 - [x] Object SDF simples (Sphere, pavé, Tore)
-- [ ] Fractals (Mandelbulb, Julia, autre)
+- [x] Fractals (Mandelbulb, Julia, autre)
+- [x] Ambiant Occlusion
 
 ## PHASE 4 : LUMIERE & MAT
 - [ ] SUN (Lumière parallèle)

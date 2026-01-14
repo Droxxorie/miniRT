@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:18:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:52:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_status	parse_int(char **line, int *value);
 t_status	parse_real(char **line, t_real *value);
 t_status	parse_comma(t_scene *scene, char **line);
 t_status	parse_dim(t_scene *scene, char **line, t_real *dim);
+t_status	parse_dim_relative(t_scene *scene, char **line, t_real *dim);
 t_status	parse_axis(t_scene *scene, char **line, t_vec3 *axis);
 t_status	parse_vec3(t_scene *scene, char **line, t_vec3 *vector);
 t_status	parse_scene_file(t_scene *scene, const char *file_path);
@@ -48,7 +49,6 @@ t_status	parse_menger_sponge(t_scene *scene, char **line);
 t_status	parse_mandelbulb(t_scene *scene, char **line);
 t_status	parse_mandelbox(t_scene *scene, char **line);
 
-
 //* ========================================================================= */
 //*                                ENTITIES                                   */
 //* ========================================================================= */
@@ -68,7 +68,7 @@ t_status	check_eol(t_scene *scene, char **line);
 void		add_object_to_scene(t_scene *scene, t_object *object);
 t_bool		has_extension(const char *file, const char *extension);
 t_status	skip_required(t_scene *scene, char **line, const char *charset);
-void		init_fractal_matrix(t_object *obj, t_point3 position,
-				t_vec3 normal, t_real size);
+void		init_fractal_matrix(t_object *obj, t_point3 position, t_vec3 normal,
+				t_real size);
 
 #endif

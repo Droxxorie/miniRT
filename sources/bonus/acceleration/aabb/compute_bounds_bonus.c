@@ -6,43 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:37:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:23:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:55:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-t_aabb	empty_aabb(void)
-{
-	t_aabb	box;
-
-	box.min = (t_point3){INFINITY, INFINITY, INFINITY};
-	box.max = (t_point3){-INFINITY, -INFINITY, -INFINITY};
-	return (box);
-}
-
-void	grow_aabb(t_aabb *box, t_point3 point)
-{
-	box->min.x = fmin(box->min.x, point.x);
-	box->min.y = fmin(box->min.y, point.y);
-	box->min.z = fmin(box->min.z, point.z);
-	box->max.x = fmax(box->max.x, point.x);
-	box->max.y = fmax(box->max.y, point.y);
-	box->max.z = fmax(box->max.z, point.z);
-}
-
-t_aabb	surrounding_box(t_aabb box1, t_aabb box2)
-{
-	t_aabb	surround_box;
-
-	surround_box.min.x = fmin(box1.min.x, box2.min.x);
-	surround_box.min.y = fmin(box1.min.y, box2.min.y);
-	surround_box.min.z = fmin(box1.min.z, box2.min.z);
-	surround_box.max.x = fmax(box1.max.x, box2.max.x);
-	surround_box.max.y = fmax(box1.max.y, box2.max.y);
-	surround_box.max.z = fmax(box1.max.z, box2.max.z);
-	return (surround_box);
-}
 
 static t_aabb	transform_aabb(t_aabb local_box, t_mat4 transform)
 {
@@ -72,9 +40,21 @@ static t_aabb	transform_aabb(t_aabb local_box, t_mat4 transform)
 	return (world_box);
 }
 
+static void	compute_more_bounds(t_object *object, t_aabb *local_box)
+{
+	if (object->type == TORUS)
+		*local_box = compute_torus_bounds(object);
+	else if (object->type == MENGER_SPONGE)
+		*local_box = compute_menger_sponge_bounds();
+	else if (object->type == MANDELBULB)
+		*local_box = compute_mandelbulb_bounds();
+	else if (object->type == MANDELBOX)
+		*local_box = compute_mandelbox_bounds();
+}
+
 void	compute_object_bounds(t_object *object)
 {
-	t_aabb		local_box;
+	t_aabb	local_box;
 
 	if (object->type == BOX)
 		local_box = compute_box_bounds();
@@ -84,8 +64,6 @@ void	compute_object_bounds(t_object *object)
 		local_box = compute_disk_bounds();
 	else if (object->type == SPHERE)
 		local_box = compute_sphere_bounds();
-	else if (object->type == TORUS)
-		local_box = compute_torus_bounds(object);
 	else if (object->type == CYLINDER)
 		local_box = compute_cylinder_bounds();
 	else if (object->type == CONE)
@@ -95,12 +73,8 @@ void	compute_object_bounds(t_object *object)
 		object->aabb = compute_triangle_bounds(object);
 		return ;
 	}
-	else if (object->type == MENGER_SPONGE)
-		local_box = compute_menger_sponge_bounds();
-	else if (object->type == MANDELBULB)
-		local_box = compute_mandelbulb_bounds();
-	else if (object->type == MANDELBOX)
-		local_box = compute_mandelbox_bounds();
+	else
+		compute_more_bounds(object, &local_box);
 	local_box.min = vec3_add_scalar(local_box.min, -BVH_PADDING);
 	local_box.max = vec3_add_scalar(local_box.max, BVH_PADDING);
 	object->aabb = transform_aabb(local_box, object->transform);

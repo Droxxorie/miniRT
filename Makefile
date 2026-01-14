@@ -242,6 +242,7 @@ SRCS_BONUS += \
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/acceleration/aabb/compute_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/hit_aabb_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/utils_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/box_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cone_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/cylinder_bounds_bonus.c \
@@ -280,6 +281,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_sphere_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_torus_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_mandelbulb_bonus.c \
 
 #* ---- Raytracer ----
 SRCS_BONUS += \
@@ -288,6 +290,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/ambient_occlusion_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_box_bonus.c \
@@ -306,7 +309,9 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_disk_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_rectangle_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/utils_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbulb_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbox_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \

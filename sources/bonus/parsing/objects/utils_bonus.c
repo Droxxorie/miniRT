@@ -6,13 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 23:09:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:09:32 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 00:00:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-void	init_fractal_matrix(t_object *object, t_point3 center, t_vec3 axis, t_real size)
+void	init_fractal_matrix(t_object *object, t_point3 center, t_vec3 axis,
+		t_real size)
 {
 	t_mat4	translation;
 	t_mat4	rotation;

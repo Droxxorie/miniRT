@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 17:26:37 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 12:50:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_bool		hit_rectangle(t_object *object, t_ray *ray, t_hit_record *record);
 t_vec3		vec_reflect(t_vec3 i, t_vec3 n);
 t_color		compute_pixel_color(t_scene *scene, t_ray *ray);
 t_color		phong_light(t_scene *scene, t_hit_record *record, t_ray *ray);
+t_real		compute_ao(t_point3 point, t_vec3 normal, t_object *object);
 
 //* ========================================================================= */
 //*                                RAYTRACING                                 */

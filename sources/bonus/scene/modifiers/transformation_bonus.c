@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 17:35:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 00:03:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,11 @@ static void	apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix)
 void	dispatch_resize(t_object *object, int mode, int direction)
 {
 	int					i;
-	static t_resize_map	map[] = {
-	{SPHERE, resize_sphere},
-	{CYLINDER, resize_cylinder},
-	{RECTANGLE, resize_rectangle},
-	{DISK, resize_disk},
-	{TRIANGLE, resize_triangle},
-	{TORUS, resize_torus},
-	{CONE, resize_cone},
-	{BOX, resize_box},
-	{NONE, NULL}
-	};
+	static t_resize_map	map[] = {{SPHERE, resize_sphere},
+	{CYLINDER, resize_cylinder}, {RECTANGLE, resize_rectangle},
+	{DISK, resize_disk}, {TRIANGLE, resize_triangle}, {TORUS, resize_torus},
+	{CONE, resize_cone}, {BOX, resize_box},
+	{MANDELBULB, resize_mandelbulb}, {NONE, NULL}};
 
 	if (!object)
 		return ;
@@ -86,9 +80,9 @@ void	translate_object(t_object *object, t_vec3 translation)
 
 void	rotate_object(t_object *object, t_vec3 rotation_axis)
 {
-	t_real		angle;
-	t_vec3		axis_input;
-	t_mat4		rotation_matrix;
+	t_real	angle;
+	t_vec3	axis_input;
+	t_mat4	rotation_matrix;
 
 	angle = vec3_len(rotation_axis);
 	if (angle < EPSILON)

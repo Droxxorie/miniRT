@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:16:59 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:31:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_mandelbulb
 {
 	t_point3			postition;
 	t_vec3				normal;
-	t_real				radius;
+	t_real				size;
 	t_real				power;
 }						t_mandelbulb;
 
@@ -145,7 +145,10 @@ typedef struct s_mandelbox
 	t_point3			postition;
 	t_vec3				normal;
 	t_real				size;
+	t_real				slice;
+	t_real				inner_radius;
 	t_real				fold_scale;
+	t_real				outer_radius;
 }						t_mandelbox;
 
 typedef struct s_sdf
@@ -186,6 +189,7 @@ typedef struct s_object
 	t_aabb				aabb;
 	t_bool				visible;
 	t_bool				render_as_sdf;
+	t_bool				is_fractal;
 	t_sdf				sdf_data;
 	t_real				sdf_scale;
 	union

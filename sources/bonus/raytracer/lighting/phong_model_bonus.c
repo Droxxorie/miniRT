@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 18:13:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 00:02:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_color	compute_specular(t_light *light, t_hit_record *record,
 	t_real	shininess;
 	t_real	specular;
 
-	shininess = 32.0; //TODO make it configurable per material
+	shininess = 32.0; // TODO make it configurable per material
 	dir = vec3_normalize(vec3_sub(light->position, record->hit_point));
 	view_dir = vec3_normalize(vec3_scale(ray->direction, -1.0));
 	reflect_dir = vec_reflect(vec3_scale(dir, -1.0), record->normal);
@@ -84,6 +84,7 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 	t_color	total_light;
 	t_light	*current_light;
 	t_color	light_contribution;
+	t_real	ao_factor;
 
 	total_light = color_prod(scene->ambient, record->color);
 	current_light = scene->lights;
@@ -93,6 +94,12 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 				record, ray);
 		total_light = color_add(total_light, light_contribution);
 		current_light = current_light->next;
+	}
+	if (record->object->render_as_sdf == TRUE)
+	{
+		ao_factor = compute_ao(record->hit_point, record->normal,
+				record->object);
+		total_light = color_scale(total_light, ao_factor);
 	}
 	return (total_light);
 }

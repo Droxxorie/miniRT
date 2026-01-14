@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 23:22:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:22:48 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:55:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_aabb	compute_mandelbox_bounds(void)
 {
 	t_aabb	box;
 
-	box.min = (t_point3){-4.0, -4.0, -4.0}; //a voir avec le scale
+	box.min = (t_point3){-4.0, -4.0, -4.0};
 	box.max = (t_point3){4.0, 4.0, 4.0};
 	return (box);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:48:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/14 23:51:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@
 # define MAX_SDF_DISTANCE 1000.0
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
+
+# define AO_STEPS 5
+# define AO_STEP_SIZE 0.03
+# define AO_INTENSITY 4.0
+# define AO_SCALE_DECAY 0.85
 
 //* ========================================================================= */
 //*                                KEYS (LINUX/X11)                           */
@@ -152,9 +157,5 @@
 # define B_MAGENTA "\033[1;35m"
 # define B_CYAN "\033[1;36m"
 # define B_W "\033[1;37m"
-
-# define MANDELBULB_SYNTAX "Mandelbulb syntax:\n" \
-		"\t'mandelbulb' <position x,y,z> <normal x,y,z> <radius> <power> " \
-		"<color r,g,b>\n"
 
 #endif
