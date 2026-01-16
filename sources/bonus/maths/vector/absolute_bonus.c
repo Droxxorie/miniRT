@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.h                                      :+:      :+:    :+:   */
+/*   absolute_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:49:22 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/16 12:58:58 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/16 14:06:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_BONUS_H
-# define UTILS_BONUS_H
+#include <minirt_bonus.h>
 
-# include "structs/s_scene_bonus.h"
+t_vec3	vec3_abs(const t_vec3 v)
+{
+	return ((t_vec3){fabs(v.x), fabs(v.y), fabs(v.z)});
+}
 
-long		get_time_ms(void);
-void		swap_real(t_real *a, t_real *b);
-size_t		ft_strspn(const char *str, const char *accept);
-t_real		ft_clamp(t_real v, t_real min, t_real max);
-t_real		ft_sign(t_real x);
-t_real		noise_3d(t_point3 p);
-
-#endif
+t_vec2	vec2_abs(const t_vec2 v)
+{
+	return ((t_vec2){fabs(v.x), fabs(v.y)});
+}

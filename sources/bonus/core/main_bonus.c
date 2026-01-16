@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:54:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 16:05:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	execute_minirt(t_scene *scene)
 	render_frame(scene);
 	if (scene->to_save == TRUE)
 	{
-		mkdir("saved", 0755);
+		mkdir("output", 0755);
 		save_image_to_bmp(scene);
 		clean_exit(scene, EXIT_SUCCESS);
 	}

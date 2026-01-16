@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 23:16:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:59:55 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 18:58:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_status	get_mandelbox_values(t_scene *scene, char **line, t_object *obj)
 			&obj->u_data.mandelbox.inner_radius) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_dim_relative(scene, line,
-			&obj->u_data.mandelbox.fold_scale) == EXIT_FAILURE
+			&obj->u_data.mandelbox.fold_factor) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_dim_relative(scene, line,
 			&obj->u_data.mandelbox.outer_radius) == EXIT_FAILURE
@@ -62,16 +62,13 @@ t_status	parse_mandelbox(t_scene *scene, char **line)
 	new_object->render_as_sdf = TRUE;
 	new_object->is_fractal = TRUE;
 	if (get_mandelbox_values(scene, line, new_object) == EXIT_FAILURE)
-	{
-		free(new_object);
-		return (EXIT_FAILURE);
-	}
+		return (free(new_object), EXIT_FAILURE);
 	init_fractal_matrix(new_object, new_object->u_data.mandelbox.postition,
 		new_object->u_data.mandelbox.normal, new_object->u_data.mandelbox.size);
 	add_object_to_scene(scene, new_object);
 	printf("Data of mandelbox object:\n");
 	printf("Slice: %f\n", new_object->u_data.mandelbox.slice);
-	printf("Fold: %f\n", new_object->u_data.mandelbox.fold_scale);
+	printf("Fold: %f\n", new_object->u_data.mandelbox.fold_factor);
 	printf("Inner Radius: %f\n", new_object->u_data.mandelbox.inner_radius);
 	printf("Outer Radius: %f\n", new_object->u_data.mandelbox.outer_radius);
 	return (EXIT_SUCCESS);

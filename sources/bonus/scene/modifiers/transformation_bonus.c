@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 00:03:50 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 14:10:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ static void	apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix)
 void	dispatch_resize(t_object *object, int mode, int direction)
 {
 	int					i;
-	static t_resize_map	map[] = {{SPHERE, resize_sphere},
-	{CYLINDER, resize_cylinder}, {RECTANGLE, resize_rectangle},
-	{DISK, resize_disk}, {TRIANGLE, resize_triangle}, {TORUS, resize_torus},
-	{CONE, resize_cone}, {BOX, resize_box},
-	{MANDELBULB, resize_mandelbulb}, {NONE, NULL}};
+	static t_resize_map	map[] = {{SPHERE, resize_sphere}, {CYLINDER,
+		resize_cylinder}, {RECTANGLE, resize_rectangle}, {DISK,
+		resize_disk}, {TRIANGLE, resize_triangle}, {TORUS, resize_torus},
+	{CONE, resize_cone}, {BOX, resize_box}, {MANDELBULB,
+		resize_mandelbulb}, {MENGER_SPONGE, resize_menger_sponge}, {NONE,
+		NULL}};
 
 	if (!object)
 		return ;

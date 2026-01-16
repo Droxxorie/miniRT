@@ -1,0 +1,50 @@
+# Ambiance faible (0.1) pour bien voir l'AO travailler dans les noirs
+A   0.1                 255,255,255
+
+# Camera positionnée légèrement en hauteur, regardant vers le bas
+C   0,5,12      0,-0.3,-1   70
+
+# Résolution standard
+R   1280 720
+# R   160 90
+
+
+# Lumière unique, très haute (Y=10) pour projeter des ombres au sol
+# Si tu bouges la lumière vers X=5, les ombres s'allongeront
+L   0,20,0      0.7     255,255,255
+
+# --- LE DÉCOR (RT Classique) ---
+# Un sol gris clair pour bien voir les ombres portées
+# pl  0,0,0       0,1,0   200,200,200 sdf
+box 0,-1,0       0,1,0  1000.0 1.0 1000 200,200,200  sdf
+
+
+# Un mur au fond pour créer un "coin" (Test ultime de l'AO Globale)
+# Regarde la jonction entre ce plan et le sol : elle doit être assombrie par l'AO
+pl  0,0,-5      0,0,1   200,200,200 sdf
+
+# --- LES OBJETS TEST ---
+
+# 1. SPHERE DE GAUCHE (RT Classique)
+# Posée directement sur le sol (Y=1.5, Diamètre=3.0)
+# TEST AO : Regarde la base de la sphère. Il doit y avoir un dégradé noir (contact shadow).
+# TEST SHADOW : L'ombre portée sur le sol doit être nette à la base et floue au bout.
+sp  -3,1.5,0    3.0     220,50,50 sdf
+
+# 2. CUBE FLOTTANT (SDF)
+# Il flotte à 2 unités du sol.
+# TEST SOFT SHADOW : L'ombre au sol doit être beaucoup plus floue (molle) que celle de la sphère.
+# box : pos vec_dir color side_size
+# (Adapte la syntaxe box selon ton parser, ici j'assume : pos vector color size)
+box 3,3,0       0,1,0  2.0 2.0 2.0 50,100,220  sdf
+
+# 3. TORUS CENTRAL (SDF)
+# Le test ultime pour l'AO "Self-Shadowing"
+# L'intérieur de l'anneau doit être plus sombre que l'extérieur grâce à l'AO.
+# torus : pos vec_dir color r_major r_minor
+# tor 0,1,4     1,0,0   1.0 0.3 50,200,50 sdf
+
+# 4. CYLINDRE COUCHÉ (RT Classique)
+# Pour voir l'interaction entre un objet RT et le sol
+# cy : pos vec_dir diameter height color
+# cy  0,0.5,-2    1,0,0   1.0 4.0     200,200,50

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.h                                      :+:      :+:    :+:   */
+/*   noise_3d_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:49:22 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/15 17:45:21 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/15 17:58:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_BONUS_H
-# define UTILS_BONUS_H
+#include <minirt_bonus.h>
 
-# include "structs/s_scene_bonus.h"
+t_real	noise_3d(t_point3 p)
+{
+	t_real	magic_number;
+	t_vec3	magic_vector;
+	t_real	magic_value;
 
-long		get_time_ms(void);
-void		swap_real(t_real *a, t_real *b);
-size_t		ft_strspn(const char *str, const char *accept);
-t_real		ft_clamp(t_real v, t_real min, t_real max);
-t_real		ft_sign(t_real x);
-t_real		noise_3d(t_point3 p);
-
-#endif
+	magic_vector = (t_vec3){12.9898, 78.233, 45.719};
+	magic_number = 43758.5453;
+	magic_value = vec3_dot(p, magic_vector);
+	return (sin(magic_value) * magic_number - (int)(sin(magic_value)
+		* magic_number));
+}

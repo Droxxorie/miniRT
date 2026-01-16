@@ -6,11 +6,18 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 22:55:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:58:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 13:53:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	print_menger_sponge_syntax(void)
+{
+	log_event(stdout, "INFO",
+		"Menger Sponge syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Position x,y,z",
+		"Normal x,y,z", "Size", "Scale", "Color r,g,b");
+}
 
 static t_status	get_menger_sponge_values(t_scene *scene, char **line,
 		t_object *obj)
@@ -24,9 +31,12 @@ static t_status	get_menger_sponge_values(t_scene *scene, char **line,
 		|| parse_dim(scene, line,
 			&obj->u_data.menger_sponge.size) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
+		|| parse_dim(scene, line,
+			&obj->u_data.menger_sponge.scale_factor) == EXIT_FAILURE
+		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (print_menger_sponge_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -44,10 +54,7 @@ t_status	parse_menger_sponge(t_scene *scene, char **line)
 	new_object->render_as_sdf = TRUE;
 	new_object->is_fractal = TRUE;
 	if (get_menger_sponge_values(scene, line, new_object) == EXIT_FAILURE)
-	{
-		free(new_object);
-		return (EXIT_FAILURE);
-	}
+		return (free(new_object), EXIT_FAILURE);
 	init_fractal_matrix(new_object, new_object->u_data.menger_sponge.postition,
 		new_object->u_data.menger_sponge.normal,
 		new_object->u_data.menger_sponge.size);

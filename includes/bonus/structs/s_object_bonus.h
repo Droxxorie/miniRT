@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:31:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 13:03:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_menger_sponge
 	t_point3			postition;
 	t_vec3				normal;
 	t_real				size;
+	t_real				scale_factor;
 }						t_menger_sponge;
 
 typedef struct s_mandelbulb
@@ -147,7 +148,7 @@ typedef struct s_mandelbox
 	t_real				size;
 	t_real				slice;
 	t_real				inner_radius;
-	t_real				fold_scale;
+	t_real				fold_factor;
 	t_real				outer_radius;
 }						t_mandelbox;
 

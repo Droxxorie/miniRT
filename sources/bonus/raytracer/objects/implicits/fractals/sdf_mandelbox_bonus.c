@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 19:38:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:44:32 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 14:09:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,23 @@ static void	box_fold(t_vec3 *z, t_real fold_scale)
 
 t_color	get_mandelbox_color(t_point3 p, t_object *object)
 {
-	t_vec3	z;
-	t_real	min_trap;
-	int		i;
-	t_real	dist;
+	t_vec3		z;
+	t_real		min_trap;
+	int			i;
+	t_real		dist;
+	t_mandelbox	*mandelbox;
 
+	mandelbox = &object->u_data.mandelbox;
 	z = p;
 	min_trap = 1e20;
 	i = 0;
 	while (i < 10)
 	{
-		box_fold(&z, object->u_data.mandelbox.fold_scale);
-		sphere_fold(&z, NULL, object->u_data.mandelbox.inner_radius,
-			object->u_data.mandelbox.outer_radius);
-		z = vec3_scale(z, object->u_data.mandelbox.fold_scale);
+		box_fold(&z, mandelbox->fold_factor);
+		sphere_fold(&z, NULL, mandelbox->inner_radius, mandelbox->outer_radius);
+		z = vec3_scale(z, mandelbox->fold_factor);
 		z = vec3_add(z, p);
-		dist = get_trap_distance(z, 0);
+		dist = get_trap_distance(z, 2);
 		if (dist < min_trap)
 			min_trap = dist;
 		i++;
@@ -83,12 +84,14 @@ t_color	get_mandelbox_color(t_point3 p, t_object *object)
 
 t_real	sdf_mandelbox(t_point3 p, t_object *object)
 {
-	t_vec3	z;
-	t_real	dr;
-	t_real	dist_bounding_sphere;
-	int		i;
+	t_vec3		z;
+	t_real		dr;
+	t_real		dist_bounding_sphere;
+	int			i;
+	t_mandelbox	*mandelbox;
 
-	dist_bounding_sphere = vec3_len(p) - (object->u_data.mandelbox.size * 2.5);
+	mandelbox = &object->u_data.mandelbox;
+	dist_bounding_sphere = vec3_len(p) - (mandelbox->size * 2.5);
 	if (dist_bounding_sphere > 1.0)
 		return (dist_bounding_sphere);
 	z = p;
@@ -96,12 +99,11 @@ t_real	sdf_mandelbox(t_point3 p, t_object *object)
 	i = 0;
 	while (i < 15)
 	{
-		box_fold(&z, object->u_data.mandelbox.fold_scale);
-		sphere_fold(&z, &dr, object->u_data.mandelbox.inner_radius,
-			object->u_data.mandelbox.outer_radius);
-		z = vec3_scale(z, object->u_data.mandelbox.slice);
+		box_fold(&z, mandelbox->fold_factor);
+		sphere_fold(&z, &dr, mandelbox->inner_radius, mandelbox->outer_radius);
+		z = vec3_scale(z, mandelbox->slice);
 		z = vec3_add(z, p);
-		dr = dr * fabs(object->u_data.mandelbox.slice) + 1.0;
+		dr = dr * fabs(mandelbox->slice) + 1.0;
 		i++;
 	}
 	return (vec3_len(z) / fabs(dr));

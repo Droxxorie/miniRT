@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:44:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 19:18:17 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 13:57:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	resize_triangle(t_object *obj, int mode, int direction);
 void	resize_rectangle(t_object *obj, int mode, int direction);
 void	resize_camera_fov(t_camera *camera, int mode, int direction);
 void	resize_mandelbulb(t_object *object, int mode, int direction);
+void	resize_menger_sponge(t_object *object, int mode, int direction);
 
 #endif

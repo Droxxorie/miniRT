@@ -282,17 +282,24 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_torus_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_triangle_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_mandelbulb_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_menger_sponge_bonus.c \
 
 #* ---- Raytracer ----
+#* ---- Engines ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/hit_dispatch_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/engines/ray_tracing_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/ray_tracing/ray_tracing_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/ray_marching_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/dispatch_sdf_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/map_the_world_bonus.c \
+#* ---- Lighting ----
+SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/shadows_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/ambient_occlusion_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
+#* ---- Intersection ----
+SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_box_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_cone_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_cylinder_bonus.c \
@@ -301,6 +308,8 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_sphere_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_torus_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_triangle_bonus.c \
+#* ---- SDFs ----
+SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_box_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_cone_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/sdf_cylinder_bonus.c \
@@ -312,6 +321,11 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/utils_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbulb_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbox_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_menger_sponge_bonus.c \
+#* ---- Utils ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/utils_bonus.c \
 
 #* ---- Maths ----
 SRCS_BONUS += \
@@ -335,6 +349,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/maths/vector/product_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/scalar_product_bonus.c \
     $(SRC_DIR_BONUS)/maths/vector/substract_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/absolute_bonus.c \
 
 #* ---- Errors & Utils ----
 SRCS_BONUS += \
@@ -352,6 +367,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
 	$(SRC_DIR_BONUS)/utils/clamp_bonus.c \
 	$(SRC_DIR_BONUS)/utils/sign_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/noise_3d_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

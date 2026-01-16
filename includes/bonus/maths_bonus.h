@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:36:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 15:03:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 12:59:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ t_vec3	vec3_sub(const t_vec3 u, const t_vec3 v);
 t_vec3	vec3_cross(const t_vec3 u, const t_vec3 v);
 t_vec3	vec3_scale(const t_vec3 v, const t_real k);
 t_vec3	vec3_add_scalar(const t_vec3 v, const t_real k);
+t_vec3	vec3_abs(const t_vec3 v);
 
 t_real	vec2_dot(const t_vec2 u, const t_vec2 v);
 t_real	vec2_len(const t_vec2 v);
 t_real	vec2_len_squared(const t_vec2 v);
 t_vec2	vec2_sub(const t_vec2 u, const t_vec2 v);
 t_vec2	vec2_scale(const t_vec2 v, const t_real k);
+t_vec2	vec2_abs(const t_vec2 v);
 
 //* ========================================================================= */
 //*                                COLOR                                      */

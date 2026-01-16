@@ -6,32 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 00:02:25 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 17:38:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-static t_bool	is_in_shadow(t_scene *scene, t_hit_record *record,
-		t_vec3 light_pos)
-{
-	t_vec3			dir_to_light;
-	t_real			dist_to_light;
-	t_ray			shadow_ray;
-	t_hit_record	shadow_record;
-
-	dir_to_light = vec3_sub(light_pos, record->hit_point);
-	dist_to_light = vec3_len(dir_to_light);
-	shadow_ray.direction = vec3_normalize(dir_to_light);
-	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
-				SHADOW_BIAS));
-	shadow_ray.min = EPSILON;
-	shadow_ray.max = dist_to_light - EPSILON;
-	shadow_ray.is_shadow_ray = TRUE;
-	if (hit_bvh(scene->bvh_root, &shadow_ray, &shadow_record) == TRUE)
-		return (TRUE);
-	return (FALSE);
-}
 
 static t_color	compute_diffuse(t_light *light, t_hit_record *record)
 {
@@ -69,24 +48,31 @@ static t_color	compute_light_contribution(t_scene *scene, t_light *light,
 	t_color	diffuse;
 	t_color	specular;
 	t_color	contribution;
+	t_real	shadow_factor;
 
-	if (is_in_shadow(scene, record, light->position) == TRUE
-		|| light->active == FALSE)
+	if (light->active == FALSE)
+		return ((t_color){0.0, 0.0, 0.0});
+	shadow_factor = get_shadow_factor(scene, record, light);
+	if (shadow_factor <= 0.01)
 		return ((t_color){0.0, 0.0, 0.0});
 	diffuse = color_prod(compute_diffuse(light, record), record->color);
 	specular = compute_specular(light, record, ray);
 	contribution = color_add(diffuse, specular);
-	return (contribution);
+	return (color_scale(contribution, shadow_factor));
 }
 
 t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 {
 	t_color	total_light;
+	t_color	ambient_part;
 	t_light	*current_light;
 	t_color	light_contribution;
 	t_real	ao_factor;
 
-	total_light = color_prod(scene->ambient, record->color);
+	ambient_part = color_prod(scene->ambient, record->color);
+	ao_factor = compute_ao(scene, record->hit_point, record->normal);
+	// ao_factor = 1.0;
+	total_light = color_scale(ambient_part, ao_factor);
 	current_light = scene->lights;
 	while (current_light)
 	{
@@ -94,12 +80,6 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 				record, ray);
 		total_light = color_add(total_light, light_contribution);
 		current_light = current_light->next;
-	}
-	if (record->object->render_as_sdf == TRUE)
-	{
-		ao_factor = compute_ao(record->hit_point, record->normal,
-				record->object);
-		total_light = color_scale(total_light, ao_factor);
 	}
 	return (total_light);
 }

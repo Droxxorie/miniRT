@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 18:31:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 18:43:56 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 13:04:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,36 +76,3 @@ t_bool	hit_bvh(t_bvh_node *node, t_ray *ray, t_hit_record *record)
 	hit[1] = hit_bvh(second, ray, record);
 	return (hit[0] || hit[1]);
 }
-
-// t_bool	hit_bvh(t_bvh_node *node, t_ray *ray, t_hit_record *record)
-// {
-// 	t_bool		hit[2];
-// 	t_real		t[2];
-// 	t_bvh_node	*first;
-// 	t_bvh_node	*second;
-
-// 	if (!node)
-// 		return (FALSE);
-// 	if (node->left_child == NULL && node->right_child == NULL)
-// 	{
-// 		if (!intersect_aabb_values(&node->box, ray, &t[0], &t[1]))
-// 			return (FALSE);
-// 		if (hit_leaf_content(node->content, ray, record) == TRUE)
-// 			return (TRUE);
-// 		return (FALSE);
-// 	}
-// 	if (hit_aabb(&node->box, ray, ray->min, ray->max) == FALSE)
-// 		return (FALSE);
-// 	first = node->right_child;
-// 	second = node->left_child;
-// 	if (get_axis_value(ray->direction, node->axis) >= 0)
-// 	{
-// 		first = node->left_child;
-// 		second = node->right_child;
-// 	}
-// 	hit[0] = hit_bvh(first, ray, record);
-// 	if (ray->is_shadow_ray && hit[0] == TRUE)
-// 		return (TRUE);
-// 	hit[1] = hit_bvh(second, ray, record);
-// 	return (hit[0] || hit[1]);
-// }

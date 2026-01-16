@@ -6,39 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 23:45:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 22:57:37 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 15:23:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-t_real	dispatch_sdf(t_point3 p, t_object *object)
-{
-	if (object->type == CONE)
-		return (sdf_cone(p));
-	else if (object->type == CYLINDER)
-		return (sdf_cylinder(p));
-	else if (object->type == SPHERE)
-		return (sdf_sphere(p));
-	else if (object->type == BOX)
-		return (sdf_box(p));
-	else if (object->type == TORUS)
-		return (sdf_torus(p, object->u_data.torus.major_radius,
-				object->u_data.torus.minor_radius));
-	else if (object->type == DISK)
-		return (sdf_disk(p));
-	else if (object->type == RECTANGLE)
-		return (sdf_rectangle(p));
-	else if (object->type == TRIANGLE)
-		return (sdf_triangle(p, object));
-	// else if (object->type == MENGER_SPONGE)
-	// 	return (sdf_menger_sponge(p, object));
-	else if (object->type == MANDELBULB)
-		return (sdf_mandelbulb(p, object));
-	else if (object->type == MANDELBOX)
-		return (sdf_mandelbox(p, object));
-	return (INFINITY);
-}
 
 static t_vec3	get_sdf_normal(t_point3 p, t_object *object)
 {
@@ -52,17 +24,6 @@ static t_vec3	get_sdf_normal(t_point3 p, t_object *object)
 	return (vec3_normalize(n));
 }
 
-static	t_color	get_fractal_color(t_point3 point, t_object *object)
-{
-	if (object->type == MANDELBULB)
-		return (get_mandelbulb_color(point, object));
-	else if (object->type == MANDELBOX)
-		return (get_mandelbox_color(point, object));
-	// else if (object->type == MENGER_SPONGE)
-	// 	return (object->color);
-	return (object->color);
-}
-
 static t_bool	set_sdf_record(t_object *object, t_ray *world_ray,
 		t_hit_record *record)
 {
@@ -73,10 +34,9 @@ static t_bool	set_sdf_record(t_object *object, t_ray *world_ray,
 	record->hit_point = ray_at(world_ray, record->t);
 	local_hit = mat4_mult_point3(object->inverse, record->hit_point);
 	local_normal = get_sdf_normal(local_hit, object);
+	record->color = object->color;
 	if (object->is_fractal == TRUE)
 		record->color = get_fractal_color(local_hit, object);
-	else
-		record->color = object->color;
 	if (world_ray->is_shadow_ray == TRUE)
 		return (TRUE);
 	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);

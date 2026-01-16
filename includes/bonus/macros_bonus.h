@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:51:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/15 17:50:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define STEP_MOVE 1.0
 # define STEP_ROT 0.1
 
-# define SHADOW_BIAS 1e-4
 
 # define DEF_WINDOW_WIDTH 720
 # define DEF_WINDOW_HEIGHT 480
@@ -45,9 +44,13 @@
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
 
-# define AO_STEPS 5
-# define AO_STEP_SIZE 0.03
-# define AO_INTENSITY 4.0
+# define SHADOW_HARDNESS 16.0
+# define SHADOW_BIAS 0.05
+# define SHADOW_NOISE 0.02
+
+# define AO_STEPS 4
+# define AO_STEP_SIZE 0.5
+# define AO_INTENSITY 0.5
 # define AO_SCALE_DECAY 0.85
 
 //* ========================================================================= */
