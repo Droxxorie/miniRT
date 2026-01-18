@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:13:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 11:13:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:57:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static t_bool	handle_more_state_keys(int key, t_scene *scene)
 {
 	if (key == KEY_I)
 		return (handle_i_key(scene), FALSE);
+	else if (key == KEY_1 || key == KEY_2 || key == KEY_3)
+		return (handle_num_keys(scene, key), TRUE);
 	return (FALSE);
 }
 

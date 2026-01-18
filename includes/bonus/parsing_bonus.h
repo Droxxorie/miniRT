@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:52:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 13:39:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ t_status	parse_dim(t_scene *scene, char **line, t_real *dim);
 t_status	parse_dim_relative(t_scene *scene, char **line, t_real *dim);
 t_status	parse_axis(t_scene *scene, char **line, t_vec3 *axis);
 t_status	parse_vec3(t_scene *scene, char **line, t_vec3 *vector);
+t_status	parse_vec4(t_scene *scene, char **line, t_vec4 *vector);
 t_status	parse_scene_file(t_scene *scene, const char *file_path);
 t_status	parse_color(t_scene *scene, char **line, t_color *color);
 t_status	parse_ratio(t_scene *scene, char **line, t_real *ratio,
 				t_bool is_negative);
 t_status	parse_sdf(t_scene *scene, char **line, t_bool *is_sdf);
+t_status	parse_bool(t_scene *scene, char **line, t_bool *value);
 
 //* ========================================================================= */
 //*                                OBJECTS                                    */
@@ -48,6 +50,7 @@ t_status	parse_rectangle(t_scene *scene, char **line);
 t_status	parse_menger_sponge(t_scene *scene, char **line);
 t_status	parse_mandelbulb(t_scene *scene, char **line);
 t_status	parse_mandelbox(t_scene *scene, char **line);
+t_status	parse_julia_set(t_scene *scene, char **line);
 
 //* ========================================================================= */
 //*                                ENTITIES                                   */
@@ -60,6 +63,7 @@ t_status	parse_resolution(t_scene *scene, char **line);
 //* ========================================================================= */
 //*                                UTILS                                      */
 //* ========================================================================= */
+t_status	dispatch_parse(t_scene *scene, char *line);
 void		skip_whitespace(char **line);
 int			get_light_count(t_light *lights);
 int			get_camera_count(t_camera *cameras);

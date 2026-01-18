@@ -4,16 +4,13 @@ fusioner test bonus et mandatory
 rajouter scaling factor au resize
 rajouter log transform ?
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
-kd-tree
 shift r marche plus ...
 camera cassée rotation z
 mesh + .obj
 add syntax messages for all shapes
-fractals 2D
-fractals 3D bizzare avec sdf (si déplacé agit bizzarement)->désactivé resize/rotate/translate ? plus de détails ?
-ajouter plus de fractals 3D ?
 mode de save meilleur qualité ?
 shift + r rescale la scene
+core dump quand deplace cam et depalcer/rotate plan ?
 
 
 # ROADMAP
@@ -45,7 +42,11 @@ shift + r rescale la scene
 ## PHASE 3.5 : RAYMARCHING
 - [x] Support SDF (mdrrrr)
 - [x] Object SDF simples (Sphere, pavé, Tore)
-- [x] Fractals (Mandelbulb, Julia, autre)
+- [x] Fractals :
+    - [x] MandelBulb
+    - [x] MandelBox
+    - [x] Julia
+    - [x] Menger Sponge
 - [x] Ambiant Occlusion
 
 ## PHASE 4 : LUMIERE & MAT

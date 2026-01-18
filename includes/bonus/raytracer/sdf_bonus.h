@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:38:58 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 18:39:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 21:55:03 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_real	sdf_triangle(t_point3 p, t_object *object);
 t_real	sdf_menger_sponge(t_point3 p, t_object *object);
 t_real	sdf_mandelbulb(t_point3 p, t_object *object);
 t_real	sdf_mandelbox(t_point3 p, t_object *object);
+t_real	sdf_julia_set(t_point3 p, t_object *object);
 
 //* Fractals Colors
 t_color	lerp_color(t_color c1, t_color c2, double t);
@@ -39,5 +40,6 @@ t_color	get_fractal_color(t_point3 p, t_object *obj);
 t_color	get_mandelbulb_color(t_point3 p, t_object *obj);
 t_color	get_mandelbox_color(t_point3 p, t_object *object);
 t_color	get_menger_sponge_color(t_point3 p, t_object *object);
+t_color	get_julia_set_color(t_point3 p, t_object *object);
 
 #endif

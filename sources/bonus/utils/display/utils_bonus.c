@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:26:28 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:52:28 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 13:53:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*get_object_type_str(t_object_type type)
 		return ("MANDELBULB");
 	else if (type == MANDELBOX)
 		return ("MANDELBOX");
+	else if (type == JULIA_SET)
+		return ("JULIA_SET");
 	return ("NONE");
 }
 

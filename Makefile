@@ -183,6 +183,7 @@ SRCS_BONUS := \
     $(SRC_DIR_BONUS)/core/main_bonus.c \
     $(SRC_DIR_BONUS)/core/cleanup_bonus.c \
     $(SRC_DIR_BONUS)/core/save_bonus.c \
+	$(SRC_DIR_BONUS)/core/debug_bonus.c \
 
 #* ---- Graphics ----
 SRCS_BONUS += \
@@ -205,6 +206,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_space_key_bonus.c \
     $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_t_key_bonus.c \
     $(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_tab_key_bonus.c \
+	$(SRC_DIR_BONUS)/inputs/keyboard/handles/handle_num_keys_bonus.c \
     $(SRC_DIR_BONUS)/inputs/mouse/mouse_hooks_bonus.c \
     $(SRC_DIR_BONUS)/inputs/mouse/handles/handle_click_bonus.c \
     $(SRC_DIR_BONUS)/inputs/mouse/handles/handle_scroll_bonus.c \
@@ -212,14 +214,16 @@ SRCS_BONUS += \
 #* ---- Parsing ----
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/parse_file_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/dispatch_parse_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/add_object_to_scene_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/get_count_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_color_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_dim_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/parse_numbers_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/utils/parse_vec3_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/utils/parse_vector_bonus.c \
     $(SRC_DIR_BONUS)/parsing/utils/utils_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/utils/parse_sdf_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/utils/parse_bool_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
@@ -237,6 +241,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbulb_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbox_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_menger_sponge_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_julia_set_bonus.c \
 
 #* ---- Acceleration (BVH/AABB) ----
 SRCS_BONUS += \
@@ -254,6 +259,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/menger_sponge_bounds_bonus.c \
 	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/mandelbulb_bounds_bonus.c \
 	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/mandelbox_bounds_bonus.c \
+	$(SRC_DIR_BONUS)/acceleration/aabb/bounding_boxes/julia_set_bounds_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/bvh/build_bvh_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/bvh/hit_bvh_bonus.c \
     $(SRC_DIR_BONUS)/acceleration/bvh/quick_sort_bonus.c \
@@ -283,6 +289,8 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_triangle_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_mandelbulb_bonus.c \
 	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_menger_sponge_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_mandelbox_bonus.c \
+	$(SRC_DIR_BONUS)/scene/modifiers/resize/resize_julia_set_bonus.c \
 
 #* ---- Raytracer ----
 #* ---- Engines ----
@@ -322,6 +330,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbulb_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbox_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_menger_sponge_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_julia_set_bonus.c \
 #* ---- Utils ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
@@ -342,14 +351,29 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/maths/solve/solve_cubic_bonus.c \
     $(SRC_DIR_BONUS)/maths/solve/solve_quadratic_bonus.c \
     $(SRC_DIR_BONUS)/maths/solve/solve_quartic_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/add_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/cross_product_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/len_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/normalize_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/product_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/scalar_product_bonus.c \
-    $(SRC_DIR_BONUS)/maths/vector/substract_bonus.c \
-	$(SRC_DIR_BONUS)/maths/vector/absolute_bonus.c \
+#* ---- Vec2 ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/maths/vector/vec2/vec2_abs_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec2/vec2_dot_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec2/vec2_len_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec2/vec2_scale_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec2/vec2_sub_bonus.c \
+#* ---- Vec3 ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_abs_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_add_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_cross_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_dot_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_len_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_normalize_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_prod_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_scale_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_sub_bonus.c \
+#* ----Vec4 ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/maths/vector/vec4/vec4_len_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec4/quaternion_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec4/vec4_add_bonus.c \
 
 #* ---- Errors & Utils ----
 SRCS_BONUS += \
@@ -365,9 +389,15 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/utils/ft_strspn_bonus.c \
     $(SRC_DIR_BONUS)/utils/swap_bonus.c \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
-	$(SRC_DIR_BONUS)/utils/clamp_bonus.c \
 	$(SRC_DIR_BONUS)/utils/sign_bonus.c \
-	$(SRC_DIR_BONUS)/utils/random/noise_3d_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/hash_rand_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/random_dir_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/random_double_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/generate_seed_bonus.c \
+	$(SRC_DIR_BONUS)/utils/colors/clamp_bonus.c \
+	$(SRC_DIR_BONUS)/utils/colors/ft_smoothstep_bonus.c \
+	$(SRC_DIR_BONUS)/utils/colors/mix_bonus.c \
+	$(SRC_DIR_BONUS)/utils/colors/shading_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

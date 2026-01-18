@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:36:49 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:24:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/17 13:39:08 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_aabb	compute_triangle_bounds(t_object *object);
 t_aabb	compute_menger_sponge_bounds(void);
 t_aabb	compute_mandelbulb_bounds(void);
 t_aabb	compute_mandelbox_bounds(void);
+t_aabb	compute_julia_set_bounds(void);
 
 t_aabb	empty_aabb(void);
 void	grow_aabb(t_aabb *box, t_point3 p);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:49:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:41:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_default_values(t_scene *scene)
 	scene->shift_pressed = FALSE;
 	scene->ctrl_pressed = FALSE;
 	scene->alt_pressed = FALSE;
+	scene->bvh_root = NULL;
 }
 
 static t_status	validate_scene(t_scene *scene)

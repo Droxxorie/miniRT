@@ -6,7 +6,7 @@ A 0.2 255,255,255
 C   0,0,-4.5    0,0,1    60
 # R 3640 2160
 # R 160 90
-# R 1920 1080
+R 1920 1080
 
 # Lumière : De côté et de face (Front-Right-Top)
 # Idéal pour l'Ambient Occlusion et les ombres portées des piques

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:35:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 13:13:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:39:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,24 @@ void	print_usage(void)
 	printf("  %-20s Path to the scene description file (.rt)\n\n",
 		"<scene_file.rt>");
 	printf(BOLD "OPTIONAL FLAGS\n" RESET);
-	printf("  %-20s Render off-screen and save to 'saved/' folder.\n",
+	printf("  %-20s Render off-screen and save to 'output/' folder.\n",
 		"--save");
 	printf("  %-20s  Filename auto-generated (timestamp).\n\n", "");
 	printf("  %-20s Render off-screen and save to specific path.\n",
 		"--save <filename>");
 	printf("  %-20s  (e.g., output.bmp)\n\n", "");
-	printf(BOLD "EXAMPLES\n" RESET);
+	printf("  %-20s Display this help message and exit.\n", "--help");
+	printf("  %-20s Enable debug mode.\n", "--debug [options]");
+	printf(BOLD "\nEXAMPLES\n" RESET);
 	printf("  Launch interactive mode:\n");
 	printf("    ./miniRT_bonus assets/scenes/example.rt\n\n");
 	printf("  Render and save automatically:\n");
 	printf("    ./miniRT_bonus assets/scenes/example.rt --save\n\n");
 	printf("  Render and save as 'final.bmp':\n");
 	printf("    ./miniRT_bonus assets/scenes/example.rt --save example.bmp\n");
+	printf("  Render in debug mode:\n");
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug AO\n");
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug NORMAL\n");
 	printf("\n");
 }
 

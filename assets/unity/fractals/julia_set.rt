@@ -1,0 +1,27 @@
+# Configuration "Close-Up"
+
+# Caméra : Très proche (z=-4.5 pour un rayon de 2.5), légèrement surélevée
+# FOV 30 : Effet "Téléobjectif", écrase la perspective, focalise sur le détail
+A 0.2 255,255,255
+C    0,0.5,-2   0,-0.13,0.9    20
+# R 3640 2160
+# R 7280 4320
+# R 160 90
+# R 1920 1080
+# R 1280 720
+
+L    0,20,0      0.8      255,255,255
+
+# Lumière d'appoint (Optionnelle, pour déboucher les noirs profonds, faible intensité)
+L   -1,2,0     0.3           255,255,100
+
+#            Pos(0,0,0)    Norm(0,1,0)    Size(3.0)    Quaternion(x, y, z, w)    Cut(TRUE/FALSE)    Orbital Trap(TRUE/FALSE)    Preset(TRUE/FALSE)    Color(255,0,0)
+julia_set    0,0,0         0,1,0          1.0          -0.2,0.6,0.2,0.1          TRUE              TRUE              TRUE              255,0,0
+# julia_set    0,0,0         0,1,0          1.0          -0.2,0.6,0.2,0.1          FALSE              FALSE              FALSE              255,0,0
+
+# sp           0,0,0         2.0 255,255,255
+
+# Sol (optionnel, pour avoir des reflets ou ombres au sol)
+# pl  0,-4,0       0,1,0         200,200,200    sdf
+pl  0,0,20       0,0,1         200,200,200    sdf
+

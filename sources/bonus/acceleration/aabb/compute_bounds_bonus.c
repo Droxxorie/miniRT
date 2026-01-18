@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:37:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:55:31 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/17 13:38:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	compute_more_bounds(t_object *object, t_aabb *local_box)
 		*local_box = compute_mandelbulb_bounds();
 	else if (object->type == MANDELBOX)
 		*local_box = compute_mandelbox_bounds();
+	else if (object->type == JULIA_SET)
+		*local_box = compute_julia_set_bounds();
 }
 
 void	compute_object_bounds(t_object *object)

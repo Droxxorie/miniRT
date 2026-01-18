@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:10:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:38:58 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:53:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ t_color	phong_light(t_scene *scene, t_hit_record *record, t_ray *ray)
 	t_real	ao_factor;
 
 	ambient_part = color_prod(scene->ambient, record->color);
-	ao_factor = compute_ao(scene, record->hit_point, record->normal);
-	// ao_factor = 1.0;
+	ao_factor = compute_ao(scene, record);
 	total_light = color_scale(ambient_part, ao_factor);
 	current_light = scene->lights;
 	while (current_light)

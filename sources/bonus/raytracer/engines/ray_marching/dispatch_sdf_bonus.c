@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:23:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 18:39:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/17 01:00:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,22 @@ t_color	get_fractal_color(t_point3 point, t_object *object)
 		return (get_mandelbox_color(point, object));
 	else if (object->type == MENGER_SPONGE)
 		return (get_menger_sponge_color(point, object));
+	else if (object->type == JULIA_SET)
+		return (get_julia_set_color(point, object));
 	return (object->color);
+}
+
+static	t_real	dispatch_fractals(t_point3 p, t_object *object)
+{
+	if (object->type == MANDELBULB)
+		return (sdf_mandelbulb(p, object));
+	else if (object->type == MANDELBOX)
+		return (sdf_mandelbox(p, object));
+	else if (object->type == MENGER_SPONGE)
+		return (sdf_menger_sponge(p, object));
+	else if (object->type == JULIA_SET)
+		return (sdf_julia_set(p, object));
+	return (INFINITY);
 }
 
 t_real	dispatch_sdf(t_point3 p, t_object *object)
@@ -42,12 +57,5 @@ t_real	dispatch_sdf(t_point3 p, t_object *object)
 		return (sdf_rectangle(p));
 	else if (object->type == TRIANGLE)
 		return (sdf_triangle(p, object));
-	else if (object->type == MENGER_SPONGE)
-		return (sdf_menger_sponge(p, object));
-	else if (object->type == MANDELBULB)
-		return (sdf_mandelbulb(p, object));
-	else if (object->type == MANDELBOX)
-		return (sdf_mandelbox(p, object));
-	printf("Error: Unknown object type in dispatch_sdf_bonus.c\n");
-	return (INFINITY);
+	return (dispatch_fractals(p, object));
 }

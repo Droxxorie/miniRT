@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 12:38:24 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:56:26 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 19:58:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ t_real	get_shadow_factor(t_scene *scene, t_hit_record *record, t_light *light)
 	t_vec3	dir_to_light;
 	t_real	dist_to_light;
 	t_ray	shadow_ray;
-	t_real	noise;
 
 	dir_to_light = vec3_sub(light->position, record->hit_point);
 	dist_to_light = vec3_len(dir_to_light);
 	shadow_ray.direction = vec3_normalize(dir_to_light);
-	noise = noise_3d(record->hit_point);
 	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
-				SHADOW_BIAS + (noise * SHADOW_NOISE)));
+				SHADOW_BIAS));
 	shadow_ray.min = SDF_THICKNESS;
 	shadow_ray.max = dist_to_light;
 	return (compute_soft_shadow(&shadow_ray, dist_to_light, SHADOW_HARDNESS,

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 23:45:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 15:23:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 20:47:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,46 +31,52 @@ static t_bool	set_sdf_record(t_object *object, t_ray *world_ray,
 	t_vec3		local_normal;
 
 	record->object = object;
+	if (world_ray->is_shadow_ray == TRUE)
+		return (TRUE);
 	record->hit_point = ray_at(world_ray, record->t);
 	local_hit = mat4_mult_point3(object->inverse, record->hit_point);
 	local_normal = get_sdf_normal(local_hit, object);
 	record->color = object->color;
 	if (object->is_fractal == TRUE)
 		record->color = get_fractal_color(local_hit, object);
-	if (world_ray->is_shadow_ray == TRUE)
-		return (TRUE);
 	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
 	record->normal = vec3_normalize(record->normal);
 	set_face_normal(record, world_ray, record->normal);
 	return (TRUE);
 }
 
+static void	init_ray_march_data(t_object *object, t_ray_march_data *data,
+		t_ray *world_ray)
+{
+	if (object->is_fractal == TRUE)
+	{
+		data->threshold = 0.00001;
+		data->step_factor = 0.15;
+		data->max_steps = 2000;
+	}
+	else
+	{
+		data->threshold = EPSILON;
+		data->step_factor = 1.0;
+		data->max_steps = MAX_SDF_STEPS;
+	}
+	data->depth = world_ray->min;
+	data->scale = object->sdf_scale;
+	data->steps = 0;
+}
+
 t_bool	ray_march(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
 	t_ray_march_data	d;
-	t_real				step_factor;
-	t_real				threshold;
-	int					steps;
 
-	step_factor = 1.0;
-	threshold = EPSILON;
-	steps = MAX_SDF_STEPS;
-	if (object->is_fractal == TRUE)
-	{
-		threshold = 0.0001;
-		step_factor = .15;
-		steps = 2000;
-	}
-	d.depth = world_ray->min;
-	d.scale = object->sdf_scale;
-	d.steps = 0;
-	while (d.steps++ < steps)
+	init_ray_march_data(object, &d, world_ray);
+	while (d.steps++ < d.max_steps)
 	{
 		d.world_p = ray_at(world_ray, d.depth);
 		d.local_p = mat4_mult_point3(object->inverse, d.world_p);
 		d.local_dist = dispatch_sdf(d.local_p, object);
-		d.world_dist = d.local_dist * d.scale * step_factor;
-		if (d.world_dist < threshold)
+		d.world_dist = d.local_dist * d.scale * d.step_factor;
+		if (d.world_dist < d.threshold)
 		{
 			record->t = d.depth;
 			return (set_sdf_record(object, world_ray, record));

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 23:46:09 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:33:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define ERR_SAVE_FILE "Cannot create or write to save file"
 # define ERR_ARG "Invalid argument"
 # define ERR_SAVE_EXT "Save file must have a .bmp extension"
+# define ERR_DEBUG "Debug mode requires an argument: 'AO' or 'NORMAL'"
 
 //* ========================================================================= */
 //*                               PARSING ERRORS                              */
@@ -69,6 +70,7 @@
 # define ERR_UY_OOB "Y component out of range [-1.0, 1.0]"
 # define ERR_Z "Invalid Z component in vector"
 # define ERR_UZ_OOB "Z component out of range [-1.0, 1.0]"
+# define ERR_W "Invalid W component in vector"
 # define ERR_VEC3_ZERO "Vector cannot be the zero vector (0,0,0)"
 
 //* --- Resolution --- */
@@ -90,6 +92,7 @@
 //* --- Objects --- */
 # define ERR_DIM "Invalid dimension value"
 # define ERR_DIM_OOB "Dimension must be positive (> 0)"
+# define ERR_BOOL "Invalid boolean value (expected TRUE or FALSE)"
 
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:36:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 12:59:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 13:06:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 //* ========================================================================= */
 //*                                VECTOR                                     */
 //* ========================================================================= */
+//* --- VEC4 --- */
+t_real	vec4_len(const t_vec4 v);
+t_real	vec4_len_squared(const t_vec4 v);
+t_vec4	vec4_add(const t_vec4 u, const t_vec4 v);
+t_vec4	q_square(t_vec4 v);
+t_vec4	q_cube(t_vec4 q);
+t_vec4	q_mult(t_vec4 a, t_vec4 b);
+
+//* --- VEC3 --- */
 t_real	vec3_len(const t_vec3 v);
 t_vec3	vec3_normalize(const t_vec3 v);
 t_real	vec3_len_squared(const t_vec3 v);
@@ -28,7 +37,9 @@ t_vec3	vec3_cross(const t_vec3 u, const t_vec3 v);
 t_vec3	vec3_scale(const t_vec3 v, const t_real k);
 t_vec3	vec3_add_scalar(const t_vec3 v, const t_real k);
 t_vec3	vec3_abs(const t_vec3 v);
+t_vec3	vec3_prod(const t_vec3 u, const t_vec3 v);
 
+//* --- VEC2 --- */
 t_real	vec2_dot(const t_vec2 u, const t_vec2 v);
 t_real	vec2_len(const t_vec2 v);
 t_real	vec2_len_squared(const t_vec2 v);
@@ -42,6 +53,7 @@ t_vec2	vec2_abs(const t_vec2 v);
 t_color	color_add(const t_color c1, const t_color c2);
 t_color	color_prod(const t_color c1, const t_color c2);
 t_color	color_scale(const t_color color, const t_real k);
+t_real	color_dot(const t_color c1, const t_color c2);
 
 //* ========================================================================= */
 //*                                MATRIX                                     */

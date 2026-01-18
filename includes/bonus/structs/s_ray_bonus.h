@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 17:39:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 20:43:33 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ typedef struct s_ray_march_data
 	t_real				world_dist;
 	int					steps;
 	t_real				scale;
+	t_real				threshold;
+	t_real				step_factor;
+	int					max_steps;
 }						t_ray_march_data;
 
 #endif

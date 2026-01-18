@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 14:10:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 14:12:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	dispatch_resize(t_object *object, int mode, int direction)
 		resize_cylinder}, {RECTANGLE, resize_rectangle}, {DISK,
 		resize_disk}, {TRIANGLE, resize_triangle}, {TORUS, resize_torus},
 	{CONE, resize_cone}, {BOX, resize_box}, {MANDELBULB,
-		resize_mandelbulb}, {MENGER_SPONGE, resize_menger_sponge}, {NONE,
+		resize_mandelbulb}, {MENGER_SPONGE, resize_menger_sponge},
+	{MANDELBOX, resize_mandelbox}, {JULIA_SET, resize_julia_set}, {NONE,
 		NULL}};
 
 	if (!object)

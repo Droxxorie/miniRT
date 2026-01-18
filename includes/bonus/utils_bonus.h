@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:49:22 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 17:51:31 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,21 @@
 
 # include "structs/s_scene_bonus.h"
 
-long		get_time_ms(void);
-void		swap_real(t_real *a, t_real *b);
-size_t		ft_strspn(const char *str, const char *accept);
-t_real		ft_clamp(t_real v, t_real min, t_real max);
-t_real		ft_sign(t_real x);
-t_real		noise_3d(t_point3 p);
+long			get_time_ms(void);
+void			swap_real(t_real *a, t_real *b);
+size_t			ft_strspn(const char *str, const char *accept);
+t_real			ft_clamp(t_real v, t_real min, t_real max);
+t_real			ft_sign(t_real x);
+
+t_real			ft_smoothstep(t_real edge0, t_real edge1, t_real x);
+t_color			color_mix(t_color c1, t_color c2, t_real a);
+t_color			apply_shading(t_color color, t_real n);
+
+//* ---- Random ---- *
+t_real			hash_rand(t_point3 p, int seed);
+unsigned int	pcg_hash(unsigned int input);
+t_real			random_double(unsigned int *seed);
+unsigned int	generate_seed(t_point3 p);
+t_vec3			random_hemisphere_dir(t_vec3 normal, unsigned int *seed);
 
 #endif

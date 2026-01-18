@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:50:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 19:55:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 # define DEF_WINDOW_WIDTH 720
 # define DEF_WINDOW_HEIGHT 480
-# define MAX_WINDOW_WIDTH 3840
-# define MAX_WINDOW_HEIGHT 2160
+# define MAX_WINDOW_WIDTH 10000
+# define MAX_WINDOW_HEIGHT 10000
 
 # define MAX_LIGHTS 10
 # define MAX_CAMERAS 10
@@ -50,8 +50,11 @@
 
 # define AO_STEPS 4
 # define AO_STEP_SIZE 0.5
-# define AO_INTENSITY 0.5
+# define AO_INTENSITY 0.2
 # define AO_SCALE_DECAY 0.85
+
+# define AO_SAMPLES 64
+# define AO_RADIUS 1.5
 
 //* ========================================================================= */
 //*                                KEYS (LINUX/X11)                           */
@@ -124,9 +127,9 @@
 # define KEY_I 105
 
 //* --- Numbers --- */
-// # define KEY_1 49
-// # define KEY_2 50
-// # define KEY_3 51
+# define KEY_1 38
+# define KEY_2 233
+# define KEY_3 34
 // # define KEY_4 52
 // # define KEY_5 53
 // # define KEY_6 54

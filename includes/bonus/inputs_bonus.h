@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 15:11:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:50:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	handle_i_key(t_scene *scene);
 void	handle_tab_key(t_scene *scene);
 t_bool	handle_space_key(t_scene *scene);
 void	handle_enter_key(t_scene *scene);
+void	handle_num_keys(t_scene *scene, int key);
 t_bool	handle_scroll(int button, t_scene *scene);
 void	handle_left_click(t_scene *scene, int x, int y);
 

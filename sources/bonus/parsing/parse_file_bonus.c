@@ -6,52 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:13:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 00:01:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/16 21:29:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-static t_status	match_identifier(const char *line, const char *identifier)
-{
-	size_t	len;
-
-	len = ft_strlen(identifier);
-	if (ft_strncmp(line, identifier, len) != 0)
-		return (EXIT_FAILURE);
-	if (line[len] != '\0' && !ft_iswhitespace(line[len]))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-static t_status	dispatch_parse(t_scene *scene, char *line)
-{
-	int					i;
-	char				*start_ptr;
-	static t_parse_map	map[] = {{"R", parse_resolution}, {"A", parse_ambient},
-	{"C", parse_camera}, {"L", parse_light}, {"sp", parse_sphere},
-	{"pl", parse_plane}, {"cy", parse_cylinder}, {"rec", parse_rectangle},
-	{"dis", parse_disk}, {"tri", parse_triangle}, {"tor", parse_torus},
-	{"con", parse_cone}, {"box", parse_box},
-	{"menger_sponge", parse_menger_sponge}, {"mandelbulb", parse_mandelbulb},
-	{"mandelbox", parse_mandelbox}, {NULL, NULL}};
-
-	skip_whitespace(&line);
-	if (*line == '\0' || *line == '#')
-		return (EXIT_SUCCESS);
-	start_ptr = line;
-	i = -1;
-	while (map[++i].id)
-	{
-		if (match_identifier(line, map[i].id) == EXIT_SUCCESS)
-		{
-			line += ft_strlen(map[i].id);
-			return (map[i].func(scene, &line));
-		}
-	}
-	print_error_loc(scene, start_ptr, ERR_UID);
-	return (EXIT_FAILURE);
-}
 
 t_bool	has_extension(const char *file, const char *extension)
 {

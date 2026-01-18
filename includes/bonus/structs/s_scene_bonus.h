@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:12:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:10:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ typedef enum e_control_mode
 	ROTATE,
 }					t_control_mode;
 
+typedef enum e_render_mode
+{
+	RENDER_IMAGE,
+	RENDER_NORMAL,
+	RENDER_AO,
+} 					t_render_mode;
+
 # define RESIZE_NONE -1
 # define RESIZE_UNIFORM 0
 # define RESIZE_X 1
@@ -101,6 +108,7 @@ typedef struct s_scene
 	int				next_line;
 	t_bool			to_save;
 	char			*save_file;
+	t_render_mode	render_mode;
 }					t_scene;
 
 typedef struct s_thread_data

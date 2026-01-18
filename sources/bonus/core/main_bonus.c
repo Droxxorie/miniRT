@@ -6,11 +6,32 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 16:05:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 18:40:47 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static	void	handle_arguments(int argc, char **argv, t_scene *scene)
+{
+	if (argc == 2)
+		return ;
+	if (ft_strncmp(argv[2], "--save", 7) == 0)
+		setup_save_mode(argc, argv, scene);
+	else if (ft_strncmp(argv[2], "--help", 7) == 0)
+	{
+		print_usage();
+		clean_exit(scene, EXIT_SUCCESS);
+	}
+	else if (ft_strncmp(argv[2], "--debug", 7) == 0)
+		setup_debug_mode(argc, argv, scene);
+	else
+	{
+		print_error_detail(ERR_ARG, argv[2]);
+		print_usage();
+		clean_exit(scene, EXIT_FAILURE);
+	}
+}
 
 static t_scene	*init_scene_struct(int argc, char **argv)
 {
@@ -24,8 +45,7 @@ static t_scene	*init_scene_struct(int argc, char **argv)
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (scene == NULL)
 		sys_print_error_exit(ERR_MEM_SCENE);
-	if (argc == 3 || argc == 4)
-		setup_save_mode(argc, argv, scene);
+	handle_arguments(argc, argv, scene);
 	if (scene->to_save)
 	{
 		log_event(stdout, "WARN", "Save mode activated\n");

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 13:03:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/18 13:39:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,26 @@ typedef struct s_mandelbox
 	t_real				outer_radius;
 }						t_mandelbox;
 
+typedef struct s_s_julia_vars
+{
+	t_vec4	z;
+	t_real	magnitude_sq;
+	t_real	dz;
+	t_real	trap_d;
+	t_real	n;
+}	t_julia_vars;
+
+typedef struct s_julia_set
+{
+	t_point3			postition;
+	t_vec3				normal;
+	t_real				size;
+	t_vec4				c_constant;
+	t_bool				cut;
+	t_bool				orbital_trap;
+	t_bool				preset;
+}						t_julia_set;
+
 typedef struct s_sdf
 {
 	t_real				p1;
@@ -172,7 +192,7 @@ typedef enum e_object_type
 	MENGER_SPONGE,
 	MANDELBULB,
 	MANDELBOX,
-	// JULIA_SET,
+	JULIA_SET,
 	// JULIA_BOX,
 	// SIERPINSKI_TETRAHEDRON,
 	// SIERPINSKI_CARPET,
@@ -206,6 +226,7 @@ typedef struct s_object
 		t_menger_sponge	menger_sponge;
 		t_mandelbulb	mandelbulb;
 		t_mandelbox		mandelbox;
+		t_julia_set		julia_set;
 	} u_data;
 	struct s_object		*next;
 }						t_object;
