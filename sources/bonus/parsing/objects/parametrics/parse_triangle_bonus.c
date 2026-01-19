@@ -6,11 +6,18 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 21:59:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 13:12:48 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 10:01:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+static void	print_triangle_syntax(void)
+{
+	log_event(stdout, "INFO",
+		"Triangle syntax:\n\t<%s> <%s> <%s> <%s>\n", "Point 1 x,y,z",
+		"Point 2 x,y,z", "Point 3 x,y,z", "Color r,g,b");
+}
 
 static t_status	get_triangle_values(t_scene *scene, char **line,
 		t_object *object)
@@ -24,7 +31,7 @@ static t_status	get_triangle_values(t_scene *scene, char **line,
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
 		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (print_triangle_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

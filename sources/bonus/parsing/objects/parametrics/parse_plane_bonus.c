@@ -6,11 +6,18 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:49:32 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 18:51:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 09:58:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	print_plane_syntax(void)
+{
+	log_event(stdout, "INFO",
+		"Plane syntax:\n\t<%s> <%s> <%s>\n", "Center x,y,z",
+		"Normal x,y,z", "Color r,g,b");
+}
 
 static t_status	get_plane_values(t_scene *scene, char **line, t_object *obj)
 {

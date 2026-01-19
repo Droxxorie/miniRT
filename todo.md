@@ -7,8 +7,6 @@ peut etre revoir rotate/translate dans mandatory et clean tt ç&
 shift r marche plus ...
 camera cassée rotation z
 mesh + .obj
-add syntax messages for all shapes
-mode de save meilleur qualité ?
 shift + r rescale la scene
 core dump quand deplace cam et depalcer/rotate plan ?
 
@@ -84,5 +82,6 @@ core dump quand deplace cam et depalcer/rotate plan ?
 - [ ] Lumière surfacique (quad)
 - [ ] Matériaux Emissifs
 - [ ] Path Tracing
+- [ ] Multi importance sampling
 - [x] Soft Shadows
 - [ ] DOF

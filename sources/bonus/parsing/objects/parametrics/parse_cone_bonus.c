@@ -6,11 +6,18 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 20:17:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 13:12:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 09:56:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	print_cone_syntax(void)
+{
+	log_event(stdout, "INFO",
+		"Cone syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
+		"Normal x,y,z", "Radius", "Height", "Color r,g,b");
+}
 
 static t_status	get_cone_values(t_scene *scene, char **line, t_object *object)
 {
@@ -28,7 +35,7 @@ static t_status	get_cone_values(t_scene *scene, char **line, t_object *object)
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
 		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (print_cone_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

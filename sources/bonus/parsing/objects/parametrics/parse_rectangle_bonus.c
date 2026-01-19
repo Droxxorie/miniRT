@@ -6,11 +6,18 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:34:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 13:12:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 09:59:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	print_rectangle_syntax(void)
+{
+	log_event(stdout, "INFO",
+		"Rectangle syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
+		"Normal x,y,z", "Width", "Height", "Color r,g,b");
+}
 
 static t_status	get_rectangle_values(t_scene *scene, char **line,
 		t_object *object)
@@ -28,7 +35,7 @@ static t_status	get_rectangle_values(t_scene *scene, char **line,
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
 		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (print_rectangle_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
