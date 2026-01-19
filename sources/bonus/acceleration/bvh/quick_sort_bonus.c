@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:54:59 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:24:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:23:47 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ static t_object	**list_to_array(t_object *head, int count)
 	i = 0;
 	while (head)
 	{
-		if (head->visible == FALSE)
-		{
-			head = head->next;
-			continue ;
-		}
 		array[i++] = head;
 		head = head->next;
 	}

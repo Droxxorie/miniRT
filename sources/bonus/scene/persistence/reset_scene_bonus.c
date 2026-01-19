@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:38:26 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:30:47 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,25 @@ void	reset_object_state(t_object *object)
 	}
 }
 
-static void	reset_bvh_state(t_bvh_node *node)
+static void	reset_bvh_objects(t_bvh_node *node)
 {
-	t_bvh_node	*current_node;
+	t_object	*current;
 
-	current_node = node;
-	while (current_node)
+	if (!node)
+		return ;
+	if (node->left_child || node->right_child)
 	{
-		reset_object_state(current_node->content);
-		current_node = current_node->left_child;
+		reset_bvh_objects(node->left_child);
+		reset_bvh_objects(node->right_child);
 	}
-	current_node = node->right_child;
-	while (current_node)
+	else
 	{
-		reset_object_state(current_node->content);
-		current_node = current_node->right_child;
+		current = node->content;
+		while (current)
+		{
+			reset_object_state(current);
+			current = current->next;
+		}
 	}
 }
 
@@ -73,7 +77,7 @@ void	reset_scene_state(t_scene *scene)
 
 	current_light = scene->lights;
 	current_camera = scene->cameras;
-	reset_bvh_state(scene->bvh_root);
+	reset_bvh_objects(scene->bvh_root);
 	while (current_light)
 	{
 		reset_light_state(current_light);

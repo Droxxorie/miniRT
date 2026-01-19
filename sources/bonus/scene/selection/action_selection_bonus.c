@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:24:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 13:24:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 12:49:23 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void	action_selection(t_scene *scene, t_vec3 input_vector)
 	if (scene->selected_object && scene->selected_object->visible == TRUE)
 	{
 		if (scene->control_mode == TRANSLATE)
-			translate_object(scene->selected_object,
+			translate_object(scene->selected_object, scene->active_camera,
 				vec3_scale(relative_vector, STEP_MOVE));
 		else if (scene->control_mode == ROTATE)
-			rotate_object(scene->selected_object,
+			rotate_object(scene->selected_object, scene->active_camera,
 				vec3_scale(relative_vector, STEP_ROT));
 		refresh_bvh(scene, scene->selected_object);
 	}
 	else if (scene->selected_light && scene->selected_light->active == TRUE)
 	{
 		if (scene->control_mode == TRANSLATE)
-			translate_light(scene->selected_light, vec3_scale(relative_vector,
-					STEP_MOVE));
+			translate_light(scene->selected_light, scene->active_camera,
+				vec3_scale(relative_vector, STEP_MOVE));
 	}
 }

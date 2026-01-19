@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:51:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 11:27:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	log_camera_info(t_camera *camera)
 		return ;
 	log_event(stdout, "WARN", "------\n");
 	log_event(stdout, "INFO", "Camera Info:\n");
-	log_event(stdout, "INFO", "FOV: %d\n", camera->fov);
+	log_event(stdout, "INFO", "FOV: %.2f\n", camera->fov);
 	log_event(stdout, "INFO", "Pos: [%.2f, %.2f, %.2f]\n", camera->position.x,
 		camera->position.y, camera->position.z);
 	log_event(stdout, "INFO", "Dir: [%.2f, %.2f, %.2f]\n", camera->direction.x,
@@ -58,7 +58,7 @@ void	log_light_info(t_light *light)
 	if (!light)
 		return ;
 	log_event(stdout, "WARN", "------\n");
-	log_event(stdout, "INFO", "Light ID: %d", light->id);
+	log_event(stdout, "INFO", "Light ID: %d\n", light->id);
 	log_event(stdout, "INFO", "Pos: [%.2f, %.2f, %.2f]\n", light->position.x,
 		light->position.y, light->position.z);
 	log_event(stdout, "INFO", "Brightness: %.2f\n", light->brightness);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:55:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 09:58:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:22:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_disk_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Disk syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
+		"Disk syntax:\n\t<%s> <%s> <%s> <%s>\n", "Center x,y,z",
 		"Normal x,y,z", "Radius", "Color r,g,b");
 }
 

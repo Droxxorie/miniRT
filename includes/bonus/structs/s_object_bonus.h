@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 13:39:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 11:36:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,9 +193,6 @@ typedef enum e_object_type
 	MANDELBULB,
 	MANDELBOX,
 	JULIA_SET,
-	// JULIA_BOX,
-	// SIERPINSKI_TETRAHEDRON,
-	// SIERPINSKI_CARPET,
 	NONE,
 }						t_object_type;
 

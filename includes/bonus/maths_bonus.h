@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:36:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 13:06:26 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:28:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_vec3	vec3_scale(const t_vec3 v, const t_real k);
 t_vec3	vec3_add_scalar(const t_vec3 v, const t_real k);
 t_vec3	vec3_abs(const t_vec3 v);
 t_vec3	vec3_prod(const t_vec3 u, const t_vec3 v);
+t_real	vec3_dist(t_point3 p1, t_point3 p2);
 
 //* --- VEC2 --- */
 t_real	vec2_dot(const t_vec2 u, const t_vec2 v);

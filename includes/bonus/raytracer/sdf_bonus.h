@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:38:58 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 21:55:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 16:40:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_bool	ray_march(t_object *object, t_ray *world_ray,
 			t_hit_record *record);
 t_real	dispatch_sdf(t_point3 p, t_object *object);
 t_real	map_the_world(t_point3 world_p, t_scene *scene);
+
 t_real	sdf_sphere(t_point3 p);
 t_real	sdf_cylinder(t_point3 p);
 t_real	sdf_cone(t_point3 p);
@@ -27,6 +28,16 @@ t_real	sdf_box(t_point3 p);
 t_real	sdf_disk(t_point3 p);
 t_real	sdf_rectangle(t_point3 p);
 t_real	sdf_triangle(t_point3 p, t_object *object);
+
+// t_real	sdf_sphere(t_point3 p, t_vec3 scale);
+// t_real	sdf_cylinder(t_point3 p, t_vec3 scale);
+// t_real	sdf_cone(t_point3 p, t_vec3 scale);
+// t_real	sdf_torus(t_point3 p, t_vec3 scale, t_real major_radius, t_real minor_radius);
+// t_real	sdf_box(t_point3 p, t_vec3 scale);
+// t_real	sdf_disk(t_point3 p, t_vec3 scale);
+// t_real	sdf_rectangle(t_point3 p, t_vec3 scale);
+// t_real	sdf_triangle(t_point3 p, t_object *object, t_vec3 scale);
+
 t_real	sdf_menger_sponge(t_point3 p, t_object *object);
 t_real	sdf_mandelbulb(t_point3 p, t_object *object);
 t_real	sdf_mandelbox(t_point3 p, t_object *object);

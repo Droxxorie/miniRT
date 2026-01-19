@@ -23,5 +23,5 @@ julia_set    0,0,0         0,1,0          1.0          -0.2,0.6,0.2,0.1         
 
 # Sol (optionnel, pour avoir des reflets ou ombres au sol)
 # pl  0,-4,0       0,1,0         200,200,200    sdf
-pl  0,0,20       0,0,1         200,200,200    sdf
+pl  0,0,20       0,0,1         200,200,200
 

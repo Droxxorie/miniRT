@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 17:59:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/11 21:37:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 13:00:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static void	flatten_bvh(t_bvh_node *node, t_object **tail)
 	{
 		if (node->content)
 		{
-			if (*tail)
-				(*tail)->next = node->content;
+			(*tail)->next = node->content;
 			current = node->content;
 			while (current->next)
 				current = current->next;
@@ -70,11 +69,14 @@ void	destroy_bvh(t_scene *scene)
 
 	if (!scene || !scene->bvh_root)
 		return ;
+	ft_bzero(&temp, sizeof(t_object));
 	tail = &temp;
-	temp.next = NULL;
 	flatten_bvh(scene->bvh_root, &tail);
+	if (tail)
+		tail->next = NULL;
 	scene->objects = temp.next;
 	free_bvh(scene->bvh_root);
+	scene->bvh_root = NULL;
 }
 
 void	refresh_bvh(t_scene *scene, t_object *object)

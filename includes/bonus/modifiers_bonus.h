@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:44:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 14:01:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 12:48:53 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,36 @@
 # include "structs/s_scene_bonus.h"
 
 void	set_transform(t_object *object, t_mat4 transform);
-void	dispatch_resize(t_object *obj, int mode, int direction);
+void	dispatch_resize(t_object *obj, t_camera *cam, int mode, int dir);
 
 //* ========================================================================= */
 //*                                TRANSLATE                                  */
 //* ========================================================================= */
-void	translate_light(t_light *light, t_vec3 vec);
-void	translate_object(t_object *obj, t_vec3 translation);
+void	translate_light(t_light *light, t_camera *cam, t_vec3 vec);
+void	translate_object(t_object *obj, t_camera *cam, t_vec3 translation);
 void	translate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
 
 //* ========================================================================= */
 //*                                ROTATE                                     */
 //* ========================================================================= */
-void	rotate_object(t_object *obj, t_vec3 rotation_axis);
+void	rotate_object(t_object *obj, t_camera *cam, t_vec3 rotation_axis);
 void	rotate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
 
 //* ========================================================================= */
 //*                                RESIZE                                     */
 //* ========================================================================= */
-void	resize_box(t_object *obj, int mode, int direction);
-void	resize_disk(t_object *obj, int mode, int direction);
-void	resize_cone(t_object *obj, int mode, int direction);
-void	resize_torus(t_object *obj, int mode, int direction);
-void	resize_sphere(t_object *obj, int mode, int direction);
-void	resize_cylinder(t_object *obj, int mode, int direction);
-void	resize_triangle(t_object *obj, int mode, int direction);
-void	resize_rectangle(t_object *obj, int mode, int direction);
+void	resize_box(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_disk(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_cone(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_torus(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_sphere(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_cylinder(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_triangle(t_object *obj, t_camera *cam, int mode, int direction);
+void	resize_rectangle(t_object *obj, t_camera *cam, int mode, int direction);
 void	resize_camera_fov(t_camera *camera, int mode, int direction);
-void	resize_mandelbulb(t_object *object, int mode, int direction);
-void	resize_menger_sponge(t_object *object, int mode, int direction);
-void	resize_julia_set(t_object *object, int mode, int direction);
-void	resize_mandelbox(t_object *object, int mode, int direction);
+void	resize_mandelbulb(t_object *obj, t_camera *cam, int mode, int dir);
+void	resize_menger_sponge(t_object *obj, t_camera *cam, int mode, int dir);
+void	resize_julia_set(t_object *obj, t_camera *cam, int mode, int dir);
+void	resize_mandelbox(t_object *obj, t_camera *cam, int mode, int dir);
 
 #endif

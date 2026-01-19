@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:07:13 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 10:00:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 14:49:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_torus_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Torus syntax:\n\t<%s> <%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
+		"Torus syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
 		"Normal x,y,z", "Major Radius", "Minor Radius", "Color r,g,b");
 }
 

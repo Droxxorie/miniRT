@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:28:50 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:28:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,24 @@ static void	set_cylinder_record(t_object *object, t_ray *world_ray,
 t_bool	hit_cylinder(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
 	t_cylinder_hit	hit;
+	t_point3		local_hit_point;
+	t_point3		world_hit_point;
+	t_real			world_dist;
 
 	hit.ray = transform_ray(*world_ray, object->inverse);
-	hit.t = world_ray->max;
+	hit.t = INFINITY;
 	hit.type = NONE_ELEMENT;
 	solve_tube(&hit);
 	check_cap(&hit, 0.5, TOP_CAP);
 	check_cap(&hit, -0.5, BOTTOM_CAP);
-	if (hit.type == NONE_ELEMENT || hit.t < world_ray->min)
+	if (hit.type == NONE_ELEMENT)
 		return (FALSE);
-	record->t = hit.t;
+	local_hit_point = ray_at(&hit.ray, hit.t);
+	world_hit_point = mat4_mult_point3(object->transform, local_hit_point);
+	world_dist = vec3_dist(world_ray->origin, world_hit_point);
+	if (world_dist < world_ray->min || world_dist > world_ray->max)
+		return (FALSE);
+	record->t = world_dist;
 	set_cylinder_record(object, world_ray, record, &hit);
 	return (TRUE);
 }

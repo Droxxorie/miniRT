@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 19:55:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 15:18:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@
 # define INV_255 0.00392156862
 # define INV_SQRT_2 0.70710678118
 
-# define STEP_MOVE 1.0
-# define STEP_ROT 0.1
+# define MOVE_SPEED 2.5
+# define ROT_SPEED 0.2
+# define RESIZE_SPEED 0.1
 
+# define STEP_MOVE 1.0
+# define STEP_ROT 1.0
 
 # define DEF_WINDOW_WIDTH 720
 # define DEF_WINDOW_HEIGHT 480

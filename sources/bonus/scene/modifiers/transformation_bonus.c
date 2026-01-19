@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:19:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 14:12:01 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:31:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	apply_rotation_to_matrix(t_object *object, t_mat4 rotation_matrix)
 	set_transform(object, object->transform);
 }
 
-void	dispatch_resize(t_object *object, int mode, int direction)
+void	dispatch_resize(t_object *object, t_camera *camera, int mode,
+		int direction)
 {
 	int					i;
 	static t_resize_map	map[] = {{SPHERE, resize_sphere}, {CYLINDER,
@@ -62,33 +63,40 @@ void	dispatch_resize(t_object *object, int mode, int direction)
 	{
 		if (map[i].type == object->type)
 		{
-			map[i].func(object, mode, direction);
+			map[i].func(object, camera, mode, direction);
 			return ;
 		}
 		i++;
 	}
 }
 
-void	translate_object(t_object *object, t_vec3 translation)
+void	translate_object(t_object *object, t_camera *camera, t_vec3 translation)
 {
 	t_mat4	translation_matrix;
+	t_real	speed;
+	t_vec3	scaled_translation;
 
-	if (!object)
+	if (!object || !camera)
 		return ;
-	translation_matrix = make_translation_matrix(translation);
+	speed = camera->scale_factor * MOVE_SPEED;
+	scaled_translation = vec3_scale(translation, speed);
+	translation_matrix = make_translation_matrix(scaled_translation);
 	object->transform = mat4_mult_mat4(translation_matrix, object->transform);
 	set_transform(object, object->transform);
 }
 
-void	rotate_object(t_object *object, t_vec3 rotation_axis)
+void	rotate_object(t_object *object, t_camera *camera, t_vec3 rotation_axis)
 {
 	t_real	angle;
 	t_vec3	axis_input;
 	t_mat4	rotation_matrix;
+	t_real	speed;
 
 	angle = vec3_len(rotation_axis);
-	if (angle < EPSILON)
+	if (angle < EPSILON || !camera)
 		return ;
+	speed = camera->scale_factor * ROT_SPEED;
+	angle *= speed;
 	axis_input = vec3_normalize(rotation_axis);
 	rotation_matrix = matrix_axis_angle(axis_input, angle);
 	apply_rotation_to_matrix(object, rotation_matrix);

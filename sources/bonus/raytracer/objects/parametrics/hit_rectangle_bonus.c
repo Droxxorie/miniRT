@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:53:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 18:33:59 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 10:26:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_bool	hit_rectangle(t_object *object, t_ray *world_ray, t_hit_record *record)
 	t_real	z;
 
 	local_ray = transform_ray(*world_ray, object->inverse);
-	if (local_ray.direction.y > EPSILON)
-		return (FALSE);
 	if (fabs(local_ray.direction.y) < EPSILON)
 		return (FALSE);
 	t = -local_ray.origin.y / local_ray.direction.y;

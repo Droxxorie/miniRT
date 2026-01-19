@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:23:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/17 01:00:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:25:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_color	get_fractal_color(t_point3 point, t_object *object)
 	return (object->color);
 }
 
-static	t_real	dispatch_fractals(t_point3 p, t_object *object)
+static t_real	dispatch_fractals(t_point3 p, t_object *object)
 {
 	if (object->type == MANDELBULB)
 		return (sdf_mandelbulb(p, object));
@@ -40,22 +40,28 @@ static	t_real	dispatch_fractals(t_point3 p, t_object *object)
 
 t_real	dispatch_sdf(t_point3 p, t_object *object)
 {
-	if (object->type == CONE)
-		return (sdf_cone(p));
-	else if (object->type == CYLINDER)
-		return (sdf_cylinder(p));
+	t_point3	local_p;
+	t_real		dist;
+
+	local_p = mat4_mult_point3(object->inverse, p);
+	if (object->type == CYLINDER)
+		dist = sdf_cylinder(local_p);
+	else if (object->type == CONE)
+		dist = sdf_cone(local_p);
 	else if (object->type == SPHERE)
-		return (sdf_sphere(p));
+		dist = sdf_sphere(local_p);
 	else if (object->type == BOX)
-		return (sdf_box(p));
+		dist = sdf_box(local_p);
 	else if (object->type == TORUS)
-		return (sdf_torus(p, object->u_data.torus.major_radius,
-				object->u_data.torus.minor_radius));
+		dist = sdf_torus(local_p, object->u_data.torus.major_radius,
+				object->u_data.torus.minor_radius);
 	else if (object->type == DISK)
-		return (sdf_disk(p));
+		dist = sdf_disk(local_p);
 	else if (object->type == RECTANGLE)
-		return (sdf_rectangle(p));
+		dist = sdf_rectangle(local_p);
 	else if (object->type == TRIANGLE)
-		return (sdf_triangle(p, object));
-	return (dispatch_fractals(p, object));
+		dist = sdf_triangle(local_p, object);
+	else
+		dist = dispatch_fractals(local_p, object);
+	return (dist);
 }

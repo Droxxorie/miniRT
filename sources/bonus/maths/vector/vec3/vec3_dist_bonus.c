@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sdf_cylinder_bonus.c                               :+:      :+:    :+:   */
+/*   vec3_dist_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 23:15:03 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 17:25:44 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/19 17:28:15 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/19 17:28:29 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-t_real	sdf_cylinder(t_point3 p)
+t_real	vec3_dist(t_point3 p1, t_point3 p2)
 {
-	t_vec2	d;
+	t_vec3	diff;
 
-	d.x = vec2_len((t_vec2){p.x, p.z}) - 1.0;
-	d.y = fabs(p.y) - 0.5;
-	return (fmin(fmax(d.x, d.y), 0.0) + vec2_len((t_vec2){fmax(d.x, 0.0),
-			fmax(d.y, 0.0)}));
+	diff = vec3_sub(p2, p1);
+	return (sqrt(vec3_dot(diff, diff)));
 }

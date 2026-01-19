@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:54:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 13:58:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:31:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,21 @@ static void	resize_scale_factor(t_object *object, int direction)
 		object->u_data.menger_sponge.scale_factor = 5.0;
 }
 
-void	resize_menger_sponge(t_object *object, int mode, int direction)
+void	resize_menger_sponge(t_object *object, t_camera *camera, int mode,
+		int direction)
 {
 	t_vec3	scale_factors;
 	t_mat4	scale_matrix;
 	t_real	factor;
+	t_real	intensity;
 
 	if (mode == RESIZE_X)
 		return (resize_scale_factor(object, direction));
+	intensity = camera->scale_factor * RESIZE_SPEED;
 	if (direction > 0)
-		factor = 1.1;
+		factor = 1.0 + intensity;
 	else
-		factor = 0.9;
+		factor = 1.0 - intensity;
 	scale_factors = (t_vec3){factor, factor, factor};
 	scale_matrix = make_scale_matrix(scale_factors);
 	object->transform = mat4_mult_mat4(object->transform, scale_matrix);

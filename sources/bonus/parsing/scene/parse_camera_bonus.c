@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:27:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/09 19:41:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 11:25:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void	add_camera_to_scene(t_scene *scene, t_camera *new_camera)
 	}
 }
 
-static t_status	parse_fov(t_scene *scene, char **line, int *fov)
+static t_status	parse_fov(t_scene *scene, char **line, t_real *fov)
 {
 	char	*start_line;
 
 	skip_whitespace(line);
 	start_line = *line;
-	if (parse_int(line, fov) == EXIT_FAILURE)
+	if (parse_real(line, fov) == EXIT_FAILURE)
 		return (print_error_loc(scene, start_line, ERR_FOV), EXIT_FAILURE);
 	if (*fov <= 0 || *fov >= 180)
 		return (print_error_loc(scene, start_line, ERR_FOV_OOB), EXIT_FAILURE);

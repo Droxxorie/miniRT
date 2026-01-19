@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:49:32 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 09:58:12 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 15:25:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static t_status	get_plane_values(t_scene *scene, char **line, t_object *obj)
 			&obj->u_data.rectangle.normal) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &obj->render_as_sdf) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (print_plane_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

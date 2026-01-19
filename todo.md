@@ -1,14 +1,9 @@
 # ERRORS / Todo
 Ajouter tests save
 fusioner test bonus et mandatory
-rajouter scaling factor au resize
-rajouter log transform ?
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
-shift r marche plus ...
-camera cassée rotation z
 mesh + .obj
-shift + r rescale la scene
-core dump quand deplace cam et depalcer/rotate plan ?
+
 
 
 # ROADMAP
@@ -66,7 +61,7 @@ core dump quand deplace cam et depalcer/rotate plan ?
 
 ## PHASE 5 : UX et Interactions
 - [ ] Rework UX clavier/Souris
-- [ ] Ajout facteur de transformation
+- [x] Ajout facteur de transformation
 - [x] Modifier FOV
 - [x] Touche Reset (toute la scène et objet sélectionné)
 - [x] UI (Objet sélectionné / ID camera / ID lumière / Coordonnées / commandes etc)

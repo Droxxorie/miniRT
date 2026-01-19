@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 13:59:02 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 14:02:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 17:31:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,23 @@ static void	change_orbital_trap(t_object *object, int direction)
 		object->u_data.julia_set.orbital_trap = FALSE;
 }
 
-void	resize_julia_set(t_object *object, int mode, int direction)
+void	resize_julia_set(t_object *object, t_camera *camera, int mode,
+		int direction)
 {
-	t_vec3		scale_factors;
-	t_mat4		scale_matrix;
-	t_real		factor;
+	t_vec3	scale_factors;
+	t_mat4	scale_matrix;
+	t_real	factor;
+	t_real	intensity;
 
 	if (mode == RESIZE_X)
 		return (change_cut(object, direction));
 	else if (mode == RESIZE_Y)
 		return (change_orbital_trap(object, direction));
+	intensity = camera->scale_factor * RESIZE_SPEED;
 	if (direction > 0)
-		factor = 1.1;
+		factor = 1.0 + intensity;
 	else
-		factor = 0.9;
+		factor = 1.0 - intensity;
 	scale_factors = (t_vec3){factor, factor, factor};
 	scale_matrix = make_scale_matrix(scale_factors);
 	object->transform = mat4_mult_mat4(object->transform, scale_matrix);

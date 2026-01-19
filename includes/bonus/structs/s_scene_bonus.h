@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:10:05 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 11:37:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_camera
 	int				id;
 	t_point3		position;
 	t_vec3			direction;
-	int				fov;
+	t_real			fov;
 	t_mat4			camera_to_world;
 	t_real			scale_factor;
 	t_real			width;
@@ -78,7 +78,7 @@ typedef enum e_render_mode
 	RENDER_IMAGE,
 	RENDER_NORMAL,
 	RENDER_AO,
-} 					t_render_mode;
+}					t_render_mode;
 
 # define RESIZE_NONE -1
 # define RESIZE_UNIFORM 0
@@ -127,7 +127,8 @@ typedef struct s_parse_map
 	t_parse_func	func;
 }					t_parse_map;
 
-typedef void		(*t_resize_func)(t_object *object, int mode, int direction);
+typedef void		(*t_resize_func)(t_object *object, t_camera *camera,
+			int mode, int direction);
 typedef struct s_resize_map
 {
 	t_object_type	type;

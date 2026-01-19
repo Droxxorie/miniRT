@@ -369,6 +369,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_prod_bonus.c \
 	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_scale_bonus.c \
 	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_sub_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_dist_bonus.c \
 #* ----Vec4 ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/maths/vector/vec4/vec4_len_bonus.c \
