@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 20:17:23 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 16:49:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:19:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_cone_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Cone syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
+		"Cone syntax:\n\t<%s> <%s> <%s> <%s> <%s> [options]\n", "Center x,y,z",
 		"Normal x,y,z", "Radius", "Height", "Color r,g,b");
 }
 
@@ -33,7 +33,7 @@ static t_status	get_cone_values(t_scene *scene, char **line, t_object *object)
 		|| parse_dim(scene, line, &cone->height) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
+		|| parse_options(scene, line, object) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_cone_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

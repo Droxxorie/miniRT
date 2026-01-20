@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 22:05:08 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 09:57:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:04:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	print_cylinder_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Cylinder syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
-		"Normal x,y,z", "Radius", "Height", "Color r,g,b");
+		"Cylinder syntax:\n\t<%s> <%s> <%s> <%s> <%s> [options]\n",
+		"Center x,y,z", "Normal x,y,z", "Radius", "Height", "Color r,g,b");
 }
 
 static t_status	get_cylinder_value(t_scene *scene, char **line, t_object *obj)
@@ -33,8 +33,8 @@ static t_status	get_cylinder_value(t_scene *scene, char **line, t_object *obj)
 		|| parse_dim(scene, line, &cyl->height) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &obj->render_as_sdf) == EXIT_FAILURE
-		|| check_eol(scene, line) == EXIT_FAILURE)
+		|| parse_options(scene, line, obj) == EXIT_FAILURE || check_eol(scene,
+			line) == EXIT_FAILURE)
 		return (print_cylinder_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -50,9 +50,7 @@ static void	init_cylinder_matrix(t_object *object)
 	cylinder = &object->u_data.cylinder;
 	translation = make_translation_matrix(cylinder->center);
 	rotation = rotation_align(cylinder->axis);
-	scaling = make_scale_matrix((t_vec3){
-			cylinder->radius,
-			cylinder->height,
+	scaling = make_scale_matrix((t_vec3){cylinder->radius, cylinder->height,
 			cylinder->radius});
 	transform = identity_matrix();
 	transform = mat4_mult_mat4(transform, translation);

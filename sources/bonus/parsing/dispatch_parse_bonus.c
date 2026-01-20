@@ -6,24 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:48:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:59:33 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 13:08:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-static t_status	match_and_consume(char **line, const char *identifier)
-{
-	size_t	len;
-
-	len = ft_strlen(identifier);
-	if (ft_strncmp(*line, identifier, len) != 0)
-		return (EXIT_FAILURE);
-	if ((*line)[len] != '\0' && !ft_iswhitespace((*line)[len]))
-		return (EXIT_FAILURE);
-	*line += len;
-	return (EXIT_SUCCESS);
-}
 
 static t_status	dispatch_shapes(t_scene *scene, char *line)
 {
@@ -78,6 +65,8 @@ t_status	dispatch_parse(t_scene *scene, char *line)
 		return (parse_camera(scene, &line));
 	if (match_and_consume(&line, "L") == EXIT_SUCCESS)
 		return (parse_light(scene, &line));
+	if (match_and_consume(&line, "mtllib") == EXIT_SUCCESS)
+		return (parse_mtl_lib(scene, &line));
 	status = dispatch_shapes(scene, line);
 	if (status != -1)
 		return (status);

@@ -73,7 +73,7 @@ static char	*ft_read_str(int fd, char *str)
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
-	while (!ft_strrchr(str, '\n') && bytes_read > 0)
+	while ((!str || !ft_strrchr(str, '\n')) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
@@ -94,20 +94,21 @@ static char	*ft_read_str(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[1024];
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= 1024)
 		return (NULL);
-	str = ft_read_str(fd, str);
-	if (!str)
+	str[fd] = ft_read_str(fd, str[fd]);
+	if (!str[fd])
 		return (NULL);
-	line = ft_clean_line(str);
-	str = ft_leftover(str);
-	if (!str ||!*str)
+	line = ft_clean_line(str[fd]);
+	str[fd] = ft_leftover(str[fd]);
+	if (!str[fd] || !*str[fd])
 	{
-		free(str);
-		str = NULL;
+		if (str[fd])
+			free(str[fd]);
+		str[fd] = NULL;
 	}
 	return (line);
 }

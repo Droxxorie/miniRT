@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:10:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 09:56:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:04:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 static void	print_box_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Box syntax:\n\t<%s> <%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
-		"Normal x,y,z", "Width", "Height", "Depth", "Color r,g,b");
+		"Box syntax:\n\t<%s> <%s> <%s> <%s> <%s> <%s> [options]\n",
+		"Center x,y,z", "Normal x,y,z", "Width", "Height", "Depth",
+		"Color r,g,b");
 }
 
 static t_status	get_box_values(t_scene *scene, char **line, t_object *object)
@@ -35,7 +36,7 @@ static t_status	get_box_values(t_scene *scene, char **line, t_object *object)
 		|| parse_dim(scene, line, &box->depth) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
+		|| parse_options(scene, line, object) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_box_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

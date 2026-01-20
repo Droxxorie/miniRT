@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 11:37:37 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 00:52:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef enum e_render_mode
 
 typedef struct s_scene
 {
+	char			*file_name;
 	char			*line_ptr;
 	int				line_number;
 	t_window		mlx_window;
@@ -109,6 +110,7 @@ typedef struct s_scene
 	t_bool			to_save;
 	char			*save_file;
 	t_render_mode	render_mode;
+	t_material		*materials;
 }					t_scene;
 
 typedef struct s_thread_data
@@ -120,12 +122,12 @@ typedef struct s_thread_data
 //* ========================================================================= */
 //*                                DISPATCH                                   */
 //* ========================================================================= */
-typedef t_status	(*t_parse_func)(t_scene *scene, char **line_tokens);
-typedef struct s_parse_map
-{
-	char			*id;
-	t_parse_func	func;
-}					t_parse_map;
+// typedef t_status	(*t_parse_func)(t_scene *scene, char **line_tokens);
+// typedef struct s_parse_map
+// {
+// 	char			*id;
+// 	t_parse_func	func;
+// }					t_parse_map;
 
 typedef void		(*t_resize_func)(t_object *object, t_camera *camera,
 			int mode, int direction);

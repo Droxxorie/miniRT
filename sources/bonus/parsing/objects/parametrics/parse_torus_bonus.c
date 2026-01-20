@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:07:13 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 14:49:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:20:33 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_torus_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Torus syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
+		"Torus syntax:\n\t<%s> <%s> <%s> <%s> <%s> [options]\n", "Center x,y,z",
 		"Normal x,y,z", "Major Radius", "Minor Radius", "Color r,g,b");
 }
 
@@ -32,7 +32,7 @@ static t_status	get_torus_values(t_scene *scene, char **line, t_object *obj)
 			&obj->u_data.torus.minor_radius) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &obj->render_as_sdf) == EXIT_FAILURE
+		|| parse_options(scene, line, obj) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_torus_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

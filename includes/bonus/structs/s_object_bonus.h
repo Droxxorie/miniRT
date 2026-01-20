@@ -6,14 +6,15 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 11:36:54 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/19 18:35:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_OBJECT_BONUS_H
 # define S_OBJECT_BONUS_H
 
-# include "s_ray_bonus.h"
+// # include "s_ray_bonus.h"
+# include "s_materials_bonus.h"
 
 typedef struct s_sphere
 {
@@ -200,6 +201,7 @@ typedef struct s_object
 {
 	t_object_type		type;
 	t_color				color;
+	t_material			*material;
 	t_mat4				transform;
 	t_mat4				initial_transform;
 	t_mat4				inverse;

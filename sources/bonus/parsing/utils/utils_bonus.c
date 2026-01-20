@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:36:09 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/02 16:42:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:39:56 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,18 @@ t_status	check_eol(t_scene *scene, char **line)
 		print_error_loc(scene, *line, ERR_EOL);
 		return (EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
+}
+
+t_status	match_and_consume(char **line, const char *identifier)
+{
+	size_t	len;
+
+	len = ft_strlen(identifier);
+	if (ft_strncmp(*line, identifier, len) != 0)
+		return (EXIT_FAILURE);
+	if ((*line)[len] != '\0' && !ft_iswhitespace((*line)[len]))
+		return (EXIT_FAILURE);
+	*line += len;
 	return (EXIT_SUCCESS);
 }

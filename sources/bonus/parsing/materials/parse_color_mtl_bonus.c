@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_sdf_bonus.c                                  :+:      :+:    :+:   */
+/*   parse_color_mtl_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 10:33:32 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 15:05:05 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/20 14:09:02 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/20 14:30:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-t_status	parse_sdf(t_scene *scene, char **line, t_object *object)
+t_status	parse_color_mtl(char **line, t_color *color)
 {
-	if (object->render_as_sdf)
-	{
-		print_error_loc(scene, *line, ERR_SDF_DUP);
+	if (parse_real(line, &color->r) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	}
-	object->render_as_sdf = TRUE;
+	if (parse_real(line, &color->g) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (parse_real(line, &color->b) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	color->r = ft_clamp(color->r, 0.0, 1.0);
+	color->g = ft_clamp(color->g, 0.0, 1.0);
+	color->b = ft_clamp(color->b, 0.0, 1.0);
 	return (EXIT_SUCCESS);
 }

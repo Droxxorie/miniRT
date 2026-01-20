@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 19:57:59 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 10:00:14 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:04:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static void	print_sphere_syntax(void)
 {
-	log_event(stdout, "INFO",
-		"Sphere syntax:\n\t<%s> <%s> <%s>\n", "Center x,y,z",
-		"Radius", "Color r,g,b");
+	log_event(stdout, "INFO", "Sphere syntax:\n\t<%s> <%s> <%s> [options]\n",
+		"Center x,y,z", "Radius", "Color r,g,b");
 }
 
 static void	init_sphere_matrix(t_object *object)
@@ -43,8 +42,8 @@ static t_status	get_sphere_values(t_scene *scene, char **line, t_object *obj)
 		|| parse_dim(scene, line, &obj->u_data.sphere.radius) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &obj->render_as_sdf) == EXIT_FAILURE
-		|| check_eol(scene, line) == EXIT_FAILURE)
+		|| parse_options(scene, line, obj) == EXIT_FAILURE || check_eol(scene,
+			line) == EXIT_FAILURE)
 		return (print_sphere_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:01:58 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 14:10:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:20:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static t_status	get_julia_set_values(t_scene *scene, char **line, t_object *obj)
 			&obj->u_data.julia_set.preset) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
+		|| parse_options(scene, line, obj) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_julia_set_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

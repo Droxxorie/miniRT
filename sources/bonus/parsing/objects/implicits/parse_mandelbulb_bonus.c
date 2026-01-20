@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 23:11:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 23:58:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:21:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_status	get_mandelbulb_values(t_scene *scene, char **line,
 		|| parse_dim(scene, line, &obj->u_data.mandelbulb.power) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
+		|| parse_options(scene, line, obj) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_mandelbulb_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

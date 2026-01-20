@@ -4,7 +4,7 @@
 # FOV 30 : Effet "Téléobjectif", écrase la perspective, focalise sur le détail
 A 0.2 255,255,255
 C    0,0.5,-2   0,-0.13,0.9    20
-# R 3640 2160
+R 3640 2160
 # R 7280 4320
 # R 160 90
 # R 1920 1080

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:34:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 09:59:54 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:04:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	print_rectangle_syntax(void)
 {
 	log_event(stdout, "INFO",
-		"Rectangle syntax:\n\t<%s> <%s> <%s> <%s> <%s>\n", "Center x,y,z",
-		"Normal x,y,z", "Width", "Height", "Color r,g,b");
+		"Rectangle syntax:\n\t<%s> <%s> <%s> <%s> <%s> [options]\n",
+		"Center x,y,z", "Normal x,y,z", "Width", "Height", "Color r,g,b");
 }
 
 static t_status	get_rectangle_values(t_scene *scene, char **line,
@@ -33,7 +33,7 @@ static t_status	get_rectangle_values(t_scene *scene, char **line,
 		|| parse_real(line, &object->u_data.rectangle.height) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &object->color) == EXIT_FAILURE
-		|| parse_sdf(scene, line, &object->render_as_sdf) == EXIT_FAILURE
+		|| parse_options(scene, line, object) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_rectangle_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

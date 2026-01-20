@@ -224,6 +224,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/utils/utils_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/utils/parse_sdf_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/utils/parse_bool_bonus.c \
+	${SRC_DIR_BONUS}/parsing/utils/parse_options_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
@@ -242,6 +243,15 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbox_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_menger_sponge_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_julia_set_bonus.c \
+#* ---- Materials Parsing ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/parsing/materials/dispatch_mtl_line_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/parse_color_mtl_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/parse_illum_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/parse_mtl_lib_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/parse_newmtl_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/parse_usemtl_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/utils_bonus.c \
 
 #* ---- Acceleration (BVH/AABB) ----
 SRCS_BONUS += \

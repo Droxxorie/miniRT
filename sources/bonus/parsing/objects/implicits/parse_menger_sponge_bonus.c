@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 22:55:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 13:53:43 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 14:21:17 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_status	get_menger_sponge_values(t_scene *scene, char **line,
 			&obj->u_data.menger_sponge.scale_factor) == EXIT_FAILURE
 		|| skip_required(scene, line, WHITESPACE_CHARS) == EXIT_FAILURE
 		|| parse_color(scene, line, &obj->color) == EXIT_FAILURE
+		|| parse_options(scene, line, obj) == EXIT_FAILURE
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (print_menger_sponge_syntax(), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

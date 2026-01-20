@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:33:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:04:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define ERR_EOL "Unexpected characters at end of line (garbage found)"
 # define ERR_COMMA "Missing required delimiter (comma)"
 # define ERR_DELIM "Missing required delimiter (whitespace)"
+# define ERR_OPTION "Invalid option identifier, expected '-usemtl' or '-sdf'"
 
 //* --- Colors --- */
 # define ERR_RED "Invalid red color value"
@@ -93,6 +94,16 @@
 # define ERR_DIM "Invalid dimension value"
 # define ERR_DIM_OOB "Dimension must be positive (> 0)"
 # define ERR_BOOL "Invalid boolean value (expected TRUE or FALSE)"
+# define ERR_SDF_DUP "SDF option already assigned to object"
+
+//* --- Materials --- */
+# define ERR_MTL_FILE "Could not open MTL file"
+# define ERR_MTL_EXT "Invalid MTL file extension (expected .mtl)"
+# define ERR_MTL_DEF "Material property defined before 'newmtl'"
+# define ERR_MTL_UID "Unknown material property identifier"
+# define ERR_MTL_OBJ "Material already assigned to object"
+# define ERR_MTL_NF "Material not found in the material library"
+# define ERR_MAT_DUP "Duplicate material name definition"
 
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */
