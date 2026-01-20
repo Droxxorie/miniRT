@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:42:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:35:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:12:04 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@
 //*                                PROTOTYPES                                 */
 //* ========================================================================= */
 void		destroy_scene(t_scene *scene);
+void		free_objects(t_object *object);
+void		free_lights(t_light *light);
+void		free_cameras(t_camera *camera);
+void		free_materials(t_material *mat);
 t_status	clean_exit(t_scene *scene, t_status status);
 void		setup_save_mode(int argc, char **argv, t_scene *scene);
 void		save_image_to_bmp(t_scene *scene);

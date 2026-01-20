@@ -6,47 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 13:09:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:11:29 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-static void	free_objects(t_object *object)
-{
-	t_object	*temp;
-
-	while (object)
-	{
-		temp = object->next;
-		free(object);
-		object = temp;
-	}
-}
-
-static void	free_lights(t_light *light)
-{
-	t_light	*temp;
-
-	while (light)
-	{
-		temp = light->next;
-		free(light);
-		light = temp;
-	}
-}
-
-static void	free_cameras(t_camera *camera)
-{
-	t_camera	*temp;
-
-	while (camera)
-	{
-		temp = camera->next;
-		free(camera);
-		camera = temp;
-	}
-}
 
 void	destroy_scene(t_scene *scene)
 {
@@ -68,6 +32,7 @@ void	destroy_scene(t_scene *scene)
 	free_objects(scene->objects);
 	free_lights(scene->lights);
 	free_cameras(scene->cameras);
+	free_materials(scene->materials);
 	free(scene->save_file);
 	free(scene);
 	log_event(stdout, "SUCCESS", "Scene destroyed successfully!\n");

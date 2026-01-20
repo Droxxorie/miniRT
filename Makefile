@@ -181,7 +181,8 @@ SRC_COUNT := $(words $(SRCS))
 #* ---- Core ----
 SRCS_BONUS := \
     $(SRC_DIR_BONUS)/core/main_bonus.c \
-    $(SRC_DIR_BONUS)/core/cleanup_bonus.c \
+    $(SRC_DIR_BONUS)/core/cleanup/cleanup_bonus.c \
+	$(SRC_DIR_BONUS)/core/cleanup/utils_bonus.c \
     $(SRC_DIR_BONUS)/core/save_bonus.c \
 	$(SRC_DIR_BONUS)/core/debug_bonus.c \
 
