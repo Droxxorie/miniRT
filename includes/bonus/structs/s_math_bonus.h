@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:48:43 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 20:05:25 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:55:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_vec4
 	t_real		z;
 	t_real		w;
 }				t_vec4;
-
 
 typedef struct s_mat4
 {

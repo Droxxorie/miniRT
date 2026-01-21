@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 00:52:13 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:36:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ typedef enum e_control_mode
 
 typedef enum e_render_mode
 {
-	RENDER_IMAGE,
+	RENDER_SHADE,
 	RENDER_NORMAL,
 	RENDER_AO,
+	RENDER_UV,
+	RENDER_DEPTH,
+	RENDER_SHADOWS,
+	RENDER_OBJECT_ID,
 }					t_render_mode;
 
 # define RESIZE_NONE -1

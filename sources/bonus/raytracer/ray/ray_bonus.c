@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:37:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:30:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:43:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_color	cast_ray(t_scene *scene, t_ray *ray, int depth)
 		return ((t_color){0.0, 0.0, 0.0});
 	if (hit_bvh(scene->bvh_root, ray, &record))
 	{
-		if (scene->render_mode != RENDER_IMAGE)
+		if (scene->render_mode != RENDER_SHADE)
 			return (render_debug(scene, &record));
 		else
 			return (render_shade(scene, &record, ray, depth));
