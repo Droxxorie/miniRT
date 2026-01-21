@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:55:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 14:23:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 19:46:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	init_default_material_properties(t_material *m)
 	m->ior = 1.0;
 	m->transparency = 0.0;
 	m->uv_scale = 1.0;
-	m->has_wave = FALSE;
+	m->pattern_type = PATTERN_NONE;
 	m->albedo_texture_path = NULL;
 	m->normal_texture_path = NULL;
 	m->roughness_texture_path = NULL;

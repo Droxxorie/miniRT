@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:29:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 21:19:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	set_sphere_record(t_object *object, t_ray *world_ray,
 	if (world_ray->is_shadow_ray == TRUE)
 		return ;
 	local_normal = ray_at(local_ray, record->t);
+	get_sphere_uv(local_normal, &record->u, &record->v);
 	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
 	record->normal = vec3_normalize(record->normal);
 	set_face_normal(record, world_ray, record->normal);

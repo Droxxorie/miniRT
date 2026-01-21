@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:51:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:29:07 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 21:20:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ static void	set_torus_record(t_object *object, t_ray *world_ray,
 	record->object = object;
 	if (world_ray->is_shadow_ray == TRUE)
 		return ;
+	get_torus_uv(local_hit_point, &object->u_data.torus, &record->u,
+		&record->v);
 	get_torus_normal(object, record, local_hit_point);
 	set_face_normal(record, world_ray, record->normal);
 }

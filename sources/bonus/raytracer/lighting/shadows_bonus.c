@@ -5,52 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 12:38:24 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 17:12:31 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/21 17:26:07 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/21 21:27:42 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static t_real	compute_soft_shadow(t_ray *ray, t_real t_max, t_real k,
-		t_scene *scene)
+static t_vec3	get_light_sample(t_light *light, unsigned int *seed)
 {
-	t_real	result;
-	t_real	t;
-	t_real	dist;
-	t_real	prev_dist;
-	t_real	var[2];
+	t_vec3	point_in_sphere;
 
-	result = 1.0;
+	point_in_sphere = random_in_unit_sphere(seed);
+	return (vec3_add(light->position, vec3_scale(point_in_sphere,
+				LIGHT_RADIUS)));
+}
+
+static t_bool	hit_sdf_shadow(t_scene *scene, t_ray *ray, t_real max_dist)
+{
+	t_real	t;
+	t_real	h;
+	int		steps;
+
 	t = ray->min;
-	prev_dist = 1e20;
-	while (t < t_max)
+	steps = 0;
+	while (t < max_dist && steps < SDF_MAX_STEPS)
 	{
-		dist = map_the_world(ray_at(ray, t), scene);
-		if (dist < 0.001)
-			return (0.0);
-		var[0] = dist * dist / (2.0 * prev_dist);
-		var[1] = sqrt(dist * dist - var[0] * var[0]);
-		result = fmin(result, k * var[1] / fmax(0.0, t - var[0]));
-		prev_dist = dist;
-		t += dist;
+		h = map_the_world(ray_at(ray, t), scene);
+		if (h < 0.001)
+			return (TRUE);
+		t += h;
+		steps++;
 	}
-	return (ft_clamp(result, 0.0, 1.0));
+	return (FALSE);
+}
+
+static t_bool	handle_transparency(t_hit_record *hit, t_ray *ray,
+		t_real *attenuation, t_vec3 target)
+{
+	t_vec3		remain;
+	t_material	*mat;
+
+	mat = hit->object->material;
+	if (mat && mat->type == DIELECTRIC)
+	{
+		*attenuation *= 0.95;
+		ray->origin = ray_at(ray, hit->t + 0.001);
+		remain = vec3_sub(target, ray->origin);
+		ray->direction = vec3_normalize(remain);
+		ray->max = vec3_len(remain);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+static t_real	cast_shadow_ray(t_scene *scene, t_vec3 target,
+		t_hit_record *rec)
+{
+	t_ray			s_ray;
+	t_hit_record	hit;
+	t_real			attenuation;
+	int				layer;
+
+	attenuation = 1.0;
+	s_ray.origin = vec3_add(rec->hit_point, vec3_scale(rec->normal, 0.001));
+	s_ray.direction = vec3_sub(target, s_ray.origin);
+	s_ray.max = vec3_len(s_ray.direction);
+	s_ray.direction = vec3_normalize(s_ray.direction);
+	s_ray.min = 0.001;
+	s_ray.is_shadow_ray = TRUE;
+	layer = 0;
+	while (layer < 12 && hit_bvh(scene->bvh_root, &s_ray, &hit))
+	{
+		if (hit.t > s_ray.max)
+			break ;
+		if (handle_transparency(&hit, &s_ray, &attenuation, target) == FALSE)
+			return (0.0);
+		layer++;
+	}
+	if (hit_sdf_shadow(scene, &s_ray, vec3_len(vec3_sub(target, s_ray.origin))))
+		return (0.0);
+	return (attenuation);
 }
 
 t_real	get_shadow_factor(t_scene *scene, t_hit_record *record, t_light *light)
 {
-	t_vec3	dir_to_light;
-	t_real	dist_to_light;
-	t_ray	shadow_ray;
+	int				i;
+	t_real			visibility;
+	t_vec3			target;
+	unsigned int	seed;
 
-	dir_to_light = vec3_sub(light->position, record->hit_point);
-	dist_to_light = vec3_len(dir_to_light);
-	shadow_ray.direction = vec3_normalize(dir_to_light);
-	shadow_ray.origin = vec3_add(record->hit_point, vec3_scale(record->normal,
-				SHADOW_BIAS));
-	shadow_ray.min = SDF_THICKNESS;
-	shadow_ray.max = dist_to_light;
-	return (compute_soft_shadow(&shadow_ray, dist_to_light, SHADOW_HARDNESS,
-			scene));
+	seed = generate_seed(record->hit_point);
+	if (SHADOW_SAMPLES <= 1)
+		return (cast_shadow_ray(scene, light->position, record));
+	visibility = 0.0;
+	i = 0;
+	while (i < SHADOW_SAMPLES)
+	{
+		target = get_light_sample(light, &seed);
+		visibility += cast_shadow_ray(scene, target, record);
+		i++;
+	}
+	return (visibility / (t_real)SHADOW_SAMPLES);
 }

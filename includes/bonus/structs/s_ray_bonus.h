@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 20:43:33 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 17:54:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_hit_record
 	t_real				t;
 	t_bool				front_face;
 	t_color				color;
+	t_real				u;
+	t_real				v;
 }						t_hit_record;
 
 typedef struct s_bvh_node

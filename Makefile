@@ -183,6 +183,7 @@ SRCS_BONUS := \
     $(SRC_DIR_BONUS)/core/main_bonus.c \
     $(SRC_DIR_BONUS)/core/cleanup/cleanup_bonus.c \
 	$(SRC_DIR_BONUS)/core/cleanup/utils_bonus.c \
+	$(SRC_DIR_BONUS)/core/cleanup/cleanup_materials_bonus.c \
     $(SRC_DIR_BONUS)/core/save_bonus.c \
 	$(SRC_DIR_BONUS)/core/debug_bonus.c \
 
@@ -192,6 +193,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/graphics/multithreading_bonus.c \
     $(SRC_DIR_BONUS)/graphics/render_frame_bonus.c \
     $(SRC_DIR_BONUS)/graphics/utils_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/init_textures_bonus.c \
 
 #* ---- Inputs ----
 SRCS_BONUS += \
@@ -244,7 +246,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbox_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_menger_sponge_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_julia_set_bonus.c \
-#* ---- Materials Parsing ----
+#* ---- Material Parsing ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/materials/dispatch_mtl_line_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/materials/parse_color_mtl_bonus.c \
@@ -253,6 +255,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/materials/parse_newmtl_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/materials/parse_usemtl_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/materials/utils_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/materials/parse_pattern_bonus.c \
 
 #* ---- Acceleration (BVH/AABB) ----
 SRCS_BONUS += \
@@ -313,10 +316,17 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/map_the_world_bonus.c \
 #* ---- Lighting ----
 SRCS_BONUS += \
-	$(SRC_DIR_BONUS)/raytracer/lighting/phong_model_bonus.c \
-	$(SRC_DIR_BONUS)/raytracer/lighting/reflect_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/shadows_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/ambient_occlusion_bonus.c \
+#* ---- UV ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_box_uv_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_cone_uv_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_cylinder_uv_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_disk_uv_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_rectangle_uv_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_sphere_uv_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_torus_uv_bonus.c \
 #* ---- Intersection ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/parametrics/hit_box_bonus.c \
@@ -342,6 +352,25 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_mandelbox_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_menger_sponge_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/objects/implicits/fractals/sdf_julia_set_bonus.c \
+#* ---- Shaders ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/raytracer/shaders/render_debug_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/render_shade_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/shader_dielectric_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/shader_metal_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/shader_lambert_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/shader_phong_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/utils/get_albedo_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/utils/get_shininess_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/utils/optic_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/utils/sample_texture_bonus.c \
+#* ---- Materials ----
+SRCS_BONUS += \
+	$(SRC_DIR_BONUS)/raytracer/materials/checkboard_texture_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/materials/perlin_noise_texture_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/materials/rainbow_texture_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/materials/wave_texture_bonus.c \
+
 #* ---- Utils ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/ray/ray_bonus.c \
@@ -381,6 +410,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_scale_bonus.c \
 	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_sub_bonus.c \
 	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_dist_bonus.c \
+	$(SRC_DIR_BONUS)/maths/vector/vec3/vec3_mean_bonus.c \
 #* ----Vec4 ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/maths/vector/vec4/vec4_len_bonus.c \
@@ -406,6 +436,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/utils/random/random_dir_bonus.c \
 	$(SRC_DIR_BONUS)/utils/random/random_double_bonus.c \
 	$(SRC_DIR_BONUS)/utils/random/generate_seed_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/noise_2d_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/clamp_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/ft_smoothstep_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/mix_bonus.c \

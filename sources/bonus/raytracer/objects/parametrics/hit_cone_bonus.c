@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 20:26:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:28:46 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 21:18:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,13 @@ static void	set_cone_record(t_object *object, t_ray *world_ray,
 	local_ray = &hit->ray;
 	if (world_ray->is_shadow_ray == TRUE)
 		return ;
+	local_hp = ray_at(local_ray, hit->t);
+	get_cone_uv(local_hp, hit->type, &record->u, &record->v);
 	if (hit->type == BOTTOM_CAP)
 		local_normal = (t_vec3){0, -1, 0};
 	else
-	{
-		local_hp = ray_at(local_ray, hit->t);
-		local_normal = (t_vec3){
-			local_hp.x,
-			sqrt((local_hp.x * local_hp.x) + (local_hp.z * local_hp.z)),
-			local_hp.z};
-	}
+		local_normal = (t_vec3){local_hp.x, sqrt((local_hp.x * local_hp.x)
+				+ (local_hp.z * local_hp.z)), local_hp.z};
 	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
 	record->normal = vec3_normalize(record->normal);
 	set_face_normal(record, world_ray, record->normal);

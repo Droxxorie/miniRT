@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 18:50:22 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 17:28:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 10:53:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,22 @@ static void	check_cap(t_cylinder_hit *hit, t_real y_plane,
 static void	set_cylinder_record(t_object *object, t_ray *world_ray,
 		t_hit_record *record, t_cylinder_hit *hit)
 {
-	t_ray	*local_ray;
 	t_vec3	local_normal;
 	t_vec3	local_hit_point;
 
 	record->hit_point = ray_at(world_ray, record->t);
 	record->color = object->color;
 	record->object = object;
-	local_ray = &hit->ray;
 	if (world_ray->is_shadow_ray == TRUE)
 		return ;
+	local_hit_point = ray_at(&hit->ray, hit->t);
+	get_cylinder_uv(local_hit_point, hit->type, &record->u, &record->v);
 	if (hit->type == TOP_CAP)
 		local_normal = (t_vec3){0, 1, 0};
 	else if (hit->type == BOTTOM_CAP)
 		local_normal = (t_vec3){0, -1, 0};
 	else
-	{
-		local_hit_point = ray_at(local_ray, record->t);
 		local_normal = (t_vec3){local_hit_point.x, 0, local_hit_point.z};
-	}
 	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
 	record->normal = vec3_normalize(record->normal);
 	set_face_normal(record, world_ray, record->normal);

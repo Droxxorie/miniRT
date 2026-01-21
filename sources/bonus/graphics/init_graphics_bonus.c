@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:51:58 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 17:24:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_status	init_graphics(t_scene *scene)
 	if (!window->win_ptr)
 		return (print_error(ERR_WIN), EXIT_FAILURE);
 	if (init_frame_buffer(scene) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (init_textures(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	log_event(stdout, "SUCCESS", "Graphics context ready!\n");
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 20:28:21 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 15:05:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:27:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,12 @@ static t_status	dispatch_scalars(t_material *current, char *line)
 		return (parse_roughness(&line, current));
 	if (match_and_consume(&line, "Ni") == EXIT_SUCCESS)
 		return (parse_real(&line, &current->ior));
-	if (match_and_consume(&line, "d") == EXIT_SUCCESS)
+	if (match_and_consume(&line, "Tr") == EXIT_SUCCESS)
 		return (parse_real(&line, &current->transparency));
 	if (match_and_consume(&line, "uv_scale") == EXIT_SUCCESS)
 		return (parse_real(&line, &current->uv_scale));
-	if (match_and_consume(&line, "wave") == EXIT_SUCCESS)
-	{
-		current->has_wave = TRUE;
-		return (EXIT_SUCCESS);
-	}
+	if (match_and_consume(&line, "pattern") == EXIT_SUCCESS)
+		return (parse_pattern(&line, current));
 	return (-1);
 }
 
@@ -37,11 +34,14 @@ static t_status	dispatch_maps(t_material *current, char *line)
 	if (match_and_consume(&line, "map_Bump") == EXIT_SUCCESS
 		|| match_and_consume(&line, "Bump") == EXIT_SUCCESS)
 		return (parse_texture_path(&line, &current->normal_texture_path));
-	if (match_and_consume(&line, "map_Pr") == EXIT_SUCCESS
-		|| match_and_consume(&line, "map_Ns") == EXIT_SUCCESS)
+	if (match_and_consume(&line, "map_Pr") == EXIT_SUCCESS)
+		return (parse_texture_path(&line, &current->metallic_texture_path));
+	if (match_and_consume(&line, "map_Ns") == EXIT_SUCCESS)
 		return (parse_texture_path(&line, &current->roughness_texture_path));
 	if (match_and_consume(&line, "map_Ke") == EXIT_SUCCESS)
 		return (parse_texture_path(&line, &current->emission_texture_path));
+	if (match_and_consume(&line, "map_Ks") == EXIT_SUCCESS)
+		return (parse_texture_path(&line, &current->specular_texture_path));
 	return (-1);
 }
 

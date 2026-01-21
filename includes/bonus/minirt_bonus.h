@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:42:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 15:12:04 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 19:53:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include "structs/s_base_bonus.h"
 # include "structs/s_math_bonus.h"
 # include "structs/s_ray_bonus.h"
+# include "structs/s_materials_bonus.h"
 # include "structs/s_object_bonus.h"
 # include "structs/s_scene_bonus.h"
 
@@ -53,6 +54,7 @@
 # include "inputs_bonus.h"
 # include "utils_bonus.h"
 # include "./raytracer/raytracer_bonus.h"
+# include "./raytracer/materials_bonus.h"
 # include "./raytracer/sdf_bonus.h"
 
 //* ========================================================================= */
@@ -62,7 +64,7 @@ void		destroy_scene(t_scene *scene);
 void		free_objects(t_object *object);
 void		free_lights(t_light *light);
 void		free_cameras(t_camera *camera);
-void		free_materials(t_material *mat);
+void		free_materials(void *mlx_ptr, t_material *mat);
 t_status	clean_exit(t_scene *scene, t_status status);
 void		setup_save_mode(int argc, char **argv, t_scene *scene);
 void		save_image_to_bmp(t_scene *scene);

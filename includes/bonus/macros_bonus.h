@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 15:18:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:26:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 //* ========================================================================= */
 # define EPSILON 1e-6
 # define PI 3.14159265359
+# define INV_PI 0.31830988618
+# define INV_TWO_PI 0.15915494309
 # define TWO_PI 6.28318530718
 # define INV_255 0.00392156862
 # define INV_SQRT_2 0.70710678118
@@ -47,9 +49,9 @@
 
 # define WHITESPACE_CHARS " \t\n\v\f\r"
 
-# define SHADOW_HARDNESS 16.0
-# define SHADOW_BIAS 0.05
-# define SHADOW_NOISE 0.02
+# define SHADOW_SAMPLES 64
+# define LIGHT_RADIUS 0.5
+# define SDF_MAX_STEPS 64
 
 # define AO_STEPS 4
 # define AO_STEP_SIZE 0.5
@@ -58,6 +60,8 @@
 
 # define AO_SAMPLES 64
 # define AO_RADIUS 1.5
+
+# define MAX_REFLECTION_DEPTH 5
 
 //* ========================================================================= */
 //*                                KEYS (LINUX/X11)                           */

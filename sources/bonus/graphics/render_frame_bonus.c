@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/14 00:00:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:26:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static void	process_pixel(t_scene *scene, int x, int y)
 {
 	t_ray	ray;
 	t_color	color;
+	int		max_depth;
 
+	max_depth = MAX_REFLECTION_DEPTH;
 	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
-	color = compute_pixel_color(scene, &ray);
+	color = cast_ray(scene, &ray, max_depth);
 	image_pixel_put(&scene->frame_buffer, x, y, color_to_int(color));
 }
 
@@ -66,6 +68,5 @@ void	render_frame(t_scene *scene)
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
 	end_time = get_time_ms();
-	log_event(stdout, "PERF", "Render time: %ld ms\r", end_time
-		- start_time);
+	log_event(stdout, "PERF", "Render time: %ld ms\r", end_time - start_time);
 }

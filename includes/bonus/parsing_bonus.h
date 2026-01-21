@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 14:31:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 19:45:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ t_status	parse_newmtl(t_scene *scene, t_material **current,
 t_status	dispatch_mtl_line(t_scene *scene, t_material **current, char *line);
 t_status	parse_mtl_lib(t_scene *scene, char **line);
 t_status	parse_usemtl(t_scene *scene, char **line, t_object *object);
+t_status	parse_pattern(char **line, t_material *material);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 14:59:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 17:52:18 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:31:22 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static	t_vec3	random_in_unit_sphere(unsigned int *seed)
+t_vec3	random_in_unit_sphere(unsigned int *seed)
 {
 	t_real	theta;
 	t_real	phi;
@@ -25,11 +25,23 @@ static	t_vec3	random_in_unit_sphere(unsigned int *seed)
 	theta = TWO_PI * u;
 	phi = acos(2.0 * v - 1.0);
 	r = cbrt(random_double(seed));
-	return ((t_vec3){
-		r * sin(phi) * cos(theta),
-		r * sin(phi) * sin(theta),
-		r * cos(phi)
-	});
+	return ((t_vec3){r * sin(phi) * cos(theta), r * sin(phi) * sin(theta), r
+		* cos(phi)});
+}
+
+t_vec3	random_vec3_in_unit_sphere(void)
+{
+	t_vec3	p;
+
+	while (1)
+	{
+		p.x = random_real_range(-1.0, 1.0);
+		p.y = random_real_range(-1.0, 1.0);
+		p.z = random_real_range(-1.0, 1.0);
+		if (vec3_len_squared(p) >= 1.0)
+			continue ;
+		return (p);
+	}
 }
 
 t_vec3	random_hemisphere_dir(t_vec3 normal, unsigned int *seed)

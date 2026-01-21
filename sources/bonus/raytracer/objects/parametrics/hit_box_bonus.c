@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 02:55:11 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:28:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 21:21:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static void	set_box_record(t_object *object, t_ray *world_ray, t_ray *local_ray,
 	p = ray_at(local_ray, record->t);
 	n = (t_vec3){0, 0, 0};
 	get_box_normal(&p, &n);
+	get_box_uv(p, n, &record->u, &record->v);
 	record->normal = mat4_mult_vec3(object->transposed_inverse, n);
 	record->normal = vec3_normalize(record->normal);
 	set_face_normal(record, world_ray, record->normal);

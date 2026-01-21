@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 17:51:31 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 20:45:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,10 @@ unsigned int	pcg_hash(unsigned int input);
 t_real			random_double(unsigned int *seed);
 unsigned int	generate_seed(t_point3 p);
 t_vec3			random_hemisphere_dir(t_vec3 normal, unsigned int *seed);
+t_real			random_real(void);
+t_real			random_real_range(t_real min, t_real max);
+t_vec3			random_vec3_in_unit_sphere(void);
+t_vec3			random_in_unit_sphere(unsigned int *seed);
+t_real			noise_2d(t_real x, t_real y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:09:37 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 15:13:08 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 21:24:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,5 @@ void	free_cameras(t_camera *camera)
 		temp = camera->next;
 		free(camera);
 		camera = temp;
-	}
-}
-
-void	free_materials(t_material *mat)
-{
-	t_material	*temp;
-
-	while (mat)
-	{
-		temp = mat->next;
-		if (mat->name)
-			free(mat->name);
-		if (mat->albedo_texture_path)
-			free(mat->albedo_texture_path);
-		if (mat->normal_texture_path)
-			free(mat->normal_texture_path);
-		if (mat->roughness_texture_path)
-			free(mat->roughness_texture_path);
-		if (mat->emission_texture_path)
-			free(mat->emission_texture_path);
-		free(mat);
-		//? peut etre destroy ici pour les images mlx liées
-		mat = temp;
 	}
 }

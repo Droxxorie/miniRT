@@ -6,24 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 23:45:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 17:26:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 17:38:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-//* OLD VERSION
-// static t_vec3	get_sdf_normal(t_point3 p, t_object *object)
-// {
-// 	t_real	d;
-// 	t_vec3	n;
-
-// 	d = dispatch_sdf(p, object);
-// 	n.x = dispatch_sdf((t_point3){p.x + EPSILON, p.y, p.z}, object) - d;
-// 	n.y = dispatch_sdf((t_point3){p.x, p.y + EPSILON, p.z}, object) - d;
-// 	n.z = dispatch_sdf((t_point3){p.x, p.y, p.z + EPSILON}, object) - d;
-// 	return (vec3_normalize(n));
-// }
 
 static t_vec3	get_sdf_normal(t_point3 p, t_object *object)
 {
@@ -52,6 +39,8 @@ static t_bool	set_sdf_record(t_object *object, t_ray *world_ray,
 	record->normal = get_sdf_normal(record->hit_point, object);
 	set_face_normal(record, world_ray, record->normal);
 	record->color = object->color;
+	record->u = 0.0;
+	record->v = 0.0;
 	if (object->is_fractal == TRUE)
 	{
 		local_hit = mat4_mult_point3(object->inverse, record->hit_point);

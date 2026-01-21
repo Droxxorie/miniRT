@@ -3,8 +3,12 @@ Ajouter tests save
 fusioner test bonus et mandatory
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
 mesh + .obj
-
-
+display depth ?
+display uv?
+texture en jpg
+photon mapping
+caustique
+skybox
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -45,19 +49,18 @@ mesh + .obj
 ## PHASE 4 : LUMIERE & MAT
 - [ ] SUN (Lumière parallèle)
 - [ ] Spotlight
-- [ ] Texture procedurale (checkboard, rainbow, Sinus)
-- [ ] UV Mapping
-- [ ] Normal Map / Bump Map
+- [x] Texture procedurale (checkboard, rainbow, Sinus)
+- [x] Normal Map / Bump Map
 - [ ] Skybox
 - [ ] BRDF basique (Lambert & Phong/Blinn-Phong)
 - [ ] BRDF avancé (Oren-Nayar & Cook-Torrance)
-- [ ] Matériaux :
-    - [ ] Choix
-    - [ ] Matte/Lambert/Color
-    - [ ] Transparent
-    - [ ] Plastique (Blinn-Phong)
-    - [ ] Miroir (refraction verre/eau/autre)
-    - [ ] Texture (UV mapping)
+- [x] Matériaux :
+    - [x] Choix
+    - [x] Matte/Lambert/Color
+    - [x] Transparent
+    - [x] Plastique (Blinn-Phong)
+    - [x] Miroir (refraction verre/eau/autre)
+    - [x] Texture (UV mapping)
 
 ## PHASE 5 : UX et Interactions
 - [ ] Rework UX clavier/Souris

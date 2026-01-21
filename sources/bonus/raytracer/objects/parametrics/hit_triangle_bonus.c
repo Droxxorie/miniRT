@@ -6,14 +6,14 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 22:15:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/13 10:29:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/20 21:10:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
 static void	set_triangle_record(t_object *object, t_ray *world_ray,
-		t_hit_record *record)
+		t_triangle_hit vars, t_hit_record *record)
 {
 	t_triangle	*triangle;
 
@@ -23,6 +23,8 @@ static void	set_triangle_record(t_object *object, t_ray *world_ray,
 	record->object = object;
 	if (world_ray->is_shadow_ray == TRUE)
 		return ;
+	record->u = vars.u;
+	record->v = vars.v;
 	record->normal = mat4_mult_vec3(object->transposed_inverse,
 			triangle->normal);
 	record->normal = vec3_normalize(record->normal);
@@ -53,7 +55,7 @@ t_bool	hit_triangle(t_object *object, t_ray *world_ray, t_hit_record *record)
 		return (FALSE);
 	vars.t = vars.f * vec3_dot(triangle->edge2, vars.q);
 	if (vars.t > world_ray->min && vars.t < world_ray->max)
-		return (record->t = vars.t, set_triangle_record(object, world_ray,
+		return (record->t = vars.t, set_triangle_record(object, world_ray, vars,
 				record), TRUE);
 	return (FALSE);
 }

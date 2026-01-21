@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:24:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 16:54:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 17:09:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ static t_real	get_min_dist_in_leaf(t_object *object, t_point3 world_p)
 	min_dist = INFINITY;
 	while (object)
 	{
+		if (object->render_as_sdf == FALSE)
+		{
+			object = object->next;
+			continue ;
+		}
 		dist = dispatch_sdf(world_p, object) * object->sdf_scale;
 		if (dist < min_dist)
 			min_dist = dist;

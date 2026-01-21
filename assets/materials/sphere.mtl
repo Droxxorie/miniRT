@@ -1,0 +1,63 @@
+# --- 1. LAMBERT (Mat) ---
+# Pas de speculaire (Ks 0), pas de brillance (Ns 0)
+# Couleur : Rouge brique
+newmtl RedMatte
+illum 1
+Ka 0.1 0.1 0.1
+Kd 0.8 0.1 0.1
+Ks 0.0 0.0 0.0
+Ns 0
+
+# --- 2. PHONG (Plastique brillant) ---
+# Speculaire blanc (Ks 1 1 1), brillance moyenne (Ns 100)
+# Couleur : Bleu plastique
+newmtl BluePlastic
+illum 2
+Ka 0.1 0.1 0.1
+Kd 0.1 0.1 0.8
+Ks 1.0 1.0 1.0
+Ns 100
+
+# --- 3. PHONG ---
+newmtl CyanPlastic
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.200000 0.200000
+Ks 0.800000 0.800000 0.800000
+Tr 1.000000
+illum 2
+Ns 100
+
+# --- 4. METAL (Miroir) ---
+# Le diffus est souvent noir (Kd 0) pour un miroir parfait
+# Tout vient du speculaire et de la reflexion
+# Couleur : Or (Reflection teintée jaune)
+newmtl GoldMirror
+illum 3
+Ka 0.0 0.0 0.0
+Kd 1.0 0.6 1.0
+Ks 0.9 0.8 0.2
+Ns 1000
+# Reflection map implicite ou calculée par shader_metal
+
+# --- 5. DIELECTRIC (Verre) ---
+# Ni 1.5 (Indice du verre)
+# Tr 0.50 (Totalement transparent)
+# Ks sert pour le reflet sur la vitre
+newmtl ClearGlass
+illum 4
+Ka 0.0 0.0 0.0
+Kd 1.0 1.0 1.0
+Ks 1.0 1.0 1.0
+Ni 0.5
+Tr 1.0
+Ns 500
+
+# --- 6. EMISSIVE (Lumière) ---
+# Ke est l'intensité d'emission
+newmtl NeonLight
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 10.0 10.0 10.0
+

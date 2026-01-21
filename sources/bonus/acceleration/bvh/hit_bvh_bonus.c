@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 18:31:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/15 13:04:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 19:26:11 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ t_bool	hit_bvh(t_bvh_node *node, t_ray *ray, t_hit_record *record)
 		second = node->right_child;
 	}
 	hit[0] = hit_bvh(first, ray, record);
-	if (ray->is_shadow_ray && hit[0] == TRUE)
-		return (TRUE);
 	hit[1] = hit_bvh(second, ray, record);
 	return (hit[0] || hit[1]);
 }
