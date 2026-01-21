@@ -4,8 +4,10 @@ C   10,2,0			-1,0,0	70
 C   0,2,10			0,0,-1	70
 # R  3840	2160
 # R 160 90
-
-mtllib assets/materials/sphere.mtl
+# SB		assets/textures/skybox/sky_alkatraz.xpm
+# SB		assets/textures/skybox/sky_museum.xpm
+# SB		assets/textures/skybox/sky_training.xpm
+mtllib	assets/materials/sphere.mtl
 
 
 L   0, 8, 0		.5		255, 255, 255

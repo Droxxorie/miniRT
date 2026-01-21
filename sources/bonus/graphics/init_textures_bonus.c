@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:18:18 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 11:55:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:53:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,23 @@ static void	safe_load(void *mlx, char *path, t_image **dest, char *name)
 	}
 }
 
+static void	load_skybox_texture(t_scene *scene)
+{
+	if (scene->skybox_texture_path)
+		safe_load(scene->mlx_window.mlx_ptr, scene->skybox_texture_path,
+			&scene->skybox_map, "skybox");
+	if (!scene->skybox_map)
+		log_event(stderr, "WARN",
+			"No skybox texture loaded. Using procedural skybox.\n");
+	return ;
+}
+
 t_status	init_textures(t_scene *scene)
 {
 	t_material	*mat;
 	void		*img_ptr;
 
-	log_event(stdout, "INFO", "Loading material textures...\n");
+	log_event(stdout, "INFO", "Loading textures...\n");
 	mat = scene->materials;
 	img_ptr = scene->mlx_window.mlx_ptr;
 	while (mat)
@@ -69,6 +80,7 @@ t_status	init_textures(t_scene *scene)
 			"specular");
 		mat = mat->next;
 	}
-	log_event(stdout, "SUCCESS", "Material textures loaded successfully!\n");
+	load_skybox_texture(scene);
+	log_event(stdout, "SUCCESS", "Textures loaded successfully!\n");
 	return (EXIT_SUCCESS);
 }

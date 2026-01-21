@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:37:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:43:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:21:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,6 @@ t_ray	transform_ray(t_ray ray, t_mat4 inverse)
 	return (local_ray);
 }
 
-t_color	get_background_color(t_ray *ray)
-{
-	t_vec3	unit_direction;
-	t_real	t;
-	t_color	white;
-	t_color	blue;
-
-	unit_direction = vec3_normalize(ray->direction);
-	t = 0.5 * (unit_direction.y + 1.0);
-	white = (t_color){1.0, 1.0, 1.0};
-	blue = (t_color){0.5, 0.7, 1.0};
-	return (color_add(color_scale(white, 1.0 - t), color_scale(blue, t)));
-}
-
 t_color	cast_ray(t_scene *scene, t_ray *ray, int depth)
 {
 	t_hit_record	record;
@@ -62,7 +48,7 @@ t_color	cast_ray(t_scene *scene, t_ray *ray, int depth)
 		else
 			return (render_shade(scene, &record, ray, depth));
 	}
-	return (get_background_color(ray));
+	return (get_skybox_color(scene, ray));
 }
 
 void	generate_ray(t_camera *camera, t_ray *ray, t_real x, t_real y)

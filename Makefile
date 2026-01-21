@@ -231,6 +231,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/scene/parse_skybox_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \
 	${SRC_DIR_BONUS}/parsing/objects/utils_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_box_bonus.c \
@@ -364,6 +365,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/shaders/utils/get_shininess_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/shaders/utils/optic_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/shaders/utils/sample_texture_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/render_skybox_bonus.c \
 #* ---- Materials ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/materials/checkboard_texture_bonus.c \

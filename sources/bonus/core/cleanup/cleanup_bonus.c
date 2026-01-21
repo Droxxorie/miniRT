@@ -6,11 +6,23 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 19:53:15 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:47:52 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	destroy_skybox(t_scene *scene)
+{
+	if (scene->skybox_map)
+	{
+		if (scene->skybox_map->ptr)
+			mlx_destroy_image(scene->mlx_window.mlx_ptr, scene->skybox_map->ptr);
+		free(scene->skybox_map);
+	}
+	if (scene->skybox_texture_path)
+		free(scene->skybox_texture_path);
+}
 
 void	destroy_scene(t_scene *scene)
 {
@@ -20,6 +32,7 @@ void	destroy_scene(t_scene *scene)
 	if (scene->mlx_window.mlx_ptr)
 	{
 		free_materials(scene->mlx_window.mlx_ptr, scene->materials);
+		destroy_skybox(scene);
 		if (scene->frame_buffer.ptr)
 			mlx_destroy_image(scene->mlx_window.mlx_ptr,
 				scene->frame_buffer.ptr);

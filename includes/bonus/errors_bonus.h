@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 15:04:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:08:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@
 # define ERR_MTL_OBJ "Material already assigned to object"
 # define ERR_MTL_NF "Material not found in the material library"
 # define ERR_MAT_DUP "Duplicate material name definition"
+
+# define ERR_SKYBOX_DUP "Duplicate skybox texture definition"
 
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */

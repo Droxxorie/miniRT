@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:54:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:20:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_color		shader_dielectric(t_scene *scene, t_hit_record *record, t_ray *ray,
 				int depth);
 t_color		shader_lambert(t_scene *scene, t_hit_record *record,
 				t_color albedo);
+t_color		get_skybox_color(t_scene *scene, t_ray *ray);
 
 //* ========================================================================= */
 //*                                RAYTRACING                                 */

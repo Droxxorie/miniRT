@@ -3,12 +3,10 @@ Ajouter tests save
 fusioner test bonus et mandatory
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
 mesh + .obj
-display depth ?
-display uv?
 texture en jpg
 photon mapping
 caustique
-skybox
+debug mode checkboard
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -42,7 +40,7 @@ skybox
 - [x] Fractals :
     - [x] MandelBulb
     - [x] MandelBox
-    - [x] Julia
+    - [x] Julia (TA MERE)
     - [x] Menger Sponge
 - [x] Ambiant Occlusion
 
@@ -51,7 +49,7 @@ skybox
 - [ ] Spotlight
 - [x] Texture procedurale (checkboard, rainbow, Sinus)
 - [x] Normal Map / Bump Map
-- [ ] Skybox
+- [x] Skybox
 - [ ] BRDF basique (Lambert & Phong/Blinn-Phong)
 - [ ] BRDF avancé (Oren-Nayar & Cook-Torrance)
 - [x] Matériaux :

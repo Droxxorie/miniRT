@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:48:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 13:08:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:31:30 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ static t_status	dispatch_fractals(t_scene *scene, char *line)
 	return (-1);
 }
 
+static t_status	dispatch_entities(t_scene *scene, char *line)
+{
+	if (match_and_consume(&line, "A") == EXIT_SUCCESS)
+		return (parse_ambient(scene, &line));
+	if (match_and_consume(&line, "C") == EXIT_SUCCESS)
+		return (parse_camera(scene, &line));
+	if (match_and_consume(&line, "L") == EXIT_SUCCESS)
+		return (parse_light(scene, &line));
+	if (match_and_consume(&line, "SB") == EXIT_SUCCESS)
+		return (parse_skybox(scene, &line));
+	return (-1);
+}
+
 t_status	dispatch_parse(t_scene *scene, char *line)
 {
 	char		*start_ptr;
@@ -59,14 +72,11 @@ t_status	dispatch_parse(t_scene *scene, char *line)
 		return (EXIT_SUCCESS);
 	if (match_and_consume(&line, "R") == EXIT_SUCCESS)
 		return (parse_resolution(scene, &line));
-	if (match_and_consume(&line, "A") == EXIT_SUCCESS)
-		return (parse_ambient(scene, &line));
-	if (match_and_consume(&line, "C") == EXIT_SUCCESS)
-		return (parse_camera(scene, &line));
-	if (match_and_consume(&line, "L") == EXIT_SUCCESS)
-		return (parse_light(scene, &line));
 	if (match_and_consume(&line, "mtllib") == EXIT_SUCCESS)
 		return (parse_mtl_lib(scene, &line));
+	status = dispatch_entities(scene, line);
+	if (status != -1)
+		return (status);
 	status = dispatch_shapes(scene, line);
 	if (status != -1)
 		return (status);

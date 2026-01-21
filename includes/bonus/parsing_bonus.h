@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 19:45:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/21 22:11:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_status	parse_light(t_scene *scene, char **line);
 t_status	parse_camera(t_scene *scene, char **line);
 t_status	parse_ambient(t_scene *scene, char **line);
 t_status	parse_resolution(t_scene *scene, char **line);
+t_status	parse_skybox(t_scene *scene, char **line);
 
 //* ========================================================================= */
 //*                                UTILS                                      */
