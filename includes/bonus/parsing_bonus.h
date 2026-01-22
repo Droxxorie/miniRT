@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:11:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 13:05:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,19 @@ t_status	parse_julia_set(t_scene *scene, char **line);
 //* ========================================================================= */
 //*                                ENTITIES                                   */
 //* ========================================================================= */
-t_status	parse_light(t_scene *scene, char **line);
 t_status	parse_camera(t_scene *scene, char **line);
 t_status	parse_ambient(t_scene *scene, char **line);
 t_status	parse_resolution(t_scene *scene, char **line);
 t_status	parse_skybox(t_scene *scene, char **line);
+//* ---- Light ---- *//
+t_light		*alloc_new_light(t_scene *scene, char **line);
+void		add_light_to_scene(t_scene *scene, t_light *new_light);
+void		init_quad_light(t_light *light);
+void		init_spot_light(t_light *light, t_real cutoff_angle);
+t_status	parse_light(t_scene *scene, char **line);
+t_status	parse_sun(t_scene *scene, char **line);
+t_status	parse_spot(t_scene *scene, char **line);
+t_status	parse_quad(t_scene *scene, char **line);
 
 //* ========================================================================= */
 //*                                UTILS                                      */
@@ -87,8 +95,7 @@ t_status	parse_texture_path(char **line, char **texture_path);
 t_status	parse_illum(char **line, t_material **material);
 t_status	parse_color_mtl(char **line, t_color *color);
 t_status	parse_roughness(char **line, t_material *material);
-t_status	parse_newmtl(t_scene *scene, t_material **current,
-				char **line);
+t_status	parse_newmtl(t_scene *scene, t_material **current, char **line);
 t_status	dispatch_mtl_line(t_scene *scene, t_material **current, char *line);
 t_status	parse_mtl_lib(t_scene *scene, char **line);
 t_status	parse_usemtl(t_scene *scene, char **line, t_object *object);

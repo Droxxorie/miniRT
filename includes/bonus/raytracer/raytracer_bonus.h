@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:20:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:40:47 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ t_real		get_shadow_factor(t_scene *scene, t_hit_record *record,
 				t_light *light);
 t_color		compute_diffuse(t_light *light, t_hit_record *record,
 				t_color albedo);
+t_color		compute_specular(t_light *light, t_hit_record *record,	
+				t_ray *ray, t_real shininess);
+t_real		get_light_attenuation(t_light *light, t_real dist);
+t_real		get_spot_factor(t_light *light, t_vec3 light_dir);
+void		get_light_data(t_light *light, t_vec3 hit_point, t_vec3 *light_dir,
+				t_real *distance);
 
 //* ========================================================================= */
 //*                                SHADERS                                    */

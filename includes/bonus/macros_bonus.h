@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:49:59 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 14:50:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@
 # define KEY_5 40
 # define KEY_6 45
 # define KEY_7 232
-// # define KEY_8 95
+# define KEY_8 95
 // # define KEY_9 231
 // # define KEY_0 224
 

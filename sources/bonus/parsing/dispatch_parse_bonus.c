@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:48:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:31:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:00:06 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ static t_status	dispatch_entities(t_scene *scene, char *line)
 		return (parse_camera(scene, &line));
 	if (match_and_consume(&line, "L") == EXIT_SUCCESS)
 		return (parse_light(scene, &line));
+	if (match_and_consume(&line, "SUN") == EXIT_SUCCESS)
+		return (parse_sun(scene, &line));
+	if (match_and_consume(&line, "SPOT") == EXIT_SUCCESS)
+		return (parse_spot(scene, &line));
+	if (match_and_consume(&line, "QUAD") == EXIT_SUCCESS)
+		return (parse_quad(scene, &line));
 	if (match_and_consume(&line, "SB") == EXIT_SUCCESS)
 		return (parse_skybox(scene, &line));
 	return (-1);

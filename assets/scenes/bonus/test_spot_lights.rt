@@ -1,0 +1,42 @@
+A   0.1                     255,255,255
+C   0,3,-12                 0,0,1   60
+C   0,10,0                  0,-1,0  90  # Caméra vue de haut (optionnelle)
+# R  1920 1080
+# R 160 90
+
+# SB		assets/textures/skybox/sky_alkatraz.xpm
+# SB		assets/textures/skybox/sky_museum.xpm
+# SB		assets/textures/skybox/sky_training.xpm
+
+mtllib  assets/materials/sphere.mtl
+
+# ---------------------------------------------------------
+# SPOT LIGHTS
+# ---------------------------------------------------------
+# Spot ROUGE (Gauche)
+# Position (-3, 8, 0) | Direction BAS (0,-1,0) | Angle 25° | Intensité 20
+SPOT   -3,8,0   0,-1,0   25.0   20.0   255,0,0
+
+# Spot VERT (Centre)
+# Position (0, 8, 0) | Direction BAS (0,-1,0) | Angle 25° | Intensité 20
+SPOT    0,8,0   0,-1,0   25.0   20.0   0,255,0
+
+# Spot BLEU (Droite)
+# Position (3, 8, 0) | Direction BAS (0,-1,0) | Angle 25° | Intensité 20
+SPOT    3,8,0   0,-1,0   25.0   20.0   0,0,255
+
+SPOT    0,20,0   0,-1,0   25.0   50.0   255,255,255
+
+
+# ---------------------------------------------------------
+# OBJETS
+# ---------------------------------------------------------
+
+# Sol (Gris mat pour bien voir les cercles de lumière)
+pl   0,0,0          0,1,0   200,200,200
+
+# Sphere Verre (Sous le spot rouge/vert)
+sp   -1.5,2,0          2.0     255,255,255  -usemtl ClearGlass
+
+# Sphere Miroir (Sous le spot vert/bleu)
+sp   1.5,2,0           2.0     255,255,255 -usemtl GoldMirror

@@ -6,48 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:46:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 17:01:04 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 12:40:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-//* dirs[0] = light_dir
-//* dirs[1] = view_dir
-//* dirs[2] = reflect_dir
-static t_color	compute_specular(t_light *light, t_hit_record *record,
-		t_ray *ray, t_real shininess)
-{
-	t_vec3		dirs[3];
-	t_real		angle;
-	t_color		specular;
-	t_material	*mat;
-
-	mat = record->object->material;
-	dirs[0] = vec3_normalize(vec3_sub(light->position, record->hit_point));
-	dirs[1] = vec3_normalize(vec3_scale(ray->direction, -1.0));
-	dirs[2] = vec3_normalize(vec3_add(dirs[0], dirs[1]));
-	angle = fmax(vec3_dot(record->normal, dirs[2]), 0.0);
-	if (mat && mat->specular_map)
-		specular = sample_texture(mat->specular_map, record->u, record->v);
-	else if (mat)
-		specular = mat->specular_color;
-	else
-		specular = (t_color){1.0, 1.0, 1.0};
-	return (color_scale(color_prod(light->color, specular), light->brightness
-			* pow(angle, shininess)));
-}
-
-t_color	compute_diffuse(t_light *light, t_hit_record *record, t_color albedo)
-{
-	t_vec3	light_dir;
-	t_real	diffuse;
-
-	light_dir = vec3_normalize(vec3_sub(light->position, record->hit_point));
-	diffuse = fmax(vec3_dot(record->normal, light_dir), 0.0);
-	return (color_scale(color_prod(light->color, albedo), light->brightness
-			* diffuse));
-}
 
 //* parts[0] = diffuse
 //* parts[1] = specular

@@ -6,11 +6,28 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:34:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:57:17 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:00:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static t_color	debug_lights_only(t_scene *scene, t_hit_record *record)
+{
+	t_color	white;
+
+	white = (t_color){0.8, 0.8, 0.8};
+	return (shader_lambert(scene, record, white));
+}
+
+static t_color	debug_checkerboard(t_hit_record *record)
+{
+	t_material	material;
+
+	material.color = (t_color){1.0, 1.0, 1.0};
+	material.uv_scale = 1.0;
+	return (pattern_checker(record, &material));
+}
 
 static t_color	debug_depth(t_hit_record *record)
 {
@@ -45,18 +62,6 @@ static t_color	debug_shadow(t_scene *scene, t_hit_record *record)
 	return ((t_color){shadow_factor, shadow_factor, shadow_factor});
 }
 
-static t_color	debug_object_id(t_object *object)
-{
-	unsigned long	id;
-	t_color			color;
-
-	id = (unsigned long)object;
-	color.r = (t_real)((id & 0xFF0000) >> 16) / 255.0;
-	color.g = (t_real)((id & 0x00FF00) >> 8) / 255.0;
-	color.b = (t_real)(id & 0x0000FF) / 255.0;
-	return (color);
-}
-
 t_color	render_debug(t_scene *scene, t_hit_record *record)
 {
 	t_real	ao_factor;
@@ -75,7 +80,9 @@ t_color	render_debug(t_scene *scene, t_hit_record *record)
 		return (debug_depth(record));
 	else if (scene->render_mode == RENDER_SHADOWS)
 		return (debug_shadow(scene, record));
-	else if (scene->render_mode == RENDER_OBJECT_ID)
-		return (debug_object_id(record->object));
+	else if (scene->render_mode == RENDER_LIGHTS)
+		return (debug_lights_only(scene, record));
+	else if (scene->render_mode == RENDER_CHECKER)
+		return (debug_checkerboard(record));
 	return ((t_color){0.0, 0.0, 0.0});
 }

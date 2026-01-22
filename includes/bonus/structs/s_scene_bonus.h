@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:05:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:00:57 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,33 @@
 # include "s_object_bonus.h"
 # include <pthread.h>
 
+typedef enum e_light_type
+{
+	LIGHT_POINT,
+	LIGHT_SUN,
+	LIGHT_SPOT,
+	LIGHT_QUAD
+}					t_light_type;
+
 typedef struct s_light
 {
 	int				id;
+	t_light_type	type;
 	t_point3		position;
+	t_vec3			direction;
 	t_real			brightness;
 	t_point3		initial_position;
+	t_vec3			initial_direction;
 	t_real			initial_brightness;
 	t_color			color;
+	t_vec3			u;
+	t_vec3			v;
+	t_real			width;
+	t_real			height;
+	t_real			cos_theta;
+	t_vec3			initial_width;
+	t_vec3			initial_height;
+	t_real			initial_cos_theta;
 	t_bool			active;
 	struct s_light	*next;
 }					t_light;
@@ -81,7 +100,9 @@ typedef enum e_render_mode
 	RENDER_UV,
 	RENDER_DEPTH,
 	RENDER_SHADOWS,
-	RENDER_OBJECT_ID,
+	RENDER_LIGHTS,
+	RENDER_CHECKER,
+	RENDER_ALBEDO
 }					t_render_mode;
 
 # define RESIZE_NONE -1

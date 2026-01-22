@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:35:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 19:25:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 16:00:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ t_color	render_shade(t_scene *scene, t_hit_record *record, t_ray *ray,
 		return (shader_lambert(scene, record, record->object->color));
 	if (mat->metallic_map && depth > 0)
 		return (mix_reflection(scene, record, ray, depth));
-	if (mat->type == EMISSIVE)
+	if (mat && (mat->emission_color.r > EPSILON
+			|| mat->emission_color.g > EPSILON
+			|| mat->emission_color.b > EPSILON))
 	{
 		if (mat->emission_map)
 			return (sample_texture(mat->emission_map, record->u, record->v));

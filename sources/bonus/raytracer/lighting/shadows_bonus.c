@@ -6,19 +6,40 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:26:07 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:27:42 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 15:58:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static t_vec3	get_light_sample(t_light *light, unsigned int *seed)
+//* uv_offset[0] = u_offset
+//* uv_offset[1] = v_offset
+static t_vec3	get_light_sample(t_light *light, t_hit_record *record,
+		unsigned int *seed)
 {
-	t_vec3	point_in_sphere;
+	t_vec3	random_point;
+	t_vec3	uv_offset[2];
+	t_vec3	sun_source;
+	t_vec3	jitter;
+	t_real	r[2];
 
-	point_in_sphere = random_in_unit_sphere(seed);
-	return (vec3_add(light->position, vec3_scale(point_in_sphere,
-				LIGHT_RADIUS)));
+	if (light->type == LIGHT_SUN)
+	{
+		sun_source = vec3_scale(light->direction, -10000.0);
+		jitter = vec3_scale(random_in_unit_sphere(seed), 50.0);
+		return (vec3_add(record->hit_point, vec3_add(sun_source, jitter)));
+	}
+	else if (light->type == LIGHT_QUAD)
+	{
+		r[0] = random_double(seed) - 0.5;
+		r[1] = random_double(seed) - 0.5;
+		uv_offset[0] = vec3_scale(light->u, r[0]);
+		uv_offset[1] = vec3_scale(light->v, r[1]);
+		return (vec3_add(light->position, vec3_add(uv_offset[0],
+					uv_offset[1])));
+	}
+	random_point = random_in_unit_sphere(seed);
+	return (vec3_add(light->position, vec3_scale(random_point, LIGHT_RADIUS)));
 }
 
 static t_bool	hit_sdf_shadow(t_scene *scene, t_ray *ray, t_real max_dist)
@@ -47,9 +68,19 @@ static t_bool	handle_transparency(t_hit_record *hit, t_ray *ray,
 	t_material	*mat;
 
 	mat = hit->object->material;
-	if (mat && mat->type == DIELECTRIC)
+	if (!mat)
+		return (FALSE);
+	if ((mat->transparency > 0.001 || mat->type == DIELECTRIC)
+		|| (mat->emission_color.r > 0.0 || mat->emission_color.g > 0.0
+			|| mat->emission_color.b > 0.0))
 	{
-		*attenuation *= 0.95;
+		if ((mat->transparency > 0.001 || mat->type == DIELECTRIC))
+		{
+			if (mat->transparency > 0.0)
+				*attenuation *= mat->transparency;
+			else
+				*attenuation *= 0.95;
+		}
 		ray->origin = ray_at(ray, hit->t + 0.001);
 		remain = vec3_sub(target, ray->origin);
 		ray->direction = vec3_normalize(remain);
@@ -102,7 +133,7 @@ t_real	get_shadow_factor(t_scene *scene, t_hit_record *record, t_light *light)
 	i = 0;
 	while (i < SHADOW_SAMPLES)
 	{
-		target = get_light_sample(light, &seed);
+		target = get_light_sample(light, record, &seed);
 		visibility += cast_shadow_ray(scene, target, record);
 		i++;
 	}

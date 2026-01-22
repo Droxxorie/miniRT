@@ -61,3 +61,7 @@ Kd 0.0 0.0 0.0
 Ks 0.0 0.0 0.0
 Ke 10.0 10.0 10.0
 
+newmtl LightCover
+Ke 10.0 10.0 10.0  # Emission très forte (Blanc)
+Kd 0.0 0.0 0.0     # Pas de diffus
+Ks 0.0 0.0 0.0     # Pas de spéculaire

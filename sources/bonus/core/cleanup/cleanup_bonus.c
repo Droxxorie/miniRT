@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:55:04 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:47:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 15:59:16 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	destroy_skybox(t_scene *scene)
 	if (scene->skybox_map)
 	{
 		if (scene->skybox_map->ptr)
-			mlx_destroy_image(scene->mlx_window.mlx_ptr, scene->skybox_map->ptr);
+			mlx_destroy_image(scene->mlx_window.mlx_ptr,
+				scene->skybox_map->ptr);
 		free(scene->skybox_map);
 	}
 	if (scene->skybox_texture_path)

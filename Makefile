@@ -230,7 +230,8 @@ SRCS_BONUS += \
 	${SRC_DIR_BONUS}/parsing/utils/parse_options_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
-    $(SRC_DIR_BONUS)/parsing/scene/parse_light_bonus.c \
+    $(SRC_DIR_BONUS)/parsing/scene/lights/parse_light_bonus.c \
+	${SRC_DIR_BONUS}/parsing/scene/lights/utils_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/scene/parse_skybox_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \
 	${SRC_DIR_BONUS}/parsing/objects/utils_bonus.c \
@@ -319,6 +320,9 @@ SRCS_BONUS += \
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/lighting/shadows_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/lighting/ambient_occlusion_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/diffuse_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/specular_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/lighting/lights_bonus.c \
 #* ---- UV ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/objects/get_uv/get_box_uv_bonus.c \

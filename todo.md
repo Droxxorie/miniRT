@@ -6,7 +6,9 @@ mesh + .obj
 texture en jpg
 photon mapping
 caustique
-debug mode checkboard
+move/modifiy ligths by type
+
+no shadow disk ?
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -45,8 +47,9 @@ debug mode checkboard
 - [x] Ambiant Occlusion
 
 ## PHASE 4 : LUMIERE & MAT
-- [ ] SUN (Lumière parallèle)
-- [ ] Spotlight
+- [x] SUN (Lumière parallèle)
+- [x] Spotlight
+- [x] Quad Light
 - [x] Texture procedurale (checkboard, rainbow, Sinus)
 - [x] Normal Map / Bump Map
 - [x] Skybox
