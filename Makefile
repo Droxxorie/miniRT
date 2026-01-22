@@ -294,6 +294,8 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/camera/movement/rotate_camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/camera/movement/translate_camera_bonus.c \
     $(SRC_DIR_BONUS)/scene/lights/translate_light_bonus.c \
+	$(SRC_DIR_BONUS)/scene/lights/rotate_light_bonus.c \
+	$(SRC_DIR_BONUS)/scene/lights/resize_light_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/transformation_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_box_bonus.c \
     $(SRC_DIR_BONUS)/scene/modifiers/resize/resize_cone_bonus.c \

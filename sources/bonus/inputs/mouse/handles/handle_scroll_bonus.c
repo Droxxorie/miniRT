@@ -6,35 +6,36 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:04:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 12:41:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 20:24:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-t_bool	handle_scroll(int button, t_scene *scene)
+t_bool	handle_scroll(int button, t_scene *s)
 {
 	int	mode;
-	int	direction;
+	int	dir;
 
-	direction = -1;
+	dir = -1;
 	if (button == SCROLL_UP)
-		direction = 1;
+		dir = 1;
 	mode = RESIZE_UNIFORM;
-	if (scene->ctrl_pressed == TRUE)
+	if (s->ctrl_pressed == TRUE)
 		mode = RESIZE_Z;
-	else if (scene->shift_pressed == TRUE)
+	else if (s->shift_pressed == TRUE)
 		mode = RESIZE_Y;
-	else if (scene->alt_pressed == TRUE)
+	else if (s->alt_pressed == TRUE)
 		mode = RESIZE_X;
-	if (scene->selected_object && scene->selected_object->visible != FALSE)
+	if (s->selected_object && s->selected_object->visible != FALSE)
 	{
-		dispatch_resize(scene->selected_object, scene->active_camera, mode,
-			direction);
-		refresh_bvh(scene, scene->selected_object);
+		dispatch_resize(s->selected_object, s->active_camera, mode, dir);
+		refresh_bvh(s, s->selected_object);
 	}
-	else if (scene->selected_light == NULL)
-		resize_camera_fov(scene->active_camera, mode, direction);
+	else if (s->selected_light == NULL)
+		resize_camera_fov(s->active_camera, mode, dir);
+	else if (s->selected_light)
+		resize_light(s->selected_light, s->active_camera, mode, dir);
 	else
 		return (FALSE);
 	return (TRUE);

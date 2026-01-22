@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 13:59:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 20:25:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ void	log_object_info(t_object *object)
 	log_event(stdout, "INFO", "Color: R:%.0f G:%.0f B:%.0f\n", color.r, color.g,
 		color.b);
 	if (object->material)
-		log_event(stdout, "INFO", "Material: %s\n",
-			object->material->name);
+		log_event(stdout, "INFO", "Material: %s\n", object->material->name);
 }

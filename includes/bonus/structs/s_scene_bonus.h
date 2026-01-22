@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 16:00:57 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:08:40 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_light
 	t_real			width;
 	t_real			height;
 	t_real			cos_theta;
-	t_vec3			initial_width;
-	t_vec3			initial_height;
+	t_vec3			initial_u;
+	t_vec3			initial_v;
 	t_real			initial_cos_theta;
 	t_bool			active;
 	struct s_light	*next;

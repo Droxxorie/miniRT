@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:27:31 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:50:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:45:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_l_key(t_scene *scene)
 	{
 		scene->selected_light = scene->lights;
 		scene->selected_object = NULL;
-		log_event(stdout, "INFO", "Switched to light ID: %d\n",
-			scene->selected_light->id);
+		log_event(stdout, "INFO", "Switched to:\n");
+		log_light_info(scene->selected_light);
 	}
 }

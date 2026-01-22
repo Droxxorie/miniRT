@@ -2,7 +2,7 @@ A   0.1                     255,255,255
 C   0,3,-12                 0,0,1   60
 C   0,10,0                  0,-1,0  90  # Caméra vue de haut (optionnelle)
 # R  1920 1080
-# R 160 90
+R 160 90
 
 # SB		assets/textures/skybox/sky_alkatraz.xpm
 # SB		assets/textures/skybox/sky_museum.xpm
@@ -15,7 +15,7 @@ mtllib  assets/materials/sphere.mtl
 # ---------------------------------------------------------
 # Spot ROUGE (Gauche)
 # Position (-3, 8, 0) | Direction BAS (0,-1,0) | Angle 25° | Intensité 20
-SPOT   -3,8,0   0,-1,0   25.0   20.0   255,0,0
+SPOT   -3,8,0   0,-1,0   1000.0   20.0   255,0,0
 
 # Spot VERT (Centre)
 # Position (0, 8, 0) | Direction BAS (0,-1,0) | Angle 25° | Intensité 20

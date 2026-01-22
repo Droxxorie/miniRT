@@ -6,9 +6,9 @@ mesh + .obj
 texture en jpg
 photon mapping
 caustique
-move/modifiy ligths by type
-
+fix rotate lights
 no shadow disk ?
+check for data race ?
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -53,7 +53,7 @@ no shadow disk ?
 - [x] Texture procedurale (checkboard, rainbow, Sinus)
 - [x] Normal Map / Bump Map
 - [x] Skybox
-- [ ] BRDF basique (Lambert & Phong/Blinn-Phong)
+- [x] BRDF basique (Lambert & Phong/Blinn-Phong)
 - [ ] BRDF avancé (Oren-Nayar & Cook-Torrance)
 - [x] Matériaux :
     - [x] Choix

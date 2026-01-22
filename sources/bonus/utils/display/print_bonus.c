@@ -6,11 +6,21 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:35:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:39:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 20:25:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static void	print_usage_more(void)
+{
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug UV\n");
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug LIGHTS\n");
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug SHADOWS\n");
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug DEPTH\n");
+	printf("    ./miniRT_bonus assets/scenes/example.rt --debug CHECKER\n");
+	printf("\n");
+}
 
 void	print_usage(void)
 {
@@ -38,7 +48,7 @@ void	print_usage(void)
 	printf("  Render in debug mode:\n");
 	printf("    ./miniRT_bonus assets/scenes/example.rt --debug AO\n");
 	printf("    ./miniRT_bonus assets/scenes/example.rt --debug NORMAL\n");
-	printf("\n");
+	print_usage_more();
 }
 
 void	print_controls(void)

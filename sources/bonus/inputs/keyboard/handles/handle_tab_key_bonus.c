@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:08:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 12:49:56 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:46:20 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	handle_tab_key(t_scene *scene)
 			&& scene->selected_object->type == TORUS)
 			log_event(stdout, "WARN",
 				"Torus rotation not supported (Complex primitive)\n");
-		else if (scene->selected_light)
-			log_event(stdout, "WARNING", "Lights cannot be rotated\n");
+		else if (scene->selected_light->type == LIGHT_POINT)
+			log_event(stdout, "WARNING", "Lights point cannot be rotated\n");
 		else
 			log_event(stdout, "INFO", "Switched to ROTATE mode\n");
 	}

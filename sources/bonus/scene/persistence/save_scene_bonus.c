@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:31:15 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 16:06:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:08:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ static void	save_lights_state(t_light *lights)
 	{
 		current->initial_position = current->position;
 		current->initial_brightness = current->brightness;
+		current->initial_direction = current->direction;
+		current->initial_cos_theta = current->cos_theta;
+		current->initial_u = current->u;
+		current->initial_v = current->v;
 		current = current->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:52:51 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 17:30:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 20:16:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	reset_light_state(t_light *light)
 {
 	light->position = light->initial_position;
 	light->brightness = light->initial_brightness;
+	light->direction = light->initial_direction;
+	light->cos_theta = light->initial_cos_theta;
+	light->u = light->initial_u;
+	light->v = light->initial_v;
 	light->active = TRUE;
 }
 
@@ -37,6 +41,7 @@ void	reset_object_state(t_object *object)
 	object->visible = TRUE;
 	object->transform = object->initial_transform;
 	set_transform(object, object->transform);
+	compute_object_bounds(object);
 	if (object->type == TORUS)
 	{
 		torus = &object->u_data.torus;
@@ -89,4 +94,6 @@ void	reset_scene_state(t_scene *scene)
 		current_camera = current_camera->next;
 	}
 	scene->active_camera = scene->cameras;
+	scene->selected_object = NULL;
+	scene->selected_light = NULL;
 }

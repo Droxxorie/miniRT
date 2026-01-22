@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:44:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/19 12:48:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/22 19:40:01 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	translate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
 //* ========================================================================= */
 void	rotate_object(t_object *obj, t_camera *cam, t_vec3 rotation_axis);
 void	rotate_camera(t_camera *cam, t_vec3 vec, t_real ratio);
+void	rotate_light(t_light *light, t_camera *cam, t_vec3 axis);
 
 //* ========================================================================= */
 //*                                RESIZE                                     */
@@ -47,5 +48,6 @@ void	resize_mandelbulb(t_object *obj, t_camera *cam, int mode, int dir);
 void	resize_menger_sponge(t_object *obj, t_camera *cam, int mode, int dir);
 void	resize_julia_set(t_object *obj, t_camera *cam, int mode, int dir);
 void	resize_mandelbox(t_object *obj, t_camera *cam, int mode, int dir);
+void	resize_light(t_light *light, t_camera *cam, int mode, int direction);
 
 #endif
