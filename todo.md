@@ -6,9 +6,8 @@ mesh + .obj
 texture en jpg
 photon mapping
 caustique
-fix rotate lights
 no shadow disk ?
-check for data race ?
+hdr
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -50,15 +49,19 @@ check for data race ?
 - [x] SUN (Lumière parallèle)
 - [x] Spotlight
 - [x] Quad Light
-- [x] Texture procedurale (checkboard, rainbow, Sinus)
+- [x] Texture procedurale (checkboard, rainbow, Sinus, Perlin)
 - [x] Normal Map / Bump Map
 - [x] Skybox
-- [x] BRDF basique (Lambert & Phong/Blinn-Phong)
-- [ ] BRDF avancé (Oren-Nayar & Cook-Torrance)
+- [x] BRDF basique :
+    - [x] Lambert
+    - [x] Phong/Blinn-Phong
+- [x] BRDF avancé :
+    - [x] Oren-Nayar
+    - [x] Cook-Torrance
 - [x] Matériaux :
     - [x] Choix
     - [x] Matte/Lambert/Color
-    - [x] Transparent
+    - [x] Transparent + Beer Lambert
     - [x] Plastique (Blinn-Phong)
     - [x] Miroir (refraction verre/eau/autre)
     - [x] Texture (UV mapping)

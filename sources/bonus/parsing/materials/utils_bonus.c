@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 20:29:10 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 12:24:12 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 11:45:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,18 @@ t_status	parse_texture_path(char **line, char **texture_path)
 t_status	parse_roughness(char **line, t_material *material)
 {
 	t_real	ns;
+	t_real	roughtness_sq;
 
 	if (parse_real(line, &ns) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	ns = ft_clamp(ns, 0.0, 1000.0);
-	material->roughness = 1.0 - (ns / 1000.0);
+	ns = ft_clamp(ns, 0.0, 999.0);
+	if (ns <= 1.0)
+		material->roughness = ns;
+	else
+		material->roughness = 1.0 - (ns / 1000.0);
+	material->roughness = ft_clamp(material->roughness, 0.05, 0.95);
+	roughtness_sq = material->roughness * material->roughness;
+	material->a = 1.0 - (0.5 * roughtness_sq / (roughtness_sq + 0.33));
+	material->b = 0.45 * (roughtness_sq / (roughtness_sq + 0.09));
 	return (EXIT_SUCCESS);
 }

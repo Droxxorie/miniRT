@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:35:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 16:00:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 11:47:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static t_color	mix_reflection(t_scene *scene, t_hit_record *record, t_ray *ray,
 {
 	t_color	diffuse;
 	t_color	reflected;
-	t_color	factor;
+	t_real	factor;
 
 	factor = sample_texture(record->object->material->metallic_map, record->u,
-			record->v);
+			record->v).r;
 	diffuse = shader_lambert(scene, record, get_albedo(record->object->material,
 				record));
 	reflected = shader_metal(scene, record, ray, depth);
-	return (color_mix(diffuse, reflected, color_mean(factor)));
+	return (color_mix(diffuse, reflected, factor));
 }
 
 static void	scale_uv_apply_normal(t_hit_record *record, t_material *mat)
@@ -68,30 +68,33 @@ static void	scale_uv_apply_normal(t_hit_record *record, t_material *mat)
 //* Blinn-Phong : diffuse + specular highlights
 //* Metal : reflective shader with roughness
 //* Dielectric : transparent shader with refraction
-t_color	render_shade(t_scene *scene, t_hit_record *record, t_ray *ray,
-		int depth)
+//* Oren-Nayar : diffuse shader for rough surfaces
+//* Cook-Torrance : physically based shader with microfacet model
+t_color	render_shade(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)
 {
 	t_material	*mat;
 
-	mat = record->object->material;
-	scale_uv_apply_normal(record, mat);
+	mat = rec->object->material;
+	scale_uv_apply_normal(rec, mat);
 	if (!mat)
-		return (shader_lambert(scene, record, record->object->color));
-	if (mat->metallic_map && depth > 0)
-		return (mix_reflection(scene, record, ray, depth));
-	if (mat && (mat->emission_color.r > EPSILON
-			|| mat->emission_color.g > EPSILON
-			|| mat->emission_color.b > EPSILON))
+		return (shader_lambert(s, rec, rec->object->color));
+	if (mat && (color_mean(mat->emission_color) > EPSILON))
 	{
 		if (mat->emission_map)
-			return (sample_texture(mat->emission_map, record->u, record->v));
+			return (sample_texture(mat->emission_map, rec->u, rec->v));
 		return (mat->emission_color);
 	}
+	if (mat->type == COOK_TORRANCE)
+		return (shader_cook_torrance(s, rec, ray));
 	if (mat->type == METAL && depth > 0)
-		return (shader_metal(scene, record, ray, depth));
+		return (shader_metal(s, rec, ray, depth));
 	if (mat->type == DIELECTRIC && depth > 0)
-		return (shader_dielectric(scene, record, ray, depth));
+		return (shader_dielectric(s, rec, ray, depth));
+	if (mat->type == OREN_NAYAR)
+		return (shader_oren_nayar(s->lights, rec, ray, get_albedo(mat, rec)));
 	if (mat->type == PHONG)
-		return (shader_phong(scene, record, ray));
-	return (shader_lambert(scene, record, get_albedo(mat, record)));
+		return (shader_phong(s, rec, ray));
+	if (mat->metallic_map && depth > 0)
+		return (mix_reflection(s, rec, ray, depth));
+	return (shader_lambert(s, rec, get_albedo(mat, rec)));
 }

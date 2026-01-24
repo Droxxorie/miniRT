@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:57:37 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:40:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 09:03:27 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,38 @@ typedef enum e_material_type
 	PHONG,
 	METAL,
 	DIELECTRIC,
-	EMISSIVE
+	EMISSIVE,
+	OREN_NAYAR,
+	COOK_TORRANCE
 }						t_material_type;
 
 typedef struct s_material
 {
 	char				*name;
 	t_material_type		type;
-	t_color				color;
 	t_color				ambient_color;
-	t_color				specular_color;
-	t_color				emission_color;
-	t_real				roughness;
+	t_real				a;
+	t_real				b;
 	t_real				ior;
 	t_real				transparency;
-	char				*albedo_texture_path;
+	t_color				absorbance;
+	t_color				color;
 	struct s_image		*albedo_map;
-	char				*normal_texture_path;
+	char				*albedo_texture_path;
 	struct s_image		*normal_map;
-	char				*roughness_texture_path;
+	char				*normal_texture_path;
+	t_real				roughness;
 	struct s_image		*roughness_map;
-	char				*emission_texture_path;
+	char				*roughness_texture_path;
+	t_color				emission_color;
 	struct s_image		*emission_map;
-	char				*metallic_texture_path;
+	char				*emission_texture_path;
+	t_real				metallic; //TODO
 	struct s_image		*metallic_map;
-	char				*specular_texture_path;
+	char				*metallic_texture_path;
+	t_color				specular_color;
 	struct s_image		*specular_map;
+	char				*specular_texture_path;
 	t_real				uv_scale;
 	t_pattern			pattern_type;
 

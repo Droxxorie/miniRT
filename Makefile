@@ -372,6 +372,9 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/shaders/utils/optic_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/shaders/utils/sample_texture_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/shaders/render_skybox_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/shader_oren_nayar_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/cook_torrance/shader_cook_torrance_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/shaders/cook_torrance/utils_bonus.c \
 #* ---- Materials ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/materials/checkboard_texture_bonus.c \

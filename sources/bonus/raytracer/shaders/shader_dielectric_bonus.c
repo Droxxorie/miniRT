@@ -6,11 +6,22 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:35:36 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 17:57:02 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 11:44:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+static t_color	beer_lambert(t_color color, t_real dist,
+		t_color absorbance)
+{
+	t_color	transmission;
+
+	transmission.r = exp(-absorbance.r * dist);
+	transmission.g = exp(-absorbance.g * dist);
+	transmission.b = exp(-absorbance.b * dist);
+	return (color_prod(color, transmission));
+}
 
 static t_real	get_ior_ratio(t_hit_record *record)
 {
@@ -35,19 +46,20 @@ static t_vec3	get_dielectric_dir(t_vec3 dir, t_vec3 normal, t_real ratio)
 	return (vec_refract(unit_dir, normal, ratio));
 }
 
-t_color	shader_dielectric(t_scene *scene, t_hit_record *rec, t_ray *ray,
-		int depth)
+t_color	shader_dielectric(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)
 {
-	t_color	attenuation;
 	t_real	n_ratio;
 	t_vec3	direction;
 	t_ray	scattered;
-	t_vec3	offset;
+	t_color	final_color;
 
-	attenuation = get_albedo(rec->object->material, rec);
 	n_ratio = get_ior_ratio(rec);
 	direction = get_dielectric_dir(ray->direction, rec->normal, n_ratio);
-	offset = vec3_scale(direction, EPSILON);
-	scattered = new_ray(vec3_add(rec->hit_point, offset), direction);
-	return (color_prod(attenuation, cast_ray(scene, &scattered, depth - 1)));
+	scattered = new_ray(vec3_add(rec->hit_point, vec3_scale(direction,
+					EPSILON)), direction);
+	final_color = cast_ray(s, &scattered, depth - 1);
+	if (rec->front_face == FALSE)
+		final_color = beer_lambert(final_color, rec->t,
+				rec->object->material->absorbance);
+	return (final_color);
 }

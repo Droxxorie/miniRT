@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:55:41 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 19:46:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 09:04:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	init_default_material_properties(t_material *m)
 	m->roughness = 0.5;
 	m->ior = 1.0;
 	m->transparency = 0.0;
+	m->absorbance = (t_color){0.0, 0.0, 0.0};
+	m->metallic = 0.0;
 	m->uv_scale = 1.0;
 	m->pattern_type = PATTERN_NONE;
 	m->albedo_texture_path = NULL;

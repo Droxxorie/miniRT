@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 20:28:21 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:27:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 09:38:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static t_status	dispatch_scalars(t_material *current, char *line)
 		return (parse_real(&line, &current->uv_scale));
 	if (match_and_consume(&line, "pattern") == EXIT_SUCCESS)
 		return (parse_pattern(&line, current));
+	if (match_and_consume(&line, "Tf") == EXIT_SUCCESS)
+		return (parse_color_mtl(&line, &current->absorbance));
+	if (match_and_consume(&line, "Pm") == EXIT_SUCCESS)
+		return (parse_dim_relative(NULL, &line, &current->metallic));
 	return (-1);
 }
 

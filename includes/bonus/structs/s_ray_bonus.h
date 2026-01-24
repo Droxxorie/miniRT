@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 17:54:52 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/23 10:26:36 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,19 @@ typedef struct s_ray_march_data
 	t_real				step_factor;
 	int					max_steps;
 }						t_ray_march_data;
+
+typedef struct s_cook_torrance_vars
+{
+	t_vec3				v;
+	t_vec3				n;
+	t_vec3				l;
+	t_vec3				h;
+	t_real				n_dot_l;
+	t_real				n_dot_v;
+	t_real				roughness;
+	t_real				metallic;
+	t_color				f0;
+	t_color				albedo;
+}						t_cook_torrance_vars;
 
 #endif
