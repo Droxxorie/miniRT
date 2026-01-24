@@ -7,7 +7,10 @@ texture en jpg
 photon mapping
 caustique
 no shadow disk ?
-hdr
+Ajouter Pr et separer de Ns
+revoir parsing .mtl
+choisir si hdr ou ldr ?
+sortie fichier hdr ? png ?
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -74,7 +77,7 @@ hdr
 - [x] UI (Objet sélectionné / ID camera / ID lumière / Coordonnées / commandes etc)
 
 ## PHASE 6 : POST-PROCESS & QUALITE
-- [ ] Tonemapping
+- [ ] Tonemapping & HDR
 - [ ] Filtres (gamma correction, Sepia, B&W)
 - [ ] Sobel
 - [ ] AA (via Supersampling)

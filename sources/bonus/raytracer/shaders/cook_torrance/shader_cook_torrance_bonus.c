@@ -6,33 +6,36 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 00:07:26 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 11:11:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 13:10:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static void	init_cook_torrance_vars(t_cook_torrance_vars *v, t_hit_record *rec,
-		t_ray *ray)
+static t_color	get_indirect_specular(t_scene *s, t_hit_record *rec,
+		t_ray *view_ray, t_cook_torrance_vars *v)
 {
-	t_material	*mat;
+	t_vec3			reflected_dir;
+	t_vec3			fuzz;
+	t_ray			reflected_ray;
+	t_color			env_color;
+	unsigned int	seed;
 
-	mat = rec->object->material;
-	v->n = rec->normal;
-	v->v = vec3_scale(ray->direction, -1.0);
-	v->n_dot_v = fmax(vec3_dot(v->n, v->v), 0.0);
-	v->albedo = get_albedo(mat, rec);
-	v->roughness = mat->roughness;
-	v->metallic = mat->metallic;
-	if (mat->roughness_map)
-		v->roughness = sample_texture(mat->roughness_map, rec->u, rec->v).r;
-	if (mat->metallic_map)
-		v->metallic = sample_texture(mat->metallic_map, rec->u, rec->v).r;
-	v->f0 = (t_color){0.04, 0.04, 0.04};
-	if (color_mean(mat->specular_color) > EPSILON)
-		v->f0 = mat->specular_color;
-	else if (v->metallic > 0.5)
-		v->f0 = v->albedo;
+	reflected_dir = vec_reflect(vec3_normalize(view_ray->direction),
+			rec->normal);
+	if (v->roughness > 0.0)
+	{
+		seed = generate_seed(rec->hit_point);
+		fuzz = vec3_scale(random_in_unit_sphere(&seed), v->roughness);
+		reflected_dir = vec3_add(reflected_dir, fuzz);
+		reflected_dir = vec3_normalize(reflected_dir);
+	}
+	if (vec3_dot(reflected_dir, rec->normal) <= 0.0)
+		return ((t_color){0.0, 0.0, 0.0});
+	reflected_ray = new_ray(vec3_add(rec->hit_point, vec3_scale(rec->normal,
+					EPSILON)), reflected_dir);
+	env_color = cast_ray(s, &reflected_ray, v->depth - 1);
+	return (color_prod(env_color, fresnel_schlick(v->n_dot_v, v->f0)));
 }
 
 static t_color	compute_brdf(t_cook_torrance_vars *v, t_color *k_s)
@@ -91,21 +94,30 @@ static t_color	process_light(t_scene *s, t_light *light,
 	return (calculate_lighting(v, k_s, radiance));
 }
 
-t_color	shader_cook_torrance(t_scene *s, t_hit_record *rec, t_ray *ray)
+t_color	shader_cook_torrance(t_scene *s, t_hit_record *rec, t_ray *ray,
+		int depth)
 {
 	t_cook_torrance_vars	v;
-	t_color					total_light;
+	t_color					direct_light;
+	t_color					indirect_light;
 	t_color					ambient;
 	t_light					*light;
 
-	init_cook_torrance_vars(&v, rec, ray);
-	total_light = (t_color){0.0, 0.0, 0.0};
+	init_cook_torrance_vars(&v, rec, ray, depth);
+	direct_light = (t_color){0.0, 0.0, 0.0};
 	light = s->lights;
 	while (light)
 	{
-		total_light = color_add(total_light, process_light(s, light, &v, rec));
+		direct_light = color_add(direct_light, process_light(s, light, &v,
+					rec));
 		light = light->next;
 	}
-	ambient = color_scale(color_prod(s->ambient, v.albedo), compute_ao(s, rec));
-	return (color_add(ambient, total_light));
+	if (depth > 0)
+		indirect_light = get_indirect_specular(s, rec, ray, &v);
+	else
+		indirect_light = (t_color){0.0, 0.0, 0.0};
+	ambient = color_prod(color_prod(s->ambient, v.albedo),
+			color_scale(color_sub((t_color){1, 1, 1}, v.f0), 1.0 - v.metallic));
+	ambient = color_scale(ambient, compute_ao(s, rec));
+	return (color_add(color_add(direct_light, indirect_light), ambient));
 }

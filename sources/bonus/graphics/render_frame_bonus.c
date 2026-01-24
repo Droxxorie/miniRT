@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:26:26 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 14:14:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static void	process_pixel(t_scene *scene, int x, int y)
 {
 	t_ray	ray;
 	t_color	color;
+	t_color	final_color;
 	int		max_depth;
 
 	max_depth = MAX_REFLECTION_DEPTH;
 	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
 	color = cast_ray(scene, &ray, max_depth);
+	final_color = aces_tone_mapping(color);
+	final_color = gamma_correction(final_color);
 	image_pixel_put(&scene->frame_buffer, x, y, color_to_int(color));
 }
 

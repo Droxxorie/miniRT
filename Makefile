@@ -452,6 +452,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/utils/colors/ft_smoothstep_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/mix_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/shading_bonus.c \
+	$(SRC_DIR_BONUS)/utils/colors/tonemapping_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

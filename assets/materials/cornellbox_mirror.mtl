@@ -12,15 +12,11 @@ newmtl rightWall
   Ns 1000.0000
   Ni 1.5000
   illum 3
-  Ka 0.14 0.45 0.091 # Green
   Kd 0.14 0.45 0.091
-  Ks 0 0 0
-  Ke 0 0 0
 
   
 newmtl floor
-  Ns 1000.0000
-  Ni 1.0000
+  Ns 0.5
   illum 2
   Ka 0.725 0.71 0.68 # White
   Kd 0.725 0.71 0.68
@@ -67,7 +63,7 @@ newmtl tallBox
 newmtl light
   Ns 10.0000
   Ni 1.0000
-  illum 2
+  illum 0
   Ka 0.78 0.78 0.78 # White
   Kd 0.78 0.78 0.78
   Ks 0 0 0

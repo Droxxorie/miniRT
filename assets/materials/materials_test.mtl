@@ -8,7 +8,7 @@
 
 # Lumière douce (ex: écran de téléphone)
 newmtl SoftLight
-illum 5
+illum 0
 Kd 0.0 0.0 0.0
 Ks 0.0 0.0 0.0
 Ke 1.0 1.0 1.0
@@ -16,7 +16,7 @@ Ke 1.0 1.0 1.0
 # Lumière intense (Test HDR / Tone Mapping)
 # Doit apparaitre très brillant et éblouir si le Tone Mapping est actif
 newmtl SuperNeon
-illum 5
+illum 0
 Kd 0.0 0.0 0.0
 Ks 0.0 0.0 0.0
 Ke 50.0 50.0 50.0

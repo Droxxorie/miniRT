@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:35:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 11:47:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 14:13:18 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_color	render_shade(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)
 		return (mat->emission_color);
 	}
 	if (mat->type == COOK_TORRANCE)
-		return (shader_cook_torrance(s, rec, ray));
+		return (shader_cook_torrance(s, rec, ray, depth));
 	if (mat->type == METAL && depth > 0)
 		return (shader_metal(s, rec, ray, depth));
 	if (mat->type == DIELECTRIC && depth > 0)

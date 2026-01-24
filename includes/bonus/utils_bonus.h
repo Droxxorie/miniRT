@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:38:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 20:45:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 14:02:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_real			ft_sign(t_real x);
 t_real			ft_smoothstep(t_real edge0, t_real edge1, t_real x);
 t_color			color_mix(t_color c1, t_color c2, t_real a);
 t_color			apply_shading(t_color color, t_real n);
+t_color			gamma_correction(t_color color);
+t_color			aces_tone_mapping(t_color hdr);
 
 //* ---- Random ---- *
 t_real			hash_rand(t_point3 p, int seed);

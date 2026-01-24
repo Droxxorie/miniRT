@@ -6,11 +6,35 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 10:29:57 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/23 10:31:30 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 13:10:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+void	init_cook_torrance_vars(t_cook_torrance_vars *v, t_hit_record *rec,
+		t_ray *ray, int depth)
+{
+	t_material	*mat;
+
+	mat = rec->object->material;
+	v->depth = depth;
+	v->n = rec->normal;
+	v->v = vec3_scale(ray->direction, -1.0);
+	v->n_dot_v = fmax(vec3_dot(v->n, v->v), 0.0);
+	v->albedo = get_albedo(mat, rec);
+	v->roughness = mat->roughness;
+	v->metallic = mat->metallic;
+	if (mat->roughness_map)
+		v->roughness = sample_texture(mat->roughness_map, rec->u, rec->v).r;
+	if (mat->metallic_map)
+		v->metallic = sample_texture(mat->metallic_map, rec->u, rec->v).r;
+	v->f0 = (t_color){0.04, 0.04, 0.04};
+	if (color_mean(mat->specular_color) > EPSILON)
+		v->f0 = mat->specular_color;
+	else if (v->metallic > 0.5)
+		v->f0 = v->albedo;
+}
 
 t_real	distribution_ggx(t_vec3 n, t_vec3 h, t_real roughness)
 {

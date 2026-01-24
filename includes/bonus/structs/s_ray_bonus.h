@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/23 10:26:36 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 13:09:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_cook_torrance_vars
 	t_real				metallic;
 	t_color				f0;
 	t_color				albedo;
+	int					depth;
 }						t_cook_torrance_vars;
 
 #endif

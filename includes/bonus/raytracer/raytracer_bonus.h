@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 11:48:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 13:10:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ t_color		get_skybox_color(t_scene *scene, t_ray *ray);
 
 //* Cook-Torrance Shader *//
 t_color		shader_cook_torrance(t_scene *s, t_hit_record *rec,
-				t_ray *view_ray);
+				t_ray *view_ray, int depth);
 t_color		fresnel_schlick(t_real cos_theta, t_color f0);
 t_real		geometry_smith(t_vec3 n, t_vec3 v, t_vec3 l, t_real roughness);
 t_real		distribution_ggx(t_vec3 n, t_vec3 h, t_real roughness);
+void		init_cook_torrance_vars(t_cook_torrance_vars *v, t_hit_record *rec,
+				t_ray *ray, int depth);
 
 //* ========================================================================= */
 //*                                RAYTRACING                                 */
