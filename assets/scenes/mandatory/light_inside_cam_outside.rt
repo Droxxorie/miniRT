@@ -1,10 +1,6 @@
-# Sphere avec lumiere enfermee
 A 0.1 255,255,255
-
-# Caméra dehors
 C 0,0,-20 0,0,1 70
 
-# Lumière au centre
 L 0,0,0 1.0 255,255,255
 
 sp 0,0,0 10.0 255,0,0

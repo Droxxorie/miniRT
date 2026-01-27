@@ -32,8 +32,7 @@ Ns 50.0
 
 newmtl PerfectMirror
 illum 3
-Kd 0.0 0.0 0.0
-Ks 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
 Ns 1000
 
 # ------------------------------------------------------------
@@ -42,15 +41,15 @@ Ns 1000
 
 newmtl RoughPlaster
 illum 5
-Kd 0.9 0.9 0.9
+Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
-Ns 1
+Ns 100
 
 newmtl RedVelvet
 illum 6
 Kd 0.7 0.0 0.1
-Ks 0.0 0.0 0.0
-Ns 1.0
+Ks 0.7 0.0 0.1
+Ns 100
 
 # ------------------------------------------------------------
 # COOK-TORRANCE
@@ -60,7 +59,7 @@ newmtl PBR_Gold
 illum 6
 Kd 1.00 0.76 0.33
 Ks 1.00 0.76 0.33
-Ns 900
+Ns 1000
 
 newmtl PBR_Silver
 illum 6
@@ -72,7 +71,31 @@ newmtl PBR_RedPlastic
 illum 6
 Kd 0.8 0.1 0.1
 Ks 0.04 0.04 0.04
-Ns 0.3
+Ns 300
+
+newmtl RedMarble
+illum 6
+Kd 0.8 0.1 0.1
+Ks 0.04 0.04 0.04
+Ns 800
+pattern marble
+uv_scale 3
+
+newmtl GoldMarble
+illum 6
+Kd 1.00 0.76 0.33
+Ks 0.04 0.04 0.04
+Ns 300
+pattern perlin
+uv_scale 0.5
+
+newmtl BlackChecker
+illum 6
+Kd 0.8 0.8 0.8
+Ks 0.04 0.04 0.04
+Ns 800
+pattern checker
+uv_scale 5
 
 # ------------------------------------------------------------
 # DIELECTRIC & BEER-LAMBERT

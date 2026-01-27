@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 20:25:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/27 22:20:39 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	log_light_info(t_light *light)
 	log_event(stdout, "INFO", "Type: %s\n", get_light_type_str(light->type));
 	log_event(stdout, "INFO", "Pos: [%.2f, %.2f, %.2f]\n", light->position.x,
 		light->position.y, light->position.z);
+	if (light->type == LIGHT_SUN || light->type == LIGHT_SPOT)
+		log_event(stdout, "INFO", "Dir: [%.2f, %.2f, %.2f]\n",
+			light->direction.x, light->direction.y, light->direction.z);
 	log_event(stdout, "INFO", "Brightness: %.2f\n", light->brightness);
 	log_event(stdout, "INFO", "Color: R:%.0f G:%.0f B:%.0f\n", light->color.r
 		* 255, light->color.g * 255, light->color.b * 255);

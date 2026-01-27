@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 00:07:26 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 13:10:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/27 21:23:41 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,23 @@
 static t_color	get_indirect_specular(t_scene *s, t_hit_record *rec,
 		t_ray *view_ray, t_cook_torrance_vars *v)
 {
-	t_vec3			reflected_dir;
-	t_vec3			fuzz;
-	t_ray			reflected_ray;
-	t_color			env_color;
-	unsigned int	seed;
+	t_vec3	reflected_dir;
+	t_ray	reflected_ray;
+	t_color	env_color;
+	t_real	reflection_mask;
 
+	reflection_mask = (1.0 - v->roughness);
+	reflection_mask *= reflection_mask;
+	if (reflection_mask < 0.01)
+		return ((t_color){0, 0, 0});
 	reflected_dir = vec_reflect(vec3_normalize(view_ray->direction),
 			rec->normal);
-	if (v->roughness > 0.0)
-	{
-		seed = generate_seed(rec->hit_point);
-		fuzz = vec3_scale(random_in_unit_sphere(&seed), v->roughness);
-		reflected_dir = vec3_add(reflected_dir, fuzz);
-		reflected_dir = vec3_normalize(reflected_dir);
-	}
 	if (vec3_dot(reflected_dir, rec->normal) <= 0.0)
-		return ((t_color){0.0, 0.0, 0.0});
+		return ((t_color){0, 0, 0});
 	reflected_ray = new_ray(vec3_add(rec->hit_point, vec3_scale(rec->normal,
 					EPSILON)), reflected_dir);
 	env_color = cast_ray(s, &reflected_ray, v->depth - 1);
+	env_color = color_scale(env_color, reflection_mask);
 	return (color_prod(env_color, fresnel_schlick(v->n_dot_v, v->f0)));
 }
 
@@ -52,7 +49,7 @@ static t_color	compute_brdf(t_cook_torrance_vars *v, t_color *k_s)
 	*k_s = f;
 	denom = 4.0 * v->n_dot_v * v->n_dot_l;
 	specular = color_scale(f, (d * g));
-	return (color_div(specular, fmax(denom, 0.001)));
+	return (color_div(specular, fmax(denom, EPSILON)));
 }
 
 static t_color	calculate_lighting(t_cook_torrance_vars *v, t_color k_s,
@@ -74,17 +71,17 @@ static t_color	process_light(t_scene *s, t_light *light,
 		t_cook_torrance_vars *v, t_hit_record *rec)
 {
 	t_color	radiance;
-	t_color	k_s;
 	t_real	dist;
 	t_real	shadow;
 	t_real	attenuation;
+	t_color	k_s;
 
 	v->l = vec3_sub(light->position, rec->hit_point);
 	dist = vec3_len(v->l);
 	v->l = vec3_normalize(v->l);
 	v->h = vec3_normalize(vec3_add(v->v, v->l));
 	v->n_dot_l = fmax(vec3_dot(v->n, v->l), 0.0);
-	if (v->n_dot_l < EPSILON)
+	if (v->n_dot_l <= 0.0)
 		return ((t_color){0.0, 0.0, 0.0});
 	shadow = get_shadow_factor(s, rec, light);
 	attenuation = get_light_attenuation(light, dist) * get_spot_factor(light,

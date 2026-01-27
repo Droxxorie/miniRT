@@ -1,0 +1,22 @@
+# Configuration "Close-Up"
+
+# Caméra : Très proche (z=-4.5 pour un rayon de 2.5), légèrement surélevée
+# FOV 30 : Effet "Téléobjectif", écrase la perspective, focalise sur le détail
+A 0.2 255,255,255
+C   0,0,-10.0   0,0,1    30
+# R 3640 2160
+# R 160 90
+# R 1920 1080
+
+# Lumière : De côté et de face (Front-Right-Top)
+# Idéal pour l'Ambient Occlusion et les ombres portées des piques
+L   5,5,-5       0.9           255,240,220
+
+# Lumière d'appoint (Optionnelle, pour déboucher les noirs profonds, faible intensité)
+L   -10,0,-5     0.2           50,50,100
+
+mandelbox  0,0,0  0,1,0  1  -2.09  0.7  1.0  1.0  255,0,0
+box  -4,0,0   0,1,0  3 3 3 0,255,0
+
+# Sol (optionnel, pour avoir des reflets ou ombres au sol)
+pl  0,-5,0       0,1,0         200,200,200

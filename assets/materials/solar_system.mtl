@@ -1,20 +1,15 @@
-# --- SOLEIL (Procedural) ---
 newmtl SunMat
 Kd 1.0 0.5 0.0
-Ke 1.0 0.5 0.0
-pattern perlin
-Tr 1.0
-uv_scale 0.5
+Ke 0.8 0.5 0.0
+pattern marble
+uv_scale 6
 
-# --- ORBITES (Discret) ---
 newmtl OrbitMat
-#Kd 0.3 0.3 0.3
-#Ns 0
-Tr 0.8
-Ni 1.20
-illum 4
+Kd 0.3 0.3 0.3
 
-# --- PLANETES (Tes textures) ---
+Ni 1.20
+illum 6
+
 newmtl Earth
 map_Kd assets/textures/earth_col.xpm
 map_Bump assets/textures/earth_nml.xpm
@@ -24,7 +19,8 @@ Ns 50
 
 newmtl Moon
 map_Kd assets/textures/moon.xpm
-illum 1
+Ns 100
+illum 6
 
 newmtl Mercury
 map_Kd assets/textures/mercury.xpm
@@ -40,7 +36,9 @@ illum 2
 
 newmtl Uranus
 map_Kd assets/textures/uranus.xpm
-illum 2
+pattern marble
+Ns 200
+illum 6
 
 newmtl Neptune
 map_Kd assets/textures/neptune.xpm
