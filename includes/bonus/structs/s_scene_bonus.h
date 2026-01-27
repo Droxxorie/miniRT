@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 19:08:40 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/26 16:51:59 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct s_scene
 	t_material		*materials;
 	char			*skybox_texture_path;
 	t_image			*skybox_map;
+	t_real			samples_per_pixel;
 }					t_scene;
 
 typedef struct s_thread_data
@@ -149,12 +150,6 @@ typedef struct s_thread_data
 //* ========================================================================= */
 //*                                DISPATCH                                   */
 //* ========================================================================= */
-// typedef t_status	(*t_parse_func)(t_scene *scene, char **line_tokens);
-// typedef struct s_parse_map
-// {
-// 	char			*id;
-// 	t_parse_func	func;
-// }					t_parse_map;
 
 typedef void		(*t_resize_func)(t_object *object, t_camera *camera,
 			int mode, int direction);

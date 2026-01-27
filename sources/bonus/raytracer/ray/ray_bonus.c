@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 10:37:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:21:25 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 15:29:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_color	cast_ray(t_scene *scene, t_ray *ray, int depth)
 		if (scene->render_mode != RENDER_SHADE)
 			return (render_debug(scene, &record));
 		else
-			return (render_shade(scene, &record, ray, depth));
+			return (render_whitted(scene, &record, ray, depth));
 	}
 	return (get_skybox_color(scene, ray));
 }

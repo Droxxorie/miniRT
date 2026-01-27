@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:28:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 14:50:35 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/27 00:43:58 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@
 # define AO_SAMPLES 64
 # define AO_RADIUS 1.5
 
-# define MAX_REFLECTION_DEPTH 5
+# define MAX_REFLECTION_DEPTH 50
+# define ROULETTE_START_DEPTH 15
 
 //* ========================================================================= */
 //*                                KEYS (LINUX/X11)                           */

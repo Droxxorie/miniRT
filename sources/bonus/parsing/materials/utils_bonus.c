@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 20:29:10 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 14:15:24 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/27 17:03:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,9 @@ t_status	parse_roughness(char **line, t_material *material)
 
 	if (parse_real(line, &ns) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	ns = ft_clamp(ns, 0.0, 999.0);
-	if (ns <= 1.0)
-		material->roughness = ns;
-	else
-		material->roughness = 1.0 - (ns / 1000.0);
-	material->roughness = ft_clamp(material->roughness, 0.001, 0.999);
+	ns = ft_clamp(ns, 0.0, 1000.0);
+	material->roughness = 1.0 - (ns / 1000.0);
+	material->roughness = ft_clamp(material->roughness, EPSILON, 1.0);
 	roughtness_sq = material->roughness * material->roughness;
 	material->a = 1.0 - (0.5 * roughtness_sq / (roughtness_sq + 0.33));
 	material->b = 0.45 * (roughtness_sq / (roughtness_sq + 0.09));

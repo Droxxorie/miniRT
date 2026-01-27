@@ -194,6 +194,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/graphics/render_frame_bonus.c \
     $(SRC_DIR_BONUS)/graphics/utils_bonus.c \
 	$(SRC_DIR_BONUS)/graphics/init_textures_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/tonemapping_bonus.c \
 
 #* ---- Inputs ----
 SRCS_BONUS += \
@@ -318,6 +319,13 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/ray_marching_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/dispatch_sdf_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/ray_marching/map_the_world_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/path_tracer_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/light_sampling_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/utils_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/bsdf/eval_bsdf_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/bsdf/sample_bsdf_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/debug_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/compute_light_contribution_bonus.c \
 #* ---- Lighting ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/lighting/shadows_bonus.c \
@@ -443,6 +451,7 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/utils/swap_bonus.c \
     $(SRC_DIR_BONUS)/utils/time_bonus.c \
 	$(SRC_DIR_BONUS)/utils/sign_bonus.c \
+	$(SRC_DIR_BONUS)/utils/random/random_cosine_dir_bonus.c \
 	$(SRC_DIR_BONUS)/utils/random/hash_rand_bonus.c \
 	$(SRC_DIR_BONUS)/utils/random/random_dir_bonus.c \
 	$(SRC_DIR_BONUS)/utils/random/random_double_bonus.c \
@@ -452,7 +461,6 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/utils/colors/ft_smoothstep_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/mix_bonus.c \
 	$(SRC_DIR_BONUS)/utils/colors/shading_bonus.c \
-	$(SRC_DIR_BONUS)/utils/colors/tonemapping_bonus.c \
 
 OBJS_BONUS := $(SRCS_BONUS:$(SRC_DIR_BONUS)/%.c=$(OBJ_DIR_BONUS)/%.o)
 

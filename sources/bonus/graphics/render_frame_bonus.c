@@ -6,25 +6,39 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:46:38 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 14:14:21 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/27 17:07:24 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static void	process_pixel(t_scene *scene, int x, int y)
+static void	process_pixel(t_scene *s, int x, int y)
 {
-	t_ray	ray;
-	t_color	color;
-	t_color	final_color;
-	int		max_depth;
+	t_ray			ray;
+	t_color			final;
+	t_color			accumulated;
+	unsigned int	seeds[2];
+	int				i;
 
-	max_depth = MAX_REFLECTION_DEPTH;
-	generate_ray(scene->active_camera, &ray, (t_real)x, (t_real)y);
-	color = cast_ray(scene, &ray, max_depth);
-	final_color = aces_tone_mapping(color);
-	final_color = gamma_correction(final_color);
-	image_pixel_put(&scene->frame_buffer, x, y, color_to_int(color));
+	if ((int)s->samples_per_pixel == 1)
+	{
+		generate_ray(s->active_camera, &ray, (t_real)x, (t_real)y);
+		final = cast_ray(s, &ray, MAX_REFLECTION_DEPTH);
+		return (image_pixel_put(&s->frame_buffer, x, y, color_to_int(final)));
+	}
+	accumulated = (t_color){0.0, 0.0, 0.0};
+	seeds[0] = generate_seed((t_point3){(t_real)x, (t_real)y, 0.0});
+	i = -1;
+	while (++i < (int)s->samples_per_pixel)
+	{
+		seeds[1] = pcg_hash(seeds[0] ^ i);
+		generate_ray(s->active_camera, &ray, (t_real)x
+			+ random_double(&seeds[1]) - 0.5, (t_real)y
+			+ random_double(&seeds[1]) - 0.5);
+		accumulated = color_add(accumulated, path_trace(s, ray, &seeds[1]));
+	}
+	final = color_div(accumulated, (t_real)i);
+	image_pixel_put(&s->frame_buffer, x, y, color_to_int(final));
 }
 
 void	*render_routine(void *arg)

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 13:10:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/26 21:19:07 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void		get_rectangle_uv(t_point3 p, t_real *u, t_real *v);
 //* ========================================================================= */
 t_vec3		vec_reflect(t_vec3 i, t_vec3 n);
 t_real		reflectance(t_real cosine, t_real ref_index);
-t_vec3		vec_refract(t_vec3 uv, t_vec3 n, t_real ni_over_nt);
+t_bool		vec_refract(t_vec3 uv, t_vec3 n, t_real ni_over_nt,
+				t_vec3 *refracted);
+t_color		beer_lambert(t_color color, t_real dist, t_color absorbance);
 
 t_color		cast_ray(t_scene *s, t_ray *ray, int depth);
 t_ray		new_ray(t_point3 origin, t_vec3 dir);
@@ -57,6 +59,8 @@ t_real		get_light_attenuation(t_light *l, t_real dist);
 t_real		get_spot_factor(t_light *l, t_vec3 light_dir);
 void		get_light_data(t_light *l, t_vec3 hit_point, t_vec3 *light_dir,
 				t_real *distance);
+t_vec3		get_light_sample(t_light *light, t_hit_record *record,
+				unsigned int *seed);
 
 //* ========================================================================= */
 //*                                SHADERS                                    */
@@ -65,7 +69,7 @@ t_color		get_albedo(t_material *mat, t_hit_record *record);
 t_real		get_shininess(t_material *mat, t_hit_record *record);
 t_color		shader_phong(t_scene *scene, t_hit_record *record, t_ray *ray);
 t_color		sample_texture(t_image *texture, t_real u, t_real v);
-t_color		render_shade(t_scene *scene, t_hit_record *record, t_ray *ray,
+t_color		render_whitted(t_scene *scene, t_hit_record *record, t_ray *ray,
 				int depth);
 t_color		render_debug(t_scene *scene, t_hit_record *record);
 t_color		shader_metal(t_scene *scene, t_hit_record *record, t_ray *ray,
@@ -79,8 +83,8 @@ t_color		shader_oren_nayar(t_light *light, t_hit_record *rec, t_ray *ray,
 t_color		get_skybox_color(t_scene *scene, t_ray *ray);
 
 //* Cook-Torrance Shader *//
-t_color		shader_cook_torrance(t_scene *s, t_hit_record *rec,
-				t_ray *view_ray, int depth);
+t_color		shader_cook_torrance(t_scene *s, t_hit_record *rec, t_ray *view_ray,
+				int depth);
 t_color		fresnel_schlick(t_real cos_theta, t_color f0);
 t_real		geometry_smith(t_vec3 n, t_vec3 v, t_vec3 l, t_real roughness);
 t_real		distribution_ggx(t_vec3 n, t_vec3 h, t_real roughness);

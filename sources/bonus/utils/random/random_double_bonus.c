@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:45:33 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 18:34:44 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 14:40:45 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ t_real	random_double(unsigned int *seed)
 	return ((t_real)(*seed) / (t_real)UINT_MAX);
 }
 
+//* pas thread safe
 t_real	random_real(void)
 {
 	return (rand() / (t_real)RAND_MAX + 1.0);
 }
 
+//* pas thread safe
 t_real	random_real_range(t_real min, t_real max)
 {
 	return (min + (max - min) * random_real());

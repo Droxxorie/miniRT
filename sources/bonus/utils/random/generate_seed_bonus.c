@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:42:14 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:59:56 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/26 21:12:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 static unsigned int	bit_cast_double_to_uint(t_real d)
 {
 	unsigned int	result;
+	size_t			len;
 
-	memcpy(&result, &d, sizeof(t_real));
+	if (sizeof(t_real) < sizeof(unsigned int))
+		len = sizeof(t_real);
+	else
+		len = sizeof(unsigned int);
+	result = 0;
+	memcpy(&result, &d, len);
 	return (result);
 }
 

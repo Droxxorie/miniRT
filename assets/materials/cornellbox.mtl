@@ -1,31 +1,52 @@
 newmtl leftWall
-  illum 3
-  Ns 1000.0000
-  Kd 0.63 0.065 0.05
-  Ks 0.63 0.065 0.05
+  illum 1
+Kd 0.8 0.05 0.05
+Ks 0.0 0.0 0.0
+Ns 0.00
+
 
 newmtl rightWall
-  Ns 1000.0000
+  Ns 0.00
   Kd 0.14 0.45 0.091
-  Ks 0.14 0.45 0.091
+  Ks 0 0 0
+  illum 1
 
 newmtl floor
-  Ns 0.0
-  Ks 0.725 0.71 0.68
   Kd 0.725 0.71 0.68
+  Ks 0 0 0
+  Ns 0.00
+  illum 1
 
 newmtl ceiling
-  Ns 1000.0000
+  Ns 0.001
   Kd 0.725 0.71 0.68
-  Ks 0.725 0.71 0.68
+  Ks 0 0 0
+  illum 1
 
 newmtl backWall
-  Ns 1000.0000
+  Ns 0.001
   Kd 0.725 0.71 0.68
-  Ks 0.725 0.71 0.68
+  Ks 0 0 0
+  illum 1
+
+newmtl shortBox
+  Ns 10.0000
+  Ni 1.0000
+  illum 2
+  Kd 0.725 0.71 0.68
+  Ks 0 0 0
+  Ke 0 0 0
+
+newmtl tallBox
+  illum 3
+  Ka 0.01 0.01 0.01
+  Kd 1.0 1.00 1.00
+  Ks 0.950 0.95 0.95
+  Ns 1000
 
 newmtl light
-  Ns 10.0000
+  Ns 0.0000
+  illum 0
   Kd 0.78 0.78 0.78
   Ks 0 0 0
   Ke 10 10 10
@@ -41,13 +62,12 @@ newmtl ClearGlass
 illum 4
 Kd 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
-Ni 0.5
-Tr 1.5
+Ni 1.5
 Ns 500
 
 newmtl ThickGreenGlass
-illum 3
+illum 4
 Kd 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
 Ni 1.5
-Tf 2.0 0.1 2.0
+Tf 0.9 0.1 0.9

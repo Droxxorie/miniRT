@@ -5,9 +5,7 @@ peut etre revoir rotate/translate dans mandatory et clean tt ç&
 mesh + .obj
 texture en jpg
 photon mapping
-caustique
 no shadow disk ?
-Ajouter Pr et separer de Ns
 revoir parsing .mtl
 choisir si hdr ou ldr ?
 sortie fichier hdr ? png ?
@@ -77,16 +75,16 @@ sortie fichier hdr ? png ?
 - [x] UI (Objet sélectionné / ID camera / ID lumière / Coordonnées / commandes etc)
 
 ## PHASE 6 : POST-PROCESS & QUALITE
-- [ ] Tonemapping & HDR
+- [x] Tonemapping & HDR
 - [ ] Filtres (gamma correction, Sepia, B&W)
 - [ ] Sobel
-- [ ] AA (via Supersampling)
+- [x] AA (via Supersampling)
 
 ## PHASE 7 : MONTE CARLO & PBR
-- [ ] Matériaux PBR
-- [ ] Lumière surfacique (quad)
-- [ ] Matériaux Emissifs
-- [ ] Path Tracing
-- [ ] Multi importance sampling
+- [x] Matériaux PBR
+- [x] Lumière surfacique (quad)
+- [x] Matériaux Emissifs
+- [x] Path Tracing
+- [x] Multi importance sampling
 - [x] Soft Shadows
 - [ ] DOF

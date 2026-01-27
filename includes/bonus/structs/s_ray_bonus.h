@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:49:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 13:09:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/25 18:55:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,27 @@ typedef struct s_cook_torrance_vars
 	t_color				albedo;
 	int					depth;
 }						t_cook_torrance_vars;
+
+typedef struct s_path_info
+{
+	unsigned int	seed;
+	t_bool			specular_bounce;
+	t_real			last_pdf;
+	t_vec3			next_dir;
+	t_real			pdf;
+	t_bvh_node		*bvh_root;
+	t_color			final;
+	t_color			thru;
+	int				depth;
+}					t_path_info;
+
+typedef struct s_light_sample_vars
+{
+	t_vec3		light_dir;
+	t_vec3		light_pos;
+	t_real		dist;
+	t_real		weight;
+	t_color		f_r;
+}				t_light_sample_vars;
 
 #endif

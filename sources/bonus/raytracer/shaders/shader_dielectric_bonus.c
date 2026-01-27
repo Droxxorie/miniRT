@@ -6,22 +6,11 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:35:36 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 11:44:54 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/26 21:11:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
-
-static t_color	beer_lambert(t_color color, t_real dist,
-		t_color absorbance)
-{
-	t_color	transmission;
-
-	transmission.r = exp(-absorbance.r * dist);
-	transmission.g = exp(-absorbance.g * dist);
-	transmission.b = exp(-absorbance.b * dist);
-	return (color_prod(color, transmission));
-}
 
 static t_real	get_ior_ratio(t_hit_record *record)
 {
@@ -34,16 +23,19 @@ static t_real	get_ior_ratio(t_hit_record *record)
 static t_vec3	get_dielectric_dir(t_vec3 dir, t_vec3 normal, t_real ratio)
 {
 	t_real	cos_theta;
-	t_real	sin_theta;
 	t_vec3	unit_dir;
+	t_vec3	refracted;
+	t_real	reflect_prob;
 
 	unit_dir = vec3_normalize(dir);
 	cos_theta = fmin(vec3_dot(vec3_scale(unit_dir, -1), normal), 1.0);
-	sin_theta = sqrt(1.0 - cos_theta * cos_theta);
-	if (ratio * sin_theta > 1.0 || reflectance(cos_theta,
-			ratio) > random_real())
+	if (vec_refract(unit_dir, normal, ratio, &refracted) == TRUE)
+		reflect_prob = reflectance(cos_theta, ratio);
+	else
+		reflect_prob = 1.0;
+	if (random_real() < reflect_prob)
 		return (vec_reflect(unit_dir, normal));
-	return (vec_refract(unit_dir, normal, ratio));
+	return (refracted);
 }
 
 t_color	shader_dielectric(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)

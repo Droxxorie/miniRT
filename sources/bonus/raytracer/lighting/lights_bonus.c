@@ -6,11 +6,41 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:31:34 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 14:55:18 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/27 17:02:37 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
+
+//* uv_offset[0] = u_offset
+//* uv_offset[1] = v_offset
+t_vec3	get_light_sample(t_light *light, t_hit_record *record,
+		unsigned int *seed)
+{
+	t_vec3	random_point;
+	t_vec3	uv_offset[2];
+	t_vec3	sun_source;
+	t_vec3	jitter;
+	t_real	r[2];
+
+	if (light->type == LIGHT_SUN)
+	{
+		sun_source = vec3_scale(light->direction, -10000.0);
+		jitter = vec3_scale(random_in_unit_sphere(seed), 50.0);
+		return (vec3_add(record->hit_point, vec3_add(sun_source, jitter)));
+	}
+	else if (light->type == LIGHT_QUAD)
+	{
+		r[0] = random_double(seed) - 0.5;
+		r[1] = random_double(seed) - 0.5;
+		uv_offset[0] = vec3_scale(light->u, r[0]);
+		uv_offset[1] = vec3_scale(light->v, r[1]);
+		return (vec3_add(light->position, vec3_add(uv_offset[0],
+					uv_offset[1])));
+	}
+	random_point = random_in_unit_sphere(seed);
+	return (vec3_add(light->position, vec3_scale(random_point, LIGHT_RADIUS)));
+}
 
 void	get_light_data(t_light *light, t_vec3 hit_point, t_vec3 *light_dir,
 		t_real *distance)

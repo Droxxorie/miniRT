@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 17:57:53 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/26 21:19:00 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void		render_frame(t_scene *scene);
 t_status	init_graphics(t_scene *scene);
 t_status	init_textures(t_scene *scene);
 void		image_pixel_put(t_image *img, int x, int y, int color);
+t_color		gamma_correction(t_color color);
+t_color		aces_tone_mapping(t_color hdr);
 
 //* --- Multi-threading --- */
 void		wait_render_threads(int count, pthread_t *threads);

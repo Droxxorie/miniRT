@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:35:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 14:13:18 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/24 15:19:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	scale_uv_apply_normal(t_hit_record *record, t_material *mat)
 //* Dielectric : transparent shader with refraction
 //* Oren-Nayar : diffuse shader for rough surfaces
 //* Cook-Torrance : physically based shader with microfacet model
-t_color	render_shade(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)
+t_color	render_whitted(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)
 {
 	t_material	*mat;
 

@@ -4,13 +4,14 @@
 # R 1920 1080
 # R   160 90
 A   0.05            255,255,255
-C   0,8,22          0,-0.3,-1      40
+# C   0,8,22          0,-0.3,-1      40
 C   0, 3.5,7        0,-0.3,-1 40
 C   6,2,0           0,0,-1	   60
 L   -10,15,10       200            255,255,255
 L   10,5,10         50            100,100,255
 
-# 4. FICHIER MATERIAUX
+SAMPLES 100
+
 mtllib assets/materials/materials_test.mtl
 
 # ============================================================
@@ -33,7 +34,7 @@ sp  2,2,2           2.0            0,0,0            -usemtl PBR_Silver
 # Sphère : Verre "Absinthe" (Beer-Lambert)
 # Le centre doit être vert foncé, les bords clairs/transparents
 sp  6,2,-2          2.0            255,255,255      -usemtl ThickGreenGlass
-sp  6,2,-10    12.0    0,0,0         -usemtl SuperNeon
+# sp  6,2,-10    12.0    0,0,0         -usemtl SuperNeon
 # Cone : Rubis (Beer-Lambert)
 # Test de réfraction complexe sur une forme conique
 con  6,0,5           0,1,0          2.0  4.0         255,255,255      -usemtl DeepRuby
@@ -44,4 +45,4 @@ con  6,0,5           0,1,0          2.0  4.0         255,255,255      -usemtl De
 # Si le Tone Mapping marche, elle doit être blanche éclatante sans "clipper" moche
 # Elle devrait éclairer le sol autour d'elle si tu as la Global Illumination (Path Tracing)
 # Sinon elle sera juste un point très blanc.
-sp  0,6,5           1.0            0,0,0            -usemtl SuperNeon
+# sp  0,6,5           1.0            0,0,0            -usemtl SuperNeon

@@ -1,20 +1,13 @@
-# ============================================================
-# TEST SUITE: MINIRT BONUS MATERIALS
-# ============================================================
-
 # ------------------------------------------------------------
-# LUMIERES (HDR & EMISSION)
+# LUMIERES
 # ------------------------------------------------------------
 
-# Lumière douce (ex: écran de téléphone)
 newmtl SoftLight
 illum 0
 Kd 0.0 0.0 0.0
 Ks 0.0 0.0 0.0
 Ke 1.0 1.0 1.0
 
-# Lumière intense (Test HDR / Tone Mapping)
-# Doit apparaitre très brillant et éblouir si le Tone Mapping est actif
 newmtl SuperNeon
 illum 0
 Kd 0.0 0.0 0.0
@@ -25,24 +18,18 @@ Ke 50.0 50.0 50.0
 # STANDARD SHADERS
 # ------------------------------------------------------------
 
-# LAMBERT (illum 1)
-# Rouge mat parfait, pas de reflet spéculaire
 newmtl RedMatte
 illum 1
 Kd 0.8 0.05 0.05
 Ks 0.0 0.0 0.0
-Ns 0
+Ns 0.001
 
-# PHONG (illum 2)
-# Plastique bleu brillant classique
 newmtl BluePlasticPhong
 illum 2
 Kd 0.1 0.1 0.8
 Ks 0.8 0.8 0.8
 Ns 50.0
 
-# METAL MIRROR (illum 3)
-# Miroir parfait (Reflection pure), pas de flou
 newmtl PerfectMirror
 illum 3
 Kd 0.0 0.0 0.0
@@ -53,22 +40,17 @@ Ns 1000
 # OREN-NAYAR
 # ------------------------------------------------------------
 
-# Lune / Plâtre / Terre
-# Doit paraître "plat" avec la lumière s'étalant sur les bords
-# Ns est utilisé ici comme Rugosité (0.0 à 1.0) ou Sigma
 newmtl RoughPlaster
-illum 6
+illum 5
 Kd 0.9 0.9 0.9
-Ks 0.0 0.0 0.0
-Ns 1.0
+Ks 0.8 0.8 0.8
+Ns 1
 
-# Tissu rouge (Velours)
-# Aspect doux, pas de point chaud spéculaire
 newmtl RedVelvet
 illum 6
 Kd 0.7 0.0 0.1
 Ks 0.0 0.0 0.0
-Ns 0.8
+Ns 1.0
 
 # ------------------------------------------------------------
 # COOK-TORRANCE
@@ -76,20 +58,16 @@ Ns 0.8
 
 newmtl PBR_Gold
 illum 6
-Kd 0.0 0.0 0.0
+Kd 1.00 0.76 0.33
 Ks 1.00 0.76 0.33
-Ns 500
-Pm 1.0
+Ns 900
 
 newmtl PBR_Silver
 illum 6
-Kd 0.0 0.0 0.0
+Kd 0.97 0.96 0.91
 Ks 0.97 0.96 0.91
-Ns 500
+Ns 900
 
-# PLASTIQUE ROUGE - Dielectrique
-# Kd donne la couleur
-# Ks (F0) doit être gris sombre (0.04) pour tout plastique/bois/verre
 newmtl PBR_RedPlastic
 illum 6
 Kd 0.8 0.1 0.1
@@ -97,12 +75,9 @@ Ks 0.04 0.04 0.04
 Ns 0.3
 
 # ------------------------------------------------------------
-# DIELECTRIC & BEER-LAMBERT (Volumétrique)
-# illum 4
-# Tf = Coefficient d'absorption (Beer-Lambert)
+# DIELECTRIC & BEER-LAMBERT
 # ------------------------------------------------------------
 
-# Verre Transparent (Standard)
 newmtl ClearGlass
 illum 4
 Kd 1.0 1.0 1.0
@@ -110,7 +85,6 @@ Ks 1.0 1.0 1.0
 Ni 1.5
 Tf 0.01 0.01 0.01
 
-# "Absinthe" (Verre Vert épais)
 newmtl ThickGreenGlass
 illum 4
 Kd 1.0 1.0 1.0
@@ -118,7 +92,6 @@ Ks 1.0 1.0 1.0
 Ni 1.5
 Tf 2.0 0.1 2.0
 
-# "Rubis" (Verre Rouge Profond)
 newmtl DeepRuby
 illum 4
 Kd 1.0 1.0 1.0
@@ -126,7 +99,6 @@ Ks 1.0 1.0 1.0
 Ni 1.7
 Tf 0.1 3.0 3.0
 
-# Diamant
 newmtl Diamond
 illum 4
 Kd 1.0 1.0 1.0
