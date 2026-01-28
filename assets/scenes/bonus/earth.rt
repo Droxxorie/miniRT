@@ -1,12 +1,17 @@
 A 0.1 255,255,255
-C 0,0,-20 0,0,1 30
+C 0,0,0 0,0,1 30
+C 0,0,25 0,0,1 30
+
 # R 1920 1080
-# R 2460 1440
+R 2460 1440
 # R 160 90
 SB assets/textures/skybox/milkyway.xpm
 mtllib assets/materials/earth.mtl
 
 SUN	    1,-1,1                         1.0    255,244,214
 
-sp 0,0,0 8 255,215,0 -usemtl Earth
+tor	0,0,45	0,1,-1	5.0	1.0		0,255,0		-usemtl Earth
+sp	0,0,20	8					255,215,0	-usemtl Earth
+
+pl 0,0,2000	0,0,-1     255,255,255 -usemtl Space
 

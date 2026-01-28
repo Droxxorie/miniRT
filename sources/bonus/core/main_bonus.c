@@ -6,13 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/18 18:40:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 17:17:49 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static	void	handle_arguments(int argc, char **argv, t_scene *scene)
+static void	handle_arguments(int argc, char **argv, t_scene *scene)
 {
 	if (argc == 2)
 		return ;
@@ -61,6 +61,19 @@ static void	load_scene_data(t_scene *scene, char *filename)
 {
 	if (load_scene(scene, filename) == EXIT_FAILURE)
 		clean_exit(scene, EXIT_FAILURE);
+	if (scene->aa_samples > 1.0)
+		log_event(stdout,
+			"INFO",
+			"Anti-aliasing enabled: %.0f samples per pixel\n",
+			scene->aa_samples);
+	else if (scene->samples_per_pixel > 1.0)
+		log_event(stdout, "INFO",
+			"Path tracing enabled: %.0f samples per pixel\n",
+			scene->samples_per_pixel);
+	else if (scene->render_scale != 1.0)
+		log_event(stdout, "WARN",
+			"Render scale set to: %.2f (May cause log issues)\n",
+			scene->render_scale);
 	prepare_cameras(scene);
 	save_scene_state(scene);
 }

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:48:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/25 19:32:20 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 17:12:44 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,21 @@ static t_status	dispatch_entities(t_scene *scene, char *line)
 	return (-1);
 }
 
+static t_status	dispatch_scene_elements(t_scene *scene, char *line)
+{
+	if (match_and_consume(&line, "R") == EXIT_SUCCESS)
+		return (parse_resolution(scene, &line));
+	if (match_and_consume(&line, "SAMPLES") == EXIT_SUCCESS)
+		return (parse_dim(scene, &line, &scene->samples_per_pixel));
+	if (match_and_consume(&line, "mtllib") == EXIT_SUCCESS)
+		return (parse_mtl_lib(scene, &line));
+	if (match_and_consume(&line, "AA_SAMPLES") == EXIT_SUCCESS)
+		return (parse_aa(scene, &line));
+	if (match_and_consume(&line, "RENDER_SCALE") == EXIT_SUCCESS)
+		return (parse_dim(scene, &line, &scene->render_scale));
+	return (-1);
+}
+
 t_status	dispatch_parse(t_scene *scene, char *line)
 {
 	char		*start_ptr;
@@ -76,12 +91,9 @@ t_status	dispatch_parse(t_scene *scene, char *line)
 	skip_whitespace(&line);
 	if (*line == '\0' || *line == '#')
 		return (EXIT_SUCCESS);
-	if (match_and_consume(&line, "R") == EXIT_SUCCESS)
-		return (parse_resolution(scene, &line));
-	if (match_and_consume(&line, "SAMPLES") == EXIT_SUCCESS)
-		return (parse_dim(scene, &line, &scene->samples_per_pixel));
-	if (match_and_consume(&line, "mtllib") == EXIT_SUCCESS)
-		return (parse_mtl_lib(scene, &line));
+	status = dispatch_scene_elements(scene, line);
+	if (status != -1)
+		return (status);
 	status = dispatch_entities(scene, line);
 	if (status != -1)
 		return (status);

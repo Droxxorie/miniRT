@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:14:29 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/27 15:18:19 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 18:47:05 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static t_color	get_sunset_gradient(t_scene *scene, t_real y)
 	t_color	ground;
 	t_real	t;
 
-	(void)scene;
-	horizon = (t_color){1.0, 0.6, 0.4};
+	horizon = scene->ambient;
 	zenith = (t_color){0.2, 0.2, 0.45};
 	ground = (t_color){0.15, 0.15, 0.15};
 	if (y < 0.0)

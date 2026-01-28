@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:42:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 20:48:58 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 14:10:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_color	get_albedo(t_material *mat, t_hit_record *record)
 {
+	if (record->object->is_fractal == TRUE)
+		return (record->color);
 	if (mat && mat->albedo_map)
 		return (sample_texture(mat->albedo_map, record->u, record->v));
 	if (mat->pattern_type == PATTERN_CHECKER)

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:42:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/27 22:20:39 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 20:07:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	log_camera_info(t_camera *camera)
 	log_event(stdout, "INFO", "Camera Info:\n");
 	log_event(stdout, "INFO", "ID: %d\n", camera->id);
 	log_event(stdout, "INFO", "FOV: %.2f\n", camera->fov);
-	log_event(stdout, "INFO", "Pos: [%.2f, %.2f, %.2f]\n", camera->position.x,
+	log_event(stdout, "INFO", "Pos: [%.4f, %.4f, %.4f]\n", camera->position.x,
 		camera->position.y, camera->position.z);
-	log_event(stdout, "INFO", "Dir: [%.2f, %.2f, %.2f]\n", camera->direction.x,
+	log_event(stdout, "INFO", "Dir: [%.4f, %.4f, %.4f]\n", camera->direction.x,
 		camera->direction.y, camera->direction.z);
 }
 

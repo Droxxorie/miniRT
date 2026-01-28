@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:52:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/26 16:51:59 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 16:59:28 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ typedef struct s_scene
 	char			*skybox_texture_path;
 	t_image			*skybox_map;
 	t_real			samples_per_pixel;
+	t_real			aa_samples;
+	t_real			render_scale;
 }					t_scene;
 
 typedef struct s_thread_data

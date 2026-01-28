@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:35:06 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 15:19:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 14:24:41 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_color	render_whitted(t_scene *s, t_hit_record *rec, t_ray *ray, int depth)
 	mat = rec->object->material;
 	scale_uv_apply_normal(rec, mat);
 	if (!mat)
-		return (shader_lambert(s, rec, rec->object->color));
+		return (shader_lambert(s, rec, rec->color));
 	if (mat && (color_mean(mat->emission_color) > EPSILON))
 	{
 		if (mat->emission_map)

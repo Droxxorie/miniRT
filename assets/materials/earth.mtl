@@ -4,3 +4,6 @@ map_Bump	assets/textures/earth_nml.xpm
 map_Ks		assets/textures/earth_spc.xpm
 map_Pr		assets/textures/earth_rfl.xpm
 illum 2
+
+newmtl Space
+map_Kd		assets/textures/skybox/milkyway.xpm

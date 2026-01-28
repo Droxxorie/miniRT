@@ -9,6 +9,8 @@ no shadow disk ?
 revoir parsing .mtl
 choisir si hdr ou ldr ?
 sortie fichier hdr ? png ?
+scene julai et fractals
+revoir transfo pour cam/objet bonus/mandatory
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS
@@ -79,6 +81,7 @@ sortie fichier hdr ? png ?
 - [ ] Filtres (gamma correction, Sepia, B&W)
 - [ ] Sobel
 - [x] AA (via Supersampling)
+- [x] Nearest Neighbor
 
 ## PHASE 7 : MONTE CARLO & PBR
 - [x] Matériaux PBR

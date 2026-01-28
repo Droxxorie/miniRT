@@ -235,6 +235,7 @@ SRCS_BONUS += \
 	${SRC_DIR_BONUS}/parsing/scene/lights/utils_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/scene/parse_skybox_bonus.c \
     $(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \
+	${SRC_DIR_BONUS}/parsing/scene/parse_aa_bonus.c \
 	${SRC_DIR_BONUS}/parsing/objects/utils_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_box_bonus.c \
     $(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_cone_bonus.c \

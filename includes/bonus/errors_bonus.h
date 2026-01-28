@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:18:47 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 22:08:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 11:09:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ERR_ARG "Invalid argument"
 # define ERR_SAVE_EXT "Save file must have a .bmp extension"
 # define ERR_DEBUG "Debug mode requires an argument: 'AO' or 'NORMAL'"
+# define ERR_AA_OOB "Anti-aliasing samples out of range [1, 16]"
 
 //* ========================================================================= */
 //*                               PARSING ERRORS                              */

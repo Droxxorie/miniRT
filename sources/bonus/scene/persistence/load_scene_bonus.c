@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 20:17:19 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 15:18:28 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 17:02:35 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static void	init_default_values(t_scene *scene)
 	scene->alt_pressed = FALSE;
 	scene->bvh_root = NULL;
 	scene->skybox_texture_path = NULL;
-	scene->samples_per_pixel = 1;
+	scene->samples_per_pixel = 1.0;
+	scene->aa_samples = 1.0;
+	scene->render_scale = 1.0;
 }
 
 static t_status	validate_scene(t_scene *scene)
