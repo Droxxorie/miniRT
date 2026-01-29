@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/29 10:31:34 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 22:46:18 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	handle_arguments(int argc, char **argv, t_scene *scene)
 static t_scene	*init_scene_struct(int argc, char **argv)
 {
 	t_scene	*scene;
-	int thread_count;
+	int		thread_count;
 
 	if (argc < 2 || argc > 4)
 		return (print_usage(), NULL);

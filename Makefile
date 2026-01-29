@@ -559,7 +559,6 @@ help:
 	@echo "$(BRIGHT_MAGENTA)re        →  ${RESET}Rebuilds the project."
 	@echo "$(BRIGHT_MAGENTA)bonus     →  ${RESET}Compile the bonus version."
 	@echo "$(BRIGHT_MAGENTA)re_bonus  →  ${RESET}Rebuilds the bonus version."
-	@echo "$(BRIGHT_MAGENTA)run       →  ${RESET}Executes the program."
 	@echo "$(BRIGHT_MAGENTA)valgrind  →  ${RESET}Check for memory leaks."
 	@echo "$(BRIGHT_MAGENTA)valgrind_bonus →  ${RESET}Check for memory leaks in bonus version."
 	@echo "$(BRIGHT_MAGENTA)help      →  ${RESET}Displays this help message."
@@ -584,4 +583,4 @@ endef
 COUNT_FILE := .make_count
 
 #* ---- Phony -------------------------------------------------------------------
-.PHONY: all clean fclean re re_bonus bonus help run valgrind valgrind_bonus
+.PHONY: all clean fclean re re_bonus bonus help valgrind valgrind_bonus

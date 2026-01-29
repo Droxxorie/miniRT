@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:44:52 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/29 10:26:16 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 22:46:29 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	open_mtl_file(t_scene *scene, char *raw_line, char **filename)
 	}
 	fd = open(*filename, O_RDONLY);
 	if (fd < 0)
-		return (print_error_loc(scene, raw_line, ERR_MTL_FILE), free(*filename),-1);
+		return (print_error_loc(scene, raw_line, ERR_MTL_FILE), free(*filename),
+			-1);
 	if (read(fd, 0, 0) < 0)
 		return (sys_print_error(*filename), close(fd), free(*filename), -1);
 	return (fd);
