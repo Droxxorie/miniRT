@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:57:37 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 09:03:27 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 22:40:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_material
 	t_color				emission_color;
 	struct s_image		*emission_map;
 	char				*emission_texture_path;
-	t_real				metallic; //TODO
+	t_real				metallic;
 	struct s_image		*metallic_map;
 	char				*metallic_texture_path;
 	t_color				specular_color;
@@ -65,7 +65,6 @@ typedef struct s_material
 	char				*specular_texture_path;
 	t_real				uv_scale;
 	t_pattern			pattern_type;
-
 	struct s_material	*next;
 }						t_material;
 

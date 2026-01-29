@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/28 17:17:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 10:31:34 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ static void	handle_arguments(int argc, char **argv, t_scene *scene)
 static t_scene	*init_scene_struct(int argc, char **argv)
 {
 	t_scene	*scene;
+	int thread_count;
 
 	if (argc < 2 || argc > 4)
 		return (print_usage(), NULL);
 	log_event(stdout, "INFO", "Initializing miniRT Engine (Bonus Edition)\n");
+	thread_count = sysconf(_SC_NPROCESSORS_ONLN);
+	if (thread_count <= 0 || thread_count > 24)
+		thread_count = 4;
 	log_event(stdout, "INFO", "Detected %li logical CPU cores\n",
-		sysconf(_SC_NPROCESSORS_ONLN));
+		thread_count);
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (scene == NULL)
 		sys_print_error_exit(ERR_MEM_SCENE);

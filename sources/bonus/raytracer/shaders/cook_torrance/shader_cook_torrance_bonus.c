@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 00:07:26 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/27 21:23:41 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 09:40:51 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_color	compute_brdf(t_cook_torrance_vars *v, t_color *k_s)
 	g = geometry_smith(v->n, v->v, v->l, v->roughness);
 	f = fresnel_schlick(fmax(vec3_dot(v->h, v->v), 0.0), v->f0);
 	*k_s = f;
-	denom = 4.0 * v->n_dot_v * v->n_dot_l;
+	denom = 4.0 * fmax(v->n_dot_v, 0.01) * fmax(v->n_dot_l, 0.01);
 	specular = color_scale(f, (d * g));
 	return (color_div(specular, fmax(denom, EPSILON)));
 }
@@ -64,7 +64,7 @@ static t_color	calculate_lighting(t_cook_torrance_vars *v, t_color k_s,
 			- v->metallic);
 	diffuse = color_prod(k_d, color_scale(v->albedo, INV_PI));
 	return (color_prod(color_add(diffuse, specular), color_scale(radiance,
-				v->n_dot_l)));
+				fmax(v->n_dot_l, 0.01))));
 }
 
 static t_color	process_light(t_scene *s, t_light *light,
@@ -80,8 +80,8 @@ static t_color	process_light(t_scene *s, t_light *light,
 	dist = vec3_len(v->l);
 	v->l = vec3_normalize(v->l);
 	v->h = vec3_normalize(vec3_add(v->v, v->l));
-	v->n_dot_l = fmax(vec3_dot(v->n, v->l), 0.0);
-	if (v->n_dot_l <= 0.0)
+	v->n_dot_l = fmax(vec3_dot(v->n, v->l), 0.01);
+	if (v->n_dot_l <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
 	shadow = get_shadow_factor(s, rec, light);
 	attenuation = get_light_attenuation(light, dist) * get_spot_factor(light,

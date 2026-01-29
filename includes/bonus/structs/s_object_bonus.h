@@ -6,14 +6,13 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:51:54 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/20 17:54:45 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/28 22:40:13 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_OBJECT_BONUS_H
 # define S_OBJECT_BONUS_H
 
-// # include "s_ray_bonus.h"
 # include "s_materials_bonus.h"
 
 typedef struct s_sphere

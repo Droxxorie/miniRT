@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:52:46 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 13:05:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 10:31:38 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_render_threads(t_scene *scene, pthread_t **threads,
 	int	thread_count;
 
 	thread_count = sysconf(_SC_NPROCESSORS_ONLN);
-	if (thread_count <= 0)
+	if (thread_count <= 0 || thread_count > 24)
 		thread_count = 4;
 	*threads = malloc(sizeof(pthread_t) * thread_count);
 	*data = malloc(sizeof(t_thread_data) * thread_count);

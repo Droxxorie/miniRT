@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 20:28:12 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 23:57:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 09:45:14 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ t_color	shader_oren_nayar(t_light *light, t_hit_record *rec, t_ray *ray,
 	t_real	dist;
 	t_real	term;
 
+	if (!light || !rec || !ray)
+		return ((t_color){0.0, 0.0, 0.0});
 	get_light_data(light, rec->hit_point, &dirs[0], &dist);
 	dots[0] = vec3_dot(rec->normal, dirs[0]);
 	if (dots[0] <= 0.0)

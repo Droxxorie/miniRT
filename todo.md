@@ -3,14 +3,10 @@ Ajouter tests save
 fusioner test bonus et mandatory
 peut etre revoir rotate/translate dans mandatory et clean tt ç&
 mesh + .obj
-texture en jpg
 photon mapping
 no shadow disk ?
 revoir parsing .mtl
-choisir si hdr ou ldr ?
-sortie fichier hdr ? png ?
-scene julai et fractals
-revoir transfo pour cam/objet bonus/mandatory
+ajouter max threads
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS

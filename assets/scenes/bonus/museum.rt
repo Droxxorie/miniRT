@@ -1,0 +1,15 @@
+A 0.1 255,255,255
+C   0,1,-3    0,-0.28,0.96    70
+# R 1920 1080
+SB assets/textures/skybox/sky_museum.xpm
+mtllib assets/materials/museum.mtl
+
+SUN   1,-1,1      2.0    255,240,220
+# SPOT  0,20,0       0,-1,0   30.0   100.0   200,200,255
+
+pl  0,-1,0      0,1,0      255,255,255   -usemtl RoomCarpet
+
+sp  0,-0.5,-1    1.0    255,255,255   -usemtl BasketBall
+sp  1,0,0        2.0    255,255,255   -usemtl EarthModel
+sp  -1,0,0          2.0    255,255,255   -usemtl DecorJupiter
+

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:15:16 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/22 14:25:23 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 09:49:48 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_status	parse_sun(t_scene *scene, char **line)
 		|| check_eol(scene, line) == EXIT_FAILURE)
 		return (free(light), EXIT_FAILURE);
 	light->direction = vec3_normalize(light->direction);
+	light->position = vec3_scale(light->direction, -10000);
 	add_light_to_scene(scene, light);
 	return (EXIT_SUCCESS);
 }

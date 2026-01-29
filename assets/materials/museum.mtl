@@ -1,0 +1,27 @@
+newmtl EarthModel
+illum 6
+Kd 1.0 1.0 1.0
+
+Ns 50
+map_Kd assets/textures/earth_col.xpm
+map_Kn assets/textures/earth_nml.xpm
+map_Ks assets/textures/earth_spc.xpm
+
+newmtl BasketBall
+illum 5
+Kd 1.0 1.0 1.0
+Ns 100
+map_Kd assets/textures/basketball.xpm
+map_Kn assets/textures/basketball_bump.xpm
+
+newmtl RoomCarpet
+illum 5
+Kd 1.0 1.0 1.0
+Ns 0
+map_Kd assets/textures/carpet.xpm
+uv_scale 1000
+
+newmtl DecorJupiter
+illum 1
+Kd 1.0 1.0 1.0
+map_Kd assets/textures/jupiter.xpm

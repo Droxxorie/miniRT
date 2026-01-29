@@ -154,7 +154,6 @@ SRCS += \
     $(SRC_DIR)/maths/matrix/mult.c \
 	$(SRC_DIR)/maths/matrix/transpose.c \
 	$(SRC_DIR)/maths/matrix/inverse.c \
-	$(SRC_DIR)/maths/matrix/rotate_vector.c \
 	$(SRC_DIR)/maths/matrix/scale.c \
 	$(SRC_DIR)/maths/matrix/rotation_euler.c \
 	$(SRC_DIR)/maths/matrix/rotation_axis.c \
@@ -401,7 +400,6 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/maths/matrix/identity_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/inverse_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/mult_bonus.c \
-    $(SRC_DIR_BONUS)/maths/matrix/rotate_vector_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/rotation_align_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/rotation_axis_bonus.c \
     $(SRC_DIR_BONUS)/maths/matrix/rotation_euler_bonus.c \

@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 20:28:21 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 12:10:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/01/29 08:59:21 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static t_status	dispatch_maps(t_material *current, char *line)
 	if (match_and_consume(&line, "map_Kd") == EXIT_SUCCESS)
 		return (parse_texture_path(&line, &current->albedo_texture_path));
 	if (match_and_consume(&line, "map_Bump") == EXIT_SUCCESS
-		|| match_and_consume(&line, "Bump") == EXIT_SUCCESS)
+		|| match_and_consume(&line, "Bump") == EXIT_SUCCESS
+		|| match_and_consume(&line, "map_Kn") == EXIT_SUCCESS)
 		return (parse_texture_path(&line, &current->normal_texture_path));
 	if (match_and_consume(&line, "map_Pr") == EXIT_SUCCESS)
 		return (parse_texture_path(&line, &current->metallic_texture_path));
