@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 00:07:26 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/29 09:40:51 by eraad            ###   ########.fr       */
+/*   Updated: 2026/02/02 16:33:32 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static t_color	process_light(t_scene *s, t_light *light,
 	t_real	attenuation;
 	t_color	k_s;
 
+	k_s = (t_color){0.0, 0.0, 0.0};
 	v->l = vec3_sub(light->position, rec->hit_point);
 	dist = vec3_len(v->l);
 	v->l = vec3_normalize(v->l);

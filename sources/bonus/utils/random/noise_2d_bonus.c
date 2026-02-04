@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:34:53 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/21 21:22:11 by eraad            ###   ########.fr       */
+/*   Updated: 2026/02/02 16:33:54 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,9 @@ static t_real	grad(int hash, t_real x, t_real y)
 		v = x;
 	else
 		v = 0;
-	if ((h & 1) == 0)
-		u = u;
-	else
+	if ((h & 1) != 0)
 		u = -u;
-	if ((h & 2) == 0)
-		v = v;
-	else
+	if ((h & 2) != 0)
 		v = -v;
 	return (u + v);
 }
