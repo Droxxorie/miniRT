@@ -12,21 +12,12 @@
 
 #include <minirt_bonus.h>
 
-static void	init_prb_params(t_material *mat, t_hit_record *rec,
-		t_cook_torrance_vars *v)
+static void	init_prb_params(t_hit_record *rec, t_cook_torrance_vars *v)
 {
-	v->albedo = get_albedo(mat, rec);
-	v->roughness = mat->roughness;
-	v->metallic = mat->metallic;
-	if (mat->roughness_map)
-		v->roughness = sample_texture(mat->roughness_map, rec->u, rec->v).r;
-	if (mat->metallic_map)
-		v->metallic = sample_texture(mat->metallic_map, rec->u, rec->v).r;
-	v->f0 = (t_color){0.04, 0.04, 0.04};
-	if (v->metallic > 0.5)
-		v->f0 = mat->specular_color;
-	else if (mat->roughness > 0.99)
-		v->f0 = (t_color){0.0, 0.0, 0.0};
+	v->albedo = rec->albedo;
+	v->roughness = rec->roughness;
+	v->metallic = rec->metallic;
+	v->f0 = rec->f0;
 }
 
 static t_color	calc_specular(t_cook_torrance_vars *v, t_color f)
@@ -55,7 +46,7 @@ static t_color	apply_specular_fade(t_cook_torrance_vars *v, t_color specular)
 	return (specular);
 }
 
-static t_color	compute_pbr_surface(t_material *mat, t_hit_record *rec,
+static t_color	compute_pbr_surface(t_hit_record *rec,
 		t_cook_torrance_vars *v)
 {
 	t_color	specular;
@@ -63,7 +54,7 @@ static t_color	compute_pbr_surface(t_material *mat, t_hit_record *rec,
 	t_color	k_d;
 	t_color	f;
 
-	init_prb_params(mat, rec, v);
+	init_prb_params(rec, v);
 	f = fresnel_schlick(fmax(vec3_dot(v->h, v->v), 0.0), v->f0);
 	specular = calc_specular(v, f);
 	specular = apply_specular_fade(v, specular);
@@ -81,7 +72,7 @@ t_color	eval_bsdf(t_material *mat, t_hit_record *rec, t_vec3 v, t_vec3 l)
 	{
 		if (fmax(vec3_dot(rec->normal, l), 0.0) <= 0.0)
 			return ((t_color){0.0, 0.0, 0.0});
-		return (color_scale(get_albedo(mat, rec), INV_PI));
+		return (color_scale(rec->albedo, INV_PI));
 	}
 	vars.v = v;
 	vars.l = l;
@@ -91,5 +82,5 @@ t_color	eval_bsdf(t_material *mat, t_hit_record *rec, t_vec3 v, t_vec3 l)
 	vars.n_dot_v = fmax(vec3_dot(vars.n, vars.v), 0.0);
 	if (vars.n_dot_l <= EPSILON || vars.n_dot_v <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
-	return (compute_pbr_surface(mat, rec, &vars));
+	return (compute_pbr_surface(rec, &vars));
 }

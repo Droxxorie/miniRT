@@ -66,6 +66,7 @@ t_vec3		get_light_sample(t_light *light, t_hit_record *record,
 //*                                SHADERS                                    */
 //* ========================================================================= */
 t_color		get_albedo(t_material *mat, t_hit_record *record);
+void		prepare_surface(t_hit_record *rec);
 t_real		get_shininess(t_material *mat, t_hit_record *record);
 t_color		shader_phong(t_scene *scene, t_hit_record *record, t_ray *ray);
 t_color		sample_texture(t_image *texture, t_real u, t_real v);

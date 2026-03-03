@@ -12,6 +12,24 @@
 
 #include <minirt_bonus.h>
 
+static void	compute_tile_grid(t_scene *scene)
+{
+	int	w;
+	int	h;
+	int	scale;
+
+	scale = (int)scene->render_scale;
+	if (scale < 1)
+		scale = 1;
+	w = (scene->mlx_window.width + TILE_SIZE * scale - 1)
+		/ (TILE_SIZE * scale);
+	h = (scene->mlx_window.height + TILE_SIZE * scale - 1)
+		/ (TILE_SIZE * scale);
+	scene->tiles_per_row = w;
+	scene->total_tiles = w * h;
+	scene->next_tile = 0;
+}
+
 int	init_render_threads(t_scene *scene, pthread_t **threads,
 		t_thread_data **data)
 {
@@ -24,8 +42,8 @@ int	init_render_threads(t_scene *scene, pthread_t **threads,
 	*data = malloc(sizeof(t_thread_data) * thread_count);
 	if (!*threads || !*data)
 		sys_print_error_free_exit(scene, ERR_MEM);
-	scene->next_line = 0;
-	if (pthread_mutex_init(&scene->line_mutex, NULL) != 0)
+	compute_tile_grid(scene);
+	if (pthread_mutex_init(&scene->tile_mutex, NULL) != 0)
 		sys_print_error_free_exit(scene, ERR_MUTEX);
 	return (thread_count);
 }
@@ -62,7 +80,7 @@ void	wait_render_threads(int count, pthread_t *threads)
 void	cleanup_render_threads(t_scene *scene, pthread_t *threads,
 		t_thread_data *data)
 {
-	pthread_mutex_destroy(&scene->line_mutex);
+	pthread_mutex_destroy(&scene->tile_mutex);
 	free(threads);
 	free(data);
 }

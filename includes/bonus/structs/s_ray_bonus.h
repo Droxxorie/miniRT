@@ -37,11 +37,15 @@ typedef struct s_hit_record
 	t_object			*object;
 	t_point3			hit_point;
 	t_vec3				normal;
-	t_real				t;
-	t_bool				front_face;
 	t_color				color;
+	t_color				albedo;
+	t_color				f0;
+	t_real				t;
 	t_real				u;
 	t_real				v;
+	t_real				roughness;
+	t_real				metallic;
+	t_bool				front_face;
 }						t_hit_record;
 
 typedef struct s_bvh_node
@@ -60,10 +64,10 @@ typedef struct s_ray_march_data
 	t_real				depth;
 	t_real				local_dist;
 	t_real				world_dist;
-	int					steps;
 	t_real				scale;
 	t_real				threshold;
 	t_real				step_factor;
+	int					steps;
 	int					max_steps;
 }						t_ray_march_data;
 
@@ -84,17 +88,17 @@ typedef struct s_cook_torrance_vars
 
 typedef struct s_path_info
 {
-	unsigned int	seed;
-	t_bool			specular_bounce;
-	t_bool			front_face;
-	t_real			last_pdf;
-	t_vec3			next_dir;
-	t_real			pdf;
-	t_real			bsdf_weight;
 	t_bvh_node		*bvh_root;
+	t_vec3			next_dir;
 	t_color			final;
 	t_color			thru;
+	t_real			last_pdf;
+	t_real			pdf;
+	t_real			bsdf_weight;
+	unsigned int	seed;
 	int				depth;
+	t_bool			specular_bounce;
+	t_bool			front_face;
 }					t_path_info;
 
 typedef struct s_light_sample_vars

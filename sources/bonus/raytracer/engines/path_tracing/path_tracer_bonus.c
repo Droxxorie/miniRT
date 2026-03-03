@@ -87,6 +87,8 @@ static t_bool	handle_emission(t_scene *s, t_hit_record *rec, t_ray *ray,
 static t_bool	process_bounce(t_scene *s, t_hit_record *rec, t_ray *ray,
 		t_path_info *i)
 {
+	t_vec3	v;
+
 	if (s->render_mode != RENDER_SHADE)
 	{
 		i->final = debug_pathtracer(s, rec, i, ray);
@@ -99,9 +101,10 @@ static t_bool	process_bounce(t_scene *s, t_hit_record *rec, t_ray *ray,
 	}
 	if (handle_emission(s, rec, ray, i))
 		return (TRUE);
-	apply_surface_logic(s, rec, vec3_scale(ray->direction, -1.0), i);
+	v = vec3_scale(ray->direction, -1.0);
+	apply_surface_logic(s, rec, v, i);
 	i->thru = color_prod(i->thru, get_attenuation(rec->object->material, rec,
-				vec3_normalize(vec3_scale(ray->direction, -1.0)), i));
+				v, i));
 	i->last_pdf = i->pdf;
 	if (russian_roulette(i, color_mean(i->thru)) == TRUE)
 		return (TRUE);
@@ -125,6 +128,7 @@ t_color	path_trace(t_scene *s, t_ray ray, unsigned int *seed)
 		if (!hit_bvh(s->bvh_root, &ray, &rec))
 			return (color_add(i.final, color_prod(i.thru, get_skybox_color(s,
 							&ray))));
+		prepare_surface(&rec);
 		if (process_bounce(s, &rec, &ray, &i) == TRUE)
 			break ;
 		ray = update_ray(&rec, i.next_dir);

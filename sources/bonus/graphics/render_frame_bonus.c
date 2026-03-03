@@ -12,113 +12,66 @@
 
 #include <minirt_bonus.h>
 
-static t_color	sample_pixel_once(t_scene *scene, int *xyi,
-		unsigned int *seed)
+static void	render_tile(t_scene *s, int tile_x, int tile_y)
 {
-	t_ray		ray;
-	t_point3	uv;
-	t_bool		use_whitted;
-	t_bool		do_jitter;
+	int	x;
+	int	y;
+	int	scale;
+	int	lim[2];
 
-	seed[1] = pcg_hash(seed[0] ^ ((unsigned int)xyi[2] * 2654435769u));
-	uv.x = (t_real)xyi[0];
-	uv.y = (t_real)xyi[1];
-	use_whitted = (scene->render_scale > 1.0
-			|| (int)scene->samples_per_pixel == 1);
-	do_jitter = (scene->render_scale > 1.0
-			|| (int)scene->samples_per_pixel == 1);
-	if (do_jitter && (int)scene->aa_samples <= 1)
-		do_jitter = FALSE;
-	if (!do_jitter && (int)scene->samples_per_pixel > 1)
-		do_jitter = TRUE;
-	if (do_jitter)
+	scale = (int)s->render_scale;
+	if (scale < 1)
+		scale = 1;
+	lim[0] = tile_x + TILE_SIZE * scale;
+	lim[1] = tile_y + TILE_SIZE * scale;
+	if (lim[0] > s->mlx_window.width)
+		lim[0] = s->mlx_window.width;
+	if (lim[1] > s->mlx_window.height)
+		lim[1] = s->mlx_window.height;
+	y = tile_y;
+	while (y < lim[1])
 	{
-		uv.x += random_double(&seed[1]) - 0.5;
-		uv.y += random_double(&seed[1]) - 0.5;
-	}
-	generate_ray(scene->active_camera, &ray, uv.x, uv.y);
-	if (use_whitted == TRUE)
-		return (cast_ray(scene, &ray, MAX_REFLECTION_DEPTH));
-	return (path_trace(scene, ray, &seed[1]));
-}
-
-static t_color	compute_pixel_color(t_scene *scene, int x, int y,
-		unsigned int *seed)
-{
-	t_color	accumulated;
-	int		xyi[3];
-	int		i;
-	int		n;
-
-	if (scene->render_scale > 1.0 || (int)scene->samples_per_pixel == 1)
-		n = (int)scene->aa_samples;
-	else
-		n = (int)scene->samples_per_pixel;
-	accumulated = (t_color){0.0, 0.0, 0.0};
-	xyi[0] = x;
-	xyi[1] = y;
-	i = 0;
-	while (i < n)
-	{
-		xyi[2] = i;
-		accumulated = color_add(accumulated, sample_pixel_once(scene, xyi,
-					seed));
-		i++;
-	}
-	return (color_div(accumulated, (t_real)n));
-}
-
-static void	process_pixel(t_scene *s, int x, int y)
-{
-	t_color			final;
-	unsigned int	seeds[2];
-	int				color;
-	int				i;
-	int				j;
-
-	seeds[0] = pcg_hash((unsigned int)x * 2654435761u
-			^ (unsigned int)y * 805459861u);
-	final = compute_pixel_color(s, x, y, seeds);
-	final = aces_tone_mapping(final);
-	final = gamma_correction(final);
-	color = color_to_int(final);
-	i = -1;
-	while (++i < (int)s->render_scale)
-	{
-		j = -1;
-		while (++j < (int)s->render_scale)
+		x = tile_x;
+		while (x < lim[0])
 		{
-			if (x + i < s->mlx_window.width && y + j < s->mlx_window.height)
-				image_pixel_put(&s->frame_buffer, x + i, y + j, color);
+			process_pixel(s, x, y);
+			x += scale;
 		}
+		y += scale;
 	}
+}
+
+static int	grab_next_tile(t_scene *s)
+{
+	int	tile_idx;
+
+	pthread_mutex_lock(&s->tile_mutex);
+	tile_idx = s->next_tile;
+	s->next_tile++;
+	if (tile_idx < s->total_tiles)
+		display_progress(tile_idx, s->total_tiles);
+	pthread_mutex_unlock(&s->tile_mutex);
+	return (tile_idx);
 }
 
 void	*render_routine(void *arg)
 {
 	t_thread_data	*data;
-	int				x;
-	int				y;
+	int				tile_idx;
 	int				scale;
 
 	data = (t_thread_data *)arg;
-	scale = (int)(data->scene->render_scale);
+	scale = (int)data->scene->render_scale;
+	if (scale < 1)
+		scale = 1;
 	while (1)
 	{
-		pthread_mutex_lock(&data->scene->line_mutex);
-		y = data->scene->next_line;
-		data->scene->next_line += scale;
-		if (y < data->scene->mlx_window.height)
-			display_progress(y, data->scene->mlx_window.height - 1);
-		pthread_mutex_unlock(&data->scene->line_mutex);
-		if (y >= data->scene->mlx_window.height)
+		tile_idx = grab_next_tile(data->scene);
+		if (tile_idx >= data->scene->total_tiles)
 			break ;
-		x = 0;
-		while (x < data->scene->mlx_window.width)
-		{
-			process_pixel(data->scene, x, y);
-			x += scale;
-		}
+		render_tile(data->scene,
+			(tile_idx % data->scene->tiles_per_row) * TILE_SIZE * scale,
+			(tile_idx / data->scene->tiles_per_row) * TILE_SIZE * scale);
 	}
 	return (NULL);
 }

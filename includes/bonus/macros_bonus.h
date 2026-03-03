@@ -61,6 +61,8 @@
 # define AO_SAMPLES 64
 # define AO_RADIUS 1.5
 
+# define TILE_SIZE 32
+
 # define MAX_REFLECTION_DEPTH 50
 # define ROULETTE_START_DEPTH 15
 

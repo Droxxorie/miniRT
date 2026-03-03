@@ -26,44 +26,44 @@ typedef enum e_light_type
 
 typedef struct s_light
 {
-	int				id;
-	t_light_type	type;
 	t_point3		position;
 	t_vec3			direction;
-	t_real			brightness;
 	t_point3		initial_position;
 	t_vec3			initial_direction;
-	t_real			initial_brightness;
 	t_color			color;
 	t_vec3			u;
 	t_vec3			v;
+	t_vec3			initial_u;
+	t_vec3			initial_v;
+	struct s_light	*next;
+	t_real			brightness;
+	t_real			initial_brightness;
 	t_real			width;
 	t_real			height;
 	t_real			cos_theta;
-	t_vec3			initial_u;
-	t_vec3			initial_v;
 	t_real			initial_cos_theta;
+	int				id;
+	t_light_type	type;
 	t_bool			active;
-	struct s_light	*next;
 }					t_light;
 
 typedef struct s_camera
 {
-	int				id;
 	t_point3		position;
 	t_vec3			direction;
-	t_real			fov;
 	t_mat4			camera_to_world;
+	t_point3		initial_position;
+	t_vec3			initial_direction;
+	struct s_camera	*next;
+	t_real			fov;
 	t_real			scale_factor;
 	t_real			width;
 	t_real			height;
 	t_real			aspect_ratio;
 	t_real			tilt;
-	t_point3		initial_position;
-	t_vec3			initial_direction;
-	int				initial_fov;
 	t_real			initial_tilt;
-	struct s_camera	*next;
+	int				id;
+	int				initial_fov;
 }					t_camera;
 
 typedef struct s_image
@@ -121,7 +121,6 @@ typedef struct s_scene
 {
 	char			*file_name;
 	char			*line_ptr;
-	int				line_number;
 	t_window		mlx_window;
 	t_image			frame_buffer;
 	t_color			ambient;
@@ -133,21 +132,24 @@ typedef struct s_scene
 	t_camera		*active_camera;
 	t_object		*selected_object;
 	t_light			*selected_light;
-	t_control_mode	control_mode;
-	t_bool			shift_pressed;
-	t_bool			ctrl_pressed;
-	t_bool			alt_pressed;
-	pthread_mutex_t	line_mutex;
-	int				next_line;
-	t_bool			to_save;
 	char			*save_file;
-	t_render_mode	render_mode;
 	t_material		*materials;
 	char			*skybox_texture_path;
 	t_image			*skybox_map;
 	t_real			samples_per_pixel;
 	t_real			aa_samples;
 	t_real			render_scale;
+	pthread_mutex_t	tile_mutex;
+	int				next_tile;
+	int				total_tiles;
+	int				tiles_per_row;
+	int				line_number;
+	t_control_mode	control_mode;
+	t_render_mode	render_mode;
+	t_bool			shift_pressed;
+	t_bool			ctrl_pressed;
+	t_bool			alt_pressed;
+	t_bool			to_save;
 }					t_scene;
 
 typedef struct s_thread_data

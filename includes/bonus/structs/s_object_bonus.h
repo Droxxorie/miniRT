@@ -198,7 +198,6 @@ typedef enum e_object_type
 
 typedef struct s_object
 {
-	t_object_type		type;
 	t_color				color;
 	t_material			*material;
 	t_mat4				transform;
@@ -206,9 +205,6 @@ typedef struct s_object
 	t_mat4				inverse;
 	t_mat4				transposed_inverse;
 	t_aabb				aabb;
-	t_bool				visible;
-	t_bool				render_as_sdf;
-	t_bool				is_fractal;
 	t_sdf				sdf_data;
 	t_real				sdf_scale;
 	union
@@ -227,6 +223,10 @@ typedef struct s_object
 		t_julia_set		julia_set;
 	} u_data;
 	struct s_object		*next;
+	t_object_type		type;
+	t_bool				visible;
+	t_bool				render_as_sdf;
+	t_bool				is_fractal;
 }						t_object;
 
 #endif

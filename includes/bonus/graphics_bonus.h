@@ -20,6 +20,7 @@
 //*                                PROTOTYPES                                 */
 //* ========================================================================= */
 int			color_to_int(t_color c);
+void		process_pixel(t_scene *s, int x, int y);
 void		*render_routine(void *arg);
 void		render_frame(t_scene *scene);
 t_status	init_graphics(t_scene *scene);

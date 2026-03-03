@@ -32,3 +32,24 @@ t_color	get_albedo(t_material *mat, t_hit_record *record)
 		return (mat->color);
 	return (record->color);
 }
+
+void	prepare_surface(t_hit_record *rec)
+{
+	t_material	*mat;
+
+	mat = rec->object->material;
+	if (!mat)
+		return ;
+	rec->albedo = get_albedo(mat, rec);
+	rec->roughness = mat->roughness;
+	rec->metallic = mat->metallic;
+	if (mat->roughness_map)
+		rec->roughness = sample_texture(mat->roughness_map, rec->u, rec->v).r;
+	if (mat->metallic_map)
+		rec->metallic = sample_texture(mat->metallic_map, rec->u, rec->v).r;
+	rec->f0 = (t_color){0.04, 0.04, 0.04};
+	if (rec->metallic > 0.5)
+		rec->f0 = mat->specular_color;
+	else if (rec->roughness > 0.99)
+		rec->f0 = (t_color){0.0, 0.0, 0.0};
+}

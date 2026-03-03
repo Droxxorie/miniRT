@@ -39,33 +39,33 @@ typedef enum e_material_type
 typedef struct s_material
 {
 	char				*name;
-	t_material_type		type;
+	struct s_material	*next;
 	t_color				ambient_color;
-	t_real				a;
-	t_real				b;
-	t_real				ior;
-	t_real				transparency;
 	t_color				absorbance;
 	t_color				color;
+	t_color				emission_color;
+	t_color				specular_color;
 	struct s_image		*albedo_map;
 	char				*albedo_texture_path;
 	struct s_image		*normal_map;
 	char				*normal_texture_path;
-	t_real				roughness;
 	struct s_image		*roughness_map;
 	char				*roughness_texture_path;
-	t_color				emission_color;
 	struct s_image		*emission_map;
 	char				*emission_texture_path;
-	t_real				metallic;
 	struct s_image		*metallic_map;
 	char				*metallic_texture_path;
-	t_color				specular_color;
 	struct s_image		*specular_map;
 	char				*specular_texture_path;
+	t_real				a;
+	t_real				b;
+	t_real				ior;
+	t_real				transparency;
+	t_real				roughness;
+	t_real				metallic;
 	t_real				uv_scale;
+	t_material_type		type;
 	t_pattern			pattern_type;
-	struct s_material	*next;
 }						t_material;
 
 #endif
