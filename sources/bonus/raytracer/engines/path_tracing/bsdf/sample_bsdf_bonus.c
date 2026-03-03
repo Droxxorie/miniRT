@@ -25,7 +25,7 @@ static t_real	get_sample_weight(t_material *mat)
 //* up_right[1] = right
 //* cos_sin_theta[0] = cos_theta
 //* cos_sin_theta[1] = sin_theta
-static t_vec3	sample_ggx(t_vec3 n, t_real roughness, unsigned int *seed)
+t_vec3	sample_ggx(t_vec3 n, t_real roughness, unsigned int *seed)
 {
 	t_real	r[2];
 	t_real	phi;
@@ -57,7 +57,11 @@ t_real	bsdf_pdf(t_material *mat, t_vec3 n, t_vec3 v, t_vec3 l)
 	t_real	d;
 
 	if (mat->type == DIELECTRIC)
+	{
+		if (mat->roughness > 0.01)
+			return (dielectric_bsdf_pdf(mat, n, v, l));
 		return (0.0);
+	}
 	if (mat->metallic < 0.01 && (mat->roughness >= 0.99))
 		return (fmax(vec3_dot(n, l), 0.0) * INV_PI);
 	h = vec3_normalize(vec3_add(v, l));
@@ -74,22 +78,19 @@ t_real	bsdf_pdf(t_material *mat, t_vec3 n, t_vec3 v, t_vec3 l)
 static void	sample_dielectric(t_material *mat, t_vec3 r_in, t_vec3 n,
 		t_path_info *info)
 {
-	t_vec3	outward_normal;
 	t_vec3	refracted;
 	t_real	ior_ratio;
 	t_real	cosine;
 	t_real	reflect_prob;
 
-	outward_normal = n;
 	ior_ratio = 1.0 / mat->ior;
-	cosine = -vec3_dot(r_in, n) / vec3_len(r_in);
-	if (vec3_dot(r_in, n) > 0.0)
+	cosine = fmin(-vec3_dot(r_in, n), 1.0);
+	if (!info->front_face)
 	{
-		outward_normal = vec3_scale(n, -1.0);
 		ior_ratio = mat->ior;
-		cosine = mat->ior * vec3_dot(r_in, n) / vec3_len(r_in);
+		cosine = fmin(mat->ior * fabs(vec3_dot(r_in, n)), 1.0);
 	}
-	if (vec_refract(r_in, outward_normal, ior_ratio, &refracted))
+	if (vec_refract(r_in, n, ior_ratio, &refracted))
 		reflect_prob = reflectance(cosine, mat->ior);
 	else
 		reflect_prob = 1.0;
@@ -107,24 +108,24 @@ void	sample_bsdf(t_material *mat, t_vec3 n, t_vec3 v, t_path_info *info)
 
 	if (mat->type == DIELECTRIC || mat->ior > 1.0)
 	{
-		sample_dielectric(mat, vec3_scale(v, -1.0), n, info);
+		if (mat->roughness > 0.01)
+			sample_rough_dielectric(mat, n, v, info);
+		else
+			sample_dielectric(mat, vec3_scale(v, -1.0), n, info);
 		return ;
 	}
 	specular_weight = get_sample_weight(mat);
-	if (random_double(&info->seed) < specular_weight)
-	{
-		h = sample_ggx(n, mat->roughness, &info->seed);
-		info->next_dir = vec_reflect(vec3_scale(v, -1.0), h);
-		if (vec3_dot(info->next_dir, n) <= 0.0)
-			info->pdf = 0.0;
-		else
-			info->pdf = bsdf_pdf(mat, n, v, info->next_dir);
-		info->specular_bounce = TRUE;
-	}
-	else
+	info->specular_bounce = FALSE;
+	if (random_double(&info->seed) >= specular_weight)
 	{
 		info->next_dir = random_cosine_dir(n, &info->seed);
 		info->pdf = bsdf_pdf(mat, n, v, info->next_dir);
-		info->specular_bounce = FALSE;
+		return ;
 	}
+	h = sample_ggx(n, mat->roughness, &info->seed);
+	info->next_dir = vec_reflect(vec3_scale(v, -1.0), h);
+	info->pdf = 0.0;
+	if (vec3_dot(info->next_dir, n) > 0.0)
+		info->pdf = bsdf_pdf(mat, n, v, info->next_dir);
+	info->specular_bounce = TRUE;
 }

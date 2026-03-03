@@ -17,6 +17,10 @@
 
 t_vec3	random_cosine_dir(t_vec3 n, unsigned int *seed);
 void	build_onb(t_vec3 n, t_vec3 *t, t_vec3 *b);
+t_vec3	sample_ggx(t_vec3 n, t_real roughness, unsigned int *seed);
+void	sample_rough_dielectric(t_material *m, t_vec3 n, t_vec3 v,
+			t_path_info *info);
+t_real	dielectric_bsdf_pdf(t_material *m, t_vec3 n, t_vec3 v, t_vec3 l);
 t_real	power_heuristic(t_real pdf_a, t_real pdf_b);
 t_color	eval_bsdf(t_material *mat, t_hit_record *rec, t_vec3 v, t_vec3 l);
 t_real	bsdf_pdf(t_material *mat, t_vec3 n, t_vec3 v, t_vec3 l);

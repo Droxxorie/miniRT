@@ -2,6 +2,7 @@ libraries/minilibx-linux
 libraries/libft/libft.a
 libraries/libft/objects
 .vscode
+.cursor
 build/
 miniRT
 miniRT_bonus

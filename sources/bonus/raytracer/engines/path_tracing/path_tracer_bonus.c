@@ -18,17 +18,21 @@ static t_color	get_attenuation(t_material *mat, t_hit_record *rec, t_vec3 v,
 	t_color	f_r;
 	t_real	cos_theta;
 
+	info->front_face = rec->front_face;
 	sample_bsdf(mat, rec->normal, v, info);
 	if (info->pdf < EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
 	if (mat->type == DIELECTRIC || mat->roughness <= 0.001)
 	{
 		if (mat->type == METAL || mat->metallic > 0.9)
-			return (mat->specular_color);
-		if (mat->specular_color.r > EPSILON || mat->specular_color.g > EPSILON
-			|| mat->specular_color.b > EPSILON)
-			return (mat->specular_color);
-		return ((t_color){1.0, 1.0, 1.0});
+			f_r = mat->specular_color;
+		else if (color_mean(mat->specular_color) > EPSILON)
+			f_r = mat->specular_color;
+		else
+			f_r = (t_color){1.0, 1.0, 1.0};
+		if (mat->type == DIELECTRIC && mat->roughness > 0.01)
+			return (color_scale(f_r, info->bsdf_weight));
+		return (f_r);
 	}
 	f_r = eval_bsdf(mat, rec, v, info->next_dir);
 	cos_theta = fmax(vec3_dot(rec->normal, info->next_dir), 0.0);
@@ -44,7 +48,8 @@ static void	apply_surface_logic(t_scene *scene, t_hit_record *rec, t_vec3 v,
 	mat = rec->object->material;
 	if (!rec->front_face && (mat->type == DIELECTRIC || mat->ior > 1.0))
 		info->thru = beer_lambert(info->thru, rec->t, mat->absorbance);
-	if (mat->roughness > 0.001 && mat->type != DIELECTRIC)
+	if (mat->roughness > 0.001
+		&& (mat->type != DIELECTRIC || mat->roughness > 0.01))
 	{
 		if (scene->render_mode == RENDER_LIGHTS)
 			direct_light = (t_color){0, 0, 0};

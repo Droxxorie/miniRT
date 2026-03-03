@@ -86,9 +86,11 @@ typedef struct s_path_info
 {
 	unsigned int	seed;
 	t_bool			specular_bounce;
+	t_bool			front_face;
 	t_real			last_pdf;
 	t_vec3			next_dir;
 	t_real			pdf;
+	t_real			bsdf_weight;
 	t_bvh_node		*bvh_root;
 	t_color			final;
 	t_color			thru;
