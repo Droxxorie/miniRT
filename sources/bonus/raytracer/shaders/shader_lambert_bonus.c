@@ -17,20 +17,19 @@ t_color	shader_lambert(t_scene *scene, t_hit_record *record, t_color albedo)
 	t_color	total_light;
 	t_color	diffuse;
 	t_light	*light;
-	t_real	shadow_factor;
-	t_real	ao_factor;
+	t_color	shadow;
 
-	ao_factor = compute_ao(scene, record);
-	total_light = color_scale(color_prod(scene->ambient, albedo), ao_factor);
+	total_light = color_scale(color_prod(scene->ambient, albedo),
+			compute_ao(scene, record));
 	light = scene->lights;
 	while (light)
 	{
-		shadow_factor = get_shadow_factor(scene, record, light);
-		if (light->active && shadow_factor > 0.01)
+		shadow = get_shadow_factor(scene, record, light);
+		if (light->active && color_mean(shadow) > 0.01)
 		{
 			diffuse = compute_diffuse(light, record, albedo);
-			total_light = color_add(total_light, color_scale(diffuse,
-						shadow_factor));
+			total_light = color_add(total_light, color_prod(diffuse,
+						shadow));
 		}
 		light = light->next;
 	}

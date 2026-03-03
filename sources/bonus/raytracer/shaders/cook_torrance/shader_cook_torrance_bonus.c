@@ -72,7 +72,7 @@ static t_color	process_light(t_scene *s, t_light *light,
 {
 	t_color	radiance;
 	t_real	dist;
-	t_real	shadow;
+	t_color	shadow;
 	t_real	attenuation;
 	t_color	k_s;
 
@@ -87,8 +87,8 @@ static t_color	process_light(t_scene *s, t_light *light,
 	shadow = get_shadow_factor(s, rec, light);
 	attenuation = get_light_attenuation(light, dist) * get_spot_factor(light,
 			v->l);
-	radiance = color_scale(light->color, light->brightness * shadow
-			* attenuation);
+	radiance = color_prod(color_scale(light->color, light->brightness
+				* attenuation), shadow);
 	return (calculate_lighting(v, k_s, radiance));
 }
 

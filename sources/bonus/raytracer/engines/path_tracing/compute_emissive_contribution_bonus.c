@@ -74,6 +74,7 @@ t_color	compute_emissive_contribution(t_object *obj, t_hit_record *rec,
 				rec->normal, v, s.light_dir));
 	result = color_scale(color_prod(s.f_r, obj->material->emission_color),
 			n_dot_l * s.weight / pdf);
+	result = color_prod(result, s.transmittance);
 	if (!is_color_finite(&result))
 		return ((t_color){0.0, 0.0, 0.0});
 	return (result);

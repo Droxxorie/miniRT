@@ -58,30 +58,6 @@ static t_color	get_incoming_light(t_light *l, t_vec3 light_dir)
 	return (intensity);
 }
 
-t_bool	is_occulted(t_path_info *i, t_hit_record *rec,
-		t_light_sample_vars *v)
-{
-	t_ray			shadow_ray;
-	t_hit_record	shadow_rec;
-	t_material		*mat;
-
-	shadow_ray = new_ray(vec3_add(rec->hit_point, vec3_scale(rec->normal, 0.1)),
-			v->light_dir);
-	shadow_ray.min = 0.01;
-	shadow_ray.is_shadow_ray = TRUE;
-	shadow_ray.max = v->dist - 0.1;
-	if (hit_bvh(i->bvh_root, &shadow_ray, &shadow_rec))
-	{
-		mat = shadow_rec.object->material;
-		if (!mat)
-			return (TRUE);
-		if (mat->emission_color.r < EPSILON && mat->emission_color.g < EPSILON
-			&& mat->emission_color.b < EPSILON)
-			return (TRUE);
-	}
-	return (FALSE);
-}
-
 t_color	compute_light_contribution(t_light *l, t_hit_record *rec, t_vec3 v,
 		t_path_info *info)
 {
@@ -106,6 +82,7 @@ t_color	compute_light_contribution(t_light *l, t_hit_record *rec, t_vec3 v,
 					rec->normal, v, s.light_dir));
 	result = color_scale(color_prod(s.f_r, get_incoming_light(l, s.light_dir)),
 			n_dot_l * s.weight / pdf_val);
+	result = color_prod(result, s.transmittance);
 	if (!is_color_finite(&result))
 		return ((t_color){0.0, 0.0, 0.0});
 	return (result);

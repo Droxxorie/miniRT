@@ -51,7 +51,7 @@ t_color		beer_lambert(t_color color, t_real dist, t_color absorbance);
 t_color		cast_ray(t_scene *s, t_ray *ray, int depth);
 t_ray		new_ray(t_point3 origin, t_vec3 dir);
 t_real		compute_ao(t_scene *s, t_hit_record *rec);
-t_real		get_shadow_factor(t_scene *s, t_hit_record *rec, t_light *l);
+t_color		get_shadow_factor(t_scene *s, t_hit_record *rec, t_light *l);
 t_color		compute_diffuse(t_light *l, t_hit_record *rec, t_color albedo);
 t_color		compute_specular(t_light *l, t_hit_record *rec, t_ray *ray,
 				t_real shininess);

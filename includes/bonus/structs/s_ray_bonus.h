@@ -104,6 +104,7 @@ typedef struct s_light_sample_vars
 	t_real		dist;
 	t_real		weight;
 	t_color		f_r;
+	t_color		transmittance;
 }				t_light_sample_vars;
 
 #endif

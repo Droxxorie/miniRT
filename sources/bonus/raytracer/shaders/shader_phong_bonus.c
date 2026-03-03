@@ -14,30 +14,29 @@
 
 //* parts[0] = diffuse
 //* parts[1] = specular
-//* factors[0] = shadow_factor
-//* factors[1] = shininess
+//* parts[2] = shadow
 static t_color	accumulate_lights(t_scene *scene, t_hit_record *record,
 		t_ray *ray, t_color albedo)
 {
 	t_light	*current;
 	t_color	total_light;
-	t_color	parts[2];
-	t_real	factors[2];
+	t_color	parts[3];
+	t_real	shininess;
 
 	total_light = (t_color){0.0, 0.0, 0.0};
 	current = scene->lights;
-	factors[1] = get_shininess(record->object->material, record);
-	if (factors[1] < 1.0)
-		factors[1] = 32.0;
+	shininess = get_shininess(record->object->material, record);
+	if (shininess < 1.0)
+		shininess = 32.0;
 	while (current)
 	{
-		factors[0] = get_shadow_factor(scene, record, current);
-		if (current->active && factors[0] > 0.01)
+		parts[2] = get_shadow_factor(scene, record, current);
+		if (current->active && color_mean(parts[2]) > 0.01)
 		{
 			parts[0] = compute_diffuse(current, record, albedo);
-			parts[1] = compute_specular(current, record, ray, factors[1]);
-			total_light = color_add(total_light, color_scale(color_add(parts[0],
-							parts[1]), factors[0]));
+			parts[1] = compute_specular(current, record, ray, shininess);
+			total_light = color_add(total_light, color_prod(color_add(
+							parts[0], parts[1]), parts[2]));
 		}
 		current = current->next;
 	}

@@ -42,24 +42,25 @@ static t_color	debug_depth(t_hit_record *record)
 static t_color	debug_shadow(t_scene *scene, t_hit_record *record)
 {
 	t_light	*light;
-	t_real	shadow_factor;
+	t_color	shadow_total;
 	int		count;
 
 	light = scene->lights;
-	shadow_factor = 0.0;
+	shadow_total = (t_color){0.0, 0.0, 0.0};
 	count = 0;
 	while (light)
 	{
 		if (light->active)
 		{
-			shadow_factor += get_shadow_factor(scene, record, light);
+			shadow_total = color_add(shadow_total, get_shadow_factor(scene,
+						record, light));
 			count++;
 		}
 		light = light->next;
 	}
 	if (count > 0)
-		shadow_factor /= (t_real)count;
-	return ((t_color){shadow_factor, shadow_factor, shadow_factor});
+		shadow_total = color_scale(shadow_total, 1.0 / (t_real)count);
+	return (shadow_total);
 }
 
 t_color	render_debug(t_scene *scene, t_hit_record *record)
