@@ -43,35 +43,36 @@ static void	render_tile(t_scene *s, int tile_x, int tile_y)
 
 static int	grab_next_tile(t_scene *s)
 {
-	int	tile_idx;
+	int	idx;
 
 	pthread_mutex_lock(&s->tile_mutex);
-	tile_idx = s->next_tile;
+	idx = s->next_tile;
 	s->next_tile++;
-	if (tile_idx < s->total_tiles)
-		display_progress(tile_idx, s->total_tiles);
 	pthread_mutex_unlock(&s->tile_mutex);
-	return (tile_idx);
+	return (idx);
 }
 
 void	*render_routine(void *arg)
 {
 	t_thread_data	*data;
-	int				tile_idx;
-	int				scale;
+	int				seq;
+	int				tile;
+	int				eff;
 
 	data = (t_thread_data *)arg;
-	scale = (int)data->scene->render_scale;
-	if (scale < 1)
-		scale = 1;
+	eff = TILE_SIZE * (int)fmax(data->scene->render_scale, 1.0);
 	while (1)
 	{
-		tile_idx = grab_next_tile(data->scene);
-		if (tile_idx >= data->scene->total_tiles)
+		seq = grab_next_tile(data->scene);
+		if (seq >= data->scene->total_tiles)
 			break ;
+		tile = data->scene->tile_order[seq];
+		draw_tile_border(data->scene,
+			(tile % data->scene->tiles_per_row) * eff,
+			(tile / data->scene->tiles_per_row) * eff);
 		render_tile(data->scene,
-			(tile_idx % data->scene->tiles_per_row) * TILE_SIZE * scale,
-			(tile_idx / data->scene->tiles_per_row) * TILE_SIZE * scale);
+			(tile % data->scene->tiles_per_row) * eff,
+			(tile / data->scene->tiles_per_row) * eff);
 	}
 	return (NULL);
 }
@@ -87,11 +88,20 @@ void	render_frame(t_scene *scene)
 	start_time = get_time_ms();
 	thread_count = init_render_threads(scene, &threads, &data);
 	start_render_threads(scene, thread_count, threads, data);
+	while (scene->next_tile < scene->total_tiles)
+	{
+		usleep(DISPLAY_INTERVAL_US);
+		display_progress(scene->next_tile, scene->total_tiles);
+		if (scene->mlx_window.win_ptr)
+			mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
+				scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
+	}
 	wait_render_threads(thread_count, threads);
+	display_progress(scene->total_tiles, scene->total_tiles);
 	cleanup_render_threads(scene, threads, data);
 	if (scene->mlx_window.win_ptr)
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
 	end_time = get_time_ms();
-	log_event(stdout, "PERF", "Render time: %ld ms\r", end_time - start_time);
+	log_event(stdout, "PERF", "Render time: %ld ms\n", end_time - start_time);
 }

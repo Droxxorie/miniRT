@@ -140,9 +140,11 @@ typedef struct s_scene
 	t_real			aa_samples;
 	t_real			render_scale;
 	pthread_mutex_t	tile_mutex;
-	int				next_tile;
-	int				total_tiles;
+	int				*tile_order;
 	int				tiles_per_row;
+	int				tiles_per_col;
+	int				total_tiles;
+	int				next_tile;
 	int				line_number;
 	t_control_mode	control_mode;
 	t_render_mode	render_mode;

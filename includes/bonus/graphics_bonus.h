@@ -28,6 +28,8 @@ t_status	init_textures(t_scene *scene);
 void		image_pixel_put(t_image *img, int x, int y, int color);
 t_color		gamma_correction(t_color color);
 t_color		aces_tone_mapping(t_color hdr);
+void		draw_tile_border(t_scene *s, int x, int y);
+void		build_spiral_order(t_scene *s);
 
 //* --- Multi-threading --- */
 void		wait_render_threads(int count, pthread_t *threads);

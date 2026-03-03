@@ -14,19 +14,16 @@
 
 static void	compute_tile_grid(t_scene *scene)
 {
-	int	w;
-	int	h;
 	int	scale;
+	int	eff;
 
 	scale = (int)scene->render_scale;
 	if (scale < 1)
 		scale = 1;
-	w = (scene->mlx_window.width + TILE_SIZE * scale - 1)
-		/ (TILE_SIZE * scale);
-	h = (scene->mlx_window.height + TILE_SIZE * scale - 1)
-		/ (TILE_SIZE * scale);
-	scene->tiles_per_row = w;
-	scene->total_tiles = w * h;
+	eff = TILE_SIZE * scale;
+	scene->tiles_per_row = (scene->mlx_window.width + eff - 1) / eff;
+	scene->tiles_per_col = (scene->mlx_window.height + eff - 1) / eff;
+	scene->total_tiles = scene->tiles_per_row * scene->tiles_per_col;
 	scene->next_tile = 0;
 }
 
@@ -43,6 +40,7 @@ int	init_render_threads(t_scene *scene, pthread_t **threads,
 	if (!*threads || !*data)
 		sys_print_error_free_exit(scene, ERR_MEM);
 	compute_tile_grid(scene);
+	build_spiral_order(scene);
 	if (pthread_mutex_init(&scene->tile_mutex, NULL) != 0)
 		sys_print_error_free_exit(scene, ERR_MUTEX);
 	return (thread_count);
@@ -81,6 +79,7 @@ void	cleanup_render_threads(t_scene *scene, pthread_t *threads,
 		t_thread_data *data)
 {
 	pthread_mutex_destroy(&scene->tile_mutex);
+	free(scene->tile_order);
 	free(threads);
 	free(data);
 }
