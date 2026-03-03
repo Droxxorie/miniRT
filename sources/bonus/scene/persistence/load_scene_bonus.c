@@ -20,6 +20,7 @@ static void	init_default_values(t_scene *scene)
 	scene->ambient.r = -1;
 	scene->objects = NULL;
 	scene->lights = NULL;
+	scene->emissive_lights = NULL;
 	scene->cameras = NULL;
 	scene->active_camera = NULL;
 	scene->selected_object = NULL;
@@ -61,6 +62,8 @@ t_status	load_scene(t_scene *scene, const char *file_path)
 		file_path, RESET);
 	init_default_values(scene);
 	if (parse_scene_file(scene, file_path) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (build_emissive_list(scene) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (scene->mlx_window.width == -1 || scene->mlx_window.height == -1)
 	{

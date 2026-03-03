@@ -47,3 +47,15 @@ void	free_cameras(t_camera *camera)
 		camera = temp;
 	}
 }
+
+void	free_emissive_lights(t_emissive *em)
+{
+	t_emissive	*temp;
+
+	while (em)
+	{
+		temp = (t_emissive *)em->next;
+		free(em);
+		em = temp;
+	}
+}

@@ -1,11 +1,11 @@
 # ERRORS / Todo
 Ajouter tests save
-fusioner test bonus et mandatory
-peut etre revoir rotate/translate dans mandatory et clean tt ç&
 mesh + .obj
-photon mapping
 no shadow disk ?
 revoir parsing .mtl
+rearanger structs ou union pour acces plus rapide
+revoir multi threading
+modifier readme
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS

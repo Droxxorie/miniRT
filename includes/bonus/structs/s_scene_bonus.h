@@ -111,6 +111,12 @@ typedef enum e_render_mode
 # define RESIZE_Y 2
 # define RESIZE_Z 3
 
+typedef struct s_emissive
+{
+	t_object		*object;
+	void			*next;
+}					t_emissive;
+
 typedef struct s_scene
 {
 	char			*file_name;
@@ -122,6 +128,7 @@ typedef struct s_scene
 	t_object		*objects;
 	t_bvh_node		*bvh_root;
 	t_light			*lights;
+	t_emissive		*emissive_lights;
 	t_camera		*cameras;
 	t_camera		*active_camera;
 	t_object		*selected_object;

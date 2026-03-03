@@ -25,6 +25,17 @@ static void	destroy_skybox(t_scene *scene)
 		free(scene->skybox_texture_path);
 }
 
+static void	free_scene_data(t_scene *scene)
+{
+	destroy_bvh(scene);
+	free_objects(scene->objects);
+	free_lights(scene->lights);
+	free_emissive_lights(scene->emissive_lights);
+	free_cameras(scene->cameras);
+	free(scene->save_file);
+	free(scene);
+}
+
 void	destroy_scene(t_scene *scene)
 {
 	if (!scene)
@@ -45,12 +56,7 @@ void	destroy_scene(t_scene *scene)
 	}
 	else
 		free_materials(NULL, scene->materials);
-	destroy_bvh(scene);
-	free_objects(scene->objects);
-	free_lights(scene->lights);
-	free_cameras(scene->cameras);
-	free(scene->save_file);
-	free(scene);
+	free_scene_data(scene);
 	log_event(stdout, "SUCCESS", "Scene destroyed successfully!\n");
 }
 

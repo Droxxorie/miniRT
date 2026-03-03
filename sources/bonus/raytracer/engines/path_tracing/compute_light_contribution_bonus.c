@@ -58,7 +58,7 @@ static t_color	get_incoming_light(t_light *l, t_vec3 light_dir)
 	return (intensity);
 }
 
-static t_bool	is_occulted(t_path_info *i, t_hit_record *rec,
+t_bool	is_occulted(t_path_info *i, t_hit_record *rec,
 		t_light_sample_vars *v)
 {
 	t_ray			shadow_ray;

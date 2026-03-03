@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/03 00:00:00 by eraad             #+#    #+#             */
-/*   Updated: 2026/03/03 15:33:33 by eraad            ###   ########.fr       */
+/*   Created: 2026/03/03 15:33:33 by eraad             #+#    #+#             */
+/*   Updated: 2026/03/03 16:47:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_real	emissive_area_simple(t_object *obj)
 	return (-1.0);
 }
 
-static t_real	emissive_area(t_object *obj)
+t_real	emissive_area(t_object *obj)
 {
 	t_real	area;
 	t_real	r;

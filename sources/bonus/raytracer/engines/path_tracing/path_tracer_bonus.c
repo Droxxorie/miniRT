@@ -25,6 +25,9 @@ static t_color	get_attenuation(t_material *mat, t_hit_record *rec, t_vec3 v,
 	{
 		if (mat->type == METAL || mat->metallic > 0.9)
 			return (mat->specular_color);
+		if (mat->specular_color.r > EPSILON || mat->specular_color.g > EPSILON
+			|| mat->specular_color.b > EPSILON)
+			return (mat->specular_color);
 		return ((t_color){1.0, 1.0, 1.0});
 	}
 	f_r = eval_bsdf(mat, rec, v, info->next_dir);
@@ -63,7 +66,8 @@ static t_bool	handle_emission(t_scene *s, t_hit_record *rec, t_ray *ray,
 	if (mat->emission_color.r <= EPSILON && mat->emission_color.g <= EPSILON
 		&& mat->emission_color.b <= EPSILON)
 		return (FALSE);
-	if (i->specular_bounce == TRUE || s->lights == NULL)
+	if (i->specular_bounce == TRUE
+		|| (s->lights == NULL && s->emissive_lights == NULL))
 		w = 1.0;
 	else
 	{

@@ -286,6 +286,7 @@ SRCS_BONUS += \
 SRCS_BONUS += \
     $(SRC_DIR_BONUS)/scene/persistence/load_scene_bonus.c \
     $(SRC_DIR_BONUS)/scene/persistence/save_scene_bonus.c \
+	$(SRC_DIR_BONUS)/scene/persistence/build_emissive_list_bonus.c \
     $(SRC_DIR_BONUS)/scene/persistence/reset_scene_bonus.c \
     $(SRC_DIR_BONUS)/scene/selection/action_selection_bonus.c \
     $(SRC_DIR_BONUS)/scene/camera/init_camera_bonus.c \
@@ -327,6 +328,8 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/debug_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/compute_light_contribution_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/emissive_pdf_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/sample_emissive_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/compute_emissive_contribution_bonus.c \
 #* ---- Lighting ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/lighting/shadows_bonus.c \

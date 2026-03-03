@@ -22,6 +22,7 @@ void		reset_light_state(t_light *light);
 void		reset_object_state(t_object *object);
 void		reset_camera_state(t_camera *camera);
 t_status	load_scene(t_scene *scene, const char *file_path);
+t_status	build_emissive_list(t_scene *scene);
 void		update_camera(t_camera *camera, t_real aspect_ratio);
 
 #endif

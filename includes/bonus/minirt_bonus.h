@@ -64,6 +64,7 @@
 void		destroy_scene(t_scene *scene);
 void		free_objects(t_object *object);
 void		free_lights(t_light *light);
+void		free_emissive_lights(t_emissive *em);
 void		free_cameras(t_camera *camera);
 void		free_materials(void *mlx_ptr, t_material *mat);
 t_status	clean_exit(t_scene *scene, t_status status);
