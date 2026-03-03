@@ -12,8 +12,8 @@
 
 #include <minirt_bonus.h>
 
-//* PDF = distance^2 / (area * cos_theta)
-t_real	light_pdf(t_light *light, t_hit_record *rec, t_vec3 light_dir)
+t_real	light_pdf(t_light *light, t_hit_record *rec, t_vec3 light_pos,
+		t_vec3 light_dir)
 {
 	t_real	dist_sq;
 	t_real	area;
@@ -21,7 +21,7 @@ t_real	light_pdf(t_light *light, t_hit_record *rec, t_vec3 light_dir)
 
 	if (light->type == LIGHT_SUN)
 		return (1.0);
-	dist_sq = vec3_len_squared(vec3_sub(light->position, rec->hit_point));
+	dist_sq = vec3_len_squared(vec3_sub(light_pos, rec->hit_point));
 	cos_light = 1.0;
 	if (light->type == LIGHT_QUAD)
 	{
@@ -63,6 +63,7 @@ static t_bool	is_occulted(t_path_info *i, t_hit_record *rec,
 {
 	t_ray			shadow_ray;
 	t_hit_record	shadow_rec;
+	t_material		*mat;
 
 	shadow_ray = new_ray(vec3_add(rec->hit_point, vec3_scale(rec->normal, 0.1)),
 			v->light_dir);
@@ -70,8 +71,14 @@ static t_bool	is_occulted(t_path_info *i, t_hit_record *rec,
 	shadow_ray.is_shadow_ray = TRUE;
 	shadow_ray.max = v->dist - 0.1;
 	if (hit_bvh(i->bvh_root, &shadow_ray, &shadow_rec))
-		if (shadow_rec.object->material->emission_color.r < EPSILON)
+	{
+		mat = shadow_rec.object->material;
+		if (!mat)
 			return (TRUE);
+		if (mat->emission_color.r < EPSILON && mat->emission_color.g < EPSILON
+			&& mat->emission_color.b < EPSILON)
+			return (TRUE);
+	}
 	return (FALSE);
 }
 
@@ -81,7 +88,6 @@ t_color	compute_light_contribution(t_light *l, t_hit_record *rec, t_vec3 v,
 	t_light_sample_vars	s;
 	t_real				n_dot_l;
 	t_real				pdf_val;
-	t_color				intensity;
 	t_color				result;
 
 	get_light_geometry(l, rec, &info->seed, &s);
@@ -90,16 +96,17 @@ t_color	compute_light_contribution(t_light *l, t_hit_record *rec, t_vec3 v,
 	n_dot_l = fmax(vec3_dot(rec->normal, s.light_dir), 0.0);
 	if (n_dot_l <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
-	pdf_val = light_pdf(l, rec, s.light_dir);
+	pdf_val = light_pdf(l, rec, s.light_pos, s.light_dir);
 	if (pdf_val < EPSILON)
 		return ((t_color){0, 0, 0});
 	s.f_r = eval_bsdf(rec->object->material, rec, v, s.light_dir);
-	intensity = get_incoming_light(l, s.light_dir);
 	s.weight = 1.0;
 	if (l->type != LIGHT_SUN)
 		s.weight = power_heuristic(pdf_val, bsdf_pdf(rec->object->material,
 					rec->normal, v, s.light_dir));
-	result = color_prod(s.f_r, intensity);
-	result = color_scale(result, n_dot_l * s.weight / pdf_val);
+	result = color_scale(color_prod(s.f_r, get_incoming_light(l, s.light_dir)),
+			n_dot_l * s.weight / pdf_val);
+	if (!is_color_finite(&result))
+		return ((t_color){0.0, 0.0, 0.0});
 	return (result);
 }

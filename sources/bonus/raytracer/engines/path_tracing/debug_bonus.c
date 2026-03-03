@@ -19,7 +19,9 @@ static t_color	debug_direct_light(t_scene *s, t_hit_record *rec,
 
 	if (!rec->object->material)
 		return ((t_color){0, 0, 0});
-	if (rec->object->material->emission_color.r > 0)
+	if (rec->object->material->emission_color.r > EPSILON
+		|| rec->object->material->emission_color.g > EPSILON
+		|| rec->object->material->emission_color.b > EPSILON)
 		return (rec->object->material->emission_color);
 	direct_light = sample_direct_lighting(s, rec, vec3_scale(ray->direction,
 				-1.0), i);
@@ -66,7 +68,10 @@ t_color	debug_light_contribution(t_light *l, t_hit_record *rec,
 	s_ray.max = s.dist - 0.1;
 	if (hit_bvh(info->bvh_root, &s_ray, &s_rec))
 	{
-		if (s_rec.object->material->emission_color.r > EPSILON)
+		if (s_rec.object->material
+			&& (s_rec.object->material->emission_color.r > EPSILON
+				|| s_rec.object->material->emission_color.g > EPSILON
+				|| s_rec.object->material->emission_color.b > EPSILON))
 			return ((t_color){0, 0, 1});
 		if (s_rec.t < 0.5)
 			return ((t_color){1, 0, 0});

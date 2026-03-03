@@ -6,7 +6,6 @@ mesh + .obj
 photon mapping
 no shadow disk ?
 revoir parsing .mtl
-ajouter max threads
 
 # ROADMAP
 ## PHASE 1 : ARCHITECTURE & PERFS

@@ -3,18 +3,19 @@
 # -----------------------------------------------------
 A 0.05 255,255,255
 C 0,0,-20 0,0,1 90
-R 3840 2160
+# R 3840 2160
 # R 1920 1080
 # R 160 90
+R 720 720
 
-SAMPLES 10
+SAMPLES 100
 mtllib assets/materials/cornellbox_mirror_whitted.mtl
 # mtllib assets/materials/cornellbox_mirror.mtl
 
 # QUAD 0,9,0    0,-1,0    5.0    5.0    10.0    255,255,255
 SPOT    0,9.5,0   0,-1,0   25.0   100.0   255,255,255
 # rec 0,9.99,0    0,-1,0    10.0    10.0            255,255,255 -usemtl light
-dis 0,9.99,0    0,-1,0    1.0            255,255,255 -usemtl light
+# dis 0,9.99,0    0,-1,0    1.0            255,255,255 -usemtl light
 # L 0,9.0,0 0.8 255,255,255
 
 rec -10,0,0    1,0,0    40.0    22.0    255,0,0 -usemtl leftWall

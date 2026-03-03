@@ -38,7 +38,9 @@ t_vec3	get_light_sample(t_light *light, t_hit_record *record,
 		return (vec3_add(light->position, vec3_add(uv_offset[0],
 					uv_offset[1])));
 	}
-	random_point = random_in_unit_sphere(seed);
+	random_point = vec3_normalize(random_in_unit_sphere(seed));
+	if (vec3_len_squared(random_point) < EPSILON)
+		random_point = (t_vec3){1.0, 0.0, 0.0};
 	return (vec3_add(light->position, vec3_scale(random_point, LIGHT_RADIUS)));
 }
 

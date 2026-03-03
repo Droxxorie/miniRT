@@ -1,2 +1,7 @@
 libraries/minilibx-linux
+libraries/libft/libft.a
+libraries/libft/objects
 .vscode
+build/
+miniRT
+miniRT_bonus

@@ -326,6 +326,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/bsdf/sample_bsdf_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/debug_bonus.c \
 	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/compute_light_contribution_bonus.c \
+	$(SRC_DIR_BONUS)/raytracer/engines/path_tracing/emissive_pdf_bonus.c \
 #* ---- Lighting ----
 SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/raytracer/lighting/shadows_bonus.c \

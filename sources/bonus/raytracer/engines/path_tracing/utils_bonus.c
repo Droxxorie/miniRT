@@ -32,8 +32,17 @@ t_real	power_heuristic(t_real pdf_a, t_real pdf_b)
 	return (f_a / (f_a + f_b + EPSILON));
 }
 
-//* Russian Roulette termination criterion
-//* Returns TRUE if the path should be terminated
+t_bool	is_color_finite(t_color *c)
+{
+	if (c->r != c->r || c->g != c->g || c->b != c->b)
+		return (FALSE);
+	if (c->r < -1e6 || c->r > 1e10 || c->g < -1e6 || c->g > 1e10)
+		return (FALSE);
+	if (c->b < -1e6 || c->b > 1e10)
+		return (FALSE);
+	return (TRUE);
+}
+
 t_bool	russian_roulette(t_path_info *info, t_real p)
 {
 	t_real	survival_prob;
@@ -47,7 +56,8 @@ t_bool	russian_roulette(t_path_info *info, t_real p)
 			survival_prob = 0.05;
 		if (random_double(&info->seed) > survival_prob)
 			return (TRUE);
-		info->thru = color_div(info->thru, survival_prob);
+		if (survival_prob >= EPSILON)
+			info->thru = color_div(info->thru, survival_prob);
 	}
 	return (FALSE);
 }
