@@ -1,0 +1,58 @@
+newmtl floor
+  illum 1
+  Kd 0.725 0.71 0.68
+  Ks 0 0 0
+  Ns 0.00
+
+newmtl backWall
+  illum 1
+  Kd 0.725 0.71 0.68
+  Ks 0 0 0
+  Ns 0.00
+
+newmtl light
+  Ns 0.0000
+  illum 0
+  Kd 0.78 0.78 0.78
+  Ks 0 0 0
+  Ke 12 12 12
+
+newmtl GreenGlass_0
+  illum 4
+  Kd 1.0 1.0 1.0
+  Ks 1.0 1.0 1.0
+  Ni 1.5
+  Ns 1000
+  Tf 0.8 0.05 0.8
+
+newmtl GreenGlass_20
+  illum 4
+  Kd 1.0 1.0 1.0
+  Ks 1.0 1.0 1.0
+  Ni 1.5
+  Ns 800
+  Tf 0.8 0.05 0.8
+
+newmtl GreenGlass_50
+  illum 4
+  Kd 1.0 1.0 1.0
+  Ks 1.0 1.0 1.0
+  Ni 1.5
+  Ns 500
+  Tf 0.8 0.05 0.8
+
+newmtl GreenGlass_80
+  illum 4
+  Kd 1.0 1.0 1.0
+  Ks 1.0 1.0 1.0
+  Ni 1.5
+  Ns 200
+  Tf 0.8 0.05 0.8
+
+newmtl GreenGlass_100
+  illum 4
+  Kd 1.0 1.0 1.0
+  Ks 1.0 1.0 1.0
+  Ni 1.5
+  Ns 0
+  Tf 0.8 0.05 0.8

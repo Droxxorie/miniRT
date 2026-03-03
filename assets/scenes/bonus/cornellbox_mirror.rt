@@ -12,9 +12,9 @@ SAMPLES 100
 mtllib assets/materials/cornellbox_mirror_whitted.mtl
 # mtllib assets/materials/cornellbox_mirror.mtl
 
-# QUAD 0,9,0    0,-1,0    5.0    5.0    10.0    255,255,255
-SPOT    0,9.5,0   0,-1,0   25.0   100.0   255,255,255
-# rec 0,9.99,0    0,-1,0    10.0    10.0            255,255,255 -usemtl light
+QUAD 0,9.9,0    0,-1,0    5.0    5.0    10.0    255,255,255
+# rec 0,9.9,0    0,-1,0    5.0    5.0            255,255,255 -usemtl light
+# SPOT    0,9.5,0   0,-1,0   25.0   100.0   255,255,255
 # dis 0,9.99,0    0,-1,0    1.0            255,255,255 -usemtl light
 # L 0,9.0,0 0.8 255,255,255
 

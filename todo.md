@@ -3,8 +3,6 @@ Ajouter tests save
 mesh + .obj
 no shadow disk ?
 revoir parsing .mtl
-rearanger structs ou union pour acces plus rapide
-revoir multi threading
 modifier readme
 
 # ROADMAP

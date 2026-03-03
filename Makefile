@@ -192,6 +192,8 @@ SRCS_BONUS += \
     $(SRC_DIR_BONUS)/graphics/multithreading_bonus.c \
     $(SRC_DIR_BONUS)/graphics/render_frame_bonus.c \
     $(SRC_DIR_BONUS)/graphics/pixel_sampling_bonus.c \
+    $(SRC_DIR_BONUS)/graphics/tile_display_bonus.c \
+    $(SRC_DIR_BONUS)/graphics/tile_order_bonus.c \
     $(SRC_DIR_BONUS)/graphics/utils_bonus.c \
 	$(SRC_DIR_BONUS)/graphics/init_textures_bonus.c \
 	$(SRC_DIR_BONUS)/graphics/post_process/tonemapping_bonus.c \
