@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:05:49 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/12 13:06:06 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/04 18:55:02 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ void	image_pixel_put(t_image *image, int x, int y, int color)
 		return ;
 	pixel_addr = image->addr + ((y * image->line_len) + (x * (image->bpp / 8)));
 	*(unsigned int *)pixel_addr = color;
+}
+
+void	clear_buffer(t_image *buffer)
+{
+	size_t	size;
+
+	if (!buffer || !buffer->addr)
+		return ;
+	size = (size_t)buffer->line_len * (size_t)buffer->height;
+	ft_bzero(buffer->addr, size);
 }

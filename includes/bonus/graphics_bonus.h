@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:37:48 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/26 21:19:00 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/04 18:55:12 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		render_frame(t_scene *scene);
 t_status	init_graphics(t_scene *scene);
 t_status	init_textures(t_scene *scene);
 void		image_pixel_put(t_image *img, int x, int y, int color);
+void		clear_buffer(t_image *buffer);
 t_color		gamma_correction(t_color color);
 t_color		aces_tone_mapping(t_color hdr);
 void		draw_tile_border(t_scene *s, int x, int y);

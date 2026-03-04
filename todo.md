@@ -1,11 +1,9 @@
 # ERRORS / Todo
-Ajouter tests save
 mesh + .obj
 no shadow disk ?
 revoir parsing .mtl
 modifier readme 42 + git ou fusion des deux
 revoir user_manual et potentielement netoyer readme
-triger les refresh de l'image quand on change de camera et donc de refaire apparaitre les tuiles 
 faire scenes et screen de fractals et autre pour readme
 
 # ROADMAP
