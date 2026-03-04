@@ -65,7 +65,7 @@ newmtl PBR_Silver
 illum 6
 Kd 0.97 0.96 0.91
 Ks 0.97 0.96 0.91
-Ns 900
+Ns 1000
 
 newmtl PBR_RedPlastic
 illum 6
@@ -107,6 +107,7 @@ Kd 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
 Ni 1.5
 Tf 0.01 0.01 0.01
+Ns 800
 
 newmtl ThickGreenGlass
 illum 4
@@ -114,6 +115,7 @@ Kd 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
 Ni 1.5
 Tf 2.0 0.1 2.0
+Ns 1000
 
 newmtl DeepRuby
 illum 4
@@ -121,6 +123,7 @@ Kd 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
 Ni 1.7
 Tf 0.1 3.0 3.0
+Ns 1000
 
 newmtl Diamond
 illum 4
@@ -128,6 +131,7 @@ Kd 1.0 1.0 1.0
 Ks 1.0 1.0 1.0
 Ni 2.4
 Tf 0.01 0.01 0.01
+Ns 1000
 
 # ------------------------------------------------------------
 # FRACTALS

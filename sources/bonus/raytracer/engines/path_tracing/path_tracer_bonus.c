@@ -18,7 +18,6 @@ static t_color	get_attenuation(t_material *mat, t_hit_record *rec, t_vec3 v,
 	t_color	f_r;
 	t_real	cos_theta;
 
-	info->front_face = rec->front_face;
 	sample_bsdf(mat, rec->normal, v, info);
 	if (info->pdf < EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
@@ -89,6 +88,7 @@ static t_bool	process_bounce(t_scene *s, t_hit_record *rec, t_ray *ray,
 {
 	t_vec3	v;
 
+	i->front_face = rec->front_face;
 	if (s->render_mode != RENDER_SHADE)
 	{
 		i->final = debug_pathtracer(s, rec, i, ray);
