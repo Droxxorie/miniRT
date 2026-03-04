@@ -6,3 +6,4 @@ libraries/libft/objects
 build/
 miniRT
 miniRT_bonus
+output/
