@@ -95,6 +95,7 @@ static void	run_poll_loop(t_scene *s, pthread_t *threads,
 	wait_render_threads(tc, threads);
 	display_progress(s->total_tiles, s->total_tiles);
 	cleanup_render_threads(s, threads, data);
+	apply_post_filters(s);
 	if (s->mlx_window.win_ptr)
 	{
 		mlx_put_image_to_window(s->mlx_window.mlx_ptr,

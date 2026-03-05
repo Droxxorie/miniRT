@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 17:23:35 by eraad             #+#    #+#             */
-/*   Updated: 2026/03/03 19:08:50 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/06 00:53:50 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ static t_color	sample_pixel_once(t_scene *scene, int *xyi,
 	seed[1] = pcg_hash(seed[0] ^ ((unsigned int)xyi[2] * 2654435769u));
 	uv.x = (t_real)xyi[0];
 	uv.y = (t_real)xyi[1];
-	use_whitted = (scene->render_scale > 1.0
-			|| (int)scene->samples_per_pixel == 1);
-	do_jitter = (scene->render_scale > 1.0
-			|| (int)scene->samples_per_pixel == 1);
+	use_whitted = ((int)scene->samples_per_pixel == 0);
+	do_jitter = ((int)scene->samples_per_pixel == 0);
 	if (do_jitter && (int)scene->aa_samples <= 1)
 		do_jitter = FALSE;
 	if (!do_jitter && (int)scene->samples_per_pixel > 1)
@@ -50,7 +48,7 @@ static t_color	compute_pixel_color(t_scene *scene, int x, int y,
 	int		i;
 	int		n;
 
-	if (scene->render_scale > 1.0 || (int)scene->samples_per_pixel == 1)
+	if ((int)scene->samples_per_pixel == 0)
 		n = (int)scene->aa_samples;
 	else
 		n = (int)scene->samples_per_pixel;

@@ -105,6 +105,24 @@ typedef enum e_render_mode
 	RENDER_ALBEDO
 }					t_render_mode;
 
+typedef enum e_filter_type
+{
+	FILTER_SOBEL,
+	FILTER_BNW,
+	FILTER_GAUSSIAN,
+	FILTER_SEPIA,
+	FILTER_SHARPEN,
+	FILTER_CONTRAST,
+	FILTER_SATURATION
+}					t_filter_type;
+
+typedef struct s_filter_entry
+{
+	t_filter_type			type;
+	t_real					param;
+	struct s_filter_entry	*next;
+}					t_filter_entry;
+
 # define RESIZE_NONE -1
 # define RESIZE_UNIFORM 0
 # define RESIZE_X 1
@@ -152,6 +170,7 @@ typedef struct s_scene
 	t_bool			ctrl_pressed;
 	t_bool			alt_pressed;
 	t_bool			to_save;
+	t_filter_entry	*filters;
 }					t_scene;
 
 typedef struct s_thread_data

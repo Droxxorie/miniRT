@@ -25,6 +25,18 @@ static void	destroy_skybox(t_scene *scene)
 		free(scene->skybox_texture_path);
 }
 
+static void	free_filters(t_filter_entry *filters)
+{
+	t_filter_entry	*next;
+
+	while (filters)
+	{
+		next = filters->next;
+		free(filters);
+		filters = next;
+	}
+}
+
 static void	free_scene_data(t_scene *scene)
 {
 	destroy_bvh(scene);
@@ -32,6 +44,7 @@ static void	free_scene_data(t_scene *scene)
 	free_lights(scene->lights);
 	free_emissive_lights(scene->emissive_lights);
 	free_cameras(scene->cameras);
+	free_filters(scene->filters);
 	free(scene->save_file);
 	free(scene);
 }

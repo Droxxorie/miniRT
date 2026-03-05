@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:42:44 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 16:21:47 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/06 00:20:43 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # include "structs/s_materials_bonus.h"
 # include "structs/s_object_bonus.h"
 # include "structs/s_scene_bonus.h"
+# include "structs/s_post_process_bonus.h"
 
 # include "errors_bonus.h"
 # include "maths_bonus.h"
@@ -53,6 +54,7 @@
 # include "modifiers_bonus.h"
 # include "inputs_bonus.h"
 # include "utils_bonus.h"
+# include "post_process_bonus.h"
 # include "./raytracer/raytracer_bonus.h"
 # include "./raytracer/materials_bonus.h"
 # include "./raytracer/sdf_bonus.h"

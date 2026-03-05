@@ -190,6 +190,17 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/graphics/pixel_sampling_bonus.c \
 	$(SRC_DIR_BONUS)/graphics/init_textures_bonus.c \
 	$(SRC_DIR_BONUS)/graphics/post_process/tonemapping_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/pixel_utils_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/apply_post_filters_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_sobel_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_bnw_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_gaussian_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_gaussian_blur_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_gaussian_blur_weights_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_sepia_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_sharpen_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_contrast_bonus.c \
+	$(SRC_DIR_BONUS)/graphics/post_process/filter_saturation_bonus.c \
 
 #* ---- Inputs ----
 SRCS_BONUS += \
@@ -226,6 +237,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/utils/add_object_to_scene_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/utils/parse_options_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/scene/parse_aa_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/scene/parse_filter_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/scene/parse_ambient_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/scene/parse_camera_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/scene/parse_resolution_bonus.c \

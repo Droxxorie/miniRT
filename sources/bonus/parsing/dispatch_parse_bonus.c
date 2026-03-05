@@ -79,6 +79,8 @@ static t_status	dispatch_scene_elements(t_scene *scene, char *line)
 		return (parse_aa(scene, &line));
 	if (match_and_consume(&line, "RENDER_SCALE") == EXIT_SUCCESS)
 		return (parse_dim(scene, &line, &scene->render_scale));
+	if (match_and_consume(&line, "FILTER") == EXIT_SUCCESS)
+		return (parse_filter(scene, &line));
 	return (-1);
 }
 

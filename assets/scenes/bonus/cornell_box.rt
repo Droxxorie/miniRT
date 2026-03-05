@@ -3,13 +3,23 @@ C 0,0,-19.9 0,0,1 50
 # R 1920 1080
 R 720 720
 # R 160 90
-# SAMPLES 100
+SAMPLES 1
 mtllib assets/materials/cornellbox.mtl
+# RENDER_SCALE 8
+# AA_SAMPLES 16
 
 # QUAD 0,9.9,10    0,-1,0    5.0    5.0    10.0    255,255,255
 rec 0,9.9,10    0,1,0    5.0    5.0            255,255,255 -usemtl light
 # SPOT    0,9.5,10   0,-1,0   25.0   100.0   255,255,255
 # L 0,9.0,0 0.8 255,255,255
+
+# FILTER SOBEL
+# FILTER BNW
+# FILTER GAUSSIAN 10.0
+# FILTER SEPIA
+# FILTER SHARPEN 1.0
+# FILTER CONTRAST 0.5
+# FILTER SATURATION 0.5
 
 rec -10,0,0   1,0,0     40.0    22.0    255,0,0 -usemtl rightWall
 rec 10,0,0    -1,0,0    40.0    22.0    0,255,0 -usemtl leftWall

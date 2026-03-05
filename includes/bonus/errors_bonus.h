@@ -108,6 +108,11 @@
 
 # define ERR_SKYBOX_DUP "Duplicate skybox texture definition"
 
+//* --- Filters --- */
+# define ERR_FILTER_UID "Unknown filter identifier"
+# define ERR_FILTER_VAL "Invalid filter parameter value"
+# define ERR_FILTER_OOB "Filter parameter out of range"
+
 //* ========================================================================= */
 //*                                PROTOTYPES                                 */
 //* ========================================================================= */

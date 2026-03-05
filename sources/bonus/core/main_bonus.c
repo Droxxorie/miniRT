@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:07:55 by eraad             #+#    #+#             */
-/*   Updated: 2026/02/02 16:35:03 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/05 23:59:26 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	load_scene_data(t_scene *scene, char *filename)
 			"INFO",
 			"Anti-aliasing enabled: %.0f samples per pixel\n",
 			scene->aa_samples);
-	else if (scene->samples_per_pixel > 1.0)
+	else if (scene->samples_per_pixel >= 1.0)
 		log_event(stdout, "INFO",
 			"Path tracing enabled: %.0f samples per pixel\n",
 			scene->samples_per_pixel);

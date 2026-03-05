@@ -61,6 +61,7 @@ t_status	parse_ambient(t_scene *scene, char **line);
 t_status	parse_resolution(t_scene *scene, char **line);
 t_status	parse_skybox(t_scene *scene, char **line);
 t_status	parse_aa(t_scene *scene, char **line);
+t_status	parse_filter(t_scene *scene, char **line);
 //* ---- Light ---- *//
 t_light		*alloc_new_light(t_scene *scene, char **line);
 void		add_light_to_scene(t_scene *scene, t_light *new_light);
