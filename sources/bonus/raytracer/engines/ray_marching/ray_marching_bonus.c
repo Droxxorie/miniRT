@@ -27,14 +27,15 @@ static t_vec3	get_sdf_normal(t_point3 p, t_object *object)
 	return (vec3_normalize(n));
 }
 
-static t_bool	set_sdf_record(t_object *object, t_ray *world_ray,
-		t_hit_record *record)
+static void	set_sdf_record(t_object *object, t_ray *world_ray,
+		t_hit_record *record, t_real depth)
 {
 	t_point3	local_hit;
 
 	record->object = object;
+	record->t = depth;
 	if (world_ray->is_shadow_ray == TRUE)
-		return (TRUE);
+		return ;
 	record->hit_point = ray_at(world_ray, record->t);
 	record->normal = get_sdf_normal(record->hit_point, object);
 	set_face_normal(record, world_ray, record->normal);
@@ -46,7 +47,6 @@ static t_bool	set_sdf_record(t_object *object, t_ray *world_ray,
 		local_hit = mat4_mult_point3(object->inverse, record->hit_point);
 		record->color = get_fractal_color(local_hit, object);
 	}
-	return (TRUE);
 }
 
 static void	init_ray_march_data(t_object *object, t_ray_march_data *data,
@@ -72,23 +72,26 @@ static void	init_ray_march_data(t_object *object, t_ray_march_data *data,
 t_bool	ray_march(t_object *object, t_ray *world_ray, t_hit_record *record)
 {
 	t_ray_march_data	d;
-	t_real				local_dist;
 
 	init_ray_march_data(object, &d, world_ray);
-	while (d.steps++ < d.max_steps)
+	while (d.steps++ < d.max_steps && d.depth <= world_ray->max)
 	{
 		d.world_p = ray_at(world_ray, d.depth);
-		local_dist = dispatch_sdf(d.world_p, object);
-		d.world_dist = local_dist * d.scale;
+		d.world_dist = dispatch_sdf(d.world_p, object) * d.scale;
 		d.world_dist *= d.step_factor;
-		if (d.world_dist < d.threshold)
+		if (fabsf(d.world_dist) < d.threshold)
 		{
-			record->t = d.depth;
-			return (set_sdf_record(object, world_ray, record));
+			set_sdf_record(object, world_ray, record, d.depth);
+			if (world_ray->is_shadow_ray == FALSE && (d.steps < 2
+					|| vec3_len(record->normal) < 0.1f))
+				d.world_dist = d.threshold * 2.0f;
+			else
+				return (TRUE);
 		}
-		d.depth += d.world_dist;
-		if (d.depth > world_ray->max)
-			return (FALSE);
+		if (d.world_dist < -0.01f)
+			d.depth += 0.001f;
+		else
+			d.depth += d.world_dist;
 	}
 	return (FALSE);
 }
