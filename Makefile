@@ -258,6 +258,7 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_vertices_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_texcoords_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_faces_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_faces_utils_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_materials_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_julia_set_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbox_bonus.c \
