@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 
-typedef double	t_real;
+typedef float	t_real;
 typedef int		t_status;
 typedef int		t_bool;
 

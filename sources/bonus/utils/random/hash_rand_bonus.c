@@ -22,7 +22,7 @@ t_real	hash_rand(t_point3 p, int seed)
 	magic_number = 43758.5453;
 	dot_result = vec3_dot(p, magic_vector);
 	dot_result += (t_real)seed * 0.1571;
-	return (sin(dot_result) * magic_number - (int)(sin(dot_result)
+	return (sinf(dot_result) * magic_number - (int)(sinf(dot_result)
 		* magic_number));
 }
 

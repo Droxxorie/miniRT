@@ -49,7 +49,7 @@ static t_real	*build_kernel_weights(t_real radius, int *out_half_size)
 	index = -half_size;
 	while (index <= half_size)
 	{
-		weights[index + half_size] = exp(-(index * index) / (2.0 * sigma
+		weights[index + half_size] = expf(-(index * index) / (2.0 * sigma
 					* sigma));
 		index++;
 	}

@@ -24,7 +24,7 @@ t_color	compute_diffuse(t_light *light, t_hit_record *record, t_color albedo)
 	spot = get_spot_factor(light, light_dir);
 	if (spot <= 0.0)
 		return ((t_color){0.0, 0.0, 0.0});
-	diffuse = fmax(vec3_dot(record->normal, light_dir), 0.0);
+	diffuse = fmaxf(vec3_dot(record->normal, light_dir), 0.0);
 	attenuation = get_light_attenuation(light, dist);
 	diffuse = diffuse * attenuation * spot * light->brightness;
 	return (color_scale(color_prod(light->color, albedo), diffuse));

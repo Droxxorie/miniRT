@@ -34,7 +34,7 @@ static t_color	get_attenuation(t_material *mat, t_hit_record *rec, t_vec3 v,
 		return (f_r);
 	}
 	f_r = eval_bsdf(mat, rec, v, info->next_dir);
-	cos_theta = fmax(vec3_dot(rec->normal, info->next_dir), 0.0);
+	cos_theta = fmaxf(vec3_dot(rec->normal, info->next_dir), 0.0);
 	return (color_scale(f_r, cos_theta / info->pdf));
 }
 

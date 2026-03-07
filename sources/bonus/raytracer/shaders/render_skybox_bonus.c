@@ -29,7 +29,7 @@ static t_color	get_sunset_gradient(t_scene *scene, t_real y)
 			t = 1.0;
 		return (color_mix(horizon, ground, t));
 	}
-	t = pow(y, 0.6);
+	t = powf(y, 0.6);
 	return (color_mix(horizon, zenith, t));
 }
 
@@ -74,7 +74,7 @@ t_color	get_skybox_color(t_scene *scene, t_ray *ray)
 	if (!scene->skybox_map)
 		return (procedural_sky(scene, ray));
 	dir = vec3_normalize(ray->direction);
-	u = 0.5 - (atan2(dir.z, dir.x) * INV_TWO_PI);
+	u = 0.5 - (atan2f(dir.z, dir.x) * INV_TWO_PI);
 	v = 0.5 + (asin(dir.y) * INV_PI);
 	return (sample_texture(scene->skybox_map, u, v));
 }

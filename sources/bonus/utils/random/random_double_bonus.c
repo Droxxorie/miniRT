@@ -21,7 +21,7 @@ t_real	random_double(unsigned int *seed)
 //* pas thread safe
 t_real	random_real(void)
 {
-	return (rand() / (t_real)RAND_MAX + 1.0);
+	return ((t_real)rand() / (t_real)RAND_MAX + 1.0f);
 }
 
 //* pas thread safe

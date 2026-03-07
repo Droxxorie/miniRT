@@ -58,9 +58,9 @@ t_real	sdf_triangle(t_point3 p, t_object *object)
 	{
 		distance_sq = get_edge_dsitance_sq(vars.ba, vars.pa);
 		distance_temp = get_edge_dsitance_sq(vars.cb, vars.pb);
-		distance_sq = fmin(distance_sq, distance_temp);
+		distance_sq = fminf(distance_sq, distance_temp);
 		distance_temp = get_edge_dsitance_sq(vars.ac, vars.pc);
-		distance_sq = fmin(distance_sq, distance_temp);
+		distance_sq = fminf(distance_sq, distance_temp);
 	}
 	else
 	{
@@ -68,5 +68,5 @@ t_real	sdf_triangle(t_point3 p, t_object *object)
 		distance_sq = distance_sq * distance_sq / vec3_dot(vars.normal,
 				vars.normal);
 	}
-	return (sqrt(distance_sq) - SDF_THICKNESS);
+	return (sqrtf(distance_sq) - SDF_THICKNESS);
 }

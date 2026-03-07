@@ -19,7 +19,7 @@ void	get_cone_uv(t_point3 p, t_cylinder_element type, t_real *u,
 
 	if (type == BODY)
 	{
-		phi = atan2(-p.z, p.x) + PI;
+		phi = atan2f(-p.z, p.x) + PI;
 		*u = phi * INV_TWO_PI;
 		*v = p.y;
 	}

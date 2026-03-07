@@ -27,7 +27,7 @@ t_real	reflectance(t_real cosine, t_real n)
 
 	r0 = (1.0 - n) / (1.0 + n);
 	r0 = r0 * r0;
-	return (r0 + (1.0 - r0) * pow((1.0 - cosine), 5.0));
+	return (r0 + (1.0 - r0) * powf((1.0 - cosine), 5.0));
 }
 
 t_bool	vec_refract(t_vec3 uv, t_vec3 n, t_real ni_over_nt, t_vec3 *refracted)
@@ -37,12 +37,12 @@ t_bool	vec_refract(t_vec3 uv, t_vec3 n, t_real ni_over_nt, t_vec3 *refracted)
 	t_vec3	r_out_para;
 	t_real	discriminant;
 
-	cos_theta = fmin(vec3_dot(vec3_scale(uv, -1.0), n), 1.0);
+	cos_theta = fminf(vec3_dot(vec3_scale(uv, -1.0), n), 1.0);
 	r_out_perp = vec3_scale(vec3_add(uv, vec3_scale(n, cos_theta)), ni_over_nt);
 	discriminant = 1.0 - vec3_len_squared(r_out_perp);
 	if (discriminant > 0.0)
 	{
-		r_out_para = vec3_scale(n, -sqrt(discriminant));
+		r_out_para = vec3_scale(n, -sqrtf(discriminant));
 		*refracted = vec3_add(r_out_perp, r_out_para);
 		return (TRUE);
 	}
@@ -54,8 +54,8 @@ t_color	beer_lambert(t_color color, t_real dist,
 {
 	t_color	transmission;
 
-	transmission.r = exp(-absorbance.r * dist);
-	transmission.g = exp(-absorbance.g * dist);
-	transmission.b = exp(-absorbance.b * dist);
+	transmission.r = expf(-absorbance.r * dist);
+	transmission.g = expf(-absorbance.g * dist);
+	transmission.b = expf(-absorbance.b * dist);
 	return (color_prod(color, transmission));
 }

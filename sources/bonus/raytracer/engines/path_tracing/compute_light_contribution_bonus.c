@@ -69,7 +69,7 @@ t_color	compute_light_contribution(t_light *l, t_hit_record *rec, t_vec3 v,
 	get_light_geometry(l, rec, &info->seed, &s);
 	if (is_occulted(info, rec, &s))
 		return ((t_color){0.0, 0.0, 0.0});
-	n_dot_l = fmax(vec3_dot(rec->normal, s.light_dir), 0.0);
+	n_dot_l = fmaxf(vec3_dot(rec->normal, s.light_dir), 0.0);
 	if (n_dot_l <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
 	pdf_val = light_pdf(l, rec, s.light_pos, s.light_dir);

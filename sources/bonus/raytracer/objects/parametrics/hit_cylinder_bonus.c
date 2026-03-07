@@ -35,7 +35,7 @@ static void	solve_tube(t_cylinder_hit *hit)
 	d = hit->ray.direction;
 	o = hit->ray.origin;
 	vars->a = (d.x * d.x) + (d.z * d.z);
-	if (fabs(vars->a) < EPSILON)
+	if (fabsf(vars->a) < EPSILON)
 		return ;
 	vars->half_b = (o.x * d.x) + (o.z * d.z);
 	vars->c = (o.x * o.x) + (o.z * o.z) - 1.0;
@@ -56,7 +56,7 @@ static void	check_cap(t_cylinder_hit *hit, t_real y_plane,
 
 	d = hit->ray.direction;
 	o = hit->ray.origin;
-	if (fabs(d.y) < EPSILON)
+	if (fabsf(d.y) < EPSILON)
 		return ;
 	t = (y_plane - o.y) / d.y;
 	if (t <= EPSILON || t >= hit->t)

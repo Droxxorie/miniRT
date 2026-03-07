@@ -27,7 +27,7 @@ t_real	get_min_scale_factor(t_mat4 mat)
 		min = scale.z;
 	if (min < EPSILON)
 		return (EPSILON);
-	return (sqrt(min));
+	return (sqrtf(min));
 }
 
 t_mat4	make_scale_matrix(t_vec3 scale)

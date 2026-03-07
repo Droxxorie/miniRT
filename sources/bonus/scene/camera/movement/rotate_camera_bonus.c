@@ -16,7 +16,7 @@ static void	yaw(t_camera *camera, t_real angle)
 {
 	t_mat4	rot_y;
 
-	if (fabs(angle) < EPSILON)
+	if (fabsf(angle) < EPSILON)
 		return ;
 	rot_y = rotation_mat_y(angle);
 	camera->direction = mat4_mult_vec3(rot_y, camera->direction);
@@ -30,7 +30,7 @@ static void	pitch(t_camera *camera, t_real angle)
 	t_vec3	new_direction;
 	t_mat4	rot_axis;
 
-	if (fabs(angle) < EPSILON)
+	if (fabsf(angle) < EPSILON)
 		return ;
 	world_up = (t_vec3){0.0, 1.0, 0.0};
 	right = vec3_cross(camera->direction, world_up);
@@ -41,13 +41,13 @@ static void	pitch(t_camera *camera, t_real angle)
 	rot_axis = matrix_axis_angle(right, angle);
 	new_direction = mat4_mult_vec3(rot_axis, camera->direction);
 	new_direction = vec3_normalize(new_direction);
-	if (fabs(new_direction.y) < 0.9)
+	if (fabsf(new_direction.y) < 0.9)
 		camera->direction = new_direction;
 }
 
 static void	tilt(t_camera *camera, t_real angle)
 {
-	if (fabs(angle) > EPSILON)
+	if (fabsf(angle) > EPSILON)
 	{
 		camera->tilt += angle;
 		if (camera->tilt > PI)

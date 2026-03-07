@@ -29,7 +29,7 @@ static void	ao_iterations(t_scene *scene, t_point3 p, t_vec3 normal,
 		step_dist = AO_STEP_SIZE * (t_real)(i + 1);
 		test_p = vec3_add(p, vec3_scale(normal, step_dist));
 		sdf_dist = map_the_world(test_p, scene);
-		*occlusion += fmax(0.0, step_dist - sdf_dist) * scale;
+		*occlusion += fmaxf(0.0, step_dist - sdf_dist) * scale;
 		scale *= AO_SCALE_DECAY;
 		i++;
 	}

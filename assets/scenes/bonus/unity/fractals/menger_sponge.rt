@@ -1,16 +1,16 @@
-A 0.2 255,255,255
+A 0.02 255,255,255
 C   0,0,-4.5   0,0,1    40
 # R 3640 2160
 # R 160 90
 # R 1920 1080
+SAMPLES 10
 
-mtllib assets/materials/sphere.mtl
-
-L   5,20,-5       0.9           255,240,220
-# L   -10,0,-5     0.2           50,50,100
+mtllib assets/materials/materials_test.mtl
 
 #                Pos(0,0,0)    Norm(0,1,0)    Size(3.0)    Scale(3.0)
-menger_sponge    0,0,0         0,1,0          1.0          3.0           255,0,0  -usemtl RedMatte
+# menger_sponge    0,0,0         0,1,0          1.0          3.0           255,0,0  -usemtl RedMatte
+menger_sponge    0,0,0         0,1,0          1.0          3.0           255,0,0  -usemtl BluePlasticPhong
+# menger_sponge    0,0,0         0,1,0          1.0          3.0           255,0,0  -usemtl ClearGlass
 
-# box			 0,0,0   0,1,0  3.0 3.0 3.0    200,200,200
-pl  0,-10,0       0,1,0         200,200,200 
+pl  0,-10,0       0,1,0         200,200,200 -usemtl BlackChecker
+sp	0,0,1	0.1					255,215,0	-usemtl SuperNeon

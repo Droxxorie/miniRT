@@ -23,10 +23,10 @@ t_vec3	random_in_unit_sphere(unsigned int *seed)
 	u = random_double(seed);
 	v = random_double(seed);
 	theta = TWO_PI * u;
-	phi = acos(2.0 * v - 1.0);
+	phi = acosf(2.0 * v - 1.0);
 	r = cbrt(random_double(seed));
-	return ((t_vec3){r * sin(phi) * cos(theta), r * sin(phi) * sin(theta), r
-		* cos(phi)});
+	return ((t_vec3){r * sinf(phi) * cosf(theta), r * sinf(phi) * sinf(theta), r
+		* cosf(phi)});
 }
 
 t_vec3	random_vec3_in_unit_sphere(void)

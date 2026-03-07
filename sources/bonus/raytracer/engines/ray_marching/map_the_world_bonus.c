@@ -46,7 +46,7 @@ static t_real	map_bvh_recursive(t_bvh_node *node, t_point3 world_p)
 		return (get_min_dist_in_leaf(node->content, world_p));
 	left_dist = map_bvh_recursive(node->left_child, world_p);
 	right_dist = map_bvh_recursive(node->right_child, world_p);
-	return (fmin(left_dist, right_dist));
+	return (fminf(left_dist, right_dist));
 }
 
 t_real	map_the_world(t_point3 world_p, t_scene *scene)

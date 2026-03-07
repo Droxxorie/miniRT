@@ -29,5 +29,5 @@ t_real	get_shininess(t_material *mat, t_hit_record *record)
 	else
 		roughness = mat->roughness;
 	shininess = (1.0 - roughness) * 1000.0;
-	return (fmax(1.0, shininess));
+	return (fmaxf(1.0, shininess));
 }

@@ -18,9 +18,9 @@ void	get_torus_uv(t_point3 p, t_torus *torus, t_real *u, t_real *v)
 	t_real	theta;
 	t_real	xz_dist;
 
-	phi = atan2(-p.z, p.x) + PI;
+	phi = atan2f(-p.z, p.x) + PI;
 	*u = phi * INV_TWO_PI;
-	xz_dist = sqrt(p.x * p.x + p.z * p.z);
-	theta = atan2(p.y, xz_dist - torus->major_radius) + PI;
+	xz_dist = sqrtf(p.x * p.x + p.z * p.z);
+	theta = atan2f(p.y, xz_dist - torus->major_radius) + PI;
 	*v = theta * INV_TWO_PI;
 }

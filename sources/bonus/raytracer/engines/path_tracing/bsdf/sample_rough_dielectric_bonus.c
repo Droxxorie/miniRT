@@ -18,7 +18,7 @@ static t_real	dielectric_f(t_real cos_i, t_real ior)
 
 	f0 = (1.0 - ior) / (1.0 + ior);
 	f0 = f0 * f0;
-	return (f0 + (1.0 - f0) * pow(1.0 - cos_i, 5.0));
+	return (f0 + (1.0 - f0) * powf(1.0 - cos_i, 5.0));
 }
 
 static t_vec3	rd_choose_dir(t_vec3 v, t_vec3 h,
@@ -29,7 +29,7 @@ static t_vec3	rd_choose_dir(t_vec3 v, t_vec3 h,
 	t_real	fresnel;
 
 	inc = vec3_scale(v, -1.0);
-	fresnel = dielectric_f(fabs(vec3_dot(v, h)), params[1]);
+	fresnel = dielectric_f(fabsf(vec3_dot(v, h)), params[1]);
 	if (random_double(seed) < fresnel
 		|| !vec_refract(inc, h, params[0], &refracted))
 		return (vec_reflect(inc, h));
@@ -42,10 +42,10 @@ static void	rd_compute_weight(t_vec3 *vecs, t_vec3 h,
 	t_real	dots[4];
 	t_real	k;
 
-	dots[0] = fmax(fabs(vec3_dot(vecs[1], h)), EPSILON);
-	dots[1] = fmax(fabs(vec3_dot(vecs[0], vecs[1])), EPSILON);
-	dots[2] = fmax(fabs(vec3_dot(vecs[0], h)), EPSILON);
-	dots[3] = fmax(fabs(vec3_dot(vecs[0], info->next_dir)), EPSILON);
+	dots[0] = fmaxf(fabsf(vec3_dot(vecs[1], h)), EPSILON);
+	dots[1] = fmaxf(fabsf(vec3_dot(vecs[0], vecs[1])), EPSILON);
+	dots[2] = fmaxf(fabsf(vec3_dot(vecs[0], h)), EPSILON);
+	dots[3] = fmaxf(fabsf(vec3_dot(vecs[0], info->next_dir)), EPSILON);
 	k = (roughness + 1.0) * (roughness + 1.0) / 8.0;
 	info->bsdf_weight = (dots[1] / (dots[1] * (1.0 - k) + k))
 		* (dots[3] / (dots[3] * (1.0 - k) + k))
@@ -62,12 +62,12 @@ t_real	dielectric_bsdf_pdf(t_material *mat, t_vec3 n,
 	t_real	dots[2];
 	t_real	fresnel;
 
-	if (fmax(vec3_dot(n, l), 0.0) <= EPSILON)
+	if (fmaxf(vec3_dot(n, l), 0.0) <= EPSILON)
 		return (0.0);
 	h = vec3_normalize(vec3_add(v, l));
 	d = distribution_ggx(n, h, mat->roughness);
-	dots[0] = fmax(vec3_dot(n, h), 0.0);
-	dots[1] = fmax(vec3_dot(v, h), EPSILON);
+	dots[0] = fmaxf(vec3_dot(n, h), 0.0);
+	dots[1] = fmaxf(vec3_dot(v, h), EPSILON);
 	fresnel = dielectric_f(dots[1], mat->ior);
 	return (fresnel * d * dots[0] / (4.0 * dots[1] + EPSILON));
 }
@@ -88,7 +88,7 @@ void	sample_rough_dielectric(t_material *mat, t_vec3 n,
 		params[0] = mat->ior;
 	params[1] = mat->ior;
 	info->next_dir = rd_choose_dir(v, h, params, &info->seed);
-	if (fabs(vec3_dot(n, info->next_dir)) < EPSILON)
+	if (fabsf(vec3_dot(n, info->next_dir)) < EPSILON)
 	{
 		info->pdf = 0.0;
 		return ;

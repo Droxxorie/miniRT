@@ -63,7 +63,7 @@ t_status	parse_real(char **line, t_real *value)
 	len = get_float_len(*line);
 	if (len <= 0)
 		return (EXIT_FAILURE);
-	*value = ft_atodbl(*line);
+	*value = (t_real)ft_atodbl(*line);
 	*line += len;
 	return (EXIT_SUCCESS);
 }

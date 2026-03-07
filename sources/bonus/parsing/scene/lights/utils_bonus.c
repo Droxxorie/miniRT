@@ -16,7 +16,7 @@ void	init_quad_light(t_light *light)
 {
 	t_vec3	up;
 
-	if (fabs(light->direction.y) < 0.999)
+	if (fabsf(light->direction.y) < 0.999)
 		up = (t_vec3){0.0, 1.0, 0.0};
 	else
 		up = (t_vec3){0.0, 0.0, 1.0};
@@ -32,7 +32,7 @@ void	init_spot_light(t_light *light, t_real cutoff_angle)
 
 	cutoff_angle = ft_clamp(cutoff_angle, 0.0, 180.0);
 	theta = cutoff_angle * PI / 180.0;
-	light->cos_theta = cos(theta);
+	light->cos_theta = cosf(theta);
 }
 
 t_light	*alloc_new_light(t_scene *scene, char **line)

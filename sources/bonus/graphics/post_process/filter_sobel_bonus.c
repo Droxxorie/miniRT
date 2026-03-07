@@ -41,7 +41,7 @@ static t_real	sobel_magnitude_at_pixel(t_image *source_image, int x, int y)
 				x + (index % 3) - 1, y + (index / 3) - 1) * kernel_y[index];
 		index++;
 	}
-	magnitude = sqrt(gradient.x * gradient.x + gradient.y * gradient.y);
+	magnitude = sqrtf(gradient.x * gradient.x + gradient.y * gradient.y);
 	if (magnitude > 1.0)
 		magnitude = 1.0;
 	return (magnitude);

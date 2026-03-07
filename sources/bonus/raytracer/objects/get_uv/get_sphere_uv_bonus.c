@@ -17,8 +17,8 @@ void	get_sphere_uv(t_point3 p, t_real *u, t_real *v)
 	t_real	theta;
 	t_real	phi;
 
-	theta = acos(-p.y);
-	phi = atan2(-p.z, p.x) + PI;
+	theta = acosf(-p.y);
+	phi = atan2f(-p.z, p.x) + PI;
 	*u = phi * INV_TWO_PI;
 	*v = theta * INV_PI;
 }

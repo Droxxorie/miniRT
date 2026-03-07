@@ -48,8 +48,8 @@ t_color	gamma_correction(t_color color)
 	t_real	inv_gamma;
 
 	inv_gamma = 1.0 / 2.2;
-	color.r = pow(color.r, inv_gamma);
-	color.g = pow(color.g, inv_gamma);
-	color.b = pow(color.b, inv_gamma);
+	color.r = powf(color.r, inv_gamma);
+	color.g = powf(color.g, inv_gamma);
+	color.b = powf(color.b, inv_gamma);
 	return (color);
 }

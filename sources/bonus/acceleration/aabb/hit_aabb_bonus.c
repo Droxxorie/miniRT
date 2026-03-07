@@ -18,7 +18,7 @@ static t_bool	check_axis(t_real *ray_data, t_real *box_data, t_real *range)
 	t_real	t1;
 	t_real	inv_dir;
 
-	if (fabs(ray_data[1]) < EPSILON)
+	if (fabsf(ray_data[1]) < EPSILON)
 	{
 		if (ray_data[0] < box_data[0] || ray_data[0] > box_data[1])
 			return (FALSE);
@@ -29,8 +29,8 @@ static t_bool	check_axis(t_real *ray_data, t_real *box_data, t_real *range)
 	t1 = (box_data[1] - ray_data[0]) * inv_dir;
 	if (t0 > t1)
 		swap_real(&t0, &t1);
-	range[0] = fmax(t0, range[0]);
-	range[1] = fmin(t1, range[1]);
+	range[0] = fmaxf(t0, range[0]);
+	range[1] = fminf(t1, range[1]);
 	return (range[1] >= range[0]);
 }
 

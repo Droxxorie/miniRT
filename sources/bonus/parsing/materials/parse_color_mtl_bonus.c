@@ -20,8 +20,8 @@ t_status	parse_color_mtl(char **line, t_color *color)
 		return (EXIT_FAILURE);
 	if (parse_real(line, &color->b) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	color->r = fmax(0.0, color->r);
-	color->g = fmax(0.0, color->g);
-	color->b = fmax(0.0, color->b);
+	color->r = fmaxf(0.0, color->r);
+	color->g = fmaxf(0.0, color->g);
+	color->b = fmaxf(0.0, color->b);
 	return (EXIT_SUCCESS);
 }

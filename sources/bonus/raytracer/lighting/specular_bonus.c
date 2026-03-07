@@ -29,7 +29,7 @@ t_color	compute_specular(t_light *light, t_hit_record *record, t_ray *ray,
 		return ((t_color){0.0, 0.0, 0.0});
 	dirs[1] = vec3_normalize(vec3_scale(ray->direction, -1.0));
 	dirs[2] = vec3_normalize(vec3_add(dirs[0], dirs[1]));
-	angle = fmax(vec3_dot(record->normal, dirs[2]), 0.0);
+	angle = fmaxf(vec3_dot(record->normal, dirs[2]), 0.0);
 	if (record->object->material && record->object->material->specular_map)
 		specular = sample_texture(record->object->material->specular_map,
 				record->u, record->v);
@@ -38,6 +38,6 @@ t_color	compute_specular(t_light *light, t_hit_record *record, t_ray *ray,
 	else
 		specular = (t_color){1.0, 1.0, 1.0};
 	attenuation = get_light_attenuation(light, dist);
-	attenuation = attenuation * light->brightness * pow(angle, shininess);
+	attenuation = attenuation * light->brightness * powf(angle, shininess);
 	return (color_scale(color_prod(light->color, specular), attenuation));
 }

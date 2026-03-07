@@ -19,5 +19,5 @@ t_real	vec2_len_squared(const t_vec2 v)
 
 t_real	vec2_len(const t_vec2 v)
 {
-	return (sqrt(vec2_len_squared(v)));
+	return (sqrtf(vec2_len_squared(v)));
 }

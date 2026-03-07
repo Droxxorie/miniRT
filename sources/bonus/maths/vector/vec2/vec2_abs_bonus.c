@@ -14,5 +14,5 @@
 
 t_vec2	vec2_abs(const t_vec2 v)
 {
-	return ((t_vec2){fabs(v.x), fabs(v.y)});
+	return ((t_vec2){fabsf(v.x), fabsf(v.y)});
 }

@@ -28,7 +28,7 @@ static t_vec3	get_dielectric_dir(t_vec3 dir, t_vec3 normal, t_real ratio)
 	t_real	reflect_prob;
 
 	unit_dir = vec3_normalize(dir);
-	cos_theta = fmin(vec3_dot(vec3_scale(unit_dir, -1), normal), 1.0);
+	cos_theta = fminf(vec3_dot(vec3_scale(unit_dir, -1), normal), 1.0);
 	if (vec_refract(unit_dir, normal, ratio, &refracted) == TRUE)
 		reflect_prob = reflectance(cos_theta, ratio);
 	else

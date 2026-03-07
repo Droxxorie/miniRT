@@ -14,5 +14,5 @@
 
 t_real	ft_clamp(t_real v, t_real min, t_real max)
 {
-	return (fmax(min, fmin(v, max)));
+	return (fmaxf(min, fminf(v, max)));
 }

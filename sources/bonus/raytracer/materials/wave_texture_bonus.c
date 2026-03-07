@@ -17,7 +17,7 @@ t_color	pattern_wave(t_hit_record *record, t_material *material)
 	t_real	t;
 	t_color	noise;
 
-	t = sin(record->v * 20.0 + sin(record->u * 30.0) * 2.0);
+	t = sinf(record->v * 20.0 + sinf(record->u * 30.0) * 2.0);
 	t = (t + 1.0) * 0.5;
 	noise = (t_color){1.0, 1.0, 1.0};
 	return (color_mix(material->color, noise, t));

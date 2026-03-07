@@ -17,5 +17,5 @@ t_real	vec3_dist(t_point3 p1, t_point3 p2)
 	t_vec3	diff;
 
 	diff = vec3_sub(p2, p1);
-	return (sqrt(vec3_dot(diff, diff)));
+	return (sqrtf(vec3_dot(diff, diff)));
 }

@@ -23,23 +23,23 @@ t_aabb	empty_aabb(void)
 
 void	grow_aabb(t_aabb *box, t_point3 point)
 {
-	box->min.x = fmin(box->min.x, point.x);
-	box->min.y = fmin(box->min.y, point.y);
-	box->min.z = fmin(box->min.z, point.z);
-	box->max.x = fmax(box->max.x, point.x);
-	box->max.y = fmax(box->max.y, point.y);
-	box->max.z = fmax(box->max.z, point.z);
+	box->min.x = fminf(box->min.x, point.x);
+	box->min.y = fminf(box->min.y, point.y);
+	box->min.z = fminf(box->min.z, point.z);
+	box->max.x = fmaxf(box->max.x, point.x);
+	box->max.y = fmaxf(box->max.y, point.y);
+	box->max.z = fmaxf(box->max.z, point.z);
 }
 
 t_aabb	surrounding_box(t_aabb box1, t_aabb box2)
 {
 	t_aabb	surround_box;
 
-	surround_box.min.x = fmin(box1.min.x, box2.min.x);
-	surround_box.min.y = fmin(box1.min.y, box2.min.y);
-	surround_box.min.z = fmin(box1.min.z, box2.min.z);
-	surround_box.max.x = fmax(box1.max.x, box2.max.x);
-	surround_box.max.y = fmax(box1.max.y, box2.max.y);
-	surround_box.max.z = fmax(box1.max.z, box2.max.z);
+	surround_box.min.x = fminf(box1.min.x, box2.min.x);
+	surround_box.min.y = fminf(box1.min.y, box2.min.y);
+	surround_box.min.z = fminf(box1.min.z, box2.min.z);
+	surround_box.max.x = fmaxf(box1.max.x, box2.max.x);
+	surround_box.max.y = fmaxf(box1.max.y, box2.max.y);
+	surround_box.max.z = fmaxf(box1.max.z, box2.max.z);
 	return (surround_box);
 }

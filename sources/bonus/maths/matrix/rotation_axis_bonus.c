@@ -19,8 +19,8 @@ t_mat4	matrix_axis_angle(t_vec3 axis, t_real angle)
 	t_real	sin_theta;
 	t_real	t;
 
-	cos_theta = cos(angle);
-	sin_theta = sin(angle);
+	cos_theta = cosf(angle);
+	sin_theta = sinf(angle);
 	t = 1 - cos_theta;
 	result = identity_matrix();
 	result.m[0][0] = t * axis.x * axis.x + cos_theta;

@@ -14,7 +14,7 @@
 
 void	build_onb(t_vec3 n, t_vec3 *t, t_vec3 *b)
 {
-	if (fabs(n.x) > 0.9)
+	if (fabsf(n.x) > 0.9)
 		*t = (t_vec3){0.0, 1.0, 0.0};
 	else
 		*t = (t_vec3){1.0, 0.0, 0.0};

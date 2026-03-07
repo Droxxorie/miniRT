@@ -44,11 +44,11 @@ static t_vec3	sample_disk(t_object *obj, unsigned int *seed)
 	t_real	phi;
 
 	build_onb(obj->u_data.disk.normal, &tb[0], &tb[1]);
-	r = obj->u_data.disk.radius * sqrt(random_double(seed));
+	r = obj->u_data.disk.radius * sqrtf(random_double(seed));
 	phi = TWO_PI * random_double(seed);
 	return (vec3_add(obj->u_data.disk.center,
-			vec3_add(vec3_scale(tb[0], r * cos(phi)),
-				vec3_scale(tb[1], r * sin(phi)))));
+			vec3_add(vec3_scale(tb[0], r * cosf(phi)),
+				vec3_scale(tb[1], r * sinf(phi)))));
 }
 
 static t_vec3	sample_tri(t_object *obj, unsigned int *seed)
@@ -59,7 +59,7 @@ static t_vec3	sample_tri(t_object *obj, unsigned int *seed)
 	t_triangle	*tri;
 
 	tri = &obj->u_data.triangle;
-	r[0] = sqrt(random_double(seed));
+	r[0] = sqrtf(random_double(seed));
 	r[1] = random_double(seed);
 	u = 1.0 - r[0];
 	v = r[0] * (1.0 - r[1]);

@@ -16,13 +16,13 @@
 //* ========================================================================= */
 //*                                MATHS & LOGIC                              */
 //* ========================================================================= */
-# define EPSILON 1e-6
-# define PI 3.14159265359
-# define INV_PI 0.31830988618
-# define INV_TWO_PI 0.15915494309
-# define TWO_PI 6.28318530718
-# define INV_255 0.00392156862
-# define INV_SQRT_2 0.70710678118
+# define EPSILON 1e-4f
+# define PI 3.14159265359f
+# define INV_PI 0.31830988618f
+# define INV_TWO_PI 0.15915494309f
+# define TWO_PI 6.28318530718f
+# define INV_255 0.00392156862f
+# define INV_SQRT_2 0.70710678118f
 
 # define MOVE_SPEED 2.5
 # define ROT_SPEED 0.2

@@ -44,7 +44,7 @@ static t_real	emissive_nee_pdf(t_object *obj, t_light_sample_vars *s)
 	t_real	area;
 
 	sn = get_emissive_normal(obj, s->light_pos);
-	cos_l = fabs(vec3_dot(vec3_scale(s->light_dir, -1.0), sn));
+	cos_l = fabsf(vec3_dot(vec3_scale(s->light_dir, -1.0), sn));
 	if (cos_l < 0.01)
 		cos_l = 0.01;
 	area = emissive_area(obj);
@@ -63,7 +63,7 @@ t_color	compute_emissive_contribution(t_object *obj, t_hit_record *rec,
 
 	if (!get_emissive_geometry(obj, rec, info, &s))
 		return ((t_color){0.0, 0.0, 0.0});
-	n_dot_l = fmax(vec3_dot(rec->normal, s.light_dir), 0.0);
+	n_dot_l = fmaxf(vec3_dot(rec->normal, s.light_dir), 0.0);
 	if (n_dot_l <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
 	pdf = emissive_nee_pdf(obj, &s);

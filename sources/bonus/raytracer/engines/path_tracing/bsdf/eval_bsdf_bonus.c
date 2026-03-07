@@ -29,7 +29,7 @@ static t_color	calc_specular(t_cook_torrance_vars *v, t_color f)
 	d = distribution_ggx(v->n, v->h, v->roughness);
 	g = geometry_smith(v->n, v->v, v->l, v->roughness);
 	denom = 4.0 * v->n_dot_v * v->n_dot_l;
-	return (color_div(color_scale(f, (d * g)), fmax(denom, 0.001)));
+	return (color_div(color_scale(f, (d * g)), fmaxf(denom, 0.001)));
 }
 
 static t_color	apply_specular_fade(t_cook_torrance_vars *v, t_color specular)
@@ -41,7 +41,7 @@ static t_color	apply_specular_fade(t_cook_torrance_vars *v, t_color specular)
 		specular_fade = 1.0;
 		if (v->roughness > 0.5)
 			specular_fade = 1.0 - ((v->roughness - 0.5) * 2.0);
-		specular = color_scale(specular, fmax(specular_fade, 0.0));
+		specular = color_scale(specular, fmaxf(specular_fade, 0.0));
 	}
 	return (specular);
 }
@@ -55,7 +55,7 @@ static t_color	compute_pbr_surface(t_hit_record *rec,
 	t_color	f;
 
 	init_prb_params(rec, v);
-	f = fresnel_schlick(fmax(vec3_dot(v->h, v->v), 0.0), v->f0);
+	f = fresnel_schlick(fmaxf(vec3_dot(v->h, v->v), 0.0), v->f0);
 	specular = calc_specular(v, f);
 	specular = apply_specular_fade(v, specular);
 	k_d = color_scale(color_sub((t_color){1.0, 1.0, 1.0}, f), 1.0
@@ -70,7 +70,7 @@ t_color	eval_bsdf(t_material *mat, t_hit_record *rec, t_vec3 v, t_vec3 l)
 
 	if (mat->metallic < 0.01 && (mat->roughness >= 0.99 || mat->type == 0))
 	{
-		if (fmax(vec3_dot(rec->normal, l), 0.0) <= 0.0)
+		if (fmaxf(vec3_dot(rec->normal, l), 0.0) <= 0.0)
 			return ((t_color){0.0, 0.0, 0.0});
 		return (color_scale(rec->albedo, INV_PI));
 	}
@@ -78,8 +78,8 @@ t_color	eval_bsdf(t_material *mat, t_hit_record *rec, t_vec3 v, t_vec3 l)
 	vars.l = l;
 	vars.n = rec->normal;
 	vars.h = vec3_normalize(vec3_add(vars.v, vars.l));
-	vars.n_dot_l = fmax(vec3_dot(vars.n, vars.l), 0.0);
-	vars.n_dot_v = fmax(vec3_dot(vars.n, vars.v), 0.0);
+	vars.n_dot_l = fmaxf(vec3_dot(vars.n, vars.l), 0.0);
+	vars.n_dot_v = fmaxf(vec3_dot(vars.n, vars.v), 0.0);
 	if (vars.n_dot_l <= EPSILON || vars.n_dot_v <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
 	return (compute_pbr_surface(rec, &vars));

@@ -21,7 +21,7 @@ t_mat4	rotation_align(t_vec3 dest)
 	t_vec3	ref_up;
 
 	forward = vec3_normalize(dest);
-	if (fabs(forward.y) > 0.99)
+	if (fabsf(forward.y) > 0.99)
 		ref_up = (t_vec3){0.0, 0.0, 1.0};
 	else
 		ref_up = (t_vec3){0.0, 1.0, 0.0};

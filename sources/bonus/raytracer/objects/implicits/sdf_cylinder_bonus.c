@@ -17,7 +17,7 @@ t_real	sdf_cylinder(t_point3 p)
 	t_vec2	d;
 
 	d.x = vec2_len((t_vec2){p.x, p.z}) - 1.0;
-	d.y = fabs(p.y) - 0.5;
-	return (fmin(fmax(d.x, d.y), 0.0) + vec2_len((t_vec2){fmax(d.x, 0.0),
-			fmax(d.y, 0.0)}));
+	d.y = fabsf(p.y) - 0.5;
+	return (fminf(fmaxf(d.x, d.y), 0.0) + vec2_len((t_vec2){fmaxf(d.x, 0.0),
+			fmaxf(d.y, 0.0)}));
 }

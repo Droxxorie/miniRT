@@ -25,7 +25,7 @@ static void	apply_normal_map(t_hit_record *rec, t_material *mat)
 	pixel = sample_texture(mat->normal_map, rec->u, rec->v);
 	map_n = (t_vec3){(pixel.r * 2.0) - 1.0, (pixel.g * 2.0) - 1.0, (pixel.b
 			* 2.0) - 1.0};
-	if (fabs(rec->normal.y) < 0.999)
+	if (fabsf(rec->normal.y) < 0.999)
 		up = (t_vec3){0, 1, 0};
 	else
 		up = (t_vec3){1, 0, 0};

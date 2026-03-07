@@ -18,9 +18,9 @@ t_real	sdf_box(t_point3 p)
 	t_vec3	abs_p;
 	t_real	distance;
 
-	abs_p = (t_vec3){fabs(p.x), fabs(p.y), fabs(p.z)};
+	abs_p = (t_vec3){fabsf(p.x), fabsf(p.y), fabsf(p.z)};
 	d = vec3_add_scalar(abs_p, -0.5);
-	distance = vec3_len((t_vec3){fmax(d.x, 0.0), fmax(d.y, 0.0), fmax(d.z,
-				0.0)}) + fmin(fmax(d.x, fmax(d.y, d.z)), 0.0);
+	distance = vec3_len((t_vec3){fmaxf(d.x, 0.0), fmaxf(d.y, 0.0), fmaxf(d.z,
+				0.0)}) + fminf(fmaxf(d.x, fmaxf(d.y, d.z)), 0.0);
 	return (distance);
 }

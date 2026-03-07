@@ -19,7 +19,7 @@ static t_bool	update_intervals(t_real dir, t_real origin, t_real *t_min,
 	t_real	t1;
 	t_real	inv_dir;
 
-	if (fabs(dir) < EPSILON)
+	if (fabsf(dir) < EPSILON)
 	{
 		if (origin < -0.5 || origin > 0.5)
 			return (FALSE);
@@ -34,8 +34,8 @@ static t_bool	update_intervals(t_real dir, t_real origin, t_real *t_min,
 		t1 = t0 - t1;
 		t0 = t0 - t1;
 	}
-	*t_min = fmax(t0, *t_min);
-	*t_max = fmin(t1, *t_max);
+	*t_min = fmaxf(t0, *t_min);
+	*t_max = fminf(t1, *t_max);
 	return (*t_max > *t_min);
 }
 
@@ -60,15 +60,15 @@ static void	get_box_normal(t_point3 *p, t_vec3 *n)
 {
 	t_real	max;
 
-	max = fmax(fabs(p->x), fmax(fabs(p->y), fabs(p->z)));
-	if (max == fabs(p->x))
+	max = fmaxf(fabsf(p->x), fmaxf(fabsf(p->y), fabsf(p->z)));
+	if (max == fabsf(p->x))
 	{
 		if (p->x > 0)
 			n->x = 1.0;
 		else
 			n->x = -1.0;
 	}
-	else if (max == fabs(p->y))
+	else if (max == fabsf(p->y))
 	{
 		if (p->y > 0)
 			n->y = 1.0;

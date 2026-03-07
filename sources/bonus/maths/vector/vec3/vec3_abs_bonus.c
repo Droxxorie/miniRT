@@ -14,5 +14,5 @@
 
 t_vec3	vec3_abs(const t_vec3 v)
 {
-	return ((t_vec3){fabs(v.x), fabs(v.y), fabs(v.z)});
+	return ((t_vec3){fabsf(v.x), fabsf(v.y), fabsf(v.z)});
 }

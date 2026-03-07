@@ -50,7 +50,7 @@ t_real	emissive_area(t_object *obj)
 	{
 		r = obj->u_data.cone.radius;
 		h = obj->u_data.cone.height;
-		return (PI * r * sqrt(r * r + h * h));
+		return (PI * r * sqrtf(r * r + h * h));
 	}
 	if (obj->type == BOX)
 		return (2.0 * (obj->u_data.box.width * obj->u_data.box.height
@@ -70,7 +70,7 @@ t_real	compute_emissive_pdf(t_hit_record *rec, t_vec3 ray_dir)
 	area = emissive_area(rec->object);
 	if (area < EPSILON)
 		area = EPSILON;
-	cos_light = fmax(vec3_dot(rec->normal, vec3_scale(ray_dir, -1.0)), 0.0);
+	cos_light = fmaxf(vec3_dot(rec->normal, vec3_scale(ray_dir, -1.0)), 0.0);
 	if (cos_light < 0.01)
 		cos_light = 0.01;
 	return ((rec->t * rec->t) / (area * cos_light + EPSILON));

@@ -19,5 +19,5 @@ t_real	vec3_len_squared(const t_vec3 v)
 
 t_real	vec3_len(const t_vec3 v)
 {
-	return (sqrt(vec3_len_squared(v)));
+	return (sqrtf(vec3_len_squared(v)));
 }

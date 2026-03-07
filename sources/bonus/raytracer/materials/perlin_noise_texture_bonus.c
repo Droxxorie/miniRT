@@ -57,7 +57,7 @@ t_color	pattern_marble(t_hit_record *record, t_material *material)
 	else
 		scale = 4.0;
 	turbulence = get_turbulence(record->u * scale, record->v * scale, 5);
-	t = sin(record->v * scale * 10.0 + turbulence * 5.0);
+	t = sinf(record->v * scale * 10.0 + turbulence * 5.0);
 	t = (t + 1.0) * 0.5;
 	vein_color = (t_color){1.0, 1.0, 1.0};
 	return (color_mix(material->color, vein_color, t));

@@ -55,7 +55,7 @@ static void	set_quartic_roots(t_quartic *vars, t_real t1, t_real t2)
 	vars->roots_count = 0;
 	if (discrim_e > -EPSILON)
 	{
-		vars->e = sqrt(fmax(discrim_e, 0.0));
+		vars->e = sqrtf(fmaxf(discrim_e, 0.0));
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 + (vars->r_var
 				+ vars->e) / 2.0;
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 + (vars->r_var
@@ -63,7 +63,7 @@ static void	set_quartic_roots(t_quartic *vars, t_real t1, t_real t2)
 	}
 	if (discrim_f > -EPSILON)
 	{
-		vars->f = sqrt(fmax(discrim_f, 0.0));
+		vars->f = sqrtf(fmaxf(discrim_f, 0.0));
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 - (vars->r_var
 				+ vars->f) / 2.0;
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 - (vars->r_var
@@ -80,11 +80,11 @@ static t_bool	compute_ferrari_vars(t_quartic *vars)
 	delta = vars->sq_a / 4.0 - vars->b + vars->y;
 	if (delta < -EPSILON)
 		return (FALSE);
-	vars->r_var = sqrt(fmax(delta, 0.0));
+	vars->r_var = sqrtf(fmaxf(delta, 0.0));
 	if (vars->r_var < EPSILON)
 	{
 		t1 = 3.0 * vars->sq_a / 4.0 - 2.0 * vars->b;
-		t2 = 2.0 * sqrt(fmax(vars->y * vars->y - 4.0 * vars->d, 0.0));
+		t2 = 2.0 * sqrtf(fmaxf(vars->y * vars->y - 4.0 * vars->d, 0.0));
 	}
 	else
 	{
@@ -98,7 +98,7 @@ static t_bool	compute_ferrari_vars(t_quartic *vars)
 
 t_bool	solve_quartic(t_quartic *vars)
 {
-	if (fabs(vars->coeffs[4]) < EPSILON)
+	if (fabsf(vars->coeffs[4]) < EPSILON)
 		return (FALSE);
 	normalize_coeffs(vars);
 	solve_resolvent(vars);

@@ -47,9 +47,9 @@ static t_real	get_angle_term(t_real n_dot_l, t_real n_dot_v)
 		cos_alpha = n_dot_v;
 		cos_beta = n_dot_l;
 	}
-	sin_alpha = sqrt(fmax(0.0, 1.0 - (cos_alpha * cos_alpha)));
-	tan_beta = sqrt(fmax(0.0, 1.0 - (cos_beta * cos_beta)));
-	return (sin_alpha * (tan_beta / fmax(EPSILON, cos_beta)));
+	sin_alpha = sqrtf(fmaxf(0.0, 1.0 - (cos_alpha * cos_alpha)));
+	tan_beta = sqrtf(fmaxf(0.0, 1.0 - (cos_beta * cos_beta)));
+	return (sin_alpha * (tan_beta / fmaxf(EPSILON, cos_beta)));
 }
 
 static t_real	get_gamma(t_vec3 normal, t_vec3 light_dir, t_vec3 view_dir,
@@ -63,7 +63,7 @@ static t_real	get_gamma(t_vec3 normal, t_vec3 light_dir, t_vec3 view_dir,
 					terms[0])));
 	view_proj = vec3_normalize(vec3_sub(view_dir, vec3_scale(normal,
 					terms[1])));
-	gamma = fmax(0.0, vec3_dot(view_proj, light_proj));
+	gamma = fmaxf(0.0, vec3_dot(view_proj, light_proj));
 	return (gamma);
 }
 

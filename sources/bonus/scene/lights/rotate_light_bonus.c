@@ -20,8 +20,8 @@ t_mat4	make_rotation_matrix(t_real angle, t_vec3 axis)
 	t_real	o_m_c;
 
 	mat = identity_matrix();
-	cosine = cos(angle);
-	sine = sin(angle);
+	cosine = cosf(angle);
+	sine = sinf(angle);
 	o_m_c = 1.0 - cosine;
 	axis = vec3_normalize(axis);
 	mat.m[0][0] = axis.x * axis.x * o_m_c + cosine;

@@ -18,7 +18,7 @@ static void	solve_cone_base(t_cone_hit *hit)
 	t_real	x;
 	t_real	z;
 
-	if (fabs(hit->ray.direction.y) < EPSILON)
+	if (fabsf(hit->ray.direction.y) < EPSILON)
 		return ;
 	t = -hit->ray.origin.y / hit->ray.direction.y;
 	if (t <= EPSILON || t >= hit->t)
@@ -82,7 +82,7 @@ static void	set_cone_record(t_object *object, t_ray *world_ray,
 	if (hit->type == BOTTOM_CAP)
 		local_normal = (t_vec3){0, -1, 0};
 	else
-		local_normal = (t_vec3){local_hp.x, sqrt((local_hp.x * local_hp.x)
+		local_normal = (t_vec3){local_hp.x, sqrtf((local_hp.x * local_hp.x)
 				+ (local_hp.z * local_hp.z)), local_hp.z};
 	record->normal = mat4_mult_vec3(object->transposed_inverse, local_normal);
 	record->normal = vec3_normalize(record->normal);

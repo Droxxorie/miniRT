@@ -19,5 +19,5 @@ t_real	vec4_len_squared(t_vec4 v)
 
 t_real	vec4_len(t_vec4 v)
 {
-	return (sqrt(vec4_len_squared(v)));
+	return (sqrtf(vec4_len_squared(v)));
 }

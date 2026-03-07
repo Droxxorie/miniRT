@@ -45,11 +45,11 @@ static t_color	compute_brdf(t_cook_torrance_vars *v, t_color *k_s)
 
 	d = distribution_ggx(v->n, v->h, v->roughness);
 	g = geometry_smith(v->n, v->v, v->l, v->roughness);
-	f = fresnel_schlick(fmax(vec3_dot(v->h, v->v), 0.0), v->f0);
+	f = fresnel_schlick(fmaxf(vec3_dot(v->h, v->v), 0.0), v->f0);
 	*k_s = f;
-	denom = 4.0 * fmax(v->n_dot_v, 0.01) * fmax(v->n_dot_l, 0.01);
+	denom = 4.0 * fmaxf(v->n_dot_v, 0.01) * fmaxf(v->n_dot_l, 0.01);
 	specular = color_scale(f, (d * g));
-	return (color_div(specular, fmax(denom, EPSILON)));
+	return (color_div(specular, fmaxf(denom, EPSILON)));
 }
 
 static t_color	calculate_lighting(t_cook_torrance_vars *v, t_color k_s,
@@ -64,7 +64,7 @@ static t_color	calculate_lighting(t_cook_torrance_vars *v, t_color k_s,
 			- v->metallic);
 	diffuse = color_prod(k_d, color_scale(v->albedo, INV_PI));
 	return (color_prod(color_add(diffuse, specular), color_scale(radiance,
-				fmax(v->n_dot_l, 0.01))));
+				fmaxf(v->n_dot_l, 0.01))));
 }
 
 static t_color	process_light(t_scene *s, t_light *light,
@@ -81,7 +81,7 @@ static t_color	process_light(t_scene *s, t_light *light,
 	dist = vec3_len(v->l);
 	v->l = vec3_normalize(v->l);
 	v->h = vec3_normalize(vec3_add(v->v, v->l));
-	v->n_dot_l = fmax(vec3_dot(v->n, v->l), 0.01);
+	v->n_dot_l = fmaxf(vec3_dot(v->n, v->l), 0.01);
 	if (v->n_dot_l <= EPSILON)
 		return ((t_color){0.0, 0.0, 0.0});
 	shadow = get_shadow_factor(s, rec, light);

@@ -26,8 +26,8 @@
 // 	t_real	cos_theta;
 // 	t_real	sin_theta;
 
-// 	cos_theta = cos(theta);
-// 	sin_theta = sin(theta);
+// 	cos_theta = cosf(theta);
+// 	sin_theta = sinf(theta);
 // 	mat = identity_matrix();
 // 	mat.m[1][1] = cos_theta;
 // 	mat.m[1][2] = -sin_theta;
@@ -42,8 +42,8 @@ t_mat4	rotation_mat_y(t_real theta)
 	t_real	cos_theta;
 	t_real	sin_theta;
 
-	cos_theta = cos(theta);
-	sin_theta = sin(theta);
+	cos_theta = cosf(theta);
+	sin_theta = sinf(theta);
 	mat = identity_matrix();
 	mat.m[0][0] = cos_theta;
 	mat.m[0][2] = sin_theta;
@@ -58,8 +58,8 @@ t_mat4	rotation_mat_z(t_real theta)
 	t_real	cos_theta;
 	t_real	sin_theta;
 
-	cos_theta = cos(theta);
-	sin_theta = sin(theta);
+	cos_theta = cosf(theta);
+	sin_theta = sinf(theta);
 	mat = identity_matrix();
 	mat.m[0][0] = cos_theta;
 	mat.m[0][1] = -sin_theta;

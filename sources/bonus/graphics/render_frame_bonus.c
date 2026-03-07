@@ -61,7 +61,7 @@ void	*render_routine(void *arg)
 	int				eff;
 
 	data = (t_thread_data *)arg;
-	eff = TILE_SIZE * (int)fmax(data->scene->render_scale, 1.0);
+	eff = TILE_SIZE * (int)fmaxf(data->scene->render_scale, 1.0);
 	while (1)
 	{
 		seq = get_tile_index(data->scene, 1);

@@ -1,110 +1,115 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sdf_mandelbox_bonus.c                              :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 19:38:42 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/16 14:09:24 by eraad            ###   ########.fr       */
+/*   Created: 2026/01/14 18:39:17 by eraad             #+#    #+#             */
+/*   Updated: 2026/01/14 23:42:19 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt_bonus.h>
 
-static void	sphere_fold(t_vec3 *z, t_real *dr, t_real inner_r, t_real outer_r)
+static void	sphere_fold(double *z, double *dr, double in_r, double out_r)
 {
-	t_real	r_sq;
-	t_real	fixed_r_sq;
-	t_real	min_r_sq;
-	t_real	temp;
+	double	r_sq;
+	double	temp;
 
-	r_sq = vec3_dot(*z, *z);
-	fixed_r_sq = outer_r * outer_r;
-	min_r_sq = inner_r * inner_r;
-	if (r_sq < min_r_sq)
+	r_sq = z[0] * z[0] + z[1] * z[1] + z[2] * z[2];
+	if (r_sq < in_r * in_r)
 	{
-		temp = fixed_r_sq / min_r_sq;
-		*z = vec3_scale(*z, temp);
+		temp = (out_r * out_r) / (in_r * in_r);
+		z[0] *= temp;
+		z[1] *= temp;
+		z[2] *= temp;
 		if (dr)
 			*dr *= temp;
 	}
-	else if (r_sq < fixed_r_sq)
+	else if (r_sq < out_r * out_r)
 	{
-		temp = fixed_r_sq / r_sq;
-		*z = vec3_scale(*z, temp);
+		temp = (out_r * out_r) / r_sq;
+		z[0] *= temp;
+		z[1] *= temp;
+		z[2] *= temp;
 		if (dr)
 			*dr *= temp;
 	}
 }
 
-static void	box_fold(t_vec3 *z, t_real fold_scale)
+static void	box_fold(double *z, double fold_scale)
 {
-	if (z->x > fold_scale)
-		z->x = 2.0 * fold_scale - z->x;
-	else if (z->x < -fold_scale)
-		z->x = -2.0 * fold_scale - z->x;
-	if (z->y > fold_scale)
-		z->y = 2.0 * fold_scale - z->y;
-	else if (z->y < -fold_scale)
-		z->y = -2.0 * fold_scale - z->y;
-	if (z->z > fold_scale)
-		z->z = 2.0 * fold_scale - z->z;
-	else if (z->z < -fold_scale)
-		z->z = -2.0 * fold_scale - z->z;
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (z[i] > fold_scale)
+			z[i] = 2.0 * fold_scale - z[i];
+		else if (z[i] < -fold_scale)
+			z[i] = -2.0 * fold_scale - z[i];
+		i++;
+	}
+}
+
+static t_color	mandelbox_palette(double min_trap, t_object *object)
+{
+	return (cosine_palette((t_real)log(min_trap + EPSILON),
+			(t_color[4]){object->color, (t_color){0.5f, 0.5f, 0.5f},
+		(t_color){2.0f, 2.0f, 2.0f}, (t_color){0.00f, 0.15f, 0.30f}}));
 }
 
 t_color	get_mandelbox_color(t_point3 p, t_object *object)
 {
-	t_vec3		z;
-	t_real		min_trap;
+	double		z[3];
+	double		min_trap;
 	int			i;
-	t_real		dist;
-	t_mandelbox	*mandelbox;
+	double		dist;
 
-	mandelbox = &object->u_data.mandelbox;
-	z = p;
+	z[0] = (double)p.x;
+	z[1] = (double)p.y;
+	z[2] = (double)p.z;
 	min_trap = 1e20;
-	i = 0;
-	while (i < 10)
+	i = -1;
+	while (++i < 10)
 	{
-		box_fold(&z, mandelbox->fold_factor);
-		sphere_fold(&z, NULL, mandelbox->inner_radius, mandelbox->outer_radius);
-		z = vec3_scale(z, mandelbox->fold_factor);
-		z = vec3_add(z, p);
-		dist = get_trap_distance(z, 2);
+		box_fold(z, (double)object->u_data.mandelbox.fold_factor);
+		sphere_fold(z, NULL, (double)object->u_data.mandelbox.inner_radius,
+			(double)object->u_data.mandelbox.outer_radius);
+		z[0] = z[0] * (double)object->u_data.mandelbox.fold_factor + p.x;
+		z[1] = z[1] * (double)object->u_data.mandelbox.fold_factor + p.y;
+		z[2] = z[2] * (double)object->u_data.mandelbox.fold_factor + p.z;
+		dist = get_trap_distance((t_vec3){(float)z[0], (float)z[1],
+				(float)z[2]}, 2);
 		if (dist < min_trap)
 			min_trap = dist;
-		i++;
 	}
-	return (cosine_palette(log(min_trap + EPSILON), (t_color[4]){object->color,
-			(t_color){0.5, 0.5, 0.5}, (t_color){2.0, 2.0, 2.0}, (t_color){0.00,
-			0.15, 0.30}}));
+	return (mandelbox_palette(min_trap, object));
 }
 
 t_real	sdf_mandelbox(t_point3 p, t_object *object)
 {
-	t_vec3		z;
-	t_real		dr;
-	t_real		dist_bounding_sphere;
+	double		z[3];
+	double		dr;
 	int			i;
-	t_mandelbox	*mandelbox;
 
-	mandelbox = &object->u_data.mandelbox;
-	dist_bounding_sphere = vec3_len(p) - (mandelbox->size * 2.5);
-	if (dist_bounding_sphere > 1.0)
-		return (dist_bounding_sphere);
-	z = p;
+	if (vec3_len(p) - (object->u_data.mandelbox.size * 2.5f) > 1.0f)
+		return (vec3_len(p) - (object->u_data.mandelbox.size * 2.5f));
+	z[0] = p.x;
+	z[1] = p.y;
+	z[2] = p.z;
 	dr = 1.0;
-	i = 0;
-	while (i < 15)
+	i = -1;
+	while (++i < 15)
 	{
-		box_fold(&z, mandelbox->fold_factor);
-		sphere_fold(&z, &dr, mandelbox->inner_radius, mandelbox->outer_radius);
-		z = vec3_scale(z, mandelbox->slice);
-		z = vec3_add(z, p);
-		dr = dr * fabs(mandelbox->slice) + 1.0;
-		i++;
+		box_fold(z, (double)object->u_data.mandelbox.fold_factor);
+		sphere_fold(z, &dr, (double)object->u_data.mandelbox.inner_radius,
+			(double)object->u_data.mandelbox.outer_radius);
+		z[0] = z[0] * (double)object->u_data.mandelbox.slice + p.x;
+		z[1] = z[1] * (double)object->u_data.mandelbox.slice + p.y;
+		z[2] = z[2] * (double)object->u_data.mandelbox.slice + p.z;
+		dr = dr * fabs((double)object->u_data.mandelbox.slice) + 1.0;
 	}
-	return (vec3_len(z) / fabs(dr));
+	return ((t_real)(sqrt(z[0] * z[0] + z[1] * z[1] + z[2] * z[2]) / fabs(dr)));
 }

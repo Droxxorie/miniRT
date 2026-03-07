@@ -14,12 +14,12 @@
 
 void	get_box_uv(t_point3 p, t_vec3 n, t_real *u, t_real *v)
 {
-	if (fabs(n.z) > 0.5)
+	if (fabsf(n.z) > 0.5)
 	{
 		*u = (p.x + 0.5);
 		*v = (p.y + 0.5);
 	}
-	else if (fabs(n.x) > 0.5)
+	else if (fabsf(n.x) > 0.5)
 	{
 		*u = (p.z + 0.5);
 		*v = (p.y + 0.5);

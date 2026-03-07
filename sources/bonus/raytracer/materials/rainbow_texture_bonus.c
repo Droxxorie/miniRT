@@ -18,8 +18,8 @@ t_color	pattern_rainbow(t_hit_record *record)
 	t_real	t;
 
 	t = record->u * TWO_PI;
-	color.r = 0.5 + 0.5 * cos(t + 0.0);
-	color.g = 0.5 + 0.5 * cos(t + (TWO_PI / 3.0));
-	color.b = 0.5 + 0.5 * cos(t + (2.0 * TWO_PI / 3.0));
+	color.r = 0.5 + 0.5 * cosf(t + 0.0);
+	color.g = 0.5 + 0.5 * cosf(t + (TWO_PI / 3.0));
+	color.b = 0.5 + 0.5 * cosf(t + (2.0 * TWO_PI / 3.0));
 	return (color);
 }

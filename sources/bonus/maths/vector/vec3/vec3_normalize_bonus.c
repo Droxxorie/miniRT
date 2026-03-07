@@ -20,6 +20,6 @@ t_vec3	vec3_normalize(const t_vec3 v)
 	len_sq = vec3_len_squared(v);
 	if (len_sq == 0.0)
 		return ((t_vec3){0.0, 0.0, 0.0});
-	len_inv = 1.0 / sqrt(len_sq);
+	len_inv = 1.0 / sqrtf(len_sq);
 	return (vec3_scale(v, len_inv));
 }

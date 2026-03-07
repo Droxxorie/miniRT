@@ -32,13 +32,13 @@ static void	resize_spot_angle(t_light *light, t_real factor)
 	t_real	step;
 
 	step = 2.0;
-	current_angle = acos(light->cos_theta) * 180.0 * INV_PI;
+	current_angle = acosf(light->cos_theta) * 180.0 * INV_PI;
 	if (factor > 1.0)
 		new_angle = current_angle + step;
 	else
 		new_angle = current_angle - step;
 	new_angle = ft_clamp(new_angle, 1.0, 179.0);
-	light->cos_theta = cos(new_angle * PI / 180.0);
+	light->cos_theta = cosf(new_angle * PI / 180.0);
 }
 
 void	resize_light(t_light *light, t_camera *camera, int mode, int direction)

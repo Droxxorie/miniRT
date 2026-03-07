@@ -36,11 +36,11 @@ t_vec3	sample_ggx(t_vec3 n, t_real roughness, unsigned int *seed)
 	r[0] = random_double(seed);
 	r[1] = random_double(seed);
 	phi = TWO_PI * r[0];
-	cos_sin_theta[0] = sqrt((1.0 - r[1]) / (1.0 + (roughness * roughness
+	cos_sin_theta[0] = sqrtf((1.0 - r[1]) / (1.0 + (roughness * roughness
 					* roughness * roughness - 1.0) * r[1]));
-	cos_sin_theta[1] = sqrt(1.0 - cos_sin_theta[0] * cos_sin_theta[0]);
-	h_tangent = (t_vec3){cos_sin_theta[1] * cos(phi), cos_sin_theta[1]
-		* sin(phi), cos_sin_theta[0]};
+	cos_sin_theta[1] = sqrtf(1.0 - cos_sin_theta[0] * cos_sin_theta[0]);
+	h_tangent = (t_vec3){cos_sin_theta[1] * cosf(phi), cos_sin_theta[1]
+		* sinf(phi), cos_sin_theta[0]};
 	build_onb(n, &up_right[0], &up_right[1]);
 	return (vec3_normalize(vec3_add(vec3_add(vec3_scale(up_right[1],
 						h_tangent.x), vec3_scale(up_right[0], h_tangent.y)),
@@ -63,14 +63,14 @@ t_real	bsdf_pdf(t_material *mat, t_vec3 n, t_vec3 v, t_vec3 l)
 		return (0.0);
 	}
 	if (mat->metallic < 0.01 && (mat->roughness >= 0.99))
-		return (fmax(vec3_dot(n, l), 0.0) * INV_PI);
+		return (fmaxf(vec3_dot(n, l), 0.0) * INV_PI);
 	h = vec3_normalize(vec3_add(v, l));
 	d = distribution_ggx(n, h, mat->roughness);
-	pdf[0] = (d * fmax(vec3_dot(n, h), 0.0)) / (4.0 * fmax(vec3_dot(v, h), 0.0)
-			+ EPSILON);
+	pdf[0] = (d * fmaxf(vec3_dot(n, h), 0.0))
+		/ (4.0 * fmaxf(vec3_dot(v, h), 0.0) + EPSILON);
 	if (mat->metallic >= 0.99)
 		return (pdf[0]);
-	pdf[1] = fmax(vec3_dot(n, l), 0.0) * INV_PI;
+	pdf[1] = fmaxf(vec3_dot(n, l), 0.0) * INV_PI;
 	specular_weight = get_sample_weight(mat);
 	return (specular_weight * pdf[0] + (1.0 - specular_weight) * pdf[1]);
 }
@@ -84,11 +84,11 @@ static void	sample_dielectric(t_material *mat, t_vec3 r_in, t_vec3 n,
 	t_real	reflect_prob;
 
 	ior_ratio = 1.0 / mat->ior;
-	cosine = fmin(-vec3_dot(r_in, n), 1.0);
+	cosine = fminf(-vec3_dot(r_in, n), 1.0);
 	if (!info->front_face)
 	{
 		ior_ratio = mat->ior;
-		cosine = fmin(mat->ior * fabs(vec3_dot(r_in, n)), 1.0);
+		cosine = fminf(mat->ior * fabsf(vec3_dot(r_in, n)), 1.0);
 	}
 	if (vec_refract(r_in, n, ior_ratio, &refracted))
 		reflect_prob = reflectance(cosine, mat->ior);

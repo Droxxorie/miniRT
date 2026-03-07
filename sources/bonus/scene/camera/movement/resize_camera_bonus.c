@@ -28,5 +28,5 @@ void	resize_camera_fov(t_camera *camera, int mode, int direction)
 		camera->fov = 1.0;
 	else if (camera->fov > 179.0)
 		camera->fov = 179.0;
-	camera->scale_factor = tan((camera->fov * PI / 180.0) * 0.5);
+	camera->scale_factor = tanf((camera->fov * PI / 180.0) * 0.5);
 }

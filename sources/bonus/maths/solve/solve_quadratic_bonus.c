@@ -21,7 +21,7 @@ t_bool	solve_quadratic(t_quadratic *vars)
 	delta = (vars->half_b * vars->half_b) - (vars->a * vars->c);
 	if (delta < 0)
 		return (FALSE);
-	sqrt_delta = sqrt(delta);
+	sqrt_delta = sqrtf(delta);
 	if (vars->a != 0)
 		inv_a = 1 / vars->a;
 	else

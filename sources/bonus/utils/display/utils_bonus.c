@@ -61,11 +61,11 @@ void	get_scale_and_position(t_object *object, t_vec3 *s, t_vec3 *p,
 
 	t = object->transform;
 	*p = (t_vec3){t.m[0][3], t.m[1][3], t.m[2][3]};
-	s->x = sqrt(t.m[0][0] * t.m[0][0] + t.m[0][1] * t.m[0][1] + t.m[0][2]
+	s->x = sqrtf(t.m[0][0] * t.m[0][0] + t.m[0][1] * t.m[0][1] + t.m[0][2]
 			* t.m[0][2]);
-	s->y = sqrt(t.m[1][0] * t.m[1][0] + t.m[1][1] * t.m[1][1] + t.m[1][2]
+	s->y = sqrtf(t.m[1][0] * t.m[1][0] + t.m[1][1] * t.m[1][1] + t.m[1][2]
 			* t.m[1][2]);
-	s->z = sqrt(t.m[2][0] * t.m[2][0] + t.m[2][1] * t.m[2][1] + t.m[2][2]
+	s->z = sqrtf(t.m[2][0] * t.m[2][0] + t.m[2][1] * t.m[2][1] + t.m[2][2]
 			* t.m[2][2]);
 	c->r = object->color.r * 255;
 	c->g = object->color.g * 255;
