@@ -102,6 +102,8 @@ static void	run_poll_loop(t_scene *s, pthread_t *threads,
 	{
 		mlx_put_image_to_window(s->mlx_window.mlx_ptr,
 			s->mlx_window.win_ptr, s->frame_buffer.ptr, 0, 0);
+		if (s->render_mode != RENDER_SHADE)
+			display_debug_text(s);
 		mlx_do_sync(s->mlx_window.mlx_ptr);
 	}
 }
