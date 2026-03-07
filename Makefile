@@ -253,6 +253,11 @@ SRCS_BONUS += \
 	$(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_cylinder_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_rectangle_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/parametrics/parse_triangle_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/obj/process_obj_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_vertices_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_faces_bonus.c \
+	$(SRC_DIR_BONUS)/parsing/objects/obj/parse_obj_materials_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_julia_set_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbox_bonus.c \
 	$(SRC_DIR_BONUS)/parsing/objects/implicits/parse_mandelbulb_bonus.c \

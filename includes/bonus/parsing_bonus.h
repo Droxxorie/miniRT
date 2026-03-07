@@ -44,6 +44,7 @@ t_status	parse_cone(t_scene *scene, char **line);
 t_status	parse_plane(t_scene *scene, char **line);
 t_status	parse_torus(t_scene *scene, char **line);
 t_status	parse_sphere(t_scene *scene, char **line);
+t_status	parse_obj(t_scene *scene, char **line);
 t_status	parse_cylinder(t_scene *scene, char **line);
 t_status	parse_triangle(t_scene *scene, char **line);
 t_status	parse_rectangle(t_scene *scene, char **line);
@@ -102,5 +103,13 @@ t_status	dispatch_mtl_line(t_scene *scene, t_material **current, char *line);
 t_status	parse_mtl_lib(t_scene *scene, char **line);
 t_status	parse_usemtl(t_scene *scene, char **line, t_object *object);
 t_status	parse_pattern(char **line, t_material *material);
+
+t_status	parse_obj_vertex(t_scene *scene, t_obj_data *data, char **line);
+t_status	parse_obj_normal(t_scene *scene, t_obj_data *data, char **line);
+t_status	parse_obj_face(t_scene *scene, t_obj_data *data, char **line);
+t_status	parse_obj_mtllib(t_scene *scene, t_obj_data *data, char **line);
+t_status	parse_obj_usemtl(t_scene *scene, t_obj_data *data, char **line);
+t_status	dispatch_obj_line(t_scene *scene, t_obj_data *data, char *line);
+t_status	process_obj_line(t_scene *scene, int fd, t_obj_data *data);
 
 #endif

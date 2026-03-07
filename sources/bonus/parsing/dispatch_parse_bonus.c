@@ -26,6 +26,8 @@ static t_status	dispatch_shapes(t_scene *scene, char *line)
 		return (parse_disk(scene, &line));
 	if (match_and_consume(&line, "tri") == EXIT_SUCCESS)
 		return (parse_triangle(scene, &line));
+	if (match_and_consume(&line, "obj") == EXIT_SUCCESS)
+		return (parse_obj(scene, &line));
 	if (match_and_consume(&line, "tor") == EXIT_SUCCESS)
 		return (parse_torus(scene, &line));
 	if (match_and_consume(&line, "con") == EXIT_SUCCESS)

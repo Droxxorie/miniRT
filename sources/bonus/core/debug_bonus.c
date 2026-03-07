@@ -53,3 +53,27 @@ void	setup_debug_mode(int argc, char **argv, t_scene *scene)
 	}
 	dispatch_mode(argv, scene);
 }
+
+void	display_debug_text(t_scene *s)
+{
+	char	*txt;
+
+	if (s->render_mode == RENDER_AO)
+		txt = "DEBUG: AO";
+	else if (s->render_mode == RENDER_NORMAL)
+		txt = "DEBUG: NORMAL";
+	else if (s->render_mode == RENDER_DEPTH)
+		txt = "DEBUG: DEPTH";
+	else if (s->render_mode == RENDER_SHADOWS)
+		txt = "DEBUG: SHADOWS";
+	else if (s->render_mode == RENDER_LIGHTS)
+		txt = "DEBUG: LIGHTS";
+	else if (s->render_mode == RENDER_UV)
+		txt = "DEBUG: UV";
+	else if (s->render_mode == RENDER_CHECKER)
+		txt = "DEBUG: CHECKER";
+	else
+		return ;
+	mlx_string_put(s->mlx_window.mlx_ptr, s->mlx_window.win_ptr,
+		20, 30, 0x00FF00, txt);
+}

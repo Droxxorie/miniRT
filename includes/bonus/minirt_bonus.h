@@ -43,6 +43,7 @@
 # include "structs/s_object_bonus.h"
 # include "structs/s_scene_bonus.h"
 # include "structs/s_post_process_bonus.h"
+# include "structs/s_obj_bonus.h"
 
 # include "errors_bonus.h"
 # include "maths_bonus.h"
@@ -73,5 +74,6 @@ t_status	clean_exit(t_scene *scene, t_status status);
 void		setup_save_mode(int argc, char **argv, t_scene *scene);
 void		save_image_to_bmp(t_scene *scene);
 void		setup_debug_mode(int argc, char **argv, t_scene *scene);
+void		display_debug_text(t_scene *s);
 
 #endif

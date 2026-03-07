@@ -25,8 +25,8 @@ t_mat4	rotation_align(t_vec3 dest)
 		ref_up = (t_vec3){0.0, 0.0, 1.0};
 	else
 		ref_up = (t_vec3){0.0, 1.0, 0.0};
-	right = vec3_normalize(vec3_cross(ref_up, forward));
-	up = vec3_normalize(vec3_cross(forward, right));
+	right = vec3_normalize(vec3_cross(forward, ref_up));
+	up = vec3_normalize(vec3_cross(right, forward));
 	mat = identity_matrix();
 	mat.m[0][0] = right.x;
 	mat.m[0][1] = forward.x;

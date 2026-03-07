@@ -38,7 +38,7 @@
 
 # define MAX_LIGHTS 10
 # define MAX_CAMERAS 10
-# define MAX_OBJECTS 100
+# define MAX_OBJECTS 5000000
 
 # define PLANE_SCALE 2000.0
 

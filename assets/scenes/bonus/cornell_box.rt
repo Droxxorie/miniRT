@@ -3,7 +3,7 @@ C 0,0,-19.9 0,0,1 50
 # R 1920 1080
 R 720 720
 # R 160 90
-SAMPLES 1000
+SAMPLES 10
 mtllib assets/materials/cornellbox.mtl
 # RENDER_SCALE 8
 # AA_SAMPLES 16

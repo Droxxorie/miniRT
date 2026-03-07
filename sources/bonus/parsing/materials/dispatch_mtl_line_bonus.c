@@ -14,10 +14,14 @@
 
 static t_status	dispatch_scalars(t_material *current, char *line)
 {
+	t_real	dummy;
+
 	if (match_and_consume(&line, "Ns") == EXIT_SUCCESS)
 		return (parse_roughness(&line, current));
 	if (match_and_consume(&line, "Ni") == EXIT_SUCCESS)
 		return (parse_real(&line, &current->ior));
+	if (match_and_consume(&line, "d") == EXIT_SUCCESS)
+		return (parse_real(&line, &dummy));
 	if (match_and_consume(&line, "Tr") == EXIT_SUCCESS)
 		return (parse_real(&line, &current->transparency));
 	if (match_and_consume(&line, "uv_scale") == EXIT_SUCCESS)

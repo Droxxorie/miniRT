@@ -89,6 +89,8 @@ static void	run_poll_loop(t_scene *s, pthread_t *threads,
 		{
 			mlx_put_image_to_window(s->mlx_window.mlx_ptr,
 				s->mlx_window.win_ptr, s->frame_buffer.ptr, 0, 0);
+			if (s->render_mode != RENDER_SHADE)
+				display_debug_text(s);
 			mlx_do_sync(s->mlx_window.mlx_ptr);
 		}
 	}
@@ -118,6 +120,8 @@ void	render_frame(t_scene *scene)
 	{
 		mlx_put_image_to_window(scene->mlx_window.mlx_ptr,
 			scene->mlx_window.win_ptr, scene->frame_buffer.ptr, 0, 0);
+		if (scene->render_mode != RENDER_SHADE)
+			display_debug_text(scene);
 		mlx_do_sync(scene->mlx_window.mlx_ptr);
 	}
 	tc = init_render_threads(scene, &threads, &data);
