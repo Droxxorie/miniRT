@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 17:12:05 by eraad             #+#    #+#             */
-/*   Updated: 2026/03/07 18:45:49 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/07 22:43:25 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_status	dispatch_obj_line(t_scene *scene, t_obj_data *data, char *line)
 		return (EXIT_SUCCESS);
 	if (match_and_consume(&line, "v") == EXIT_SUCCESS)
 		return (parse_obj_vertex(scene, data, &line));
+	if (match_and_consume(&line, "vt") == EXIT_SUCCESS)
+		return (parse_obj_texcoord(scene, data, &line));
 	if (match_and_consume(&line, "vn") == EXIT_SUCCESS)
 		return (parse_obj_normal(scene, data, &line));
 	if (match_and_consume(&line, "f") == EXIT_SUCCESS)

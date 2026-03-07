@@ -1,0 +1,9 @@
+A 0.2 255,255,255
+C 0,1,-4 0,0,1 70
+L 2,5,-3 0.8 255,255,255
+# R 200 200
+
+# obj assets/objects/teapot/teapot.obj 0,0,0 0,1,0 1 255,255,255
+obj assets/objects/teapot/low_poly_teapot.obj 0,0,0 0,1,0 1 255,255,255
+
+pl 0,-1,0 0,1,0 205,100,100

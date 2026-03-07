@@ -6,7 +6,7 @@
 /*   By: eraad <eraad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 14:08:36 by eraad             #+#    #+#             */
-/*   Updated: 2026/01/24 09:30:38 by eraad            ###   ########.fr       */
+/*   Updated: 2026/03/07 22:14:55 by eraad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_status	parse_illum(char **line, t_material **material)
 	{
 		(*material)->type = LAMBERT;
 		log_event(stderr, "WARNING",
-			"Unknown illumination model %d. Defaulting to LAMBERT.", model);
+			"Unknown illumination model %d. Defaulting to LAMBERT.\n", model);
 	}
 	return (EXIT_SUCCESS);
 }

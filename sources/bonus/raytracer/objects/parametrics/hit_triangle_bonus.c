@@ -16,6 +16,7 @@ static void	set_triangle_record(t_object *object, t_ray *world_ray,
 		t_triangle_hit vars, t_hit_record *record)
 {
 	t_triangle	*triangle;
+	t_real		w;
 
 	triangle = &object->u_data.triangle;
 	record->hit_point = ray_at(world_ray, record->t);
@@ -23,8 +24,11 @@ static void	set_triangle_record(t_object *object, t_ray *world_ray,
 	record->object = object;
 	if (world_ray->is_shadow_ray == TRUE)
 		return ;
-	record->u = vars.u;
-	record->v = vars.v;
+	w = 1.0 - vars.u - vars.v;
+	record->u = w * triangle->uv0.x + vars.u * triangle->uv1.x
+		+ vars.v * triangle->uv2.x;
+	record->v = w * triangle->uv0.y + vars.u * triangle->uv1.y
+		+ vars.v * triangle->uv2.y;
 	record->normal = mat4_mult_vec3(object->transposed_inverse,
 			triangle->normal);
 	record->normal = vec3_normalize(record->normal);

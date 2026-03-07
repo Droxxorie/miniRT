@@ -100,6 +100,7 @@ t_status	parse_obj(t_scene *scene, char **line)
 	status = parse_obj_core(scene, &data, filename);
 	free(filename);
 	free(data.v_array);
+	free(data.vt_array);
 	free(data.vn_array);
 	return (status);
 }

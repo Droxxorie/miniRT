@@ -91,6 +91,9 @@ typedef struct s_triangle
 	t_vec3				edge1;
 	t_vec3				edge2;
 	t_vec3				normal;
+	t_vec2				uv0;
+	t_vec2				uv1;
+	t_vec2				uv2;
 }						t_triangle;
 
 typedef struct s_torus

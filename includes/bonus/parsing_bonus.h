@@ -106,6 +106,7 @@ t_status	parse_pattern(char **line, t_material *material);
 
 t_status	parse_obj_vertex(t_scene *scene, t_obj_data *data, char **line);
 t_status	parse_obj_normal(t_scene *scene, t_obj_data *data, char **line);
+t_status	parse_obj_texcoord(t_scene *scene, t_obj_data *data, char **line);
 t_status	parse_obj_face(t_scene *scene, t_obj_data *data, char **line);
 t_status	parse_obj_mtllib(t_scene *scene, t_obj_data *data, char **line);
 t_status	parse_obj_usemtl(t_scene *scene, t_obj_data *data, char **line);

@@ -21,6 +21,9 @@ typedef struct s_obj_data
 	t_vec3		*v_array;
 	int			v_count;
 	int			v_capacity;
+	t_vec2		*vt_array;
+	int			vt_count;
+	int			vt_capacity;
 	t_vec3		*vn_array;
 	int			vn_count;
 	int			vn_capacity;

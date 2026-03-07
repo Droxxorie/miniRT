@@ -1,0 +1,14 @@
+newmtl None
+Ns 500
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+illum 2
+
+newmtl GoldMarble
+illum 6
+Kd 1.00 0.76 0.33
+Ks 0.04 0.04 0.04
+Ns 300
+pattern perlin
+uv_scale 0.5
