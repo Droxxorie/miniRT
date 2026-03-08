@@ -1,6 +1,6 @@
 A 0.05 255,255,255
-# C 0,0,-19.9 0,0,1 50
-C -2.2,0.43,17.8 0.22,-0.53,-0.82 50
+C 0,0,-19.9 0,0,1 50
+# C -2.2,0.43,17.8 0.22,-0.53,-0.82 50
 
 # R 1920 1080
 R 720 720
@@ -32,8 +32,8 @@ rec 0,10,0    0,-1,0    20.0    40.0    255,255,255 -usemtl ceiling
 
 # sp 5,-7,3 6.0 255,255,255 -usemtl ClearGlass
 # sp -5,-7,-2 6.0 255,255,255 -usemtl GoldMirror
-# sp 0,-5,10 6.0 255,255,255 -usemtl ThickGreenGlass
-box 0,-7.5,10 0,1,0 5.0 5.0 5.0 255,255,255 -usemtl floor
-obj assets/objects/teapot/teapot.obj 0,-4.8,10 0,1,0 1 1,1,1
+sp 0,-5,10 6.0 255,255,255 -usemtl ThickGreenGlass
+# box 0,-7.5,10 0,1,0 5.0 5.0 5.0 255,255,255 -usemtl floor
+# obj assets/objects/teapot/teapot.obj 0,-4.8,10 0,1,0 1 1,1,1
 # obj assets/objects/pomme/pomme.obj 0,-4.8,10 0,0.75,0 1 1,1,1
 

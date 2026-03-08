@@ -1,279 +1,114 @@
+*This project has been created as part of the 42 curriculum by eraad, jehubert.*
+
 ![Banner](output/green_glass.bmp)
 
 # miniRT - Raytracing Engine
 
-## Language : C
-Ce projet a été réalisé dans le cadre du cursus à l'école **42 Paris**.
+## Description
+**miniRT** is a hybrid rendering engine developed in C using the **MinilibX**. Designed as a comprehensive introduction to computer-generated imagery, this project goes far beyond standard requirements. The engine seamlessly combines **Analytic Raytracing** (Whitted-style), **Path Tracing** (Monte Carlo integration for global illumination), and **Raymarching** (Signed Distance Functions) to render highly realistic 3D scenes with Physically Based Rendering (PBR) materials.
 
-**miniRT** est un moteur de rendu hybride développé en C avec la **MinilibX**.
+## Key Features & Technologies
 
-Ce projet implémente un pipeline de rendu combinant **Raytracing**, **Path Tracing** (Monte Carlo) et **Raymarching** (SDF), permettant de générer des images photoréalistes utilisant des matériaux PBR.
+### Architecture & Performance
+* **Multi-threading**: Optimized tile-based rendering with a spiral path algorithm, utilizing all available CPU cores.
+* **Acceleration Structures**: Bounding Volume Hierarchy (BVH) for fast ray-object intersections.
+* **Culling**: Implements Back-Face Culling and Occlusion Culling.
+* **Progressive Rendering**: Real-time tile visualization with intermediate updates.
 
----
+### Lighting & Physically Based Rendering (PBR)
+* **BRDF Models**: Supports Lambert (diffuse), Oren-Nayar (rough surfaces), Cook-Torrance (microfacet metallic/plastic), and Dielectric (refraction, glass, water).
+* **Global Illumination**: Fully implemented Path Tracing with Color Bleeding.
+* **Advanced Light Sampling**: Next Event Estimation (NEE) and Multiple Importance Sampling (MIS) using the power heuristic to combine light and BSDF sampling efficiently.
+* **Volumetrics**: Volumetric absorption for transparent materials using the Beer-Lambert law.
+* **Light Types**: Point lights, Sun (directional), Spotlights, Quad (area) lights, and Emissive materials.
+* **Shadows & AO**: Physically accurate soft shadows and Ambient Occlusion.
 
-## Installation et Compilation
+### Geometry & SDF Raymarching
+* **Analytic Primitives**: Spheres, planes, cylinders, cones, boxes, rectangles, disks, triangles, and toruses.
+* **Mesh Loading**: Full support for `.obj` files with automatic triangulation and BVH integration.
+* **3D Fractals**: Signed Distance Functions (SDF) implementation rendering complex mathematical structures: Mandelbulb, Mandelbox, 4D Julia Set, and Menger Sponge.
 
-Cloner le repo :
+### Textures & Post-Processing
+* **Material Mapping**: Full `.mtl` support with diffuse, normal (bump), roughness, metallic, emission, and specular maps (via `.xpm` textures).
+* **Procedural Textures**: Checkerboard, Perlin noise, sine waves, and rainbow patterns.
+* **Post-Process Filters**: Anti-Aliasing (SSAA), ACES Tone Mapping, Gaussian Blur, Sobel (edge detection), Sepia, Black & White, Sharpen, Contrast, and Saturation adjustments.
 
-```sh
-git clone git@github.com:ton_pseudo/miniRT.git miniRT && cd miniRT
-```
+## Instructions
 
-**Prérequis**
-* Une machine sous Linux ou MacOS
-* ```make```, ```gcc```
-* Les bibliothèques X11
-
-**MinilibX**
-
-Le moteur graphique repose sur la MinilibX.
-
-Si elle n'est pas présente sur votre système :
-1. Cloner la MinilibX dans le dossier racine :
-	```bash
-	git clone [https://github.com/42paris/minilibx-linux.git](https://github.com/42paris/minilibx-linux.git) minilibx
-	```
-2. La compilation de la MinilibX est gérée automatiquement par le Makefile du projet.
-
-## **Compilation**
-
-Générer l'exécutable standard (Raytracing pur - Partie Mandatory) :
+### Compilation
+The graphics engine relies on MinilibX, which is automatically compiled.
 ```bash
+# Standard Raytracer (Mandatory part)
 make
-```
 
-Générer l'exécutable avancé (PBR, Path Tracing, Fractales - Partie Bonus) :
-```bash
+# Advanced Path Tracer with PBR, OBJ, and SDFs (Bonus part)
 make bonus
 ```
 
-Commandes de nettoyage :
+### Execution
 ```bash
-make clean			# Supprime les objets
-make fclean			# Supprime objets et exécutables
-make re				# Recompile le mandatory
-make re_bonus		# Recompile le bonus
+./miniRT scene.rt
+./miniRT_bonus scene_bonus.rt
 ```
 
-Autre :
-```bash
-make valgrind		# Execute avec valgrind (Prend ARGS)
-make valgrind_bonus # Execute le bonus avec valgrind (prend ARGS)
-make help			# Affiche les options
-```
+**For comprehensive details on how to use the engine, keyboard/mouse controls, and how to write `.rt` and `.mtl` files, please consult the [User Manual](user_manual.md).**
 
-## **Utilisation**
+## Gallery
 
-Le programme prend en argument un fichier de scène ```.rt```.
+### PBR & Materials
+![Cornell Box PBR](output/cornell_mirrors_2K.bmp)
+*Physically Based Rendering in a Cornell Box.*
 
-### **Mode Mandatory :**
-```bash
-./miniRT <scene.rt>
-```
+![Glass Refraction](output/green_glass.bmp)
+*Dielectric materials with Beer-Lambert absorption.*
 
-### **Mode Bonus :**
-```bash
-./miniRT_bonus <scene_bonus.rt> [options]
-```
+![Earth](output/20260128_182557.bmp)
+*Textured sphere with normal, emission, and roughness maps.*
 
-**Options et Arguments**
-|Flag   |Argument           |Description                                                                                |
-|-------|-------------------|-------------------------------------------------------------------------------------------|
-|--save |```<fichier.bmp>```|Lance le rendu et sauvegarde automatiquement l'image au format BMP dans le chemin spécifié.|
-|--debug|```<MODE>```       |Active un mode de visualisation spécifique pour le débogage.                               |
+### Fractals & Raymarching
+![Mandelbulb](output/fractals/20260114_184545.bmp)
+*SDF Raymarching: Zoom on Mandelbulb.*
 
-**Modes de debug :**
-* ```SHADE``` : Rendu standard (par défaut).
-* ```NORMAL``` : Visualise les normales.
-* ```AO``` : Visualise l'Ambient Occlusion.
-* ```LIGHTS``` : Visualise uniquement l'impact direct des sources lumineuses.
-* ```SHADOWS``` : Affiche les masques d'ombres.
-* ```UV``` : Visualise les coordonnées de texture.
-* ```CHECKER``` : Applique un damier de test sur tous les objets.
+![Mandelbox](output/fractals/20260114_222948.bmp)
+*SDF Raymarching: Mandelbox.*
 
-### **Exemples**
-```bash
-./miniRT assets/scenes/mandatory/exemple.rt
+![Julia 4D](output/fractals/20260118_131248.bmp)
+*SDF Raymarching: Exploration of the 4D Julia Set.*
 
-./miniRT_bonus assets/scenes/bonus/exemple.rt
+### Path Tracing
+![Cornell Mirrors](output/pathtrace_cornell_box_mirrors.bmp)
+*Path Tracing with mirrors.*
 
-./miniRT_bonus assets/scenes/bonus/scene_complexe.rt --save rendu_final.bmp
+![Classic Path Tracing](output/Cornell_box_5000.bmp)
+*5000 samples Path Tracing.*
 
-./miniRT_bonus assets/scenes/bonus/test_texture.rt --debug UV
-```
+### Bloopers & Fails
+*Building a rendering engine is a journey filled with artistic bugs!*
 
-## **Contrôles et UX**
+![Broken Normals](output/broken.bmp)
+*The Broken Normals.*
 
-L'interface permet de naviguer en temps réel (lentement cependant).
+![AABB Issue](output/aabb_issue.bmp)
+*Entering the Matrix (AABB issues).*
 
-###  Clavier
+![Black Hole](output/black_hole.bmp)
+*The Black Hole incident.*
 
-| Touche | Action |
-| :--- | :--- |
-| **Z / S** | Avancer / Reculer (Zoom) |
-| **Q / D** | Translation Gauche / Droite |
-| **A / E** | Monter / Descendre |
-| **Flèches** | Rotation de la caméra (Look around) |
-| **TAB** | Basculer entre mode **Translation** et **Rotation** |
-| **Space** | Cycler entre les Caméras / Lumières actives |
-| **C** | Sélectionner la **Caméra** |
-| **L** | Sélectionner une **Lumière** |
-| **I** | Afficher les infos de l'élément sélectionné (Objet/Cam/Light) |
-| **T** | Activer/Désactiver l'objet ou la lumière sélectionné(e) |
-| **R** | Réinitialiser la position de la caméra actuelle |
-| **Shift + R** | Réinitialiser toute la scène |
-| **Enter** | Prendre une capture d'écran (`output.bmp`) |
-| **ESC** | Quitter le programme |
+![SDF Broken](output/borken_sdf.bmp)
+*Broken SDF computations.*
 
-### Souris & Molette
+## Resources & AI Usage
 
-| Action | Contexte | Effet |
-| :--- | :--- | :--- |
-| **Clic Gauche** | Global | Sélectionner un objet (Raycasting) |
-| **Molette** | Caméra | Ajuster le **FOV** (Champ de vision) |
-| **Molette** | Objet | Redimensionnement uniforme (Scale) |
-| **Shift + Molette** | Objet | Redimensionnement sur l'axe **X** |
-| **Ctrl + Molette** | Objet | Redimensionnement sur l'axe **Y** |
-| **Alt + Molette** | Objet | Redimensionnement sur l'axe **Z** |
+### Resources
+* **Peter Shirley** - *Ray Tracing in One Weekend* book series.
+* **Inigo Quilez** - Articles and mathematical foundations for Signed Distance Functions (SDF) and fractals.
+* **Scratchapixel** - Theoretical and mathematical foundations for computer graphics and raytracing.
+* **My brother** - Incredible source of inspiration since 1999 (Reference: *ISIR Project*).
 
-### Modes de Debug
-
-Les touches **1** à **7** permettent de visualiser les différentes passes du rendu :
-
-* **1** : Mode Standard (Shading final)
-* **2** : Normales (XYZ -> RGB)
-* **3** : Ambient Occlusion (AO)
-* **4** : Lumières directes (Sans textures)
-* **5** : Masque d'ombres (Shadows)
-* **6** : Coordonnées UV
-* **7** : Pattern Checker (Vérification UV)
-
-## **Fonctionnalités du Moteur**
-Ce moteur a été conçu pour explorer le rendu logiciel en C.
-
-Il permet de modeliser plusieurs type de primites:
-SPhere, cone, cylindre, box, rectangle, plan, tore, triangle, disk
-
-### **Architecture & Performance**
-* **Multi-threading** : Utilisation de tous les cœurs CPU disponibles.
-* **BVH** (Bounding Volume Hierarchy) : Accélération des intersections rayons/objets.
-* **Culling** : Occlusion Culling et Back-Face Culling.
-* **Anti-Aliasing** : Supersampling (SSAA) et accumulation temporelle (Path Tracing).
-
-### **Éclairage & PBR**
-* **Modèles BRDF** :
-  * **Lambert** (Diffuse standard).
-  * **Oren-Nayar** (Surfaces rugueuses réalistes, ex: Argile, Lune).
-  * **Cook-Torrance** (Micro-facettes spéculaires pour métaux/plastiques).
-  * **Dielectric** : Gestion de la réfraction (Verre, Eau, Diamant).
-* **Matériaux** :
-  * **Conductor** : Métaux avec absorption (Or, Argent, Cuivre).
-  * **Absorption** Volumétrique : Loi de Beer-Lambert pour les verres colorés.
-* **Lumières** :
-  * **Soleil**, **Point Light**, **Spotlight**.
-  * **Quad Lights** (Lumières surfaciques).
-* **Global Illumination** : Color Bleeding et éclairage indirect via Path Tracing.
-* Calcul de l'**Ambient Occlusion** (AO) via Monte Carlo.
-* Calcule des **Soft Shadows**.
-
-### **Géométrie & Fractales (SDF)**
-
-Le moteur intègre auusi un raymarcher pour les Signed Distance Functions :
-* **Fractales 3D** : Mandelbulb, Mandelbox, Ensemble de Julia (4D), Éponge de Menger.
-* Calcul d'**AO**.
-* Calcul des **Soft Shadows**.
-
-### **Matériaux & Textures**
-* Textures : Support ```.xpm``` (Normal map, Reflexion map, Roughness map, Emission map).
-* Matériaux Émissifs : Les objets peuvent devenir des sources de lumière (Pathtracing only).
-
----
-
-## **Galerie**
-
-### 1. **Rendu PBR & Matériaux**
-![figure_1](output/cornell_mirrors_2K.bmp)
-
-**Figure 1.** Cornell Box PBR.
-
-![figure_2](output/20260128_182557.bmp)
-
-**Figure 2.** Sphere avec texture de la terre (et normal/emission/roughness map).
-
-![figure_3](output/solar_with_aa.bmp)
-
-**Figure 3.** Terre face au solei avec Anti-Aliasing.
-
-### 2. **Fractales & Raymarching**
-![figure_4](output/fractals/20260114_184545.bmp)
-
-**Figure 4.** Zoom sur structure Mandelbulb.
-
-![figure_5](output/fractals/20260114_222948.bmp)
-
-**Figure 5.** Mandelbox.
-
-![figure_6](output/fractals/20260118_131248.bmp)
-
-**Figure 6.** Exploration de l'ensemble de Julia 4D.
-
-### 3. **Pathtracing**
-![figure_7](output/green_glass.bmp)
-![figure_10](output/Cornell_box_5000.bmp)
-
-**Figure 7.** Bille de verre transparence colorée.
-
-![figure_8](output/pathtrace_cornell_box_mirrors.bmp)
-
-**Figure 8.** Cornell Box mirroirs en Path Tracing.
-
-![figure_9](output/20260126_181341.bmp)
-
-**Figure 8.** Cornell Box classique en Path Tracing.
-
-### 4. **Fails**
-Le développement d'un moteur graphique passe par beaucoup d'essais... et d'erreurs artistiques.
-![figure_11](output/broken.bmp)
-![figure_12](output/20260126_232211.bmp)
-![figure_13](output/aabb_issue.bmp)
-![figure_14](output/black_hole.bmp)
-![figure_15](output/borken_sdf.bmp)
-![figure_16](output/brocken_cone.bmp)
-![figure_17](output/matrix.bmp)
-
----
-
-## **Tests et Validation**
-
-Un script de test automatisé est fourni pour valider le parsing des fichiers ```.rt``` et ```.mtl```.
-
-Lancer les tests de la partie obligatoire :
-```bash
-./tester.sh
-```
-
-Lancer les tests complets (incluant les bonus et matériaux) :
-```bash
-./tester.sh --bonus
-```
-
----
-
-# **Ressources et Inspirations**
-
-🔹 Peter Shirley - Série de livres Ray Tracing in One Weekend.
-🔹 Inigo Quilez - Articles sur les SDF et le Raymarching de fractales.
-🔹 Scratchapixel - Théorie mathématique.
-🔹 Mon frère - Inspiration since 1999.
-
----
-
-# Auteurs
-
-Projet réalisé par :
-* @eraad
-* @jehubert
-
----
-
-Note : Ce projet respecte la Norme 42.
+### AI Usage
+During the development of this project, Artificial Intelligence tools were utilized as assistants for several specific tasks:
+* **Refactoring**: Assisting with refactoring complex functions to adhere strictly to the 42 Norm (max 25 lines, max 5 variables, explicit naming conventions).
+* **Research**: Quickly finding exact mathematical formulas and best practices for specific graphic algorithms (e.g., BRDF models, MIS weights).
+* **Testing**: Generating complex, edge-case `.rt` scenes to deeply test the engine's limits and robustness.
+* **Documentation**: Structuring and formatting this README and the detailed User Manual.
+* **Problem Solving**: Identifying the origins of unexpected rendering artifacts, eliminating flawed implementation ideas, and debugging logic errors during the Path Tracing implementation.
