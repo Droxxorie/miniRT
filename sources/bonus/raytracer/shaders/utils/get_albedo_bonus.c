@@ -33,6 +33,30 @@ t_color	get_albedo(t_material *mat, t_hit_record *record)
 	return (record->color);
 }
 
+static void	apply_normal_map(t_hit_record *rec, t_material *mat)
+{
+	t_color	pixel;
+	t_vec3	map_n;
+	t_vec3	tangent;
+	t_vec3	bitangent;
+	t_vec3	up;
+
+	if (!mat || !mat->normal_map)
+		return ;
+	pixel = sample_texture(mat->normal_map, rec->u, rec->v);
+	map_n = (t_vec3){(pixel.r * 2.0f) - 1.0f, -((pixel.g * 2.0f) - 1.0f),
+		fabsf((pixel.b * 2.0f) - 1.0f)};
+	if (fabsf(rec->normal.y) < 0.999f)
+		up = (t_vec3){0.0f, 1.0f, 0.0f};
+	else
+		up = (t_vec3){1.0f, 0.0f, 0.0f};
+	tangent = vec3_normalize(vec3_cross(up, rec->normal));
+	bitangent = vec3_normalize(vec3_cross(rec->normal, tangent));
+	rec->normal = vec3_normalize(vec3_add(vec3_add(vec3_scale(tangent, map_n.x),
+					vec3_scale(bitangent, map_n.y)), vec3_scale(rec->normal,
+					map_n.z)));
+}
+
 void	prepare_surface(t_hit_record *rec)
 {
 	t_material	*mat;
@@ -40,6 +64,12 @@ void	prepare_surface(t_hit_record *rec)
 	mat = rec->object->material;
 	if (!mat)
 		return ;
+	if (mat->uv_scale > EPSILON)
+	{
+		rec->u *= mat->uv_scale;
+		rec->v *= mat->uv_scale;
+	}
+	apply_normal_map(rec, mat);
 	rec->albedo = get_albedo(mat, rec);
 	rec->roughness = mat->roughness;
 	rec->metallic = mat->metallic;

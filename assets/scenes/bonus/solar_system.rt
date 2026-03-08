@@ -2,8 +2,10 @@ A 0.05 255,255,255
 SB assets/textures/skybox/milkyway.xpm
 mtllib assets/materials/solar_system.mtl
 # R 1920 1080
-R 3840 2160
-# SAMPLES 100
+# R 3840 2160
+# R 720 720
+
+SAMPLES 100
 # AA_SAMPLES 16
 
 C 50,5,5 -0.8,-0.3,-0.5 40

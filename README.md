@@ -1,6 +1,6 @@
 *This project has been created as part of the 42 curriculum by eraad, jehubert.*
 
-![Banner](output/green_glass.bmp)
+![Banner](assets/images/Banner.jpg)
 
 # miniRT - Raytracing Engine
 

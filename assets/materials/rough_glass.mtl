@@ -30,7 +30,7 @@ newmtl GreenGlass_20
   Kd 1.0 1.0 1.0
   Ks 1.0 1.0 1.0
   Ni 1.5
-  Ns 800
+  Ns 950
   Tf 0.8 0.05 0.8
 
 newmtl GreenGlass_50
@@ -38,7 +38,7 @@ newmtl GreenGlass_50
   Kd 1.0 1.0 1.0
   Ks 1.0 1.0 1.0
   Ni 1.5
-  Ns 500
+  Ns 900
   Tf 0.8 0.05 0.8
 
 newmtl GreenGlass_80
@@ -46,7 +46,7 @@ newmtl GreenGlass_80
   Kd 1.0 1.0 1.0
   Ks 1.0 1.0 1.0
   Ni 1.5
-  Ns 200
+  Ns 800
   Tf 0.8 0.05 0.8
 
 newmtl GreenGlass_100
@@ -54,5 +54,13 @@ newmtl GreenGlass_100
   Kd 1.0 1.0 1.0
   Ks 1.0 1.0 1.0
   Ni 1.5
-  Ns 0
+  Ns 600
   Tf 0.8 0.05 0.8
+
+newmtl BlackChecker
+illum 6
+Kd 0.8 0.8 0.8
+Ks 0.04 0.04 0.04
+Ns 800
+pattern checker
+uv_scale 1

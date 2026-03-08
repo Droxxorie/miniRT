@@ -1,14 +1,28 @@
 A 0.1 255,255,255
 C 0,0,0 0,0,1 30
-C 0,0,25 0,0,1 30
+C 0,0,25 0,0,1 40
 
 # R 1920 1080
-R 2460 1440
+# R 2460 1440
 # R 160 90
+R 720 720
+
+# AA_SAMPLES 16
+# RENDER_SCALE 4
+SAMPLES 100
+
+# FILTER SOBEL
+# FILTER BNW
+# FILTER GAUSSIAN 10.0
+# FILTER SEPIA
+# FILTER SHARPEN 1.0
+# FILTER CONTRAST 1.5
+# FILTER SATURATION 0.5
+
 SB assets/textures/skybox/milkyway.xpm
 mtllib assets/materials/earth.mtl
 
-SUN	    1,-1,1                         1.0    255,244,214
+SUN	    1,-1,1                         .5    255,244,214
 
 tor	0,0,45	0,1,-1	5.0	1.0		0,255,0		-usemtl Earth
 sp	0,0,20	8					255,215,0	-usemtl Earth

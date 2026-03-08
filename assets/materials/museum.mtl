@@ -12,16 +12,22 @@ illum 5
 Kd 1.0 1.0 1.0
 Ns 100
 map_Kd assets/textures/basketball.xpm
-map_Kn assets/textures/basketball_bump.xpm
+map_Kn assets/textures/basketball_normal.xpm
 
 newmtl RoomCarpet
 illum 5
 Kd 1.0 1.0 1.0
 Ns 0
 map_Kd assets/textures/carpet.xpm
-uv_scale 1000
+uv_scale 500
 
 newmtl DecorJupiter
 illum 1
 Kd 1.0 1.0 1.0
 map_Kd assets/textures/jupiter.xpm
+
+newmtl SoftLight
+illum 0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 1.0 1.0 1.0
