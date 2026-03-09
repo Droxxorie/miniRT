@@ -54,37 +54,37 @@ typedef struct s_quadratic
 
 typedef struct s_cubic
 {
-	t_real		coeffs[4];
-	t_real		roots[3];
+	double		coeffs[4];
+	double		roots[3];
 	int			roots_count;
-	t_real		a;
-	t_real		sq_a;
-	t_real		b;
-	t_real		c;
-	t_real		p;
-	t_real		cube_p;
-	t_real		q;
-	t_real		delta;
-	t_real		sqrt_delta;
-	t_real		phi;
-	t_real		u;
-	t_real		v;
+	double		a;
+	double		sq_a;
+	double		b;
+	double		c;
+	double		p;
+	double		cube_p;
+	double		q;
+	double		delta;
+	double		sqrt_delta;
+	double		phi;
+	double		u;
+	double		v;
 }				t_cubic;
 
 typedef struct s_quartic
 {
-	t_real		coeffs[5];
-	t_real		roots[4];
+	double		coeffs[5];
+	double		roots[4];
 	int			roots_count;
-	t_real		a;
-	t_real		sq_a;
-	t_real		b;
-	t_real		c;
-	t_real		d;
-	t_real		y;
-	t_real		r_var;
-	t_real		e;
-	t_real		f;
+	double		a;
+	double		sq_a;
+	double		b;
+	double		c;
+	double		d;
+	double		y;
+	double		r_var;
+	double		e;
+	double		f;
 	t_cubic		cubic_vars;
 }				t_quartic;
 

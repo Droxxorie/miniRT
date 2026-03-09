@@ -28,10 +28,10 @@ newmtl BluePlasticPhong
 illum 2
 Kd 0.1 0.1 0.8
 Ks 0.8 0.8 0.8
-Ns 50.0
+Ns 9000.0
 
 newmtl PerfectMirror
-illum 3
+illum 6
 Kd 1.0 1.0 1.0
 Ns 1000
 

@@ -1,28 +1,28 @@
 A 0.05 255,255,255
-C 0,0,-19.9 0,0,1 50
-# C -2.2,0.43,17.8 0.22,-0.53,-0.82 50
+# C 0,0,-19.9 0,0,1 50
+C -2.2,0.43,17.8 0.22,-0.53,-0.82 40
 
 # R 1920 1080
 R 720 720
 # R 160 90
 
-SAMPLES 10
 mtllib assets/materials/cornellbox.mtl
 # RENDER_SCALE 16
 # AA_SAMPLES 16
+SAMPLES 1000
 
 # QUAD 0,9.89,10    0,-1,0    5.0    5.0    20.0    255,255,255
 rec 0,9.9,10    0,1,0    5.0    5.0            255,255,255 -usemtl light
-# SPOT    0,9.5,10   0,-1,0   25.0   100.0   255,255,255
-# L 0,9.0,0 0.8 255,255,255
+# SPOT    0,9,10   0,-1,0   25.0   100.0   255,255,255
+# L 0,9.89,0 20 255,255,255
 
 # FILTER SOBEL
 # FILTER BNW
 # FILTER GAUSSIAN 10.0
 # FILTER SEPIA
 # FILTER SHARPEN 1.0
-# FILTER CONTRAST 1.5
-# FILTER SATURATION 0.5
+FILTER CONTRAST 1.1
+FILTER SATURATION 1.1
 
 rec -10,0,0   1,0,0     40.0    22.0    255,0,0 -usemtl rightWall
 rec 10,0,0    -1,0,0    40.0    22.0    0,255,0 -usemtl leftWall
@@ -33,8 +33,7 @@ rec 0,10,0    0,-1,0    20.0    40.0    255,255,255 -usemtl ceiling
 
 # sp 5,-7,3 6.0 255,255,255 -usemtl ClearGlass
 # sp -5,-7,-2 6.0 255,255,255 -usemtl GoldMirror
-sp 0,-5,10 6.0 255,255,255 -usemtl ThickGreenGlass
-# box 0,-7.5,10 0,1,0 5.0 5.0 5.0 255,255,255 -usemtl floor
+# sp 0,-5,10 6.0 255,255,255 -usemtl ThickGreenGlass
+box 0,-7.5,10 0,1,0 5.0 5.0 5.0 255,255,255 -usemtl floor
 # obj assets/objects/teapot/teapot.obj 0,-4.8,10 0,1,0 1 1,1,1
-# obj assets/objects/pomme/pomme.obj 0,-4.8,10 0,0.75,0 1 1,1,1
-
+obj assets/objects/pomme/pomme.obj 0,-4.86,10 0,0.75,0 1 1,1,1

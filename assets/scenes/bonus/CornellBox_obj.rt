@@ -1,19 +1,22 @@
 A 0.05 255,255,255
 C 0,1,3.6 0,0,-1 40
+# C 0,1,3.6 0,0,-1 34
 R 720 720
 # R 160 90
 
-SAMPLES 100
-# RENDER_SCALE 8
+# SAMPLES 1000
+# RENDER_SCALE 4
+AA_SAMPLES 16
 
 # FILTER SOBEL
 # FILTER BNW
 # FILTER GAUSSIAN 10.0
 # FILTER SEPIA
 # FILTER SHARPEN 1.0
-# FILTER CONTRAST 0.5
+# FILTER CONTRAST 1.1
 # FILTER SATURATION 0.5
 
-obj assets/objects/CornellBox/CornellBox-Original.obj 0,0,0 0,1,0 1 0,0,0
+QUAD 0,1.7,0    0,-1,0    1.0    1.0    .5    255,255,255
+# obj assets/objects/CornellBox/CornellBox-Original.obj 0,0,0 0,1,0 1 0,0,0
 # obj assets/objects/CornellBox/CornellBox-Water.obj 0,0.2,0 0,1,0 1 0,0,0
-# obj assets/objects/CornellBox/CornellBox-Mirror.obj 0,0,0 0,1,0 1 0,0,0
+obj assets/objects/CornellBox/CornellBox-Mirror.obj 0,0,0 0,1,0 1 0,0,0

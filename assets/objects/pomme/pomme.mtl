@@ -1,47 +1,43 @@
 # Blender MTL File: 'pomme.blend'
 # Material Count: 4
+# From ISIR Josue
 
 newmtl Pomme
-Ns 250.000000
+Ns 600
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 1
+illum 6
 map_Bump assets/objects/pomme/textures/Pomme_NRM.xpm
 map_Kd assets/objects/pomme/textures/Pomme_COL.xpm
 
 newmtl Stem
-Ns 90.000007
+Ns 600
 Ka 1.000000 1.000000 1.000000
 Kd 0.050038 0.025353 0.004548
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 2
+illum 6
 map_Bump assets/objects/pomme/textures/stem_nrm.xpm
 map_Ns assets/objects/pomme/textures/stem_rough.xpm
 
 newmtl blade
-Ns 800.500000
+Ns 1000
 Ka 1.000000 1.000000 1.000000
 Kd 0.949470 0.949470 0.949470
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
 illum 6
 
 newmtl wood
-Ns 250.000000
+Ns 600.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.048760 0.026642 0.011016
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
-Ni 1.450000
 d 1.000000
 illum 6
 map_Kd assets/objects/pomme/textures/knife.xpm
+map_Bump assets/objects/pomme/textures/knife_normal.xpm
+

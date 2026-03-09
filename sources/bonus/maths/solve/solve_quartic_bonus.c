@@ -14,7 +14,7 @@
 
 static void	normalize_coeffs(t_quartic *vars)
 {
-	t_real	a_inv;
+	double	a_inv;
 
 	a_inv = 1.0 / vars->coeffs[4];
 	vars->a = vars->coeffs[3] * a_inv;
@@ -45,25 +45,25 @@ static void	solve_resolvent(t_quartic *vars)
 	}
 }
 
-static void	set_quartic_roots(t_quartic *vars, t_real t1, t_real t2)
+static void	set_quartic_roots(t_quartic *vars, double t1, double t2)
 {
-	t_real	discrim_e;
-	t_real	discrim_f;
+	double	discrim_e;
+	double	discrim_f;
 
 	discrim_e = t1 + t2;
 	discrim_f = t1 - t2;
 	vars->roots_count = 0;
-	if (discrim_e > -EPSILON)
+	if (discrim_e > -1e-9)
 	{
-		vars->e = sqrtf(fmaxf(discrim_e, 0.0));
+		vars->e = sqrt(fmax(discrim_e, 0.0));
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 + (vars->r_var
 				+ vars->e) / 2.0;
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 + (vars->r_var
 				- vars->e) / 2.0;
 	}
-	if (discrim_f > -EPSILON)
+	if (discrim_f > -1e-9)
 	{
-		vars->f = sqrtf(fmaxf(discrim_f, 0.0));
+		vars->f = sqrt(fmax(discrim_f, 0.0));
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 - (vars->r_var
 				+ vars->f) / 2.0;
 		vars->roots[vars->roots_count++] = -vars->a / 4.0 - (vars->r_var
@@ -73,18 +73,18 @@ static void	set_quartic_roots(t_quartic *vars, t_real t1, t_real t2)
 
 static t_bool	compute_ferrari_vars(t_quartic *vars)
 {
-	t_real	delta;
-	t_real	t1;
-	t_real	t2;
+	double	delta;
+	double	t1;
+	double	t2;
 
 	delta = vars->sq_a / 4.0 - vars->b + vars->y;
-	if (delta < -EPSILON)
+	if (delta < -1e-9)
 		return (FALSE);
-	vars->r_var = sqrtf(fmaxf(delta, 0.0));
-	if (vars->r_var < EPSILON)
+	vars->r_var = sqrt(fmax(delta, 0.0));
+	if (vars->r_var < 1e-9)
 	{
 		t1 = 3.0 * vars->sq_a / 4.0 - 2.0 * vars->b;
-		t2 = 2.0 * sqrtf(fmaxf(vars->y * vars->y - 4.0 * vars->d, 0.0));
+		t2 = 2.0 * sqrt(fmax(vars->y * vars->y - 4.0 * vars->d, 0.0));
 	}
 	else
 	{
@@ -98,7 +98,7 @@ static t_bool	compute_ferrari_vars(t_quartic *vars)
 
 t_bool	solve_quartic(t_quartic *vars)
 {
-	if (fabsf(vars->coeffs[4]) < EPSILON)
+	if (fabs(vars->coeffs[4]) < 1e-9)
 		return (FALSE);
 	normalize_coeffs(vars);
 	solve_resolvent(vars);

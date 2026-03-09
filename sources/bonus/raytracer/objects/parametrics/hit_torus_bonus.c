@@ -14,33 +14,34 @@
 
 static void	setup_torus_coeffs(t_quartic *vars, t_ray *ray, t_torus *torus)
 {
-	t_real	dist_sq;
-	t_real	od;
-	t_real	k;
-	t_real	dx_dz_sq;
-	t_real	ox_oz_sq;
+	double	dist_sq;
+	double	od;
+	double	k;
+	double	dx_dz_sq;
+	double	ox_oz_sq;
 
 	dist_sq = vec3_len_squared(ray->direction);
 	od = vec3_dot(ray->origin, ray->direction);
 	k = vec3_len_squared(ray->origin) + torus->diff_radius_sq;
-	dx_dz_sq = (ray->direction.x * ray->direction.x) + (ray->direction.z
-			* ray->direction.z);
-	ox_oz_sq = (ray->origin.x * ray->origin.x) + (ray->origin.z
-			* ray->origin.z);
+	dx_dz_sq = (double)ray->direction.x * ray->direction.x
+		+ (double)ray->direction.z * ray->direction.z;
+	ox_oz_sq = (double)ray->origin.x * ray->origin.x
+		+ (double)ray->origin.z * ray->origin.z;
 	vars->coeffs[4] = dist_sq * dist_sq;
 	vars->coeffs[3] = 4.0 * dist_sq * od;
 	vars->coeffs[2] = (2.0 * dist_sq * k) + (4.0 * od * od) - (4.0
 			* torus->major_radius_sq * dx_dz_sq);
 	vars->coeffs[1] = (4.0 * k * od) - 8.0 * torus->major_radius_sq
-		* (ray->origin.x * ray->direction.x + ray->origin.z * ray->direction.z);
+		* ((double)ray->origin.x * ray->direction.x + (double)ray->origin.z
+			* ray->direction.z);
 	vars->coeffs[0] = (k * k) - (4.0 * torus->major_radius_sq * ox_oz_sq);
 }
 
-static t_real	find_nearest_root(t_quartic *vars, t_ray *ray, t_real *t,
-		t_real scale)
+static double	find_nearest_root(t_quartic *vars, t_ray *ray, t_real *t,
+		double scale)
 {
 	int		i;
-	t_real	t_local;
+	double	t_local;
 	t_real	t_world;
 
 	*t = ray->max;
@@ -48,7 +49,7 @@ static t_real	find_nearest_root(t_quartic *vars, t_ray *ray, t_real *t,
 	i = 0;
 	while (i < vars->roots_count)
 	{
-		t_world = vars->roots[i] / scale;
+		t_world = (t_real)(vars->roots[i] / scale);
 		if (t_world > ray->min && t_world < *t)
 		{
 			*t = t_world;
@@ -99,21 +100,22 @@ t_bool	hit_torus(t_object *object, t_ray *world_ray, t_hit_record *record)
 	t_ray		local_ray;
 	t_torus		*torus;
 	t_quartic	vars;
-	t_real		scale;
-	t_real		t_local;
+	double		scale;
+	double		t_local;
 
 	torus = &object->u_data.torus;
 	local_ray = transform_ray(*world_ray, object->inverse);
-	scale = vec3_len(local_ray.direction);
+	scale = (double)vec3_len(local_ray.direction);
 	if (scale < EPSILON)
 		return (FALSE);
-	local_ray.direction = vec3_scale(local_ray.direction, 1.0 / scale);
+	local_ray.direction = vec3_scale(local_ray.direction, 1.0f / scale);
 	setup_torus_coeffs(&vars, &local_ray, torus);
 	if (solve_quartic(&vars) == FALSE)
 		return (FALSE);
 	t_local = find_nearest_root(&vars, &local_ray, &record->t, scale);
 	if (t_local < 0.0)
 		return (FALSE);
-	set_torus_record(object, world_ray, ray_at(&local_ray, t_local), record);
+	set_torus_record(object, world_ray, ray_at(&local_ray, (t_real)t_local),
+		record);
 	return (TRUE);
 }

@@ -14,7 +14,7 @@
 
 static void	solve_for_one_root(t_cubic *vars)
 {
-	vars->sqrt_delta = sqrtf(vars->delta);
+	vars->sqrt_delta = sqrt(vars->delta);
 	vars->u = cbrt(-vars->q / 2.0 + vars->sqrt_delta);
 	vars->v = cbrt(-vars->q / 2.0 - vars->sqrt_delta);
 	vars->roots[0] = vars->u + vars->v - vars->a / 3.0;
@@ -23,27 +23,27 @@ static void	solve_for_one_root(t_cubic *vars)
 
 static void	solve_for_three_roots(t_cubic *vars)
 {
-	t_real	factor;
-	t_real	offset;
-	t_real	arg;
+	double	factor;
+	double	offset;
+	double	arg;
 
-	if (fabsf(vars->p) < EPSILON)
+	if (fabs(vars->p) < 1e-9)
 	{
 		vars->roots_count = 1;
 		vars->roots[0] = -vars->a / 3.0;
 		return ;
 	}
-	factor = 2.0 * sqrtf(-vars->p / 3.0);
-	arg = -sqrtf(-27.0 / (vars->cube_p)) * (vars->q / 2.0);
+	factor = 2.0 * sqrt(-vars->p / 3.0);
+	arg = -sqrt(-27.0 / (vars->cube_p)) * (vars->q / 2.0);
 	if (arg < -1.0)
 		arg = -1.0;
 	else if (arg > 1.0)
 		arg = 1.0;
-	vars->phi = acosf(arg);
+	vars->phi = acos(arg);
 	offset = vars->a / 3.0;
-	vars->roots[0] = factor * cosf(vars->phi / 3.0) - offset;
-	vars->roots[1] = factor * cosf((vars->phi + 2.0 * PI) / 3.0) - offset;
-	vars->roots[2] = factor * cosf((vars->phi + 4.0 * PI) / 3.0) - offset;
+	vars->roots[0] = factor * cos(vars->phi / 3.0) - offset;
+	vars->roots[1] = factor * cos((vars->phi + 2.0 * PI) / 3.0) - offset;
+	vars->roots[2] = factor * cos((vars->phi + 4.0 * PI) / 3.0) - offset;
 	vars->roots_count = 3;
 }
 
@@ -61,7 +61,7 @@ static void	init_cubic_vars(t_cubic *vars)
 
 t_bool	solve_cubic(t_cubic *vars)
 {
-	if (fabsf(vars->coeffs[3]) < EPSILON)
+	if (fabs(vars->coeffs[3]) < 1e-9)
 		return (FALSE);
 	init_cubic_vars(vars);
 	if (vars->delta < 0)

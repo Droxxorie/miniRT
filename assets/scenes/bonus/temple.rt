@@ -1,28 +1,28 @@
-A   									0.1										255,255,255
+A   									0.1										255,180,20
 # R   160 90
 # R  3840	2160
 R 720 720
 
 C   0,2,-25				0,0,1						20 #* Default
-C   0,2,-25				0,0,1						70 #* Far
-C  1.9,1.1,-7.3			0,0,1						8.0 #* Glass close
-C  -1.9,1.1,-7.3		0,0,1						8.0 #* Silver close
+# C   0,2,-25				0,0,1						70 #* Far
+# C  1.9,1.1,-7.3			0,0,1						8.0 #* Glass close
+# C  -1.9,1.1,-7.3		0,0,1						8.0 #* Silver close
 mtllib	assets/materials/materials_test.mtl
 SB		assets/textures/skybox/sky_alkatraz.xpm
 
-SAMPLES 100
+SAMPLES 1000
 # AA_SAMPLES 16
 
 # FILTER SOBEL
 # FILTER BNW
-# FILTER GAUSSIAN 10.0
+# FILTER GAUSSIAN 1.0
 # FILTER SEPIA
-# FILTER SHARPEN 1.0
-# FILTER CONTRAST 1.5
+# FILTER SHARPEN 10
+FILTER CONTRAST 1.2
 # FILTER SATURATION 0.5
 
-rec 0,10,5    0,1,0    5.0    5.0            255,255,255 -usemtl SuperNeon
-SUN	    1,-1,1                         0.5    255,244,214
+# rec 0,10,5    0,1,0    5.0    5.0            255,255,255 -usemtl SuperNeon
+SUN	    1,-1,1                         2.0    255,244,214
 # SPOT    0,20,0      0,-1,0      10.0   100.0   255,193,84
 # SPOT    0,20,-20   0,-0.6,0.7   10.0   500.0   255,193,84
 
