@@ -65,25 +65,25 @@ void	setup_save_mode(int argc, char **argv, t_scene *scene)
 static t_status	write_bmp_header(int fd, int width, int height)
 {
 	char	header[54];
-	int		bpp;
-	int		plane;
-	int		offset;
-	int		file_size;
+	int		val;
+	short	val_s;
 
 	ft_bzero(header, 54);
 	header[0] = 'B';
 	header[1] = 'M';
-	bpp = 32;
-	plane = 1;
-	offset = 54;
-	file_size = offset + (width * height * 4);
-	*(int *)&header[2] = file_size;
-	*(int *)&header[10] = offset;
-	*(int *)&header[14] = 40;
-	*(int *)&header[18] = width;
-	*(int *)&header[22] = -height;
-	*(short *)&header[26] = plane;
-	*(short *)&header[28] = bpp;
+	val = 54 + (width * height * 4);
+	ft_memcpy(&header[2], &val, 4);
+	val = 54;
+	ft_memcpy(&header[10], &val, 4);
+	val = 40;
+	ft_memcpy(&header[14], &val, 4);
+	ft_memcpy(&header[18], &width, 4);
+	val = -height;
+	ft_memcpy(&header[22], &val, 4);
+	val_s = 1;
+	ft_memcpy(&header[26], &val_s, 2);
+	val_s = 32;
+	ft_memcpy(&header[28], &val_s, 2);
 	if (write(fd, header, 54) < 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
