@@ -73,17 +73,13 @@ make bonus
 
 *SDF Raymarching: Menger Sponge*
 
-![Mandelbulb](output/fractals/20260114_184545.bmp)
+![MandelBox](assets/images/MandelBox.png)
 
-*SDF Raymarching: Zoom on Mandelbulb.*
+*SDF Raymarching: MandelBox.*
 
-![Mandelbox](assets/images/MandelBox.png)
+![MandelBulb](assets/images/MandelBulb.png)
 
-*SDF Raymarching: Mandelbox.*
-
-![Julia 4D](output/fractals/20260118_131248.bmp)
-
-*SDF Raymarching: Exploration of the 4D Julia Set.*
+*SDF Raymarching: MandelBulb.*
 
 ### Path Tracing
 ![Pomme & Knife](assets/images/Pomme.png)
