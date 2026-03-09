@@ -4,16 +4,24 @@ C   0,0,-4.5    0,0,1    80
 # R 3640 2160
 # R 160 90
 # R 1920 1080
-R 720 720
 
+R 720 720
+# RENDER_SCALE 4
+# AA_SAMPLES 16
 SAMPLES 1
-# RENDER_SCALE 2
+
+# FILTER SOBEL
+# FILTER BNW
+# FILTER GAUSSIAN 10.0
+# FILTER SEPIA
+# FILTER SHARPEN 1.0
+FILTER CONTRAST 1.1
+FILTER SATURATION 1.1
 
 mtllib assets/materials/materials_test.mtl
 
 # sp	0,0,-2		0.5					255,215,0	-usemtl SuperNeon
 sp	0,0,-2		1					255,215,0	-usemtl SuperNeon
 
-mandelbulb  0,0,0        0,1,0      2.5    12.0     255,0,0 -usemtl BluePlasticPhong
-# mandelbulb  0,0,0        0,1,0      2.5    12.0     255,0,0 -usemtl ClearGlass
+mandelbulb  0,0,0        0,1,0      2.5    12.0     255,0,0 -usemtl Ceramic
 pl 0,0,1000	0,0,-1     255,255,255 -usemtl Space

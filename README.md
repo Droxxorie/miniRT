@@ -56,46 +56,79 @@ make bonus
 ## Gallery
 
 ### PBR & Materials
-![Cornell Box PBR](output/cornell_mirrors_2K.bmp)
+![Cornell Box PBR](assets/images/CornellBox_Mirror.png)
+
 *Physically Based Rendering in a Cornell Box.*
 
-![Glass Refraction](output/green_glass.bmp)
+![Glass Refraction](assets/images/Rough_Glass_950.png)
+
 *Dielectric materials with Beer-Lambert absorption.*
 
-![Earth](output/20260128_182557.bmp)
+![Earth](assets/images/Earth.png)
+
 *Textured sphere with normal, emission, and roughness maps.*
 
 ### Fractals & Raymarching
+![Menger Sponge](assets/images/Menger_Sponge.png)
+
+*SDF Raymarching: Menger Sponge*
+
 ![Mandelbulb](output/fractals/20260114_184545.bmp)
+
 *SDF Raymarching: Zoom on Mandelbulb.*
 
-![Mandelbox](output/fractals/20260114_222948.bmp)
+![Mandelbox](assets/images/MandelBox.png)
+
 *SDF Raymarching: Mandelbox.*
 
 ![Julia 4D](output/fractals/20260118_131248.bmp)
+
 *SDF Raymarching: Exploration of the 4D Julia Set.*
 
 ### Path Tracing
-![Cornell Mirrors](output/pathtrace_cornell_box_mirrors.bmp)
-*Path Tracing with mirrors.*
+![Pomme & Knife](assets/images/Pomme.png)
 
-![Classic Path Tracing](output/Cornell_box_5000.bmp)
-*5000 samples Path Tracing.*
+*Path Traced .obj file.*
 
-### Bloopers & Fails
+![Classic Path Tracing](assets/images/Temple_silver.png)
+
+*Path Traced Silver Ball.*
+
+### Others
+![Sobel](assets/images/Earth_Sobel.png)
+
+*Sobel filter on Earth.*
+
+![Nearest Neighbor](assets/images/CornellBox_PathTraced_10_RenderScale_8.png)
+
+*NEarest Neighbor interpolation.*
+
+![Anti Aliasing](assets/images/CornellBox_Whitted_AA.png)
+
+*Super Sampling Anti Aliasing.*
+
+![Ambient Occlusion](assets/images/AO.png)
+
+*Ambient Occlusion.*
+
+### Fails & Bloopers
 *Building a rendering engine is a journey filled with artistic bugs!*
 
-![Broken Normals](output/broken.bmp)
-*The Broken Normals.*
+![Broken Path Tracing](assets/images/fails/Nonsense.png)
 
-![AABB Issue](output/aabb_issue.bmp)
-*Entering the Matrix (AABB issues).*
+*Broken Path tracing sampling.*
 
-![Black Hole](output/black_hole.bmp)
-*The Black Hole incident.*
+![Broken AO](assets/images/fails/Broken_AO.png)
 
-![SDF Broken](output/borken_sdf.bmp)
-*Broken SDF computations.*
+*AO Sampling with sine function.*
+
+![Broken AABB](assets/images/fails/aabb_issue.png)
+
+*Wrong Bounding Box edges.*
+
+![Broken SDF](assets/images/fails/Broken_sdf.png)
+
+*AO Sampling with sine function.*
 
 ## Resources & AI Usage
 

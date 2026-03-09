@@ -1,19 +1,33 @@
 A 0.2 255,255,255
-C   0,0,-10.0   0,0,1    30
+# C   0,0,-10.0   0,0,1    30
+C   -4.41,4.02,-9.01   0.42,-0.38,0.82    36
 # R 3640 2160
 # R 160 90
 # R 1920 1080
 R 720 720
 
-SAMPLES 10
+# RENDER_SCALE 2
+# AA_SAMPLES 16
+SAMPLES 100
+
+# FILTER SOBEL
+# FILTER BNW
+# FILTER GAUSSIAN 10.0
+# FILTER SEPIA
+# FILTER SHARPEN 1.0
+FILTER CONTRAST 1.1
+FILTER SATURATION 1.1
 
 mtllib assets/materials/materials_test.mtl
 
-L   5,5,-5       0.9           255,240,220
-L   -10,0,-5     0.2           50,50,100
+# L   0, 8, 0		.5		255, 255, 255
 
-# mandelbox  0,0,0  0,1,0  1  -2.09  0.7  1.0  1.0  255,0,0 -usemtl BluePlasticPhong
-mandelbox  0,0,0  0,1,0  1  -2.09  0.7  1.0  1.0  255,0,0 -usemtl Ceramic
-# mandelbox  0,0,0  0,1,0  1  -2.09  0.7  1.0  1.0  255,0,0 -usemtl ClearGlass
+mandelbox  0,0,0  0,1,0  1  -2.09  0.7  1.0  1.0  50,50,255 -usemtl Ceramic
 
-pl  0,-5,0       0,1,0         200,200,200 -usemtl BlackChecker
+pl 0,0,100	0,0,-1     255,255,255 -usemtl Space
+sp	2,0,0	0.5					255,215,0	-usemtl SuperNeon
+sp	-2,0,0	0.5					255,215,0	-usemtl SuperNeon
+sp	0,2,0	0.5					255,215,0	-usemtl SuperNeon
+sp	0,-2,0	0.5					255,215,0	-usemtl SuperNeon
+sp	0,0,2	0.5					255,215,0	-usemtl SuperNeon
+sp	0,0,-2	0.5					255,215,0	-usemtl SuperNeon

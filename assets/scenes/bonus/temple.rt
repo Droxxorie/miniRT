@@ -4,13 +4,13 @@ A   									0.1										255,180,20
 R 720 720
 
 C   0,2,-25				0,0,1						20 #* Default
-# C   0,2,-25				0,0,1						70 #* Far
-# C  1.9,1.1,-7.3			0,0,1						8.0 #* Glass close
-# C  -1.9,1.1,-7.3		0,0,1						8.0 #* Silver close
+C   0,2,-25				0,0,1						70 #* Far
+C  1.9,1.1,-7.3			0,0,1						8.0 #* Glass close
+C  -1.9,1.1,-7.3		0,0,1						8.0 #* Silver close
 mtllib	assets/materials/materials_test.mtl
 SB		assets/textures/skybox/sky_alkatraz.xpm
 
-SAMPLES 1000
+# SAMPLES 1000
 # AA_SAMPLES 16
 
 # FILTER SOBEL
